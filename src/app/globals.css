@@ -1,0 +1,248 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+:root {
+  --gold: #D4A017;
+  --gold-hover: #B8870A;
+  --gold-light: #F5E6B8;
+  --cream: #FAFAF8;
+  --border: #E7E2D8;
+  --ink: #0F172A;
+  --navy: #0B1220;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #FAFAF8;
+  color: #0F172A;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Gold button */
+.btn-gold {
+  background-color: #D4A017;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 0.625rem 1.5rem;
+  transition: background-color 0.18s ease, box-shadow 0.18s ease, transform 0.12s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.btn-gold:hover {
+  background-color: #B8870A;
+  box-shadow: 0 4px 20px rgba(212, 160, 23, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-gold:active {
+  transform: translateY(0);
+}
+
+/* Outline button */
+.btn-outline {
+  border: 1.5px solid #0F172A;
+  color: #0F172A;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 0.625rem 1.5rem;
+  transition: border-color 0.18s ease, background-color 0.18s ease, transform 0.12s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  white-space: nowrap;
+}
+
+.btn-outline:hover {
+  background-color: #0F172A;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* Card */
+.card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(15, 23, 42, 0.06);
+  border: 1px solid #E7E2D8;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.12);
+  transform: translateY(-2px);
+}
+
+/* Section padding */
+.section-pad {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+/* Max width container */
+.container-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* Gold divider */
+.gold-divider {
+  width: 3rem;
+  height: 3px;
+  background: #D4A017;
+  border-radius: 2px;
+  margin-bottom: 1rem;
+}
+
+/* Difficulty badge */
+.badge-difficulty {
+  border: 1.5px solid #D4A017;
+  color: #B8870A;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+/* Input */
+.input-base {
+  width: 100%;
+  padding: 0.625rem 1rem;
+  border: 1.5px solid #E7E2D8;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.15s ease;
+  color: #0F172A;
+}
+
+.input-base:focus {
+  border-color: #D4A017;
+  box-shadow: 0 0 0 3px rgba(212, 160, 23, 0.12);
+}
+
+/* Navbar shadow on scroll (added via JS class) */
+.nav-scrolled {
+  box-shadow: 0 2px 20px rgba(15, 23, 42, 0.08);
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: #0F172A;
+  color: #fff;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.25);
+  z-index: 9999;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Modal backdrop */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 18, 32, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* Tab active */
+.tab-active {
+  color: #D4A017;
+  border-bottom: 2px solid #D4A017;
+}
+
+/* Gradient text */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #D4A017 0%, #F0C84A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Hero gradient bg */
+.hero-bg {
+  background: linear-gradient(135deg, #FAFAF8 0%, #F3F0E8 60%, #FAFAF8 100%);
+}
+
+/* Comparison table highlights */
+.col-aurentis {
+  background: linear-gradient(180deg, rgba(212, 160, 23, 0.06) 0%, rgba(212, 160, 23, 0.02) 100%);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F3F0E8;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E7E2D8;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #D4A017;
+}
+
+/* Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+/* Pause marquee when users prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation-play-state: paused;
+  }
+}
