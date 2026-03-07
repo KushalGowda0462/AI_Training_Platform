@@ -365,10 +365,10 @@ function Navbar() {
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
                                     onSubmit: handleSearchSubmit,
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "relative",
+                                        className: "search-input-wrapper",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-                                                className: "absolute left-[14px] top-1/2 -translate-y-1/2 text-[#94A3B8]",
+                                                className: "search-input-icon",
                                                 width: "16",
                                                 height: "16",
                                                 viewBox: "0 0 16 16",
@@ -407,7 +407,7 @@ function Navbar() {
                                                 value: searchValue,
                                                 onChange: (e)=>handleSearch(e.target.value),
                                                 onFocus: ()=>suggestions.length && setShowSuggestions(true),
-                                                className: "input-base !pl-[42px] py-2 text-sm h-10 w-full"
+                                                className: "search-input-base py-2 h-10 w-full"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Navbar.tsx",
                                                 lineNumber: 127,
@@ -537,10 +537,10 @@ function Navbar() {
                             onSubmit: handleSearchSubmit,
                             className: "px-1 mb-3",
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "relative",
+                                className: "search-input-wrapper",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-                                        className: "absolute left-[14px] top-1/2 -translate-y-1/2 text-[#94A3B8]",
+                                        className: "search-input-icon",
                                         width: "16",
                                         height: "16",
                                         viewBox: "0 0 16 16",
@@ -578,7 +578,7 @@ function Navbar() {
                                         placeholder: "Search certifications…",
                                         value: searchValue,
                                         onChange: (e)=>handleSearch(e.target.value),
-                                        className: "input-base !pl-[42px] py-2 text-sm h-10 w-full"
+                                        className: "search-input-base py-2 h-10 w-full"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/Navbar.tsx",
                                         lineNumber: 197,

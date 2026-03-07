@@ -6,6 +6,7 @@ import { Suspense } from "react";
 import { certifications } from "@/lib/mock/certifications";
 import { vendors } from "@/lib/mock/vendors";
 import CertificationCard from "@/components/CertificationCard";
+import SearchInput from "@/components/SearchInput";
 
 const difficulties = ["All", "Beginner", "Intermediate", "Advanced"];
 const roles = ["All", "DevOps", "SRE", "SecOps", "Network", "Storage", "Cloud"];
@@ -49,19 +50,13 @@ function CertificationsContent() {
 
                 {/* Search bar */}
                 <div className="max-w-xl mb-8">
-                    <div className="relative">
-                        <svg className="absolute left-4 top-1/2 -translate-y-1/2 text-[#94A3B8]" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                            <circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.5" />
-                            <path d="M13 13l3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                        </svg>
-                        <input
-                            type="text"
-                            placeholder="Search certifications, vendors, roles…"
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                            className="input-base pl-12 py-3 text-base"
-                        />
-                    </div>
+                    <SearchInput
+                        placeholder="Search certifications, vendors, roles…"
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        className="py-3 text-base"
+                        iconSize={18}
+                    />
                 </div>
 
                 {/* Filters */}
@@ -90,8 +85,8 @@ function CertificationsContent() {
                                     key={d}
                                     onClick={() => setDifficulty(d)}
                                     className={`px-3 py-1.5 rounded-lg text-sm font-600 transition-all border ${difficulty === d
-                                            ? "bg-[#D4A017] border-[#D4A017] text-white"
-                                            : "border-[#E7E2D8] text-[#64748B] hover:border-[#D4A017]"
+                                        ? "bg-[#D4A017] border-[#D4A017] text-white"
+                                        : "border-[#E7E2D8] text-[#64748B] hover:border-[#D4A017]"
                                         }`}
                                 >
                                     {d}
@@ -109,8 +104,8 @@ function CertificationsContent() {
                                     key={r}
                                     onClick={() => setRole(r)}
                                     className={`px-3 py-1.5 rounded-lg text-sm font-600 transition-all border ${role === r
-                                            ? "bg-[#D4A017] border-[#D4A017] text-white"
-                                            : "border-[#E7E2D8] text-[#64748B] hover:border-[#D4A017]"
+                                        ? "bg-[#D4A017] border-[#D4A017] text-white"
+                                        : "border-[#E7E2D8] text-[#64748B] hover:border-[#D4A017]"
                                         }`}
                                 >
                                     {r}

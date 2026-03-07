@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import { certifications } from "@/lib/mock/certifications";
+import SearchInput from "@/components/SearchInput";
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
@@ -113,26 +114,15 @@ export default function Navbar() {
 
                     <div ref={searchRef} className="relative hidden lg:block flex-1 max-w-xs">
                         <form onSubmit={handleSearchSubmit}>
-                            <div className="relative">
-                                <svg
-                                    className="absolute left-[14px] top-1/2 -translate-y-1/2 text-[#94A3B8]"
-                                    width="16"
-                                    height="16"
-                                    viewBox="0 0 16 16"
-                                    fill="none"
-                                >
-                                    <circle cx="7" cy="7" r="5" stroke="currentColor" strokeWidth="1.5" />
-                                    <path d="M11 11l3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                                </svg>
-                                <input
-                                    type="text"
-                                    placeholder="Search certifications…"
-                                    value={searchValue}
-                                    onChange={(e) => handleSearch(e.target.value)}
-                                    onFocus={() => suggestions.length && setShowSuggestions(true)}
-                                    className="input-base !pl-[42px] py-2 text-sm h-10 w-full"
-                                />
-                            </div>
+                            <SearchInput
+                                placeholder="Search certifications…"
+                                value={searchValue}
+                                onChange={(e) => handleSearch(e.target.value)}
+                                onFocus={() => suggestions.length && setShowSuggestions(true)}
+                                containerClassName="h-10 w-full"
+                                className="py-2 text-sm"
+                                iconSize={16}
+                            />
                         </form>
 
                         {showSuggestions && suggestions.length > 0 && (
@@ -183,25 +173,14 @@ export default function Navbar() {
                     <div className="md:hidden border-t border-[#E7E2D8] py-3 space-y-1">
                         {/* Mobile Search */}
                         <form onSubmit={handleSearchSubmit} className="px-1 mb-3">
-                            <div className="relative">
-                                <svg
-                                    className="absolute left-[14px] top-1/2 -translate-y-1/2 text-[#94A3B8]"
-                                    width="16"
-                                    height="16"
-                                    viewBox="0 0 16 16"
-                                    fill="none"
-                                >
-                                    <circle cx="7" cy="7" r="5" stroke="currentColor" strokeWidth="1.5" />
-                                    <path d="M11 11l3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                                </svg>
-                                <input
-                                    type="text"
-                                    placeholder="Search certifications…"
-                                    value={searchValue}
-                                    onChange={(e) => handleSearch(e.target.value)}
-                                    className="input-base !pl-[42px] py-2 text-sm h-10 w-full"
-                                />
-                            </div>
+                            <SearchInput
+                                placeholder="Search certifications…"
+                                value={searchValue}
+                                onChange={(e) => handleSearch(e.target.value)}
+                                containerClassName="h-10 w-full"
+                                className="py-2 text-sm"
+                                iconSize={16}
+                            />
                         </form>
                         {navLinks.map((l) => (
                             <Link

@@ -139,6 +139,8 @@ body {
   box-shadow: 0 0 0 3px rgba(212, 160, 23, 0.12);
 }
 
+
+
 /* Navbar shadow on scroll (added via JS class) */
 .nav-scrolled {
   box-shadow: 0 2px 20px rgba(15, 23, 42, 0.08);

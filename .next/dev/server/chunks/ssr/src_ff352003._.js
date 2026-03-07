@@ -467,7 +467,9 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navi
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$mock$2f$certifications$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/mock/certifications.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$mock$2f$vendors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/mock/vendors.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$CertificationCard$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/CertificationCard.tsx [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$SearchInput$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/SearchInput.tsx [app-ssr] (ecmascript)");
 "use client";
+;
 ;
 ;
 ;
@@ -521,7 +523,7 @@ function CertificationsContent() {
                             className: "gold-divider"
                         }, void 0, false, {
                             fileName: "[project]/src/app/certifications/page.tsx",
-                            lineNumber: 43,
+                            lineNumber: 44,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
@@ -529,7 +531,7 @@ function CertificationsContent() {
                             children: "Certifications"
                         }, void 0, false, {
                             fileName: "[project]/src/app/certifications/page.tsx",
-                            lineNumber: 44,
+                            lineNumber: 45,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -537,74 +539,31 @@ function CertificationsContent() {
                             children: "Explore the full catalog of AI-powered certification paths with hands-on labs and intelligent instructor agents."
                         }, void 0, false, {
                             fileName: "[project]/src/app/certifications/page.tsx",
-                            lineNumber: 45,
+                            lineNumber: 46,
                             columnNumber: 21
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/certifications/page.tsx",
-                    lineNumber: 42,
+                    lineNumber: 43,
                     columnNumber: 17
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "max-w-xl mb-8",
-                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "relative",
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-                                className: "absolute left-4 top-1/2 -translate-y-1/2 text-[#94A3B8]",
-                                width: "18",
-                                height: "18",
-                                viewBox: "0 0 18 18",
-                                fill: "none",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("circle", {
-                                        cx: "8",
-                                        cy: "8",
-                                        r: "6",
-                                        stroke: "currentColor",
-                                        strokeWidth: "1.5"
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/app/certifications/page.tsx",
-                                        lineNumber: 54,
-                                        columnNumber: 29
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
-                                        d: "M13 13l3 3",
-                                        stroke: "currentColor",
-                                        strokeWidth: "1.5",
-                                        strokeLinecap: "round"
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/app/certifications/page.tsx",
-                                        lineNumber: 55,
-                                        columnNumber: 29
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/src/app/certifications/page.tsx",
-                                lineNumber: 53,
-                                columnNumber: 25
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                type: "text",
-                                placeholder: "Search certifications, vendors, roles…",
-                                value: search,
-                                onChange: (e)=>setSearch(e.target.value),
-                                className: "input-base pl-12 py-3 text-base"
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/certifications/page.tsx",
-                                lineNumber: 57,
-                                columnNumber: 25
-                            }, this)
-                        ]
-                    }, void 0, true, {
+                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$SearchInput$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                        placeholder: "Search certifications, vendors, roles…",
+                        value: search,
+                        onChange: (e)=>setSearch(e.target.value),
+                        className: "py-3 text-base",
+                        iconSize: 18
+                    }, void 0, false, {
                         fileName: "[project]/src/app/certifications/page.tsx",
-                        lineNumber: 52,
+                        lineNumber: 53,
                         columnNumber: 21
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/app/certifications/page.tsx",
-                    lineNumber: 51,
+                    lineNumber: 52,
                     columnNumber: 17
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -618,7 +577,7 @@ function CertificationsContent() {
                                     children: "Vendor"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/certifications/page.tsx",
-                                    lineNumber: 71,
+                                    lineNumber: 66,
                                     columnNumber: 25
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -631,7 +590,7 @@ function CertificationsContent() {
                                             children: "All Vendors"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/certifications/page.tsx",
-                                            lineNumber: 77,
+                                            lineNumber: 72,
                                             columnNumber: 29
                                         }, this),
                                         __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$mock$2f$vendors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["vendors"].map((v)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -639,19 +598,19 @@ function CertificationsContent() {
                                                 children: v.name
                                             }, v.slug, false, {
                                                 fileName: "[project]/src/app/certifications/page.tsx",
-                                                lineNumber: 79,
+                                                lineNumber: 74,
                                                 columnNumber: 33
                                             }, this))
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/certifications/page.tsx",
-                                    lineNumber: 72,
+                                    lineNumber: 67,
                                     columnNumber: 25
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/certifications/page.tsx",
-                            lineNumber: 70,
+                            lineNumber: 65,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -662,7 +621,7 @@ function CertificationsContent() {
                                     children: "Difficulty"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/certifications/page.tsx",
-                                    lineNumber: 86,
+                                    lineNumber: 81,
                                     columnNumber: 25
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -673,18 +632,18 @@ function CertificationsContent() {
                                             children: d
                                         }, d, false, {
                                             fileName: "[project]/src/app/certifications/page.tsx",
-                                            lineNumber: 89,
+                                            lineNumber: 84,
                                             columnNumber: 33
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/certifications/page.tsx",
-                                    lineNumber: 87,
+                                    lineNumber: 82,
                                     columnNumber: 25
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/certifications/page.tsx",
-                            lineNumber: 85,
+                            lineNumber: 80,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -695,7 +654,7 @@ function CertificationsContent() {
                                     children: "Role"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/certifications/page.tsx",
-                                    lineNumber: 105,
+                                    lineNumber: 100,
                                     columnNumber: 25
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -706,18 +665,18 @@ function CertificationsContent() {
                                             children: r
                                         }, r, false, {
                                             fileName: "[project]/src/app/certifications/page.tsx",
-                                            lineNumber: 108,
+                                            lineNumber: 103,
                                             columnNumber: 33
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/certifications/page.tsx",
-                                    lineNumber: 106,
+                                    lineNumber: 101,
                                     columnNumber: 25
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/certifications/page.tsx",
-                            lineNumber: 104,
+                            lineNumber: 99,
                             columnNumber: 21
                         }, this),
                         (search || vendor !== "All" || difficulty !== "All" || role !== "All") && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -733,18 +692,18 @@ function CertificationsContent() {
                                 children: "Clear filters"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/certifications/page.tsx",
-                                lineNumber: 125,
+                                lineNumber: 120,
                                 columnNumber: 29
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/app/certifications/page.tsx",
-                            lineNumber: 124,
+                            lineNumber: 119,
                             columnNumber: 25
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/certifications/page.tsx",
-                    lineNumber: 68,
+                    lineNumber: 63,
                     columnNumber: 17
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -756,14 +715,14 @@ function CertificationsContent() {
                             children: filtered.length
                         }, void 0, false, {
                             fileName: "[project]/src/app/certifications/page.tsx",
-                            lineNumber: 137,
+                            lineNumber: 132,
                             columnNumber: 29
                         }, this),
                         " certifications"
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/certifications/page.tsx",
-                    lineNumber: 136,
+                    lineNumber: 131,
                     columnNumber: 17
                 }, this),
                 filtered.length > 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -772,12 +731,12 @@ function CertificationsContent() {
                             cert: c
                         }, c.id, false, {
                             fileName: "[project]/src/app/certifications/page.tsx",
-                            lineNumber: 144,
+                            lineNumber: 139,
                             columnNumber: 29
                         }, this))
                 }, void 0, false, {
                     fileName: "[project]/src/app/certifications/page.tsx",
-                    lineNumber: 142,
+                    lineNumber: 137,
                     columnNumber: 21
                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "text-center py-24 text-[#94A3B8]",
@@ -787,7 +746,7 @@ function CertificationsContent() {
                             children: "🔍"
                         }, void 0, false, {
                             fileName: "[project]/src/app/certifications/page.tsx",
-                            lineNumber: 149,
+                            lineNumber: 144,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -795,7 +754,7 @@ function CertificationsContent() {
                             children: "No certifications match your filters."
                         }, void 0, false, {
                             fileName: "[project]/src/app/certifications/page.tsx",
-                            lineNumber: 150,
+                            lineNumber: 145,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -803,24 +762,24 @@ function CertificationsContent() {
                             children: "Try adjusting your search or clearing filters."
                         }, void 0, false, {
                             fileName: "[project]/src/app/certifications/page.tsx",
-                            lineNumber: 151,
+                            lineNumber: 146,
                             columnNumber: 25
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/certifications/page.tsx",
-                    lineNumber: 148,
+                    lineNumber: 143,
                     columnNumber: 21
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/certifications/page.tsx",
-            lineNumber: 40,
+            lineNumber: 41,
             columnNumber: 13
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/certifications/page.tsx",
-        lineNumber: 39,
+        lineNumber: 40,
         columnNumber: 9
     }, this);
 }
@@ -831,17 +790,17 @@ function CertificationsPage() {
             children: "Loading…"
         }, void 0, false, {
             fileName: "[project]/src/app/certifications/page.tsx",
-            lineNumber: 161,
+            lineNumber: 156,
             columnNumber: 29
         }, void 0),
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(CertificationsContent, {}, void 0, false, {
             fileName: "[project]/src/app/certifications/page.tsx",
-            lineNumber: 162,
+            lineNumber: 157,
             columnNumber: 13
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/certifications/page.tsx",
-        lineNumber: 161,
+        lineNumber: 156,
         columnNumber: 9
     }, this);
 }

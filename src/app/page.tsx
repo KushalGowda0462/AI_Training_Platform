@@ -7,6 +7,7 @@ import { certifications } from "@/lib/mock/certifications";
 import VendorCard from "@/components/VendorCard";
 import CertificationCard from "@/components/CertificationCard";
 import Modal from "@/components/Modal";
+import SearchInput from "@/components/SearchInput";
 
 export default function HomePage() {
   const [videoModalOpen, setVideoModalOpen] = useState(false);
@@ -330,19 +331,13 @@ export default function HomePage() {
 
           {/* Search bar */}
           <div className="max-w-xl mx-auto mb-8">
-            <div className="relative">
-              <svg className="absolute left-4 top-1/2 -translate-y-1/2 text-[#94A3B8]" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.5" />
-                <path d="M13 13l3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-              </svg>
-              <input
-                type="text"
-                placeholder="e.g. Kubernetes, Azure Administrator, CCNA…"
-                value={certSearch}
-                onChange={(e) => setCertSearch(e.target.value)}
-                className="input-base pl-11 py-3 text-base"
-              />
-            </div>
+            <SearchInput
+              placeholder="e.g. Kubernetes, Azure Administrator, CCNA…"
+              value={certSearch}
+              onChange={(e) => setCertSearch(e.target.value)}
+              className="py-3 text-base"
+              iconSize={18}
+            />
           </div>
 
           {/* Filter chips */}

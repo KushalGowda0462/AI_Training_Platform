@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { vendors } from "@/lib/mock/vendors";
 import VendorCard from "@/components/VendorCard";
+import SearchInput from "@/components/SearchInput";
 
 const categories = ["All", "Networking", "Cloud", "Storage", "DevOps", "Virtualization", "Cloud Native"];
 
@@ -33,19 +34,13 @@ export default function VendorsPage() {
 
                 {/* Search */}
                 <div className="max-w-md mb-6">
-                    <div className="relative">
-                        <svg className="absolute left-3 top-1/2 -translate-y-1/2 text-[#94A3B8]" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <circle cx="7" cy="7" r="5" stroke="currentColor" strokeWidth="1.5" />
-                            <path d="M11 11l3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                        </svg>
-                        <input
-                            type="text"
-                            placeholder="Search vendors…"
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                            className="input-base pl-9 text-sm"
-                        />
-                    </div>
+                    <SearchInput
+                        placeholder="Search vendors…"
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        className="py-2.5 text-sm"
+                        iconSize={16}
+                    />
                 </div>
 
                 {/* Filter chips */}
@@ -55,8 +50,8 @@ export default function VendorsPage() {
                             key={cat}
                             onClick={() => setActiveCategory(cat)}
                             className={`px-4 py-1.5 rounded-full text-sm font-600 transition-all border ${activeCategory === cat
-                                    ? "bg-[#D4A017] border-[#D4A017] text-white"
-                                    : "border-[#E7E2D8] text-[#64748B] hover:border-[#D4A017] hover:text-[#D4A017]"
+                                ? "bg-[#D4A017] border-[#D4A017] text-white"
+                                : "border-[#E7E2D8] text-[#64748B] hover:border-[#D4A017] hover:text-[#D4A017]"
                                 }`}
                         >
                             {cat}
