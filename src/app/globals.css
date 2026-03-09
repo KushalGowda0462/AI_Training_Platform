@@ -2,9 +2,9 @@
 @import "tailwindcss";
 
 :root {
-  --gold: #D4A017;
-  --gold-hover: #B8870A;
-  --gold-light: #F5E6B8;
+  --gold: #A9802A;
+  --gold-hover: #8F6920;
+  --gold-light: #EBDCBD;
   --cream: #FAFAF8;
   --border: #E7E2D8;
   --ink: #0F172A;

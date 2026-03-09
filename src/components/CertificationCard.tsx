@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Certification } from "@/lib/mock/certifications";
 import Modal from "./Modal";
 
@@ -84,9 +85,9 @@ export default function CertificationCard({ cert }: Props) {
                     )}
 
                     <div className="pt-4 border-t border-[#E7E2D8]">
-                        <a href="/#contact" className="btn-gold w-full justify-center" onClick={() => setOpen(false)}>
+                        <Link href="/#contact" className="btn-gold w-full justify-center" onClick={() => setOpen(false)}>
                             Request Demo for this Certification
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </Modal>
