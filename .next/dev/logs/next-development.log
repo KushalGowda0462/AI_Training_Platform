@@ -2,3 +2,1595 @@
 [00:00:11.669] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
 [00:00:11.796] Browser LOG     Anti-anti-debug loaded! Happy debugging!
 [00:00:27.433] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[02:59:17.156] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.161] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.163] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.165] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.168] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.169] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.171] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.172] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.174] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.176] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.177] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.178] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.180] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.181] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.183] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.184] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.186] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.187] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.189] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.190] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.192] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.194] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.195] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.196] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.198] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.200] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.201] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.202] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.204] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.205] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.207] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.208] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.210] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.213] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.217] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.221] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.225] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.229] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.233] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.237] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.245] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.247] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.248] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.250] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.252] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.254] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.256] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.258] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.260] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.262] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.264] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.265] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.267] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.268] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.269] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.271] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.272] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.274] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.275] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.276] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:59:17.278] Server  LOG     ✓ Compiled in 31ms
+[02:59:17.383] Browser ERROR   ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[02:59:17.383] Browser ERROR   ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[02:59:17.473] Server  LOG     ✓ Compiled in 94ms
+[02:59:17.514] Browser ERROR   ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[02:59:17.520] Browser ERROR   ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/mock/testimonials'
+  4 | import Link from "next/link";
+  5 | import Modal from "@/components/Modal";
+> 6 | import { testimonials } from "@/lib/mock/testimonials";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export default function HomePage() {
+  9 |   const [videoModalOpen, setVideoModalOpen] = useState(false);
+
+Import map: aliased to relative './src/lib/mock/testimonials' inside of [project]/
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[02:59:17.811] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:59:17.833] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
