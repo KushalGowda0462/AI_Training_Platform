@@ -43,3 +43,8 @@ out/
 .env
 .env.local
 .DS_Store
+.next/
+node_modules/
+*.log
+node_modules/
+*.log
