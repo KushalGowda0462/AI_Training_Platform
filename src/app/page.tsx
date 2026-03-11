@@ -8,7 +8,6 @@ import { testimonials } from "@/lib/mock/testimonials";
 export default function HomePage() {
   const [videoModalOpen, setVideoModalOpen] = useState(false);
 
-  // Contact form state
   const [form, setForm] = useState({ email: "", stack: "", teamSize: "" });
   const [submitted, setSubmitted] = useState(false);
   const [toastVisible, setToastVisible] = useState(false);
@@ -120,9 +119,9 @@ export default function HomePage() {
 
   return (
     <>
-      {/* ─── SECTION 1: HERO ─── */}
-      <section id="hero" className="hero-bg overflow-hidden pt-[100px] lg:pt-[120px] pb-16 lg:pb-20">
-        <div className="container-content">
+      {/* ─── SECTION 1: HERO (full-screen snap) ─── */}
+      <section id="hero" className="snap-section hero-bg pt-20">
+        <div className="container-content w-full py-16 lg:py-0">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
 
             {/* Left: Text */}
@@ -187,7 +186,6 @@ export default function HomePage() {
                   <div className="w-full h-full bg-[radial-gradient(circle_at_top_right,var(--gold),transparent_60%)]" />
                 </div>
 
-                {/* Simulated chat UI */}
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#0B1220] via-[#0B1220]/80 to-transparent p-6 pt-20">
                   <div className="space-y-4">
                     <div className="flex gap-3 items-end opacity-90">
@@ -210,7 +208,6 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                {/* Play Button */}
                 <div className="absolute inset-0 flex items-center justify-center pb-10">
                   <button
                     onClick={() => setVideoModalOpen(true)}
@@ -225,8 +222,6 @@ export default function HomePage() {
                   </button>
                 </div>
               </div>
-
-              {/* Decorative dots */}
               <div className="absolute -top-4 -right-4 w-20 h-20 bg-[radial-gradient(circle,var(--gold-light)_2px,transparent_2px)] [background-size:10px_10px] opacity-60 -z-10 rounded-full" />
               <div className="absolute -bottom-6 -left-6 w-28 h-28 bg-[radial-gradient(circle,var(--border)_2px,transparent_2px)] [background-size:10px_10px] opacity-80 -z-10 rounded-full" />
             </div>
@@ -235,71 +230,71 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── SECTION 2: ABOUT + CREDIBILITY ─── */}
-      <section id="about" className="py-20 lg:py-24 bg-[#FAFAF8] border-y border-[#E7E2D8]">
-        <div className="container-content">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-
-            {/* Left: About text */}
-            <div>
-              <div className="gold-divider" />
-              <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A] mb-5">About Aurilearn</h2>
-              <p className="text-lg md:text-xl font-serif text-[#0F172A] leading-snug mb-6 italic">
-                &quot;Built on deep real-world IT training experience. Informed by 16 years in technical training. Experienced in applying modern LLMs to narrow, high-value training use cases.&quot;
+      {/* ─── SECTION 2: ABOUT + TRUST LOGOS (full-screen snap) ─── */}
+      <section id="about" className="snap-section bg-[#FAFAF8] border-t border-[#E7E2D8] flex flex-col">
+        {/* Main content — grows to push logos down */}
+        <div className="container-content flex-1 flex flex-col justify-center py-16">
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="w-14 h-14 rounded-2xl bg-[var(--gold)] shadow-lg mx-auto mb-6 flex items-center justify-center">
+              <span className="text-white text-2xl font-bold">A</span>
+            </div>
+            <div className="gold-divider mx-auto" />
+            <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A] mb-6">About Aurilearn</h2>
+            <p className="text-lg md:text-xl font-serif text-[#0F172A] leading-snug mb-6 italic">
+              &quot;Built on deep real-world IT training experience. Informed by 16 years in technical training. Experienced in applying modern LLMs to narrow, high-value training use cases.&quot;
+            </p>
+            <div className="text-base text-[#64748B] leading-relaxed space-y-3 max-w-2xl mx-auto text-center">
+              <p>
+                Aurilearn is engineered by professionals who have worked for top-tier global IT training companies, bringing together decades of combined experience in the classroom and curriculum architecture.
               </p>
-              <div className="text-base text-[#64748B] leading-relaxed space-y-4">
-                <p>
-                  Aurilearn is engineered by professionals who have worked for top-tier global IT training companies, bringing together decades of combined experience in the classroom and curriculum architecture.
-                </p>
-                <p>
-                  We recognize that general chatbots fail to teach effectively. By leveraging narrow, specialized LLM implementations, we&apos;ve created a platform fluent in interpreting the complex, stateful environments of modern engineering — delivering the world&apos;s first true automated 1:1 technical mentorship.
-                </p>
-              </div>
+              <p>
+                We recognize that general chatbots fail to teach effectively. By leveraging narrow, specialized LLM implementations, we&apos;ve created a platform fluent in interpreting the complex, stateful environments of modern engineering.
+              </p>
             </div>
 
-            {/* Right: Trust credibility */}
-            <div>
-              <p className="text-xs font-bold text-[#94A3B8] uppercase tracking-widest mb-6">
-                Trusted by engineering teams at
-              </p>
-              <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
-                <div className="flex w-max animate-marquee hover:[animation-play-state:paused] items-center">
-                  {[...logos, ...logos].map((logo, index) => (
-                    <div
-                      key={`${logo.name}-${index}`}
-                      className="px-8 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 opacity-50 hover:opacity-100"
-                      title={logo.name}
-                      aria-label={logo.name}
-                      role="img"
-                    >
-                      {logo.svg}
-                    </div>
-                  ))}
+            {/* Stats row */}
+            <div className="mt-8 grid grid-cols-3 gap-4 max-w-lg mx-auto">
+              {[
+                { value: "16+", label: "Years IT Training" },
+                { value: "1:1", label: "AI Mentorship" },
+                { value: "94%", label: "Lab Pass Rate" },
+              ].map((stat) => (
+                <div key={stat.label} className="text-center p-4 rounded-xl bg-white border border-[#E7E2D8] shadow-sm">
+                  <div className="text-2xl font-900 text-[#0F172A] mb-1">{stat.value}</div>
+                  <div className="text-xs text-[#64748B] font-semibold leading-tight">{stat.label}</div>
                 </div>
-              </div>
+              ))}
+            </div>
+          </div>
+        </div>
 
-              {/* Quick stat highlights */}
-              <div className="mt-8 grid grid-cols-3 gap-4">
-                {[
-                  { value: "16+", label: "Years of IT Training Experience" },
-                  { value: "1:1", label: "AI Mentorship Model" },
-                  { value: "94%", label: "Avg. Lab Pass Rate" },
-                ].map((stat) => (
-                  <div key={stat.label} className="text-center p-4 rounded-2xl bg-white border border-[#E7E2D8] shadow-sm">
-                    <div className="text-2xl font-900 text-[#0F172A] mb-1">{stat.value}</div>
-                    <div className="text-xs text-[#64748B] font-semibold leading-tight">{stat.label}</div>
-                  </div>
-                ))}
-              </div>
+        {/* Logo strip — anchored at the bottom via mt-auto on the outer wrapper */}
+        <div className="w-full mt-auto border-t border-black/[0.06] bg-white py-6">
+          <p className="text-center text-xs font-bold text-[#94A3B8] uppercase tracking-widest mb-4">
+            Trusted by engineering teams at
+          </p>
+          <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+            <div className="flex w-max animate-marquee-slow hover:[animation-play-state:paused] items-center">
+              {[...logos, ...logos].map((logo, index) => (
+                <div
+                  key={`${logo.name}-${index}`}
+                  className="px-14 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 opacity-50 hover:opacity-100"
+                  title={logo.name}
+                  aria-label={logo.name}
+                  role="img"
+                >
+                  {logo.svg}
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* ─── SECTION 3: HOW IT WORKS ─── */}
-      <section className="py-20 lg:py-24 bg-white border-b border-[#E7E2D8]">
-        <div className="container-content">
-          <div className="text-center mb-14">
+      {/* ─── SECTION 3: HOW IT WORKS (full-screen snap) ─── */}
+      <section className="snap-section bg-white border-t border-[#E7E2D8]">
+        <div className="container-content w-full py-16">
+          <div className="text-center mb-12">
             <div className="gold-divider mx-auto" />
             <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A] mb-3">How Aurilearn works</h2>
             <p className="text-lg text-[#64748B] max-w-xl mx-auto">
@@ -307,10 +302,9 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             {howItWorks.map((step, i) => (
               <div key={i} className="group relative p-6 rounded-2xl bg-[#FAFAF8] border border-[#E7E2D8] hover:border-[var(--gold)] hover:shadow-[0_8px_30px_rgba(169,128,42,0.08)] transition-all">
-                {/* Step connector line */}
                 {i < howItWorks.length - 1 && (
                   <div className="hidden lg:block absolute top-[44px] -right-3 w-6 h-[2px] bg-[#E7E2D8] z-10" />
                 )}
@@ -322,8 +316,7 @@ export default function HomePage() {
             ))}
           </div>
 
-          {/* Mid-page CTA */}
-          <div className="mt-12 text-center">
+          <div className="text-center">
             <Link href="/#contact" className="btn-gold text-base px-8 py-3.5 inline-flex items-center gap-2">
               See Aurilearn in Action
             </Link>
@@ -332,8 +325,8 @@ export default function HomePage() {
       </section>
 
       {/* ─── SECTION 4: EASE OF USE ─── */}
-      <section id="ease-of-use" className="py-20 lg:py-24 bg-[#FAFAF8] border-b border-[#E7E2D8]">
-        <div className="container-content text-center">
+      <section id="ease-of-use" className="snap-section bg-[#FAFAF8] border-t border-[#E7E2D8]">
+        <div className="container-content w-full py-16 text-center">
           <div className="max-w-2xl mx-auto mb-12">
             <div className="gold-divider mx-auto" />
             <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A] mb-3">Easy to use</h2>
@@ -361,8 +354,8 @@ export default function HomePage() {
       </section>
 
       {/* ─── SECTION 5: SCALABILITY ─── */}
-      <section id="scalability" className="py-20 lg:py-24 bg-white border-b border-[#E7E2D8]">
-        <div className="container-content">
+      <section id="scalability" className="snap-section bg-white border-t border-[#E7E2D8]">
+        <div className="container-content w-full py-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div>
               <div className="gold-divider" />
@@ -389,7 +382,6 @@ export default function HomePage() {
               </ul>
             </div>
 
-            {/* Visual bar chart */}
             <div className="relative rounded-2xl bg-white border border-[#E7E2D8] shadow-lg p-7 overflow-hidden flex flex-col">
               <div className="flex justify-between items-center mb-8">
                 <div className="font-bold text-[#0F172A]">Concurrent Mentorship Sessions</div>
@@ -408,9 +400,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── SECTION 6: SECURITY ─── */}
-      <section id="security" className="py-20 lg:py-24 bg-[#0B1220]">
-        <div className="container-content">
+      {/* ─── SECTION 6: SECURITY (full-screen snap) ─── */}
+      <section id="security" className="snap-section bg-[#0B1220]">
+        <div className="container-content w-full py-16">
           <div className="text-center mb-12">
             <div className="gold-divider mx-auto" />
             <h2 className="text-3xl md:text-4xl font-800 text-white mb-4">Security built in</h2>
@@ -433,19 +425,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── SECTION 7: ANALYTICS ─── */}
-      <section id="analytics" className="py-20 lg:py-24 bg-[#FBFCFD] border-b border-[#E7E2D8] relative overflow-hidden">
-        {/* Subtle grid pattern */}
+      {/* ─── SECTION 7: ANALYTICS (full-screen snap) ─── */}
+      <section id="analytics" className="snap-section bg-[#FBFCFD] border-t border-[#E7E2D8] relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.025] pointer-events-none" style={{ backgroundImage: 'linear-gradient(#0F172A 1px, transparent 1px), linear-gradient(90deg, #0F172A 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
         <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--gold-light)] rounded-full mix-blend-multiply filter blur-[80px] opacity-25 pointer-events-none translate-x-1/3 -translate-y-1/3" />
 
-        <div className="container-content relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-            {/* Left */}
+        <div className="container-content relative z-10 w-full py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-5">
               <div className="gold-divider" />
               <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A] mb-5">Analytics when and as you want them</h2>
-              <p className="text-base text-[#64748B] leading-relaxed mb-8">
+              <p className="text-base text-[#64748B] leading-relaxed mb-7">
                 Move beyond generic course completion rates. All data is captured and presented on demand, giving engineering leaders granular visibility into team capabilities and potential blockers.
               </p>
 
@@ -473,7 +463,6 @@ export default function HomePage() {
               </Link>
             </div>
 
-            {/* Right: Dashboard mock */}
             <div className="lg:col-span-7">
               <div className="bg-white rounded-2xl p-6 border border-[#E7E2D8] shadow-xl overflow-hidden">
                 <div className="flex justify-between items-center mb-6 border-b border-[#E7E2D8] pb-5">
@@ -523,12 +512,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── SECTION 8: TESTIMONIALS ─── */}
-      <section id="testimonials" className="py-20 lg:py-24 bg-[#FCFBF8] border-b border-[#E7E2D8] relative overflow-hidden">
+      {/* ─── SECTION 8: TESTIMONIALS (full-screen snap) ─── */}
+      <section id="testimonials" className="snap-section bg-[#FCFBF8] border-t border-[#E7E2D8] relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--gold)] to-transparent opacity-20" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(169,128,42,0.05),transparent_60%)] pointer-events-none" />
 
-        <div className="container-content relative z-10">
+        <div className="container-content relative z-10 w-full py-16">
           <div className="text-center mb-12">
             <div className="gold-divider mx-auto" />
             <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A]">Customer testimonials</h2>
@@ -558,9 +547,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── SECTION 9: FINAL CTA / CONTACT ─── */}
-      <section id="contact" className="py-20 lg:py-28 bg-[#0B1220]">
-        <div className="container-content">
+      {/* ─── SECTION 9: FINAL CTA / CONTACT (full-screen snap) ─── */}
+      <section id="contact" className="snap-section bg-[#0B1220]">
+        <div className="container-content w-full py-16">
           <div className="max-w-xl mx-auto">
             <div className="text-center mb-10">
               <div className="gold-divider mx-auto" />
