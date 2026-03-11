@@ -1,64 +1,41 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState, useEffect, useRef } from "react";
-import { certifications } from "@/lib/mock/certifications";
+import { useState, useEffect } from "react";
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
-    const [searchValue, setSearchValue] = useState("");
-    const [suggestions, setSuggestions] = useState<typeof certifications>([]);
-    const [showSuggestions, setShowSuggestions] = useState(false);
-    const searchRef = useRef<HTMLDivElement>(null);
-    const router = useRouter();
+    const [heroVisible, setHeroVisible] = useState(true);
 
     useEffect(() => {
-        const onScroll = () => setScrolled(window.scrollY > 8);
+        const onScroll = () => {
+            setScrolled(window.scrollY > 8);
+
+            const hero = document.getElementById("hero");
+            if (!hero) {
+                if (window.location.pathname !== "/") setHeroVisible(false);
+                return;
+            }
+
+            const rect = hero.getBoundingClientRect();
+            if (rect.bottom < 120) {
+                setHeroVisible(false);
+            } else {
+                setHeroVisible(true);
+            }
+        };
+
         window.addEventListener("scroll", onScroll);
+        onScroll();
         return () => window.removeEventListener("scroll", onScroll);
     }, []);
 
-    useEffect(() => {
-        const handleClickOutside = (e: MouseEvent) => {
-            if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
-                setShowSuggestions(false);
-            }
-        };
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
-
-    const handleSearch = (val: string) => {
-        setSearchValue(val);
-        if (val.trim().length > 1) {
-            const filtered = certifications.filter(
-                (c) =>
-                    c.title.toLowerCase().includes(val.toLowerCase()) ||
-                    c.tagline.toLowerCase().includes(val.toLowerCase())
-            );
-            setSuggestions(filtered.slice(0, 5));
-            setShowSuggestions(true);
-        } else {
-            setSuggestions([]);
-            setShowSuggestions(false);
-        }
-    };
-
-    const handleSearchSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        if (searchValue.trim()) {
-            setShowSuggestions(false);
-            router.push(`/certifications?query=${encodeURIComponent(searchValue.trim())}`);
-        }
-    };
-
     const navLinks = [
-        { href: "/#vendors", label: "Vendors" },
-        { href: "/#certifications", label: "Certifications" },
-        { href: "/#security", label: "Security" },
         { href: "/#about", label: "About" },
+        { href: "/#security", label: "Security" },
+        { href: "/#analytics", label: "Analytics" },
+        { href: "/#testimonials", label: "Testimonials" },
     ];
 
     const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -67,98 +44,60 @@ export default function Navbar() {
             const id = href.replace("/#", "");
             const element = document.getElementById(id);
             if (element) {
-                // Determine offset. 'certifications' gets less padding so we scroll lower down the page
-                // to frame the bottom CTA better. Normal sticky nav offset is ~80px (5rem).
-                // We'll subtract less for certifications so it scrolls further down.
-                const offset = id === "certifications" ? 0 : 80;
-                const elementPosition = element.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - offset;
-
+                // Align section beautifully to top for fullscreen mode
+                const offsetPosition = element.getBoundingClientRect().top + window.pageYOffset;
                 window.scrollTo({
                     top: offsetPosition,
                     behavior: "smooth"
                 });
+                setMenuOpen(false);
             }
         }
     };
-
 
     return (
         <header
             className={`fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm transition-shadow duration-200 border-b border-[#E7E2D8] ${scrolled ? "shadow-[0_2px_20px_rgba(15,23,42,0.08)]" : ""}`}
         >
             <div className="container-content">
-                <div className="flex items-center justify-between h-16 gap-4">
+                <div className="flex items-center justify-between h-20 gap-4">
                     {/* Logo */}
-                    <Link href="/" className="flex items-center gap-2 shrink-0">
-                        <div className="w-7 h-7 rounded-lg bg-[#D4A017] flex items-center justify-center">
-                            <span className="text-white text-xs font-bold">A</span>
+                    <Link href="/" onClick={(e) => {
+                        if (window.location.pathname === "/") {
+                            e.preventDefault();
+                            window.scrollTo({ top: 0, behavior: "smooth" });
+                            setMenuOpen(false);
+                        }
+                    }} className="flex items-center gap-3 shrink-0">
+                        <div className="w-9 h-9 rounded-lg bg-[var(--gold)] flex items-center justify-center shadow-sm">
+                            <span className="text-white text-base font-bold">A</span>
                         </div>
-                        <span className="text-[#0F172A] text-xl font-bold tracking-tight">Aurentis</span>
+                        <span className="text-[#0F172A] text-2xl font-800 tracking-tight">Aurilearn</span>
                     </Link>
 
                     {/* Desktop Nav */}
-                    <nav className="hidden md:flex items-center gap-6">
+                    <nav className="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
                         {navLinks.map((l) => (
                             <Link
                                 key={l.href}
                                 href={l.href}
                                 onClick={(e) => handleAnchorClick(e, l.href)}
-                                className="text-sm font-medium text-[#475569] hover:text-[#0F172A] transition-colors"
+                                className="text-sm font-semibold text-[#475569] hover:text-[#0F172A] transition-colors"
                             >
                                 {l.label}
                             </Link>
                         ))}
                     </nav>
 
-                    <div ref={searchRef} className="relative hidden lg:block flex-1 max-w-xs">
-                        <form onSubmit={handleSearchSubmit}>
-                            <div className="relative">
-                                <svg
-                                    className="absolute left-[14px] top-1/2 -translate-y-1/2 text-[#94A3B8]"
-                                    width="16"
-                                    height="16"
-                                    viewBox="0 0 16 16"
-                                    fill="none"
-                                >
-                                    <circle cx="7" cy="7" r="5" stroke="currentColor" strokeWidth="1.5" />
-                                    <path d="M11 11l3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                                </svg>
-                                <input
-                                    type="text"
-                                    placeholder="Search certifications…"
-                                    value={searchValue}
-                                    onChange={(e) => handleSearch(e.target.value)}
-                                    onFocus={() => suggestions.length && setShowSuggestions(true)}
-                                    className="input-base !pl-[42px] py-2 text-sm h-10 w-full"
-                                />
-                            </div>
-                        </form>
-
-                        {showSuggestions && suggestions.length > 0 && (
-                            <div className="absolute top-full mt-1 w-full bg-white rounded-xl shadow-lg border border-[#E7E2D8] overflow-hidden z-50">
-                                {suggestions.map((s) => (
-                                    <button
-                                        key={s.id}
-                                        onClick={() => {
-                                            setSearchValue(s.title);
-                                            setShowSuggestions(false);
-                                            router.push(`/certifications?query=${encodeURIComponent(s.title)}`);
-                                        }}
-                                        className="w-full text-left px-4 py-2.5 hover:bg-[#FAFAF8] transition-colors"
-                                    >
-                                        <div className="text-sm font-medium text-[#0F172A] truncate">{s.title}</div>
-                                        <div className="text-xs text-[#94A3B8] truncate">{s.tagline}</div>
-                                    </button>
-                                ))}
-                            </div>
-                        )}
+                    {/* CTAs */}
+                    <div className={`hidden md:flex items-center gap-3 transition-all duration-300 ${heroVisible ? "opacity-0 translate-y-2 pointer-events-none" : "opacity-100 translate-y-0"}`}>
+                        <Link href="/#contact" className="text-sm font-600 px-4 py-2 rounded-lg text-[#0F172A] hover:bg-[#F3F0E8] transition-colors">
+                            Try for Free
+                        </Link>
+                        <Link href="/#contact" className="btn-gold text-sm px-5 py-2">
+                            Request Enterprise Demo
+                        </Link>
                     </div>
-
-                    {/* CTA */}
-                    <Link href="/#contact" className="btn-gold text-sm hidden md:inline-flex">
-                        Request Enterprise Demo
-                    </Link>
 
                     {/* Hamburger */}
                     <button
@@ -167,12 +106,12 @@ export default function Navbar() {
                         aria-label="Toggle menu"
                     >
                         {menuOpen ? (
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                <path d="M15 5L5 15M5 5l10 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                             </svg>
                         ) : (
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                             </svg>
                         )}
                     </button>
@@ -180,44 +119,22 @@ export default function Navbar() {
 
                 {/* Mobile menu */}
                 {menuOpen && (
-                    <div className="md:hidden border-t border-[#E7E2D8] py-3 space-y-1">
-                        {/* Mobile Search */}
-                        <form onSubmit={handleSearchSubmit} className="px-1 mb-3">
-                            <div className="relative">
-                                <svg
-                                    className="absolute left-[14px] top-1/2 -translate-y-1/2 text-[#94A3B8]"
-                                    width="16"
-                                    height="16"
-                                    viewBox="0 0 16 16"
-                                    fill="none"
-                                >
-                                    <circle cx="7" cy="7" r="5" stroke="currentColor" strokeWidth="1.5" />
-                                    <path d="M11 11l3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                                </svg>
-                                <input
-                                    type="text"
-                                    placeholder="Search certifications…"
-                                    value={searchValue}
-                                    onChange={(e) => handleSearch(e.target.value)}
-                                    className="input-base !pl-[42px] py-2 text-sm h-10 w-full"
-                                />
-                            </div>
-                        </form>
+                    <div className="md:hidden border-t border-[#E7E2D8] py-4 space-y-2 pb-6">
                         {navLinks.map((l) => (
                             <Link
                                 key={l.href}
                                 href={l.href}
-                                onClick={(e) => {
-                                    handleAnchorClick(e, l.href);
-                                    setMenuOpen(false);
-                                }}
-                                className="block px-2 py-2.5 text-sm font-medium text-[#475569] hover:text-[#0F172A] rounded-lg hover:bg-[#FAFAF8] transition-colors"
+                                onClick={(e) => handleAnchorClick(e, l.href)}
+                                className="block px-3 py-3 text-base font-semibold text-[#475569] hover:text-[#0F172A] rounded-xl hover:bg-[#FAFAF8] transition-colors"
                             >
                                 {l.label}
                             </Link>
                         ))}
-                        <div className="px-1 pt-2">
-                            <Link href="/#contact" className="btn-gold text-sm w-full justify-center" onClick={() => setMenuOpen(false)}>
+                        <div className="px-3 pt-4 flex flex-col gap-3">
+                            <Link href="/#contact" className="w-full text-center py-3 text-sm font-600 rounded-xl bg-[#F3F0E8] text-[#0F172A]" onClick={() => setMenuOpen(false)}>
+                                Try for Free
+                            </Link>
+                            <Link href="/#contact" className="btn-gold text-sm w-full justify-center py-3" onClick={() => setMenuOpen(false)}>
                                 Request Enterprise Demo
                             </Link>
                         </div>

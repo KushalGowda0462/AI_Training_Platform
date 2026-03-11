@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+# AI_Training_Platform
+=======
 # Aurentis — AI Instructor Agent Platform
 
 A polished enterprise frontend demo built with **Next.js 14**, **TypeScript**, and **Tailwind CSS**.
@@ -73,3 +76,4 @@ src/
 - Contact form with segmented team size control and success toast
 - Sticky navbar with scroll shadow + mobile hamburger
 - All client-side — no backend required
+>>>>>>> kushal-works-here
