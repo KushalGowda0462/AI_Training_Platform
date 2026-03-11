@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Aurentis — AI-Powered Instructor Agent Platform",
+  title: "AURILEARN.AI — AI-Powered Instructor Agent Platform",
   description:
-    "Aurentis delivers AI instructor agents that transform legacy technical training into interactive, lab-driven mastery. Enterprise-grade, secure, and deeply integrated.",
+    "AURILEARN.AI delivers AI instructor agents that transform legacy technical training into interactive, lab-driven mastery. Enterprise-grade, secure, and deeply integrated.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -19,7 +18,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="bg-[#FAFAF8]">
         <Navbar />
         <main className="pt-16">{children}</main>
-        <Footer />
       </body>
     </html>
   );

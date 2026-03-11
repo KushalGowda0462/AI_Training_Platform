@@ -157,10 +157,10 @@ export default function HomePage() {
 
               {/* CTA Stack */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-2">
-                <Link href="/#contact" className="btn-gold flex items-center justify-center text-base font-bold px-7 h-12 rounded-xl shadow-[0_4px_20px_rgba(169,128,42,0.25)] w-full sm:w-auto transition-transform hover:-translate-y-0.5">
+                <Link href="#contact" className="btn-gold flex items-center justify-center text-base font-bold px-7 h-12 rounded-xl shadow-[0_4px_20px_rgba(169,128,42,0.25)] w-full sm:w-auto transition-transform hover:-translate-y-0.5">
                   Request Enterprise Demo
                 </Link>
-                <Link href="/#contact" className="btn-outline flex items-center justify-center text-base font-bold px-7 h-12 rounded-xl bg-white border-2 w-full sm:w-auto transition-all hover:bg-[#FAFAF8] hover:-translate-y-0.5">
+                <Link href="#contact" className="btn-outline flex items-center justify-center text-base font-bold px-7 h-12 rounded-xl bg-white border-2 w-full sm:w-auto transition-all hover:bg-[#FAFAF8] hover:-translate-y-0.5">
                   Try for Free
                 </Link>
               </div>
@@ -547,17 +547,18 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── SECTION 9: FINAL CTA / CONTACT (full-screen snap) ─── */}
-      <section id="contact" className="snap-section bg-[#0B1220]">
-        <div className="container-content w-full py-16">
-          <div className="max-w-xl mx-auto">
-            <div className="text-center mb-10">
+      {/* ─── SECTION 9: FINAL CTA / CONTACT (full-screen snap, flex-col) ─── */}
+      <section id="contact" className="snap-section bg-[#0B1220] flex flex-col">
+        {/* Form area — grows to fill space */}
+        <div className="container-content w-full flex-1 flex flex-col justify-center py-12">
+          <div className="max-w-xl mx-auto w-full">
+            <div className="text-center mb-8">
               <div className="gold-divider mx-auto" />
-              <h2 className="text-3xl md:text-4xl font-800 text-white mb-4">
+              <h2 className="text-3xl md:text-4xl font-800 text-white mb-3">
                 Ready to scale 1:1 mentorship?
               </h2>
               <p className="text-[#94A3B8] text-base">
-                Book a 30-minute discovery call with an Aurilearn solutions architect or sign up to try 10 free minutes of instruction.
+                Book a 30-minute discovery call with an AURILEARN.AI solutions architect or sign up to try 10 free minutes of instruction.
               </p>
             </div>
 
@@ -568,7 +569,7 @@ export default function HomePage() {
                 <p className="text-[#94A3B8] text-sm">Our team will reach out within one business day.</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label className="block text-sm font-600 text-[#94A3B8] mb-2">Corporate Email *</label>
                   <input
@@ -596,17 +597,18 @@ export default function HomePage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-600 text-[#94A3B8] mb-3">Estimated Team Size</label>
+                  <label className="block text-sm font-600 text-[#94A3B8] mb-2">Estimated Team Size</label>
                   <div className="flex gap-3">
                     {["10–100", "100–500", "500+"].map((size) => (
                       <button
                         key={size}
                         type="button"
                         onClick={() => setForm((f) => ({ ...f, teamSize: size }))}
-                        className={`flex-1 py-3 rounded-xl border-[1.5px] text-sm font-600 transition-all ${form.teamSize === size
-                          ? "border-[var(--gold)] bg-[var(--gold)]/10 text-[var(--gold)]"
-                          : "border-[#1E2D45] text-[#475569] hover:border-[var(--gold)]/50"
-                          }`}
+                        className={`flex-1 py-3 rounded-xl border-[1.5px] text-sm font-600 transition-all ${
+                          form.teamSize === size
+                            ? "border-[var(--gold)] bg-[var(--gold)]/10 text-[var(--gold)]"
+                            : "border-[#1E2D45] text-[#475569] hover:border-[var(--gold)]/50"
+                        }`}
                       >
                         {size}
                       </button>
@@ -614,16 +616,97 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                  <button type="submit" className="btn-gold text-base flex-1 justify-center py-4">
+                <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                  <button type="submit" className="btn-gold text-base flex-1 justify-center py-3.5">
                     Secure Discovery Call
                   </button>
-                  <button type="submit" className="btn-outline border-white text-white hover:bg-white hover:text-[#0B1220] text-base flex-1 justify-center py-4">
+                  <button type="submit" className="btn-outline border-white text-white hover:bg-white hover:text-[#0B1220] text-base flex-1 justify-center py-3.5">
                     Try For Free
                   </button>
                 </div>
               </form>
             )}
+          </div>
+        </div>
+
+        {/* Rich company footer band — pinned at bottom of the contact panel */}
+        <div className="w-full mt-auto border-t border-[#162035] bg-[#060D1A]">
+          <div className="container-content py-8">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-6">
+              {/* Brand + tagline */}
+              <div className="md:col-span-1">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-7 h-7 rounded-lg bg-[var(--gold)] flex items-center justify-center shrink-0">
+                    <span className="text-white text-xs font-bold">A</span>
+                  </div>
+                  <span className="text-white text-base font-bold tracking-tight">AURILEARN.AI</span>
+                </div>
+                <p className="text-[#475569] text-xs leading-relaxed">
+                  AI-powered 1:1 instructor agents for enterprise technical training at scale.
+                </p>
+              </div>
+
+              {/* Product */}
+              <div>
+                <h4 className="text-xs font-semibold text-white mb-3 uppercase tracking-wider">Product</h4>
+                <ul className="space-y-2">
+                  {[
+                    { label: "How It Works", href: "#ease-of-use" },
+                    { label: "Security", href: "#security" },
+                    { label: "Analytics", href: "#analytics" },
+                    { label: "Scalability", href: "#scalability" },
+                  ].map((l) => (
+                    <li key={l.label}>
+                      <a href={l.href} className="text-xs text-[#475569] hover:text-[var(--gold)] transition-colors">{l.label}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Company */}
+              <div>
+                <h4 className="text-xs font-semibold text-white mb-3 uppercase tracking-wider">Company</h4>
+                <ul className="space-y-2">
+                  {[
+                    { label: "About", href: "#about" },
+                    { label: "Testimonials", href: "#testimonials" },
+                    { label: "Contact", href: "#contact" },
+                    { label: "Careers", href: "#" },
+                  ].map((l) => (
+                    <li key={l.label}>
+                      <a href={l.href} className="text-xs text-[#475569] hover:text-[var(--gold)] transition-colors">{l.label}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Resources */}
+              <div>
+                <h4 className="text-xs font-semibold text-white mb-3 uppercase tracking-wider">Resources</h4>
+                <ul className="space-y-2">
+                  {[
+                    { label: "Documentation", href: "#" },
+                    { label: "Support", href: "#" },
+                    { label: "API Reference", href: "#" },
+                    { label: "Status", href: "#" },
+                  ].map((l) => (
+                    <li key={l.label}>
+                      <a href={l.href} className="text-xs text-[#475569] hover:text-[var(--gold)] transition-colors">{l.label}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Bottom copyright row */}
+            <div className="border-t border-[#162035] pt-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+              <p className="text-[#334155] text-xs">© {new Date().getFullYear()} AURILEARN.AI Inc. All rights reserved.</p>
+              <div className="flex items-center gap-5">
+                {["Privacy Policy", "Terms of Service", "Cookie Policy"].map((l) => (
+                  <a key={l} href="#" className="text-xs text-[#334155] hover:text-[var(--gold)] transition-colors">{l}</a>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
