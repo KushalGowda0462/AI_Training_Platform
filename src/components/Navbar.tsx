@@ -44,15 +44,18 @@ export default function Navbar() {
             const id = href.replace("/#", "");
             const element = document.getElementById(id);
             if (element) {
-                // Align section beautifully to top for fullscreen mode
-                const offsetPosition = element.getBoundingClientRect().top + window.pageYOffset;
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
-                });
+                element.scrollIntoView({ behavior: "smooth", block: "start" });
                 setMenuOpen(false);
             }
         }
+    };
+
+    const scrollToContact = () => {
+        const el = document.getElementById("contact");
+        if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+        setMenuOpen(false);
     };
 
     return (
@@ -91,12 +94,12 @@ export default function Navbar() {
 
                     {/* CTAs */}
                     <div className={`hidden md:flex items-center gap-3 transition-all duration-300 ${heroVisible ? "opacity-0 translate-y-2 pointer-events-none" : "opacity-100 translate-y-0"}`}>
-                        <Link href="/#contact" className="text-sm font-600 px-4 py-2 rounded-lg text-[#0F172A] hover:bg-[#F3F0E8] transition-colors">
+                        <button onClick={scrollToContact} className="text-sm font-600 px-4 py-2 rounded-lg text-[#0F172A] hover:bg-[#F3F0E8] transition-colors cursor-pointer">
                             Try for Free
-                        </Link>
-                        <Link href="/#contact" className="btn-gold text-sm px-5 py-2">
+                        </button>
+                        <button onClick={scrollToContact} className="btn-gold text-sm px-5 py-2 cursor-pointer">
                             Request Enterprise Demo
-                        </Link>
+                        </button>
                     </div>
 
                     {/* Hamburger */}
@@ -131,12 +134,12 @@ export default function Navbar() {
                             </Link>
                         ))}
                         <div className="px-3 pt-4 flex flex-col gap-3">
-                            <Link href="/#contact" className="w-full text-center py-3 text-sm font-600 rounded-xl bg-[#F3F0E8] text-[#0F172A]" onClick={() => setMenuOpen(false)}>
+                            <button onClick={scrollToContact} className="w-full text-center py-3 text-sm font-600 rounded-xl bg-[#F3F0E8] text-[#0F172A] cursor-pointer">
                                 Try for Free
-                            </Link>
-                            <Link href="/#contact" className="btn-gold text-sm w-full justify-center py-3" onClick={() => setMenuOpen(false)}>
+                            </button>
+                            <button onClick={scrollToContact} className="btn-gold text-sm w-full justify-center py-3 cursor-pointer">
                                 Request Enterprise Demo
-                            </Link>
+                            </button>
                         </div>
                     </div>
                 )}

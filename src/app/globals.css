@@ -18,8 +18,8 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 0;
-  /* Full-page scroll snap */
-  scroll-snap-type: y mandatory;
+  /* Proximity snap: sections snap when close, but anchor links still work */
+  scroll-snap-type: y proximity;
 }
 
 body {

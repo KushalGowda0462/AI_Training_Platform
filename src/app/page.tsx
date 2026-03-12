@@ -8,6 +8,14 @@ import { testimonials } from "@/lib/mock/testimonials";
 export default function HomePage() {
   const [videoModalOpen, setVideoModalOpen] = useState(false);
 
+  // Reliable programmatic scroll — works regardless of scroll-snap or Next.js router
+  const scrollToContact = () => {
+    const el = document.getElementById("contact");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   const [form, setForm] = useState({ email: "", stack: "", teamSize: "" });
   const [submitted, setSubmitted] = useState(false);
   const [toastVisible, setToastVisible] = useState(false);
@@ -157,12 +165,18 @@ export default function HomePage() {
 
               {/* CTA Stack */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-2">
-                <Link href="#contact" className="btn-gold flex items-center justify-center text-base font-bold px-7 h-12 rounded-xl shadow-[0_4px_20px_rgba(169,128,42,0.25)] w-full sm:w-auto transition-transform hover:-translate-y-0.5">
+                <button
+                  onClick={scrollToContact}
+                  className="btn-gold flex items-center justify-center text-base font-bold px-7 h-12 rounded-xl shadow-[0_4px_20px_rgba(169,128,42,0.25)] w-full sm:w-auto transition-transform hover:-translate-y-0.5 cursor-pointer"
+                >
                   Request Enterprise Demo
-                </Link>
-                <Link href="#contact" className="btn-outline flex items-center justify-center text-base font-bold px-7 h-12 rounded-xl bg-white border-2 w-full sm:w-auto transition-all hover:bg-[#FAFAF8] hover:-translate-y-0.5">
+                </button>
+                <button
+                  onClick={scrollToContact}
+                  className="btn-outline flex items-center justify-center text-base font-bold px-7 h-12 rounded-xl bg-white border-2 w-full sm:w-auto transition-all hover:bg-[#FAFAF8] hover:-translate-y-0.5 cursor-pointer"
+                >
                   Try for Free
-                </Link>
+                </button>
               </div>
               <p className="text-xs text-[#64748B] font-semibold mb-3">Included: 10 free minutes of AI instruction with &quot;Try for Free&quot;</p>
 
@@ -317,7 +331,7 @@ export default function HomePage() {
           </div>
 
           <div className="text-center">
-            <Link href="/#contact" className="btn-gold text-base px-8 py-3.5 inline-flex items-center gap-2">
+            <Link href="#contact" className="btn-gold text-base px-8 py-3.5 inline-flex items-center gap-2">
               See Aurilearn in Action
             </Link>
           </div>
@@ -458,7 +472,7 @@ export default function HomePage() {
                 ))}
               </ul>
 
-              <Link href="/#contact" className="btn-gold text-base px-7 py-3">
+              <Link href="#contact" className="btn-gold text-base px-7 py-3">
                 View Analytics Demo
               </Link>
             </div>
