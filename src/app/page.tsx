@@ -29,24 +29,29 @@ export default function HomePage() {
 
   const securityCards = [
     {
-      icon: "🔒",
-      title: "Secure SaaS Architecture",
-      desc: "SOC2-compliant infrastructure ensures all training data and runbooks are encrypted and isolated per tenant.",
+      icon: "🏗️",
+      title: "Private Deployment Options",
+      desc: "Deploy Aurilearn within your infrastructure or dedicated cloud environment — keeping all training data inside your perimeter.",
+    },
+    {
+      icon: "🔐",
+      title: "Controlled Access",
+      desc: "Administrators manage which teams and individual users can access the AI instructor and training programs.",
+    },
+    {
+      icon: "🏢",
+      title: "Organization-Isolated Environments",
+      desc: "Each company operates in a fully isolated environment. No cross-tenant data sharing at any layer.",
     },
     {
       icon: "🛡️",
-      title: "Enterprise-Grade Compliance",
-      desc: "End-to-end TLS encryption on all interactions with the AI instructor, meeting strict global IT data governance standards.",
+      title: "Secure Training Data",
+      desc: "Runbooks, labs, and infrastructure interactions remain fully protected and never leave your controlled environment.",
     },
     {
       icon: "🔑",
-      title: "Secure Authentication",
-      desc: "Enterprise SSO integrations guarantee secure logon and fully isolated tenant environments for every customer.",
-    },
-    {
-      icon: "☁️",
-      title: "Model Agnostic & Private",
-      desc: "Deploy on your cloud or ours. Aurilearn is model-agnostic and supports private cloud deployment for air-gapped environments.",
+      title: "Enterprise Identity Integration",
+      desc: "Integrate with corporate SSO, authentication systems, and access policies for seamless and secure onboarding.",
     },
   ];
 
@@ -101,27 +106,33 @@ export default function HomePage() {
   const howItWorks = [
     {
       step: "01",
-      icon: "📥",
-      title: "Ingest Your Content",
-      desc: "Aurilearn ingests your internal documentation, lab environments, runbooks, and training content automatically.",
+      icon: "🚀",
+      title: "Deploy Aurilearn Instructor",
+      desc: "Aurilearn deploys securely into the company environment and integrates with existing engineering tools and lab systems.",
     },
     {
       step: "02",
-      icon: "🔗",
-      title: "Integrate With Labs",
-      desc: "The AI instructor securely integrates with your Kubernetes environments, cloud labs, and existing training platforms.",
+      icon: "📋",
+      title: "Enroll Teams in Training Programs",
+      desc: "Teams join curated Aurilearn learning tracks such as Kubernetes, DevOps, platform engineering, or internal product training.",
     },
     {
       step: "03",
-      icon: "🎓",
-      title: "1:1 AI Mentorship",
-      desc: "Engineers receive real-time, context-aware mentorship and feedback — like having a senior expert at their side.",
+      icon: "🤖",
+      title: "AI-Guided Mentorship",
+      desc: "Engineers interact with an AI instructor that explains concepts, answers questions, and guides problem solving like a senior engineer.",
     },
     {
       step: "04",
+      icon: "🧪",
+      title: "Practice in Real Labs",
+      desc: "Learners work inside realistic infrastructure labs while the AI mentor provides step-by-step guidance and debugging support.",
+    },
+    {
+      step: "05",
       icon: "📊",
-      title: "Track Progress",
-      desc: "Analytics dashboards track skill progression, lab pass rates, and certification pipeline status in real time.",
+      title: "Track Skill Progress",
+      desc: "Managers monitor module progress, lab completion, and certification readiness across their teams.",
     },
   ];
 
@@ -312,11 +323,11 @@ export default function HomePage() {
             <div className="gold-divider mx-auto" />
             <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A] mb-3">How Aurilearn works</h2>
             <p className="text-lg text-[#64748B] max-w-xl mx-auto">
-              Four steps from content ingestion to certified expertise.
+              Five steps from deployment to certified expertise — Aurilearn provides everything.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 mb-12">
             {howItWorks.map((step, i) => (
               <div key={i} className="group relative p-6 rounded-2xl bg-[#FAFAF8] border border-[#E7E2D8] hover:border-[var(--gold)] hover:shadow-[0_8px_30px_rgba(169,128,42,0.08)] transition-all">
                 {i < howItWorks.length - 1 && (
@@ -331,57 +342,61 @@ export default function HomePage() {
           </div>
 
           <div className="text-center">
-            <Link href="#contact" className="btn-gold text-base px-8 py-3.5 inline-flex items-center gap-2">
+            <button onClick={scrollToContact} className="btn-gold text-base px-8 py-3.5 inline-flex items-center gap-2 cursor-pointer">
               See Aurilearn in Action
-            </Link>
+            </button>
           </div>
         </div>
       </section>
 
-      {/* ─── SECTION 4: EASE OF USE ─── */}
+      {/* ─── SECTION 4: NATURAL LEARNING EXPERIENCE ─── */}
       <section id="ease-of-use" className="snap-section bg-[#FAFAF8] border-t border-[#E7E2D8]">
         <div className="container-content w-full py-16 text-center">
           <div className="max-w-2xl mx-auto mb-12">
             <div className="gold-divider mx-auto" />
-            <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A] mb-3">Easy to use</h2>
+            <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A] mb-3">Natural Learning Experience</h2>
             <p className="text-lg text-[#64748B]">
-              Click, type, or use voice to interact naturally with your AI instructor. No complex dashboards to learn.
+              Interact with your AI instructor like working with a senior engineer.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 max-w-6xl mx-auto">
             {[
-              { icon: "🖱️", title: "Click", desc: "Select concepts, highlight code segments, and navigate your labs visually." },
-              { icon: "⌨️", title: "Type", desc: "Chat naturally to ask follow-up questions or paste code errors for immediate analysis." },
-              { icon: "🎙️", title: "Voice", desc: "Talk through your logic aloud. The agent listens and corrects your reasoning conversationally." },
+              { icon: "💬", title: "Ask Questions Anytime", desc: "Learners can ask the AI mentor questions at any stage of training — no waiting, no bottlenecks." },
+              { icon: "🐛", title: "Debug Errors Instantly", desc: "Paste logs, errors, or configurations and receive guided troubleshooting explanations in real time." },
+              { icon: "🗺️", title: "Guided Lab Execution", desc: "The AI mentor walks engineers through complex infrastructure tasks step by step." },
+              { icon: "💡", title: "Concept Explanations", desc: "Difficult engineering concepts are explained clearly using examples and structured reasoning." },
+              { icon: "🔄", title: "Continuous Learning Support", desc: "The AI instructor remembers context and continues guiding the learner through their full progress." },
             ].map((card) => (
-              <div key={card.title} className="group rounded-2xl p-7 bg-white border border-[#E7E2D8] hover:border-[var(--gold)] hover:shadow-[0_8px_30px_rgba(169,128,42,0.08)] transition-all flex flex-col items-center text-center gap-4">
+              <div key={card.title} className="group rounded-2xl p-6 bg-white border border-[#E7E2D8] hover:border-[var(--gold)] hover:shadow-[0_8px_30px_rgba(169,128,42,0.08)] transition-all flex flex-col items-center text-center gap-3">
                 <div className="w-14 h-14 rounded-xl bg-[#FAFAF8] border border-[#E7E2D8] flex items-center justify-center text-3xl group-hover:-translate-y-1 transition-transform duration-300">
                   {card.icon}
                 </div>
-                <h3 className="text-lg font-bold text-[#0F172A]">{card.title}</h3>
-                <p className="text-[#64748B] text-sm">{card.desc}</p>
+                <h3 className="text-base font-bold text-[#0F172A]">{card.title}</h3>
+                <p className="text-[#64748B] text-sm leading-relaxed">{card.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ─── SECTION 5: SCALABILITY ─── */}
+      {/* ─── SECTION 5: MENTORSHIP THAT FEELS REAL ─── */}
       <section id="scalability" className="snap-section bg-white border-t border-[#E7E2D8]">
         <div className="container-content w-full py-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div>
               <div className="gold-divider" />
-              <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A] mb-5">Scalable when you need it</h2>
+              <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A] mb-5">Mentorship That Feels Real</h2>
               <p className="text-base text-[#64748B] leading-relaxed mb-7">
-                Aurilearn&apos;s architecture is built to adapt to your operational reality. Scale up or down instantly based on demand, eliminating the rigid scheduling bottlenecks of human-led cohorts.
+                Aurilearn&apos;s AI instructor behaves like a senior engineer guiding your learning journey — patient, precise, and always available.
               </p>
-              <ul className="space-y-5">
+              <ul className="space-y-4">
                 {[
-                  { title: "Zero Wait Times", desc: "Suitable for small ad-hoc cohorts or enterprise-wide rollouts of thousands of concurrent learners." },
-                  { title: "Flexible Delivery", desc: "Engineers train when they want, where they want. No instructor bottlenecks or timezone conflicts." },
-                  { title: "Cost Efficiency", desc: "Pay for the mentorship compute you use, rather than locking into expensive fixed-rate instructor contracts." },
+                  { title: "Human-Like Mentorship", desc: "Learners interact with the AI instructor as if they are working with an experienced mentor." },
+                  { title: "Context-Aware Teaching", desc: "The AI understands what the learner is currently doing and adapts its guidance accordingly." },
+                  { title: "Continuous Feedback", desc: "Learners receive immediate feedback on commands, configurations, and decisions in real time." },
+                  { title: "Confidence Building", desc: "Engineers learn by doing while the AI mentor supports and validates their reasoning process." },
+                  { title: "Deeper Learning Engagement", desc: "Mentorship-style interaction improves understanding, retention, and real-world skill transfer." },
                 ].map((item, i) => (
                   <li key={i} className="flex gap-4">
                     <div className="w-9 h-9 rounded-full bg-[#FAFAF8] border border-[#E7E2D8] flex items-center justify-center shrink-0 mt-0.5">
@@ -396,36 +411,59 @@ export default function HomePage() {
               </ul>
             </div>
 
-            <div className="relative rounded-2xl bg-white border border-[#E7E2D8] shadow-lg p-7 overflow-hidden flex flex-col">
-              <div className="flex justify-between items-center mb-8">
-                <div className="font-bold text-[#0F172A]">Concurrent Mentorship Sessions</div>
-                <div className="text-[var(--gold)] font-bold bg-[var(--gold-light)]/50 px-3 py-1 rounded-full text-xs">Auto-scaling</div>
+            {/* Right side: Mentorship visual */}
+            <div className="relative rounded-2xl bg-[#0B1220] border border-[#1E2D45] shadow-xl p-7 overflow-hidden flex flex-col gap-5">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-10 h-10 rounded-full bg-[var(--gold)] flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(169,128,42,0.4)]">
+                  <span className="text-white text-sm font-bold">A</span>
+                </div>
+                <div>
+                  <div className="text-white text-sm font-bold">Aurilearn Instructor</div>
+                  <div className="text-[#94A3B8] text-xs">Kubernetes CKA — Pod Networking</div>
+                </div>
+                <div className="ml-auto flex items-center gap-1.5 text-xs text-green-400 font-semibold">
+                  <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                  Live session
+                </div>
               </div>
-              <div className="flex-1 flex items-end gap-1.5 h-36">
-                {[30, 45, 25, 60, 85, 40, 75, 95, 100, 80, 50, 70, 90, 65, 85, 45].map((h, i) => (
-                  <div key={i} className="flex-1 bg-gradient-to-t from-[var(--gold)]/20 to-[var(--gold)] rounded-t-sm" style={{ height: `${h}%`, opacity: (i / 16) * 0.5 + 0.5 }} />
-                ))}
-              </div>
-              <div className="mt-4 flex justify-between text-xs font-bold text-[#94A3B8] uppercase tracking-wider">
-                <span>Q1</span><span>Q2</span><span>Q3</span><span>Q4</span>
-              </div>
+              {[
+                { role: "learner", text: "I applied the NetworkPolicy but traffic is still being blocked between namespaces." },
+                { role: "ai", text: "Good catch. Let's check two things: first, ensure the podSelector labels match exactly. A common mistake is a label casing mismatch. Can you paste your policy spec?" },
+                { role: "learner", text: "Here it is — podSelector: matchLabels: app: frontend" },
+                { role: "ai", text: "I see it — your destination namespace selector is missing. Add a namespaceSelector block alongside the podSelector. Here's the corrected structure..." },
+              ].map((msg, i) => (
+                <div key={i} className={`flex gap-3 ${msg.role === "learner" ? "" : "flex-row-reverse"}`}>
+                  <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 text-xs font-bold ${
+                    msg.role === "ai" ? "bg-[var(--gold)] text-white" : "bg-[#1E2D45] text-[#94A3B8]"
+                  }`}>
+                    {msg.role === "ai" ? "A" : "R"}
+                  </div>
+                  <div className={`rounded-2xl px-4 py-2.5 text-xs leading-relaxed max-w-[80%] ${
+                    msg.role === "ai"
+                      ? "bg-[var(--gold)]/10 border border-[var(--gold)]/20 text-white rounded-tr-sm"
+                      : "bg-[#1E2D45] text-[#CBD5E1] rounded-tl-sm"
+                  }`}>
+                    {msg.text}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* ─── SECTION 6: SECURITY (full-screen snap) ─── */}
+      {/* ─── SECTION 6: ENTERPRISE DEPLOYMENT CONTROL ─── */}
       <section id="security" className="snap-section bg-[#0B1220]">
         <div className="container-content w-full py-16">
           <div className="text-center mb-12">
             <div className="gold-divider mx-auto" />
-            <h2 className="text-3xl md:text-4xl font-800 text-white mb-4">Security built in</h2>
+            <h2 className="text-3xl md:text-4xl font-800 text-white mb-4">Enterprise Deployment Control</h2>
             <p className="text-[#94A3B8] text-base max-w-xl mx-auto">
-              Data remains protected at rest, in transit, and throughout secure user authentication, meeting the strict requirements of global enterprise IT.
+              Aurilearn runs within your controlled environment while maintaining full enterprise governance and access management.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
             {securityCards.map((card) => (
               <div key={card.title} className="bg-[#162035] border border-[#1E2D45] rounded-2xl p-6 flex flex-col gap-4 hover:-translate-y-1 transition-transform duration-300">
                 <div className="w-14 h-14 rounded-full bg-[#0B1220] border border-[var(--gold)]/20 flex items-center justify-center text-2xl shadow-[0_0_16px_rgba(169,128,42,0.12)]">
@@ -479,45 +517,70 @@ export default function HomePage() {
 
             <div className="lg:col-span-7">
               <div className="bg-white rounded-2xl p-6 border border-[#E7E2D8] shadow-xl overflow-hidden">
-                <div className="flex justify-between items-center mb-6 border-b border-[#E7E2D8] pb-5">
-                  <div className="font-bold text-lg text-[#0F172A]">Company Overview</div>
+                {/* Learner profile header */}
+                <div className="flex items-center justify-between mb-5 border-b border-[#E7E2D8] pb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-[#FAFAF8] border border-[#E7E2D8] flex items-center justify-center font-bold text-[#94A3B8]">
+                      R
+                    </div>
+                    <div>
+                      <div className="font-bold text-[#0F172A]">Rahul Sharma</div>
+                      <div className="text-xs text-[#94A3B8] font-medium">Kubernetes CKA Track · Active</div>
+                    </div>
+                  </div>
                   <div className="flex gap-2 text-sm">
-                    <span className="bg-[#FAFAF8] border border-[#E7E2D8] px-3 py-1.5 rounded-lg text-[#475569] font-medium">Last 30 Days</span>
-                    <span className="bg-[#0F172A] text-white px-3 py-1.5 rounded-lg font-medium">Export CSV</span>
+                    <span className="bg-[#FAFAF8] border border-[#E7E2D8] px-3 py-1.5 rounded-lg text-[#475569] font-medium text-xs">Last 30 Days</span>
+                    <span className="bg-[#0F172A] text-white px-3 py-1.5 rounded-lg font-medium text-xs">Export</span>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+                {/* Module progress table */}
+                <div className="mb-5">
+                  <div className="grid grid-cols-3 text-xs font-bold text-[#94A3B8] uppercase tracking-wider px-3 pb-2">
+                    <span>Module</span><span className="text-center">Score</span><span className="text-right">Status</span>
+                  </div>
                   {[
-                    { label: "Active Students", value: "342", trend: "+12%" },
-                    { label: "Avg. Module Level", value: "07", trend: "+2" },
-                    { label: "Lab Pass Rate", value: "94%", trend: "+3%" },
-                    { label: "Cert. Registrations", value: "128", trend: "+18%" },
-                  ].map((stat, i) => (
-                    <div key={i} className="bg-[#FAFAF8] p-4 rounded-xl border border-[#E7E2D8]">
-                      <div className="text-xs font-semibold text-[#94A3B8] uppercase tracking-wider mb-2">{stat.label}</div>
-                      <div className="flex items-end gap-2">
-                        <div className="text-xl font-900 text-[#0F172A]">{stat.value}</div>
-                        <div className="text-xs font-bold text-green-600 mb-0.5">{stat.trend}</div>
-                      </div>
+                    { module: "Kubernetes Basics", score: "92%", status: "Completed", color: "text-green-600 bg-green-50" },
+                    { module: "Pod Networking", score: "84%", status: "In Progress", color: "text-blue-600 bg-blue-50" },
+                    { module: "Cluster Debugging", score: "70%", status: "Needs Improvement", color: "text-amber-600 bg-amber-50" },
+                    { module: "Helm Deployments", score: "88%", status: "Completed", color: "text-green-600 bg-green-50" },
+                    { module: "Security Policies", score: "60%", status: "Practicing", color: "text-purple-600 bg-purple-50" },
+                  ].map((row, i) => (
+                    <div key={i} className="grid grid-cols-3 items-center px-3 py-2.5 rounded-lg hover:bg-[#FAFAF8] transition-colors">
+                      <span className="text-sm font-semibold text-[#0F172A]">{row.module}</span>
+                      <span className="text-sm font-bold text-[#0F172A] text-center">{row.score}</span>
+                      <span className={`text-xs font-bold px-2 py-0.5 rounded-full text-right w-fit ml-auto ${row.color}`}>{row.status}</span>
                     </div>
                   ))}
                 </div>
 
+                {/* Certification pipeline */}
                 <div className="bg-[#FAFAF8] p-5 rounded-xl border border-[#E7E2D8]">
                   <div className="flex justify-between items-end mb-3">
                     <div className="font-bold text-[#0F172A] text-sm">Kubernetes CKA Certification Pipeline</div>
-                    <div className="text-sm font-bold text-[var(--gold)]">85% Pass Rate</div>
+                    <div className="text-xs font-bold text-[var(--gold)]">Currently: Lab Practice</div>
                   </div>
-                  <div className="w-full h-3 bg-[#F3F0E8] rounded-full overflow-hidden flex">
-                    <div className="bg-[#0F172A] h-full" style={{ width: "40%" }} title="Completed & Passed" />
-                    <div className="bg-[var(--gold)] h-full" style={{ width: "25%" }} title="Registered" />
-                    <div className="bg-[var(--gold-light)] h-full" style={{ width: "20%" }} title="In Progress" />
-                  </div>
-                  <div className="flex gap-5 mt-3 text-xs font-semibold text-[#64748B]">
-                    <div className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full bg-[#0F172A]" /> Passed Exam</div>
-                    <div className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full bg-[var(--gold)]" /> Registered</div>
-                    <div className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full bg-[var(--gold-light)]" /> Module Training</div>
+                  {/* Staged progress bars */}
+                  <div className="space-y-2">
+                    {[
+                      { label: "Concept Learning", pct: 100, done: true },
+                      { label: "Lab Practice", pct: 65, done: false },
+                      { label: "Assessment", pct: 20, done: false },
+                      { label: "Certification", pct: 0, done: false },
+                    ].map((stage) => (
+                      <div key={stage.label} className="flex items-center gap-3">
+                        <span className={`text-xs font-semibold w-36 shrink-0 ${stage.done ? "text-[#0F172A]" : stage.pct > 0 ? "text-[var(--gold)]" : "text-[#CBD5E1]"}`}>
+                          {stage.label}
+                        </span>
+                        <div className="flex-1 h-2.5 bg-[#F3F0E8] rounded-full overflow-hidden">
+                          <div
+                            className={`h-full rounded-full transition-all ${stage.done ? "bg-[#0F172A]" : "bg-[var(--gold)]"}`}
+                            style={{ width: `${stage.pct}%` }}
+                          />
+                        </div>
+                        <span className="text-xs font-bold text-[#94A3B8] w-8 text-right shrink-0">{stage.pct}%</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
