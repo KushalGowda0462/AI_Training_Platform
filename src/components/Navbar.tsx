@@ -71,11 +71,13 @@ export default function Navbar() {
                             window.scrollTo({ top: 0, behavior: "smooth" });
                             setMenuOpen(false);
                         }
-                    }} className="flex items-center gap-3 shrink-0">
-                        <div className="w-9 h-9 rounded-lg bg-[var(--gold)] flex items-center justify-center shadow-sm">
-                            <span className="text-white text-base font-bold">A</span>
-                        </div>
-                        <span className="text-[#0F172A] text-2xl font-800 tracking-tight">Aurilearn</span>
+                    }} className="flex items-center shrink-0">
+                        <img
+                            src="/aurilearn-logo.png"
+                            alt="Aurilearn"
+                            className="h-32 w-auto object-contain"
+                            draggable={false}
+                        />
                     </Link>
 
                     {/* Desktop Nav */}

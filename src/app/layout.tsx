@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import ChatWidget from "@/components/ChatWidget";
 
 export const metadata: Metadata = {
   title: "AURILEARN.AI — AI-Powered Instructor Agent Platform",
@@ -18,6 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="bg-[#FAFAF8]">
         <Navbar />
         <main className="pt-16">{children}</main>
+        <ChatWidget />
       </body>
     </html>
   );
