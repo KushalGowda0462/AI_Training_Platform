@@ -108,7 +108,7 @@ export default function HomePage() {
       step: "01",
       icon: "🚀",
       title: "Deploy Aurilearn Instructor",
-      desc: "Aurilearn deploys securely into the company environment and integrates with existing engineering tools and lab systems.",
+      desc: "Aurilearn deploys securely in to your companies environment and integrates with your existing engineering tools and lab systems.",
     },
     {
       step: "02",
@@ -120,7 +120,7 @@ export default function HomePage() {
       step: "03",
       icon: "🤖",
       title: "AI-Guided Mentorship",
-      desc: "Engineers interact with an AI instructor that explains concepts, answers questions, and guides problem solving like a senior engineer.",
+      desc: "Engineers interact with the Aurilearn AI instructor that explains concepts, answers questions, and guides problem solving like a senior engineer.",
     },
     {
       step: "04",
@@ -132,7 +132,7 @@ export default function HomePage() {
       step: "05",
       icon: "📊",
       title: "Track Skill Progress",
-      desc: "Managers monitor module progress, lab completion, and certification readiness across their teams.",
+      desc: "Managers monitor class and module progress, lab completion, and certification readiness across their teams.",
     },
   ];
 
@@ -155,7 +155,11 @@ export default function HomePage() {
               </h1>
 
               <p className="text-lg text-[#475569] leading-relaxed mb-5 font-medium">
-                The Aurilearn AI instructor transforms legacy training into a 1:1 mentorship experience leading to class mastery. Secure, scalable, and easily integrated into your current training management platform.
+                The Aurilearn AI instructor can be
+                used any time, anywhere on any device and transforms your legacy training in to a
+                1:1 mentorship experience leading you to class mastery. Further, its secure,
+                scalable, and easily integrated into your current training management platform with
+                robust and granular data analytics.
               </p>
 
               <ul className="space-y-2 mb-6 text-[#64748B]">
@@ -164,6 +168,7 @@ export default function HomePage() {
                   "Ask as many questions as you want",
                   "Receive context-aware expert answers",
                   "Go entirely at your own speed",
+                  "Any device, any time, any where",
                 ].map((item, idx) => (
                   <li key={idx} className="flex items-center gap-3">
                     <svg className="w-5 h-5 text-[var(--gold)] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -180,13 +185,13 @@ export default function HomePage() {
                   onClick={scrollToContact}
                   className="btn-gold flex items-center justify-center text-base font-bold px-7 h-12 rounded-xl shadow-[0_4px_20px_rgba(169,128,42,0.25)] w-full sm:w-auto transition-transform hover:-translate-y-0.5 cursor-pointer"
                 >
-                  Request Enterprise Demo
+                  Request an Enterprise Demo
                 </button>
                 <button
                   onClick={scrollToContact}
-                  className="btn-outline flex items-center justify-center text-base font-bold px-7 h-12 rounded-xl bg-white border-2 w-full sm:w-auto transition-all hover:bg-[#FAFAF8] hover:-translate-y-0.5 cursor-pointer"
+                  className="btnx-outline flex items-center justify-center text-base font-bold px-7 h-12 rounded-xl bg-white border-2 w-full sm:w-auto transition-all hover:bg-[#FAFAF8] hover:-translate-y-0.5 cursor-pointer"
                 >
-                  Try for Free
+                  Try it for Free
                 </button>
               </div>
               <p className="text-xs text-[#64748B] font-semibold mb-3">Included: 10 free minutes of AI instruction with &quot;Try for Free&quot;</p>
@@ -266,15 +271,18 @@ export default function HomePage() {
             <div className="gold-divider mx-auto" />
             <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A] mb-6">About Aurilearn</h2>
             <p className="text-lg md:text-xl font-serif text-[#0F172A] leading-snug mb-6 italic">
-              &quot;Built on deep real-world IT training experience. Informed by 16 years in technical training. Experienced in applying modern LLMs to narrow, high-value training use cases.&quot;
+              &quot;Built on deep real-world IT training experience. Informed by decades of years managing and delivering technical training. Experienced in applying modern LLMs to narrow, high-value training use cases.&quot;
             </p>
             <div className="text-base text-[#64748B] leading-relaxed space-y-3 max-w-2xl mx-auto text-center">
               <p>
-                Aurilearn is engineered by professionals who have worked for top-tier global IT training companies, bringing together decades of combined experience in the classroom and curriculum architecture.
+                Aurilearn was created, architected and engineered by professionals who have
+                worked for top-tier global IT training companies, bringing together decades of
+                combined experience in the classroom and curriculum architecture.
               </p>
               <p>
-                We recognize that general chatbots fail to teach effectively. By leveraging narrow, specialized LLM implementations, we&apos;ve created a platform fluent in interpreting the complex, stateful environments of modern engineering.
-              </p>
+                We recognize that general LLM based chatbots fail to teach effectively. By building a
+                specialized LLM implementation, we&#39;ve created a platform that dynamically and
+                fluently interprets the complex, stateful environments of modern engineering.              </p>
             </div>
 
             {/* Stats row */}
@@ -323,7 +331,8 @@ export default function HomePage() {
             <div className="gold-divider mx-auto" />
             <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A] mb-3">How Aurilearn works</h2>
             <p className="text-lg text-[#64748B] max-w-xl mx-auto">
-              Five steps from deployment to certified expertise — Aurilearn provides everything.
+              Five steps from deployment to certified expertise — Your
+              Comprehensive Solution
             </p>
           </div>
 
@@ -356,7 +365,7 @@ export default function HomePage() {
             <div className="gold-divider mx-auto" />
             <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A] mb-3">Natural Learning Experience</h2>
             <p className="text-lg text-[#64748B]">
-              Interact with your AI instructor like working with a senior engineer.
+              Interact with your Aurilearn AI instructor like working with a senior engineer.
             </p>
           </div>
 
@@ -433,16 +442,14 @@ export default function HomePage() {
                 { role: "ai", text: "I see it — your destination namespace selector is missing. Add a namespaceSelector block alongside the podSelector. Here's the corrected structure..." },
               ].map((msg, i) => (
                 <div key={i} className={`flex gap-3 ${msg.role === "learner" ? "" : "flex-row-reverse"}`}>
-                  <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 text-xs font-bold ${
-                    msg.role === "ai" ? "bg-[var(--gold)] text-white" : "bg-[#1E2D45] text-[#94A3B8]"
-                  }`}>
+                  <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 text-xs font-bold ${msg.role === "ai" ? "bg-[var(--gold)] text-white" : "bg-[#1E2D45] text-[#94A3B8]"
+                    }`}>
                     {msg.role === "ai" ? "A" : "R"}
                   </div>
-                  <div className={`rounded-2xl px-4 py-2.5 text-xs leading-relaxed max-w-[80%] ${
-                    msg.role === "ai"
-                      ? "bg-[var(--gold)]/10 border border-[var(--gold)]/20 text-white rounded-tr-sm"
-                      : "bg-[#1E2D45] text-[#CBD5E1] rounded-tl-sm"
-                  }`}>
+                  <div className={`rounded-2xl px-4 py-2.5 text-xs leading-relaxed max-w-[80%] ${msg.role === "ai"
+                    ? "bg-[var(--gold)]/10 border border-[var(--gold)]/20 text-white rounded-tr-sm"
+                    : "bg-[#1E2D45] text-[#CBD5E1] rounded-tl-sm"
+                    }`}>
                     {msg.text}
                   </div>
                 </div>
@@ -459,7 +466,7 @@ export default function HomePage() {
             <div className="gold-divider mx-auto" />
             <h2 className="text-3xl md:text-4xl font-800 text-white mb-4">Enterprise Deployment Control</h2>
             <p className="text-[#94A3B8] text-base max-w-xl mx-auto">
-              Aurilearn runs within your controlled environment while maintaining full enterprise governance and access management.
+              Aurilearn runs within your controlled environment ensuring that you have full enterprise governance and access management.
             </p>
           </div>
 
@@ -486,15 +493,15 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-5">
               <div className="gold-divider" />
-              <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A] mb-5">Analytics when and as you want them</h2>
+              <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A] mb-5">Analytics when, where and as you want them</h2>
               <p className="text-base text-[#64748B] leading-relaxed mb-7">
-                Move beyond generic course completion rates. All data is captured and presented on demand, giving engineering leaders granular visibility into team capabilities and potential blockers.
+                Move beyond generic course completion rates. All data is captured and presented on demand, giving engineering leaders granular visibility in to team capabilities and potential road blocks.
               </p>
 
               <ul className="space-y-4 mb-8">
                 {[
                   "Number of students enrolled and in progress",
-                  "Live tracking of exact module positions",
+                  "Live tracking of exact class and module positions",
                   "Pass/fail rates on automated lab validations",
                   "Certification exam registration tracking",
                   "Final certification pass statistics",
@@ -635,7 +642,10 @@ export default function HomePage() {
                 Ready to scale 1:1 mentorship?
               </h2>
               <p className="text-[#94A3B8] text-base">
-                Book a 30-minute discovery call with an AURILEARN.AI solutions architect or sign up to try 10 free minutes of instruction.
+                Book a 30-minute discovery call with an AURILEARN.AI Customer Service Representative
+              </p>
+              <p className="text-[#94A3B8] text-base">
+                Sign up to try 10 free minutes of instruction.
               </p>
             </div>
 
@@ -681,11 +691,10 @@ export default function HomePage() {
                         key={size}
                         type="button"
                         onClick={() => setForm((f) => ({ ...f, teamSize: size }))}
-                        className={`flex-1 py-3 rounded-xl border-[1.5px] text-sm font-600 transition-all ${
-                          form.teamSize === size
-                            ? "border-[var(--gold)] bg-[var(--gold)]/10 text-[var(--gold)]"
-                            : "border-[#1E2D45] text-[#475569] hover:border-[var(--gold)]/50"
-                        }`}
+                        className={`flex-1 py-3 rounded-xl border-[1.5px] text-sm font-600 transition-all ${form.teamSize === size
+                          ? "border-[var(--gold)] bg-[var(--gold)]/10 text-[var(--gold)]"
+                          : "border-[#1E2D45] text-[#475569] hover:border-[var(--gold)]/50"
+                          }`}
                       >
                         {size}
                       </button>
