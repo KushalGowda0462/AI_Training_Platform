@@ -132,10 +132,10 @@ export default function HomePage() {
       {/* ─── SECTION 1: HERO (full-screen snap) ─── */}
       <section id="hero" className="snap-section hero-bg pt-20">
         <div className="container-content w-full py-16 lg:py-0">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-14 items-center">
 
             {/* Left: Text */}
-            <div className="max-w-xl relative z-10">
+            <div className="md:col-span-6 lg:col-span-6 max-w-xl relative z-10">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--gold-light)] text-[var(--gold-hover)] text-sm font-700 mb-4">
                 <span className="w-2 h-2 rounded-full bg-[var(--gold)] inline-block animate-pulse" />
                 AI delivered training – 1:1 mentorship
@@ -201,7 +201,7 @@ export default function HomePage() {
             </div>
 
             {/* Right: Product Visual */}
-            <div className="relative z-10 lg:ml-auto w-full max-w-lg">
+            <div className="md:col-span-6 lg:col-span-6 relative z-10 lg:ml-auto w-full max-w-lg">
               <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-[#0B1220] to-[#162035] aspect-[4/3] shadow-2xl border-4 border-white">
                 <div className="absolute inset-0 opacity-30 mix-blend-overlay">
                   <div className="w-full h-full bg-[radial-gradient(circle_at_top_right,var(--gold),transparent_60%)]" />
@@ -255,7 +255,8 @@ export default function HomePage() {
       <section id="about" className="snap-section bg-[#FAFAF8] border-t border-[#E7E2D8] flex flex-col">
         {/* Main content — grows to push logos down */}
         <div className="container-content flex-1 flex flex-col justify-center py-16">
-          <div className="max-w-3xl mx-auto text-center">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+            <div className="md:col-span-12 lg:col-span-8 lg:col-start-3 text-center">
             <div className="w-14 h-14 rounded-2xl bg-[var(--gold)] shadow-lg mx-auto mb-6 flex items-center justify-center">
               <span className="text-white text-2xl font-bold">A</span>
             </div>
@@ -277,13 +278,13 @@ export default function HomePage() {
             </div>
 
             {/* Stats row */}
-            <div className="mt-8 grid grid-cols-3 gap-4 max-w-lg mx-auto">
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-12 gap-4 max-w-2xl mx-auto w-full">
               {[
                 { value: "16+", label: "Years IT Training" },
                 { value: "1:1", label: "AI Mentorship" },
                 { value: "94%", label: "Lab Pass Rate" },
               ].map((stat) => (
-                <div key={stat.label} className="text-center p-4 rounded-xl bg-white border border-[#E7E2D8] shadow-sm">
+                <div key={stat.label} className="sm:col-span-4 text-center p-4 rounded-xl bg-white border border-[#E7E2D8] shadow-sm">
                   <div className="text-2xl font-900 text-[#0F172A] mb-1">{stat.value}</div>
                   <div className="text-xs text-[#64748B] font-semibold leading-tight">{stat.label}</div>
                 </div>
@@ -291,6 +292,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+      </div>
 
         {/* Logo strip — anchored at the bottom via mt-auto on the outer wrapper */}
         <div className="w-full mt-auto border-t border-black/[0.06] bg-white py-6">
@@ -318,16 +320,19 @@ export default function HomePage() {
       {/* ─── SECTION 3: HOW IT WORKS (full-screen snap) ─── */}
       <section className="snap-section bg-white border-t border-[#E7E2D8]">
         <div className="container-content w-full py-16">
-          <div className="text-center mb-12">
-            <div className="gold-divider mx-auto" />
-            <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A] mb-3">How Aurilearn works</h2>
-            <p className="text-lg text-[#64748B] max-w-xl mx-auto">
-              Five steps from deployment to certified expertise — Your
-              Comprehensive Solution
-            </p>
+          <div className="grid grid-cols-1 md:grid-cols-12 mb-12">
+            <div className="md:col-span-12 lg:col-span-8 lg:col-start-3 text-center">
+              <div className="gold-divider mx-auto" />
+              <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A] mb-3">How Aurilearn works</h2>
+              <p className="text-lg text-[#64748B] max-w-xl mx-auto">
+                Five steps from deployment to certified expertise — Your
+                Comprehensive Solution
+              </p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-5 mb-12">
+            <div className="md:col-span-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
             {howItWorks.map((step, i) => (
               <div key={i} className="group relative p-6 rounded-2xl bg-[#FAFAF8] border border-[#E7E2D8] hover:border-[var(--gold)] hover:shadow-[0_8px_30px_rgba(169,128,42,0.08)] transition-all">
                 {i < howItWorks.length - 1 && (
@@ -339,6 +344,7 @@ export default function HomePage() {
                 <p className="text-sm text-[#64748B] leading-relaxed">{step.desc}</p>
               </div>
             ))}
+            </div>
           </div>
 
           <div className="text-center">
@@ -352,15 +358,18 @@ export default function HomePage() {
       {/* ─── SECTION 4: NATURAL LEARNING EXPERIENCE ─── */}
       <section id="ease-of-use" className="snap-section bg-[#FAFAF8] border-t border-[#E7E2D8]">
         <div className="container-content w-full py-16 text-center">
-          <div className="max-w-2xl mx-auto mb-12">
-            <div className="gold-divider mx-auto" />
-            <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A] mb-3">Natural Learning Experience</h2>
-            <p className="text-lg text-[#64748B]">
-              Interact with your Aurilearn AI instructor like working with a senior engineer.
-            </p>
+          <div className="grid grid-cols-1 md:grid-cols-12 mb-12">
+            <div className="md:col-span-12 lg:col-span-8 lg:col-start-3 max-w-2xl mx-auto">
+              <div className="gold-divider mx-auto" />
+              <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A] mb-3">Natural Learning Experience</h2>
+              <p className="text-lg text-[#64748B]">
+                Interact with your Aurilearn AI instructor like working with a senior engineer.
+              </p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-5 max-w-6xl mx-auto">
+            <div className="md:col-span-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
             {[
               { icon: "💬", title: "Ask Questions Anytime", desc: "Learners can ask the AI mentor questions at any stage of training — no waiting, no bottlenecks." },
               { icon: "🐛", title: "Debug Errors Instantly", desc: "Paste logs, errors, or configurations and receive guided troubleshooting explanations in real time." },
@@ -376,6 +385,7 @@ export default function HomePage() {
                 <p className="text-[#64748B] text-sm leading-relaxed">{card.desc}</p>
               </div>
             ))}
+            </div>
           </div>
         </div>
       </section>
@@ -383,8 +393,8 @@ export default function HomePage() {
       {/* ─── SECTION 5: MENTORSHIP THAT FEELS REAL ─── */}
       <section id="scalability" className="snap-section bg-white border-t border-[#E7E2D8]">
         <div className="container-content w-full py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            <div className="lg:col-span-6">
               <div className="gold-divider" />
               <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A] mb-5">Mentorship That Feels Real</h2>
               <p className="text-base text-[#64748B] leading-relaxed mb-7">
@@ -412,7 +422,7 @@ export default function HomePage() {
             </div>
 
             {/* Right side: Mentorship visual */}
-            <div className="relative rounded-2xl bg-[#0B1220] border border-[#1E2D45] shadow-xl p-7 overflow-hidden flex flex-col gap-5">
+            <div className="lg:col-span-6 lg:col-start-7 relative rounded-2xl bg-[#0B1220] border border-[#1E2D45] shadow-xl p-7 overflow-hidden flex flex-col gap-5">
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-10 h-10 rounded-full bg-[var(--gold)] flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(169,128,42,0.4)]">
                   <span className="text-white text-sm font-bold">A</span>
@@ -453,16 +463,19 @@ export default function HomePage() {
       {/* ─── SECTION 6: ENTERPRISE DEPLOYMENT CONTROL ─── */}
       <section id="security" className="snap-section bg-[#0B1220]">
         <div className="container-content w-full py-16">
-          <div className="text-center mb-12">
-            <div className="gold-divider mx-auto" />
-            <h2 className="text-3xl md:text-4xl font-800 text-white mb-4">Enterprise Deployment Control</h2>
-            <p className="text-[#94A3B8] text-base max-w-xl mx-auto">
-              Aurilearn runs within your controlled environment ensuring that you have full enterprise governance and access management.
-            </p>
+          <div className="grid grid-cols-1 md:grid-cols-12 mb-12">
+            <div className="md:col-span-12 lg:col-span-8 lg:col-start-3 text-center">
+              <div className="gold-divider mx-auto" />
+              <h2 className="text-3xl md:text-4xl font-800 text-white mb-4">Enterprise Deployment Control</h2>
+              <p className="text-[#94A3B8] text-base max-w-xl mx-auto">
+                Aurilearn runs within your controlled environment ensuring that you have full enterprise governance and access management.
+              </p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
-            {securityCards.map((card) => (
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
+            <div className="md:col-span-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+              {securityCards.map((card) => (
               <div key={card.title} className="bg-[#162035] border border-[#1E2D45] rounded-2xl p-6 flex flex-col gap-4 hover:-translate-y-1 transition-transform duration-300">
                 <div className="w-14 h-14 rounded-full bg-[#0B1220] border border-[var(--gold)]/20 flex items-center justify-center text-2xl shadow-[0_0_16px_rgba(169,128,42,0.12)]">
                   {card.icon}
@@ -471,6 +484,7 @@ export default function HomePage() {
                 <p className="text-sm text-[#94A3B8] leading-relaxed">{card.desc}</p>
               </div>
             ))}
+            </div>
           </div>
         </div>
       </section>
@@ -480,7 +494,7 @@ export default function HomePage() {
         <div className="absolute inset-0 opacity-[0.025] pointer-events-none" style={{ backgroundImage: 'linear-gradient(#0F172A 1px, transparent 1px), linear-gradient(90deg, #0F172A 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
         <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--gold-light)] rounded-full mix-blend-multiply filter blur-[80px] opacity-25 pointer-events-none translate-x-1/3 -translate-y-1/3" />
 
-        <div className="relative z-10 w-full py-16 max-w-[1200px] mx-auto px-6">
+        <div className="container-content relative z-10 w-full py-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
             <div className="lg:col-span-5">
               <div className="gold-divider" />
@@ -702,12 +716,15 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(169,128,42,0.05),transparent_60%)] pointer-events-none" />
 
         <div className="container-content relative z-10 w-full py-16">
-          <div className="text-center mb-12">
-            <div className="gold-divider mx-auto" />
-            <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A]">Customer testimonials</h2>
+          <div className="grid grid-cols-1 md:grid-cols-12 mb-12">
+            <div className="md:col-span-12 lg:col-span-8 lg:col-start-3 text-center">
+              <div className="gold-divider mx-auto" />
+              <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A]">Customer testimonials</h2>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 max-w-6xl mx-auto">
+            <div className="md:col-span-12 grid grid-cols-1 sm:grid-cols-3 gap-6">
             {testimonials.map((t) => (
               <div key={t.id} className="bg-white p-7 rounded-2xl border border-[#E7E2D8] shadow-[0_4px_20px_rgba(15,23,42,0.05)] hover:-translate-y-1 transition-transform duration-300 flex flex-col justify-between">
                 <div>
@@ -727,6 +744,7 @@ export default function HomePage() {
                 </div>
               </div>
             ))}
+            </div>
           </div>
         </div>
       </section>
@@ -735,8 +753,9 @@ export default function HomePage() {
       <section id="contact" className="snap-section bg-[#0B1220] flex flex-col">
         {/* Form area — grows to fill space */}
         <div className="container-content w-full flex-1 flex flex-col justify-center py-12">
-          <div className="max-w-xl mx-auto w-full">
-            <div className="text-center mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+            <div className="md:col-span-12 lg:col-span-8 lg:col-start-3 max-w-xl mx-auto w-full">
+              <div className="text-center mb-8">
               <div className="gold-divider mx-auto" />
               <h2 className="text-3xl md:text-4xl font-800 text-white mb-3">
                 Ready to scale 1:1 mentorship?
@@ -792,6 +811,7 @@ export default function HomePage() {
                   We&apos;ll get back to you within 24 hours
                 </p>
               </div>
+              </div>
             </div>
           </div>
         </div>
@@ -799,9 +819,9 @@ export default function HomePage() {
         {/* Rich company footer band — pinned at bottom of the contact panel */}
         <div className="w-full mt-auto border-t border-[#162035] bg-[#060D1A]">
           <div className="container-content py-8">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-6">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-6">
               {/* Brand + tagline */}
-              <div className="md:col-span-1">
+              <div className="md:col-span-12 lg:col-span-4 lg:col-start-2">
                 <div className="flex items-center gap-2 mb-3">
                   <div className="w-7 h-7 rounded-lg bg-[var(--gold)] flex items-center justify-center shrink-0">
                     <span className="text-white text-xs font-bold">A</span>
@@ -814,7 +834,7 @@ export default function HomePage() {
               </div>
 
               {/* Product */}
-              <div>
+              <div className="md:col-span-4 lg:col-span-2">
                 <h4 className="text-xs font-semibold text-white mb-3 uppercase tracking-wider">Product</h4>
                 <ul className="space-y-2">
                   {[
@@ -831,7 +851,7 @@ export default function HomePage() {
               </div>
 
               {/* Company */}
-              <div>
+              <div className="md:col-span-4 lg:col-span-2">
                 <h4 className="text-xs font-semibold text-white mb-3 uppercase tracking-wider">Company</h4>
                 <ul className="space-y-2">
                   {[
@@ -848,7 +868,7 @@ export default function HomePage() {
               </div>
 
               {/* Resources */}
-              <div>
+              <div className="md:col-span-4 lg:col-span-2">
                 <h4 className="text-xs font-semibold text-white mb-3 uppercase tracking-wider">Resources</h4>
                 <ul className="space-y-2">
                   {[
