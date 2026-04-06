@@ -16,16 +16,7 @@ export default function HomePage() {
     }
   };
 
-  const [form, setForm] = useState({ email: "", stack: "", teamSize: "" });
-  const [submitted, setSubmitted] = useState(false);
-  const [toastVisible, setToastVisible] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-    setToastVisible(true);
-    setTimeout(() => setToastVisible(false), 4000);
-  };
 
   const securityCards = [
     {
@@ -758,69 +749,50 @@ export default function HomePage() {
               </p>
             </div>
 
-            {submitted ? (
-              <div className="bg-[#162035] rounded-2xl p-10 text-center border border-[var(--gold)]/30">
-                <div className="text-5xl mb-4">✓</div>
-                <h3 className="text-xl font-700 text-white mb-2">Request received</h3>
-                <p className="text-[#94A3B8] text-sm">Our team will reach out within one business day.</p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-600 text-[#94A3B8] mb-2">Corporate Email *</label>
-                  <input
-                    type="email"
-                    required
-                    placeholder="you@company.com"
-                    value={form.email}
-                    onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-                    className="w-full px-4 py-3 rounded-xl bg-[#162035] border-[1.5px] border-[#1E2D45] text-white placeholder-[#475569] focus:outline-none focus:border-[var(--gold)] transition-colors"
-                  />
-                </div>
+            <div className="bg-[#162035] rounded-2xl p-8 sm:p-10 text-center border border-[#1E2D45] shadow-2xl mt-8">
+              <h3 className="text-sm font-bold text-[#94A3B8] uppercase tracking-widest mb-6">
+                Contact us at
+              </h3>
 
-                <div>
-                  <label className="block text-sm font-600 text-[#94A3B8] mb-2">Current Training Stack</label>
-                  <select
-                    value={form.stack}
-                    onChange={(e) => setForm((f) => ({ ...f, stack: e.target.value }))}
-                    className="w-full px-4 py-3 rounded-xl bg-[#162035] border-[1.5px] border-[#1E2D45] text-white focus:outline-none focus:border-[var(--gold)] transition-colors"
-                  >
-                    <option value="">Select a domain…</option>
-                    {["Kubernetes", "Cloud Native", "DevOps", "Networking", "Security", "Storage"].map((s) => (
-                      <option key={s} value={s}>{s}</option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-600 text-[#94A3B8] mb-2">Estimated Team Size</label>
-                  <div className="flex gap-3">
-                    {["10–100", "100–500", "500+"].map((size) => (
-                      <button
-                        key={size}
-                        type="button"
-                        onClick={() => setForm((f) => ({ ...f, teamSize: size }))}
-                        className={`flex-1 py-3 rounded-xl border-[1.5px] text-sm font-600 transition-all ${form.teamSize === size
-                          ? "border-[var(--gold)] bg-[var(--gold)]/10 text-[var(--gold)]"
-                          : "border-[#1E2D45] text-[#475569] hover:border-[var(--gold)]/50"
-                          }`}
-                      >
-                        {size}
-                      </button>
-                    ))}
+              <div className="flex flex-col gap-6 items-center justify-center">
+                <a
+                  href="mailto:contact@aurilearn.ai"
+                  className="group flex flex-col items-center gap-3"
+                >
+                  <div className="w-12 h-12 rounded-full bg-[var(--gold)]/10 border border-[var(--gold)]/30 flex items-center justify-center text-[var(--gold)] group-hover:scale-110 group-hover:bg-[var(--gold)]/20 transition-all duration-300">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <rect width="20" height="16" x="2" y="4" rx="2" />
+                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                    </svg>
                   </div>
-                </div>
+                  <span className="text-xl sm:text-2xl font-800 text-white group-hover:text-[var(--gold)] transition-colors">
+                    Rashmi@aurilearn.ai
+                  </span>
+                </a>
 
-                <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                  <button type="submit" className="btn-gold text-base flex-1 justify-center py-3.5">
-                    Secure Discovery Call
-                  </button>
-                  <button type="submit" className="btn-outline border-white text-white hover:bg-white hover:text-[#0B1220] text-base flex-1 justify-center py-3.5">
-                    Try For Free
-                  </button>
-                </div>
-              </form>
-            )}
+                <div className="w-12 h-px bg-[#1E2D45]" />
+
+                <a
+                  href="tel:+910000000000"
+                  className="group flex flex-col items-center gap-2"
+                >
+                  <div className="w-10 h-10 rounded-full bg-[#1E2D45] border border-[#334155] flex items-center justify-center text-[#94A3B8] group-hover:scale-110 group-hover:text-white transition-all duration-300">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                  </div>
+                  <span className="text-base font-600 text-[#CBD5E1] group-hover:text-white transition-colors">
+                    +91 99869 68828
+                  </span>
+                </a>
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-[#1E2D45]">
+                <p className="text-[#64748B] text-xs font-600">
+                  We&apos;ll get back to you within 24 hours
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -924,15 +896,7 @@ export default function HomePage() {
         </div>
       </Modal>
 
-      {/* Toast */}
-      {toastVisible && (
-        <div className="toast border border-[#1E2D45]">
-          <div className="flex items-center gap-3">
-            <span className="w-5 h-5 rounded-full bg-[var(--gold)] flex items-center justify-center shrink-0 text-[10px] text-white font-bold">✓</span>
-            <span className="text-sm font-600 text-white">Thanks — we&apos;ll reach out shortly.</span>
-          </div>
-        </div>
-      )}
+
     </>
   );
 }
