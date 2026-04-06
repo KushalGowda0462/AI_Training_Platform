@@ -138,17 +138,17 @@ export default function HomePage() {
             <div className="md:col-span-6 lg:col-span-6 max-w-xl relative z-10">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--gold-light)] text-[var(--gold-hover)] text-sm font-700 mb-4">
                 <span className="w-2 h-2 rounded-full bg-[var(--gold)] inline-block animate-pulse" />
-                AI delivered training – 1:1 mentorship
+                AI delivered IT training – 1:1 mentorship
               </div>
 
               <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-900 text-[#0F172A] leading-[1.05] tracking-tight mb-4">
-                With Aurilearn, you will <span className="text-gradient-gold">exceed your own limitations.</span>
+                With Aurilearn, you will <span className="text-gradient-gold">exceed your own expectations.</span>
               </h1>
 
               <p className="text-lg text-[#475569] leading-relaxed mb-5 font-medium">
                 The Aurilearn AI instructor can be
                 used any time, anywhere on any device and transforms your legacy training in to a
-                1:1 mentorship experience leading you to class mastery. Further, its secure,
+                1:1 mentorship experience leading you to technology mastery. Further, it is secure,
                 scalable, and easily integrated into your current training management platform with
                 robust and granular data analytics.
               </p>
@@ -257,42 +257,42 @@ export default function HomePage() {
         <div className="container-content flex-1 flex flex-col justify-center py-16">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
             <div className="md:col-span-12 lg:col-span-8 lg:col-start-3 text-center">
-            <div className="w-14 h-14 rounded-2xl bg-[var(--gold)] shadow-lg mx-auto mb-6 flex items-center justify-center">
-              <span className="text-white text-2xl font-bold">A</span>
-            </div>
-            <div className="gold-divider mx-auto" />
-            <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A] mb-6">About Aurilearn</h2>
-            <p className="text-lg md:text-xl font-serif text-[#0F172A] leading-snug mb-6 italic">
-              &quot;Built on deep real-world IT training experience. Informed by decades of years managing and delivering technical training. Experienced in applying modern LLMs to narrow, high-value training use cases.&quot;
-            </p>
-            <div className="text-base text-[#64748B] leading-relaxed space-y-3 max-w-2xl mx-auto text-center">
-              <p>
-                Aurilearn was created, architected and engineered by professionals who have
-                worked for top-tier global IT training companies, bringing together decades of
-                combined experience in the classroom and curriculum architecture.
+              <div className="w-14 h-14 rounded-2xl bg-[var(--gold)] shadow-lg mx-auto mb-6 flex items-center justify-center">
+                <span className="text-white text-2xl font-bold">A</span>
+              </div>
+              <div className="gold-divider mx-auto" />
+              <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A] mb-6">About Aurilearn</h2>
+              <p className="text-lg md:text-xl font-serif text-[#0F172A] leading-snug mb-6 italic">
+                &quot;Built on decades of deep real-world IT training experience and applying LLMs to
+                narrow, high value training use cases.&quot;
               </p>
-              <p>
-                We recognize that general LLM based chatbots fail to teach effectively. By building a
-                specialized LLM implementation, we&#39;ve created a platform that dynamically and
-                fluently interprets the complex, stateful environments of modern engineering.              </p>
-            </div>
+              <div className="text-base text-[#64748B] leading-relaxed space-y-3 max-w-2xl mx-auto text-center">
+                <p>
+                  Aurilearn was created, architected and engineered by professionals who have
+                  worked for top-tier global IT training companies, bringing together decades of
+                  combined experience in the classroom and content development.
+                </p>
+                <p>
+                  We recognize that general LLM based chatbots have failed to teach effectively. By building a specialized
+                  LLM IT training platform we have created a system that dynamically and efficiently interprets the complex, stateful environments of modern engineering.              </p>
+              </div>
 
-            {/* Stats row */}
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-12 gap-4 max-w-2xl mx-auto w-full">
-              {[
-                { value: "16+", label: "Years IT Training" },
-                { value: "1:1", label: "AI Mentorship" },
-                { value: "94%", label: "Lab Pass Rate" },
-              ].map((stat) => (
-                <div key={stat.label} className="sm:col-span-4 text-center p-4 rounded-xl bg-white border border-[#E7E2D8] shadow-sm">
-                  <div className="text-2xl font-900 text-[#0F172A] mb-1">{stat.value}</div>
-                  <div className="text-xs text-[#64748B] font-semibold leading-tight">{stat.label}</div>
-                </div>
-              ))}
+              {/* Stats row */}
+              <div className="mt-8 grid grid-cols-1 sm:grid-cols-12 gap-4 max-w-2xl mx-auto w-full">
+                {[
+                  { value: "Decades", label: "of IT Training Experience" },
+                  { value: "1:1", label: "AI Mentorship" },
+                  { value: "94%", label: "Lab Pass Rate" },
+                ].map((stat) => (
+                  <div key={stat.label} className="sm:col-span-4 text-center p-4 rounded-xl bg-white border border-[#E7E2D8] shadow-sm">
+                    <div className="text-2xl font-900 text-[#0F172A] mb-1">{stat.value}</div>
+                    <div className="text-xs text-[#64748B] font-semibold leading-tight">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
         {/* Logo strip — anchored at the bottom via mt-auto on the outer wrapper */}
         <div className="w-full mt-auto border-t border-black/[0.06] bg-white py-6">
@@ -333,17 +333,17 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-5 mb-12">
             <div className="md:col-span-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
-            {howItWorks.map((step, i) => (
-              <div key={i} className="group relative p-6 rounded-2xl bg-[#FAFAF8] border border-[#E7E2D8] hover:border-[var(--gold)] hover:shadow-[0_8px_30px_rgba(169,128,42,0.08)] transition-all">
-                {i < howItWorks.length - 1 && (
-                  <div className="hidden lg:block absolute top-[44px] -right-3 w-6 h-[2px] bg-[#E7E2D8] z-10" />
-                )}
-                <div className="text-xs font-bold text-[var(--gold)] tracking-widest mb-3 uppercase">{step.step}</div>
-                <div className="text-3xl mb-4">{step.icon}</div>
-                <h3 className="text-base font-800 text-[#0F172A] mb-2">{step.title}</h3>
-                <p className="text-sm text-[#64748B] leading-relaxed">{step.desc}</p>
-              </div>
-            ))}
+              {howItWorks.map((step, i) => (
+                <div key={i} className="group relative p-6 rounded-2xl bg-[#FAFAF8] border border-[#E7E2D8] hover:border-[var(--gold)] hover:shadow-[0_8px_30px_rgba(169,128,42,0.08)] transition-all">
+                  {i < howItWorks.length - 1 && (
+                    <div className="hidden lg:block absolute top-[44px] -right-3 w-6 h-[2px] bg-[#E7E2D8] z-10" />
+                  )}
+                  <div className="text-xs font-bold text-[var(--gold)] tracking-widest mb-3 uppercase">{step.step}</div>
+                  <div className="text-3xl mb-4">{step.icon}</div>
+                  <h3 className="text-base font-800 text-[#0F172A] mb-2">{step.title}</h3>
+                  <p className="text-sm text-[#64748B] leading-relaxed">{step.desc}</p>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -370,21 +370,21 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-5 max-w-6xl mx-auto">
             <div className="md:col-span-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
-            {[
-              { icon: "💬", title: "Ask Questions Anytime", desc: "Learners can ask the AI mentor questions at any stage of training — no waiting, no bottlenecks." },
-              { icon: "🐛", title: "Debug Errors Instantly", desc: "Paste logs, errors, or configurations and receive guided troubleshooting explanations in real time." },
-              { icon: "🗺️", title: "Guided Lab Execution", desc: "The AI mentor walks engineers through complex infrastructure tasks step by step." },
-              { icon: "💡", title: "Concept Explanations", desc: "Difficult engineering concepts are explained clearly using examples and structured reasoning." },
-              { icon: "🔄", title: "Continuous Learning Support", desc: "The AI instructor remembers context and continues guiding the learner through their full progress." },
-            ].map((card) => (
-              <div key={card.title} className="group rounded-2xl p-6 bg-white border border-[#E7E2D8] hover:border-[var(--gold)] hover:shadow-[0_8px_30px_rgba(169,128,42,0.08)] transition-all flex flex-col items-center text-center gap-3">
-                <div className="w-14 h-14 rounded-xl bg-[#FAFAF8] border border-[#E7E2D8] flex items-center justify-center text-3xl group-hover:-translate-y-1 transition-transform duration-300">
-                  {card.icon}
+              {[
+                { icon: "💬", title: "Ask Questions Anytime", desc: "Learners can ask the AI mentor questions at any stage of training — no waiting, no bottlenecks." },
+                { icon: "🐛", title: "Debug Errors Instantly", desc: "Paste logs, errors, or configurations and receive guided troubleshooting explanations in real time." },
+                { icon: "🗺️", title: "Guided Lab Execution", desc: "The AI mentor walks engineers through complex infrastructure tasks step by step." },
+                { icon: "💡", title: "Concept Explanations", desc: "Difficult engineering concepts are explained clearly using examples and structured reasoning." },
+                { icon: "🔄", title: "Continuous Learning Support", desc: "The AI instructor remembers context and continues guiding the learner through their full progress." },
+              ].map((card) => (
+                <div key={card.title} className="group rounded-2xl p-6 bg-white border border-[#E7E2D8] hover:border-[var(--gold)] hover:shadow-[0_8px_30px_rgba(169,128,42,0.08)] transition-all flex flex-col items-center text-center gap-3">
+                  <div className="w-14 h-14 rounded-xl bg-[#FAFAF8] border border-[#E7E2D8] flex items-center justify-center text-3xl group-hover:-translate-y-1 transition-transform duration-300">
+                    {card.icon}
+                  </div>
+                  <h3 className="text-base font-bold text-[#0F172A]">{card.title}</h3>
+                  <p className="text-[#64748B] text-sm leading-relaxed">{card.desc}</p>
                 </div>
-                <h3 className="text-base font-bold text-[#0F172A]">{card.title}</h3>
-                <p className="text-[#64748B] text-sm leading-relaxed">{card.desc}</p>
-              </div>
-            ))}
+              ))}
             </div>
           </div>
         </div>
@@ -468,7 +468,8 @@ export default function HomePage() {
               <div className="gold-divider mx-auto" />
               <h2 className="text-3xl md:text-4xl font-800 text-white mb-4">Enterprise Deployment Control</h2>
               <p className="text-[#94A3B8] text-base max-w-xl mx-auto">
-                Aurilearn runs within your controlled environment ensuring that you have full enterprise governance and access management.
+                Aurilearn runs within your controlled environment ensuring that you have full enterprise
+                governance, security and access management.
               </p>
             </div>
           </div>
@@ -476,14 +477,14 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
             <div className="md:col-span-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
               {securityCards.map((card) => (
-              <div key={card.title} className="bg-[#162035] border border-[#1E2D45] rounded-2xl p-6 flex flex-col gap-4 hover:-translate-y-1 transition-transform duration-300">
-                <div className="w-14 h-14 rounded-full bg-[#0B1220] border border-[var(--gold)]/20 flex items-center justify-center text-2xl shadow-[0_0_16px_rgba(169,128,42,0.12)]">
-                  {card.icon}
+                <div key={card.title} className="bg-[#162035] border border-[#1E2D45] rounded-2xl p-6 flex flex-col gap-4 hover:-translate-y-1 transition-transform duration-300">
+                  <div className="w-14 h-14 rounded-full bg-[#0B1220] border border-[var(--gold)]/20 flex items-center justify-center text-2xl shadow-[0_0_16px_rgba(169,128,42,0.12)]">
+                    {card.icon}
+                  </div>
+                  <h3 className="text-base font-bold text-white">{card.title}</h3>
+                  <p className="text-sm text-[#94A3B8] leading-relaxed">{card.desc}</p>
                 </div>
-                <h3 className="text-base font-bold text-white">{card.title}</h3>
-                <p className="text-sm text-[#94A3B8] leading-relaxed">{card.desc}</p>
-              </div>
-            ))}
+              ))}
             </div>
           </div>
         </div>
@@ -534,10 +535,10 @@ export default function HomePage() {
                 <div className="flex sm:items-start flex-col sm:flex-row gap-3 justify-between pb-4 border-b border-[#E7E2D8]">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-full bg-[#FAFAF8] border border-[#E7E2D8] flex items-center justify-center font-bold text-[#94A3B8] text-xl shadow-sm shrink-0">
-                      R
+                      SR
                     </div>
                     <div>
-                      <div className="font-bold text-[#0F172A] text-lg leading-tight mb-1">Rahul Sharma</div>
+                      <div className="font-bold text-[#0F172A] text-lg leading-tight mb-1">Simon Riley</div>
                       <div className="flex flex-wrap gap-2 text-xs">
                         <span className="text-[#475569] font-bold bg-[#FAFAF8] border border-[#E7E2D8] px-2 py-0.5 rounded-md">Kubernetes CKA Track</span>
                         <span className="text-[var(--gold)] font-bold bg-[var(--gold)]/10 px-2 py-0.5 rounded-md">In Progress</span>
@@ -642,7 +643,7 @@ export default function HomePage() {
                         Aurilearn AI Insight
                       </div>
                       <p className="text-xs font-medium text-[#0F172A] leading-relaxed relative z-10 mb-4 opacity-90">
-                        Rahul is struggling with Kubernetes NetworkPolicies, specifically block-all ingress rules. He spent 45 minutes on the last module without passing validation.
+                        Simon is struggling with Kubernetes Network Policies, specifically block-all ingress rules. He spent 45 minutes on the last module without passing validation.
                       </p>
                     </div>
                     <div className="text-[10px] font-bold text-white bg-blue-600 inline-flex items-center justify-between px-3 py-2 rounded-lg shadow-sm relative z-10 cursor-pointer hover:bg-blue-700 transition-colors w-full">
@@ -725,25 +726,25 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 max-w-6xl mx-auto">
             <div className="md:col-span-12 grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {testimonials.map((t) => (
-              <div key={t.id} className="bg-white p-7 rounded-2xl border border-[#E7E2D8] shadow-[0_4px_20px_rgba(15,23,42,0.05)] hover:-translate-y-1 transition-transform duration-300 flex flex-col justify-between">
-                <div>
-                  <div className="text-[var(--gold)] text-3xl font-serif leading-none mb-4">&quot;</div>
-                  <p className="text-[#0F172A] text-base font-medium leading-relaxed mb-6">
-                    {t.quote}
-                  </p>
-                </div>
-                <div className="border-t border-[#F3F0E8] pt-5 flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#FAFAF8] border border-[#E7E2D8] flex items-center justify-center font-bold text-[#94A3B8] text-sm shrink-0">
-                    {t.author.charAt(0)}
-                  </div>
+              {testimonials.map((t) => (
+                <div key={t.id} className="bg-white p-7 rounded-2xl border border-[#E7E2D8] shadow-[0_4px_20px_rgba(15,23,42,0.05)] hover:-translate-y-1 transition-transform duration-300 flex flex-col justify-between">
                   <div>
-                    <div className="font-bold text-[#0F172A] text-sm">{t.author}</div>
-                    <div className="text-xs font-semibold text-[#64748B]">{t.role}, {t.company}</div>
+                    <div className="text-[var(--gold)] text-3xl font-serif leading-none mb-4">&quot;</div>
+                    <p className="text-[#0F172A] text-base font-medium leading-relaxed mb-6">
+                      {t.quote}
+                    </p>
+                  </div>
+                  <div className="border-t border-[#F3F0E8] pt-5 flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-[#FAFAF8] border border-[#E7E2D8] flex items-center justify-center font-bold text-[#94A3B8] text-sm shrink-0">
+                      {t.author.charAt(0)}
+                    </div>
+                    <div>
+                      <div className="font-bold text-[#0F172A] text-sm">{t.author}</div>
+                      <div className="text-xs font-semibold text-[#64748B]">{t.role}, {t.company}</div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
             </div>
           </div>
         </div>
@@ -756,61 +757,61 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
             <div className="md:col-span-12 lg:col-span-8 lg:col-start-3 max-w-xl mx-auto w-full">
               <div className="text-center mb-8">
-              <div className="gold-divider mx-auto" />
-              <h2 className="text-3xl md:text-4xl font-800 text-white mb-3">
-                Ready to scale 1:1 mentorship?
-              </h2>
-              <p className="text-[#94A3B8] text-base">
-                Book a 30-minute discovery call with an AURILEARN.AI Customer Service Representative
-              </p>
-              <p className="text-[#94A3B8] text-base">
-                Sign up to try 10 free minutes of instruction.
-              </p>
-            </div>
-
-            <div className="bg-[#162035] rounded-2xl p-8 sm:p-10 text-center border border-[#1E2D45] shadow-2xl mt-8">
-              <h3 className="text-sm font-bold text-[#94A3B8] uppercase tracking-widest mb-6">
-                Contact us at
-              </h3>
-
-              <div className="flex flex-col gap-6 items-center justify-center">
-                <a
-                  href="mailto:contact@aurilearn.ai"
-                  className="group flex flex-col items-center gap-3"
-                >
-                  <div className="w-12 h-12 rounded-full bg-[var(--gold)]/10 border border-[var(--gold)]/30 flex items-center justify-center text-[var(--gold)] group-hover:scale-110 group-hover:bg-[var(--gold)]/20 transition-all duration-300">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <rect width="20" height="16" x="2" y="4" rx="2" />
-                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                    </svg>
-                  </div>
-                  <span className="text-xl sm:text-2xl font-800 text-white group-hover:text-[var(--gold)] transition-colors">
-                    Rashmi@aurilearn.ai
-                  </span>
-                </a>
-
-                <div className="w-12 h-px bg-[#1E2D45]" />
-
-                <a
-                  href="tel:+910000000000"
-                  className="group flex flex-col items-center gap-2"
-                >
-                  <div className="w-10 h-10 rounded-full bg-[#1E2D45] border border-[#334155] flex items-center justify-center text-[#94A3B8] group-hover:scale-110 group-hover:text-white transition-all duration-300">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                    </svg>
-                  </div>
-                  <span className="text-base font-600 text-[#CBD5E1] group-hover:text-white transition-colors">
-                    +91 99869 68828
-                  </span>
-                </a>
-              </div>
-
-              <div className="mt-8 pt-6 border-t border-[#1E2D45]">
-                <p className="text-[#64748B] text-xs font-600">
-                  We&apos;ll get back to you within 24 hours
+                <div className="gold-divider mx-auto" />
+                <h2 className="text-3xl md:text-4xl font-800 text-white mb-3">
+                  Let Aurliearn take you beyond your own expectations
+                </h2>
+                <p className="text-[#94A3B8] text-base">
+                  Book a 30-minute discovery call with an AURILEARN.AI Customer Service Representative
+                </p>
+                <p className="text-[#94A3B8] text-base">
+                  Sign up to try 10 free minutes of instruction.
                 </p>
               </div>
+
+              <div className="bg-[#162035] rounded-2xl p-8 sm:p-10 text-center border border-[#1E2D45] shadow-2xl mt-8">
+                <h3 className="text-sm font-bold text-[#94A3B8] uppercase tracking-widest mb-6">
+                  Contact us at
+                </h3>
+
+                <div className="flex flex-col gap-6 items-center justify-center">
+                  <a
+                    href="mailto:contact@aurilearn.ai"
+                    className="group flex flex-col items-center gap-3"
+                  >
+                    <div className="w-12 h-12 rounded-full bg-[var(--gold)]/10 border border-[var(--gold)]/30 flex items-center justify-center text-[var(--gold)] group-hover:scale-110 group-hover:bg-[var(--gold)]/20 transition-all duration-300">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <rect width="20" height="16" x="2" y="4" rx="2" />
+                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                      </svg>
+                    </div>
+                    <span className="text-xl sm:text-2xl font-800 text-white group-hover:text-[var(--gold)] transition-colors">
+                      sales@aurilearn.ai
+                    </span>
+                  </a>
+
+                  <div className="w-12 h-px bg-[#1E2D45]" />
+
+                  <a
+                    href="tel:+910000000000"
+                    className="group flex flex-col items-center gap-2"
+                  >
+                    <div className="w-10 h-10 rounded-full bg-[#1E2D45] border border-[#334155] flex items-center justify-center text-[#94A3B8] group-hover:scale-110 group-hover:text-white transition-all duration-300">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                      </svg>
+                    </div>
+                    <span className="text-base font-600 text-[#CBD5E1] group-hover:text-white transition-colors">
+                      +91 99869 68828
+                    </span>
+                  </a>
+                </div>
+
+                <div className="mt-8 pt-6 border-t border-[#1E2D45]">
+                  <p className="text-[#64748B] text-xs font-600">
+                    We&apos;ll get back to you within 24 hours
+                  </p>
+                </div>
               </div>
             </div>
           </div>
