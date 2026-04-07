@@ -751,9 +751,9 @@ export default function HomePage() {
       </section>
 
       {/* ─── SECTION 9: FINAL CTA / CONTACT (full-screen snap, flex-col) ─── */}
-      <section id="contact" className="snap-section bg-[#0B1220] flex flex-col">
+      <section id="contact" className="snap-section bg-[#0B1220] flex flex-col pt-20 md:pt-28">
         {/* Form area — grows to fill space */}
-        <div className="container-content w-full flex-1 flex flex-col justify-center py-12">
+        <div className="container-content w-full flex-1 flex flex-col justify-center pb-12">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
             <div className="md:col-span-12 lg:col-span-8 lg:col-start-3 max-w-xl mx-auto w-full">
               <div className="text-center mb-8">
@@ -763,9 +763,6 @@ export default function HomePage() {
                 </h2>
                 <p className="text-[#94A3B8] text-base">
                   Book a 30-minute discovery call with an AURILEARN.AI Customer Service Representative
-                </p>
-                <p className="text-[#94A3B8] text-base">
-                  Sign up to try 10 free minutes of instruction.
                 </p>
               </div>
 
