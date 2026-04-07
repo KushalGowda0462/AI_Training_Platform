@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import Modal from "@/components/Modal";
-import { testimonials } from "@/lib/mock/testimonials";
 
 export default function HomePage() {
   const [videoModalOpen, setVideoModalOpen] = useState(false);
@@ -711,46 +710,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── SECTION 8: TESTIMONIALS (full-screen snap) ─── */}
-      <section id="testimonials" className="snap-section bg-[#FCFBF8] border-t border-[#E7E2D8] relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--gold)] to-transparent opacity-20" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(169,128,42,0.05),transparent_60%)] pointer-events-none" />
-
-        <div className="container-content relative z-10 w-full py-16">
-          <div className="grid grid-cols-1 md:grid-cols-12 mb-12">
-            <div className="md:col-span-12 lg:col-span-8 lg:col-start-3 text-center">
-              <div className="gold-divider mx-auto" />
-              <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A]">Customer testimonials</h2>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 max-w-6xl mx-auto">
-            <div className="md:col-span-12 grid grid-cols-1 sm:grid-cols-3 gap-6">
-              {testimonials.map((t) => (
-                <div key={t.id} className="bg-white p-7 rounded-2xl border border-[#E7E2D8] shadow-[0_4px_20px_rgba(15,23,42,0.05)] hover:-translate-y-1 transition-transform duration-300 flex flex-col justify-between">
-                  <div>
-                    <div className="text-[var(--gold)] text-3xl font-serif leading-none mb-4">&quot;</div>
-                    <p className="text-[#0F172A] text-base font-medium leading-relaxed mb-6">
-                      {t.quote}
-                    </p>
-                  </div>
-                  <div className="border-t border-[#F3F0E8] pt-5 flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-[#FAFAF8] border border-[#E7E2D8] flex items-center justify-center font-bold text-[#94A3B8] text-sm shrink-0">
-                      {t.author.charAt(0)}
-                    </div>
-                    <div>
-                      <div className="font-bold text-[#0F172A] text-sm">{t.author}</div>
-                      <div className="text-xs font-semibold text-[#64748B]">{t.role}, {t.company}</div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── SECTION 9: FINAL CTA / CONTACT (full-screen snap, flex-col) ─── */}
+      {/* ─── SECTION 8: FINAL CTA / CONTACT (full-screen snap, flex-col) ─── */}
       <section id="contact" className="snap-section bg-[#0B1220] flex flex-col pt-20 md:pt-28">
         {/* Form area — grows to fill space */}
         <div className="container-content w-full flex-1 flex flex-col justify-center pb-12">
