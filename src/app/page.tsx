@@ -3,9 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import Modal from "@/components/Modal";
+import DemoRequestModal from "@/components/DemoRequestModal";
 
 export default function HomePage() {
   const [videoModalOpen, setVideoModalOpen] = useState(false);
+  const [demoModalOpen, setDemoModalOpen] = useState(false);
 
   // Reliable programmatic scroll — works regardless of scroll-snap or Next.js router
   const scrollToContact = () => {
@@ -128,6 +130,8 @@ export default function HomePage() {
 
   return (
     <>
+      <DemoRequestModal isOpen={demoModalOpen} onClose={() => setDemoModalOpen(false)} />
+
       {/* ─── SECTION 1: HERO (full-screen snap) ─── */}
       <section id="hero" className="snap-section hero-bg pt-20">
         <div className="container-content w-full py-16 lg:py-0">
@@ -146,9 +150,9 @@ export default function HomePage() {
 
               <p className="text-lg text-[#475569] leading-relaxed mb-5 font-medium">
                 The Aurilearn AI instructor can be
-                used any time, anywhere on any device and transforms your legacy training in to a
+                used any time, any where on any device and transforms your legacy training in to a
                 1:1 mentorship experience leading you to technology mastery. Further, it is secure,
-                scalable, and easily integrated into your current training management platform with
+                scalable, and easily integrated in to your current training management platform with
                 robust and granular data analytics.
               </p>
 
@@ -172,7 +176,7 @@ export default function HomePage() {
               {/* CTA Stack */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-2">
                 <button
-                  onClick={scrollToContact}
+                  onClick={() => setDemoModalOpen(true)}
                   className="btn-gold flex items-center justify-center text-base font-bold px-7 h-12 rounded-xl shadow-[0_4px_20px_rgba(169,128,42,0.25)] w-full sm:w-auto transition-transform hover:-translate-y-0.5 cursor-pointer"
                 >
                   Request an Enterprise Demo
@@ -293,8 +297,8 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Logo strip — anchored at the bottom via mt-auto on the outer wrapper */}
-        <div className="w-full mt-auto border-t border-black/[0.06] bg-white py-6">
+        {/* Logo strip — hidden for now, can be re-enabled later */}
+        {/* <div className="w-full mt-auto border-t border-black/[0.06] bg-white py-6">
           <p className="text-center text-xs font-bold text-[#94A3B8] uppercase tracking-widest mb-4">
             Trusted by engineering teams at
           </p>
@@ -313,7 +317,7 @@ export default function HomePage() {
               ))}
             </div>
           </div>
-        </div>
+        </div> */}
       </section>
 
       {/* ─── SECTION 3: HOW IT WORKS (full-screen snap) ─── */}
@@ -759,7 +763,7 @@ export default function HomePage() {
                       </svg>
                     </div>
                     <span className="text-base font-600 text-[#CBD5E1] group-hover:text-white transition-colors">
-                      +91 99869 68828
+                      +XXXXXXXXXX
                     </span>
                   </a>
                 </div>

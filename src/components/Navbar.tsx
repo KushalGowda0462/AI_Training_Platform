@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import DemoRequestModal from "@/components/DemoRequestModal";
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [heroVisible, setHeroVisible] = useState(true);
+    const [demoOpen, setDemoOpen] = useState(false);
 
     useEffect(() => {
         const onScroll = () => {
@@ -58,6 +60,8 @@ export default function Navbar() {
     };
 
     return (
+        <>
+        <DemoRequestModal isOpen={demoOpen} onClose={() => setDemoOpen(false)} />
         <header
             className={`fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm transition-shadow duration-200 border-b border-[#E7E2D8] ${scrolled ? "shadow-[0_2px_20px_rgba(15,23,42,0.08)]" : ""}`}
         >
@@ -98,7 +102,7 @@ export default function Navbar() {
                         <button onClick={scrollToContact} className="text-sm font-600 px-4 py-2 rounded-lg text-[#0F172A] hover:bg-[#F3F0E8] transition-colors cursor-pointer">
                             Try for Free
                         </button>
-                        <button onClick={scrollToContact} className="btn-gold text-sm px-5 py-2 cursor-pointer">
+                        <button onClick={() => setDemoOpen(true)} className="btn-gold text-sm px-5 py-2 cursor-pointer">
                             Request Enterprise Demo
                         </button>
                     </div>
@@ -138,7 +142,7 @@ export default function Navbar() {
                             <button onClick={scrollToContact} className="w-full text-center py-3 text-sm font-600 rounded-xl bg-[#F3F0E8] text-[#0F172A] cursor-pointer">
                                 Try for Free
                             </button>
-                            <button onClick={scrollToContact} className="btn-gold text-sm w-full justify-center py-3 cursor-pointer">
+                            <button onClick={() => { setDemoOpen(true); setMenuOpen(false); }} className="btn-gold text-sm w-full justify-center py-3 cursor-pointer">
                                 Request Enterprise Demo
                             </button>
                         </div>
@@ -146,5 +150,6 @@ export default function Navbar() {
                 )}
             </div>
         </header>
+        </>
     );
 }
