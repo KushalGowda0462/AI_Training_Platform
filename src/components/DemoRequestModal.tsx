@@ -221,7 +221,7 @@ export default function DemoRequestModal({ isOpen, onClose }: Props) {
           {/* Submit */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2 border-t border-[#E7E2D8] mt-1">
             <p className="text-xs text-[#94A3B8] leading-relaxed">
-              By submitting, you agree to Aurilearn's privacy policy. We will never share your data.
+              By submitting, you agree to Aurilearn&apos;s privacy policy. We will never share your data.
             </p>
             <button
               type="submit"
