@@ -206,33 +206,18 @@ export default function HomePage() {
             {/* Right: Product Visual */}
             <div className="md:col-span-6 lg:col-span-6 relative z-10 lg:ml-auto w-full max-w-lg">
               <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-[#0B1220] to-[#162035] aspect-[4/3] shadow-2xl border-4 border-white">
-                <div className="absolute inset-0 opacity-30 mix-blend-overlay">
-                  <div className="w-full h-full bg-[radial-gradient(circle_at_top_right,var(--gold),transparent_60%)]" />
-                </div>
+                <video
+                  src="/Demo%20Video.mp4#t=0.1"
+                  className="absolute inset-0 h-full w-full object-cover"
+                  muted
+                  playsInline
+                  preload="metadata"
+                  aria-hidden="true"
+                  tabIndex={-1}
+                />
+                <div className="absolute inset-0 bg-[#0B1220]/25" />
 
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#0B1220] via-[#0B1220]/80 to-transparent p-6 pt-20">
-                  <div className="space-y-4">
-                    <div className="flex gap-3 items-end opacity-90">
-                      <div className="w-8 h-8 rounded-full bg-[#1E2D45] flex items-center justify-center shrink-0">
-                        <span className="text-xs">👤</span>
-                      </div>
-                      <div className="bg-[#1E2D45] text-white text-sm py-2 px-3 rounded-2xl rounded-bl-sm max-w-[85%]">
-                        I&apos;m stuck on this security group routing. Why isn&apos;t traffic passing?
-                      </div>
-                    </div>
-                    <div className="flex gap-3 items-end justify-end">
-                      <div className="bg-[var(--gold)]/10 border border-[var(--gold)]/30 text-white text-sm py-2 px-4 rounded-2xl rounded-br-sm max-w-[90%] backdrop-blur-sm">
-                        <span className="text-[var(--gold)] font-bold block mb-1">Aurilearn Instructor</span>
-                        I see in your YAML that port 443 is undefined. Let&apos;s fix that. Here&apos;s a hint on how ingress rules work in this context...
-                      </div>
-                      <div className="w-8 h-8 rounded-full bg-[var(--gold)] flex items-center justify-center shrink-0 shadow-[0_0_15px_var(--gold)]">
-                        <span className="text-white text-xs font-bold">A</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="absolute inset-0 flex items-center justify-center pb-10">
+                <div className="absolute inset-0 flex items-center justify-center">
                   <button
                     onClick={() => setVideoModalOpen(true)}
                     className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-2xl hover:bg-white/20 hover:scale-105 transition-all"
@@ -862,19 +847,17 @@ export default function HomePage() {
 
       {/* Video Modal */}
       <Modal isOpen={videoModalOpen} onClose={() => setVideoModalOpen(false)} title="Aurilearn Demo: Overcoming Obstacles" size="xl">
-        <div className="aspect-video bg-[#0B1220] rounded-xl flex items-center justify-center relative overflow-hidden border border-[#1E2D45]">
-          <div className="absolute inset-0 bg-gradient-to-tr from-[var(--gold)]/10 to-transparent" />
-          <div className="text-center relative z-10 px-8">
-            <div className="w-16 h-16 rounded-full bg-[var(--gold)] flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_var(--gold)] animate-pulse">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M8 6l10 6-10 6V6z" fill="white" />
-              </svg>
-            </div>
-            <h3 className="text-white text-xl font-bold mb-2">Demo Video Placeholder</h3>
-            <p className="text-[#94A3B8] text-sm max-w-sm mx-auto">
-              Visualizing the workflow: Click, Type, and Voice interactions with the Aurilearn instructor agent leading to &quot;aha!&quot; moments.
-            </p>
-          </div>
+        <div className="aspect-video bg-[#0B1220] rounded-xl overflow-hidden border border-[#1E2D45]">
+          <video
+            src="/Demo%20Video.mp4"
+            className="h-full w-full object-contain"
+            controls
+            autoPlay
+            playsInline
+            preload="metadata"
+          >
+            Your browser does not support the video tag.
+          </video>
         </div>
       </Modal>
 
