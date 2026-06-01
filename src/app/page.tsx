@@ -199,7 +199,7 @@ export default function HomePage() {
                     <path d="M4 3L9 6L4 9V3Z" fill="currentColor" />
                   </svg>
                 </span>
-                Watch 30-Second Demo
+                Watch 90-Second Demo
               </button>
             </div>
 
