@@ -1,12 +1,12 @@
 /**
  * Central contact details.
  *
- * TODO: replace WHATSAPP_NUMBER with the real number once the client provides it.
- * Format: full international number, digits only, no "+", no spaces (e.g. "919876543210").
+ * Format: full international number, digits only, no "+", no spaces (e.g. "6592388578").
  * WHATSAPP_DISPLAY is what users see on the page.
  */
-export const WHATSAPP_NUMBER = "910000000000";
-export const WHATSAPP_DISPLAY = "+91 XXXXX XXXXX";
+export const WHATSAPP_NUMBER = "6592388578";
+export const WHATSAPP_DISPLAY = "+65 9238 8578";
+export const WHATSAPP_NAME = "James Firefly";
 
 /** Prefilled message that opens in WhatsApp when a user taps "Contact Us". */
 export const WHATSAPP_MESSAGE =
