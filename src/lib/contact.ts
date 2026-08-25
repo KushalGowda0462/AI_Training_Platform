@@ -6,7 +6,7 @@
  */
 export const WHATSAPP_NUMBER = "6592388578";
 export const WHATSAPP_DISPLAY = "+65 9238 8578";
-export const WHATSAPP_NAME = "James Firefly";
+export const WHATSAPP_NAME = "James Furneaux";
 
 /** Prefilled message that opens in WhatsApp when a user taps "Contact Us". */
 export const WHATSAPP_MESSAGE =
