@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import ChatWidget from "@/components/ChatWidget";
 
 const META_PIXEL_ID = "327793394379737";
+const GA_MEASUREMENT_ID = "G-WXT567CCDN";
 
 export const metadata: Metadata = {
   title: "AURILEARN.AI",
@@ -30,8 +31,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="apple-touch-icon" href="/aurilearn-logo.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
       </head>
       <body className="bg-[#FAFAF8]">
+        {/* Google tag (gtag.js) */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
+        {/* End Google tag */}
         {/* Meta Pixel Code */}
         <Script id="meta-pixel" strategy="afterInteractive">
           {`
