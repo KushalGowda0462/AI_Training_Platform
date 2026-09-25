@@ -2,11 +2,9 @@
  * Central contact details.
  *
  * Format: full international number, digits only, no "+", no spaces (e.g. "6592388578").
- * WHATSAPP_DISPLAY is what users see on the page.
+ * Not shown on the page — used only to build the WhatsApp deep link.
  */
 export const WHATSAPP_NUMBER = "6592388578";
-export const WHATSAPP_DISPLAY = "+65 9238 8578";
-export const WHATSAPP_NAME = "James Furneaux";
 
 /** Prefilled message that opens in WhatsApp when a user taps "Contact Us". */
 export const WHATSAPP_MESSAGE =
