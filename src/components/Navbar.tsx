@@ -33,10 +33,22 @@ export default function Navbar() {
         return () => window.removeEventListener("scroll", onScroll);
     }, []);
 
-    const navLinks = [
-        { href: "/#about", label: "About" },
-        { href: "/#security", label: "Security" },
-        { href: "/#analytics", label: "Analytics" },
+    /**
+     * Top menu. "anchor" items scroll to a section on the home page;
+     * "demo" opens the Request an Enterprise Demo form.
+     *
+     * NOTE: a "Products" item is requested but has no section to link to yet.
+     * Add { kind: "anchor", href: "/#products", label: "Products" } here once
+     * that section exists.
+     */
+    const navLinks: ({ label: string } & (
+        | { kind: "anchor"; href: string }
+        | { kind: "demo" }
+    ))[] = [
+        { kind: "anchor", href: "/#about", label: "About" },
+        { kind: "demo", label: "Demo" },
+        { kind: "anchor", href: "/#security", label: "Security" },
+        { kind: "anchor", href: "/#contact", label: "Contact" },
     ];
 
     const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -85,16 +97,26 @@ export default function Navbar() {
 
                     {/* Desktop Nav */}
                     <nav className="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
-                        {navLinks.map((l) => (
-                            <Link
-                                key={l.href}
-                                href={l.href}
-                                onClick={(e) => handleAnchorClick(e, l.href)}
-                                className="text-sm font-semibold text-[#475569] hover:text-[#0F172A] transition-colors"
-                            >
-                                {l.label}
-                            </Link>
-                        ))}
+                        {navLinks.map((l) =>
+                            l.kind === "demo" ? (
+                                <button
+                                    key={l.label}
+                                    onClick={() => setDemoOpen(true)}
+                                    className="text-sm font-semibold text-[#475569] hover:text-[#0F172A] transition-colors cursor-pointer"
+                                >
+                                    {l.label}
+                                </button>
+                            ) : (
+                                <Link
+                                    key={l.href}
+                                    href={l.href}
+                                    onClick={(e) => handleAnchorClick(e, l.href)}
+                                    className="text-sm font-semibold text-[#475569] hover:text-[#0F172A] transition-colors"
+                                >
+                                    {l.label}
+                                </Link>
+                            )
+                        )}
                     </nav>
 
                     {/* CTAs */}
@@ -128,16 +150,26 @@ export default function Navbar() {
                 {/* Mobile menu */}
                 {menuOpen && (
                     <div className="md:hidden border-t border-[#E7E2D8] py-4 space-y-2 pb-6">
-                        {navLinks.map((l) => (
-                            <Link
-                                key={l.href}
-                                href={l.href}
-                                onClick={(e) => handleAnchorClick(e, l.href)}
-                                className="block px-3 py-3 text-base font-semibold text-[#475569] hover:text-[#0F172A] rounded-xl hover:bg-[#FAFAF8] transition-colors"
-                            >
-                                {l.label}
-                            </Link>
-                        ))}
+                        {navLinks.map((l) =>
+                            l.kind === "demo" ? (
+                                <button
+                                    key={l.label}
+                                    onClick={() => { setDemoOpen(true); setMenuOpen(false); }}
+                                    className="block w-full text-left px-3 py-3 text-base font-semibold text-[#475569] hover:text-[#0F172A] rounded-xl hover:bg-[#FAFAF8] transition-colors cursor-pointer"
+                                >
+                                    {l.label}
+                                </button>
+                            ) : (
+                                <Link
+                                    key={l.href}
+                                    href={l.href}
+                                    onClick={(e) => handleAnchorClick(e, l.href)}
+                                    className="block px-3 py-3 text-base font-semibold text-[#475569] hover:text-[#0F172A] rounded-xl hover:bg-[#FAFAF8] transition-colors"
+                                >
+                                    {l.label}
+                                </Link>
+                            )
+                        )}
                         <div className="px-3 pt-4 flex flex-col gap-3">
                             <button onClick={scrollToContact} className="w-full text-center py-3 text-sm font-600 rounded-xl bg-[#F3F0E8] text-[#0F172A] cursor-pointer">
                                 Try for Free
