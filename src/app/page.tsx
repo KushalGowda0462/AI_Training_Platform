@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import Modal from "@/components/Modal";
 import DemoRequestModal from "@/components/DemoRequestModal";
 import { whatsappLink } from "@/lib/contact";
@@ -196,18 +195,6 @@ export default function HomePage() {
                 </button>
               </div>
               <p className="text-xs text-[#64748B] font-semibold mb-3">Included: 10 free minutes of AI instruction with &quot;Try for Free&quot;</p>
-
-              <button
-                onClick={() => setVideoModalOpen(true)}
-                className="text-sm font-bold text-[#0F172A] hover:text-[var(--gold)] flex items-center gap-2 transition-colors group"
-              >
-                <span className="w-8 h-8 rounded-full bg-[#E7E2D8] flex items-center justify-center group-hover:bg-[var(--gold-light)] transition-colors">
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="text-current ml-0.5">
-                    <path d="M4 3L9 6L4 9V3Z" fill="currentColor" />
-                  </svg>
-                </span>
-                Watch 90-Second Demo
-              </button>
             </div>
 
             {/* Right: Product Visual */}
@@ -517,10 +504,6 @@ export default function HomePage() {
                   </li>
                 ))}
               </ul>
-
-              <Link href="#contact" className="btn-gold text-base px-7 py-3">
-                View Analytics Demo
-              </Link>
             </div>
 
             <div className="lg:col-span-7 w-full break-words [overflow-wrap:break-word] relative z-20">
