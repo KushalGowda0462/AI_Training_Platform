@@ -6,6 +6,12 @@ import Modal from "@/components/Modal";
 import DemoRequestModal from "@/components/DemoRequestModal";
 import { whatsappLink } from "@/lib/contact";
 
+/**
+ * Temporarily hidden pending security review. Set to true to restore the
+ * "Contact Us on WhatsApp" button (and its divider) in the contact panel.
+ */
+const SHOW_WHATSAPP_BUTTON = false;
+
 export default function HomePage() {
   const [videoModalOpen, setVideoModalOpen] = useState(false);
   const [demoModalOpen, setDemoModalOpen] = useState(false);
@@ -737,6 +743,8 @@ export default function HomePage() {
                     </span>
                   </a>
 
+                  {SHOW_WHATSAPP_BUTTON && (
+                  <>
                   <div className="w-12 h-px bg-[#1E2D45]" />
 
                   <a
@@ -751,6 +759,8 @@ export default function HomePage() {
                     </svg>
                     <span className="text-base">Contact Us on WhatsApp</span>
                   </a>
+                  </>
+                  )}
                 </div>
 
                 <div className="mt-8 pt-6 border-t border-[#1E2D45]">
