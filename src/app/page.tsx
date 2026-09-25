@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Modal from "@/components/Modal";
 import DemoRequestModal from "@/components/DemoRequestModal";
-import { whatsappLink, WHATSAPP_DISPLAY, WHATSAPP_NAME } from "@/lib/contact";
+import { whatsappLink } from "@/lib/contact";
 
 export default function HomePage() {
   const [videoModalOpen, setVideoModalOpen] = useState(false);
@@ -751,10 +751,6 @@ export default function HomePage() {
                     </svg>
                     <span className="text-base">Contact Us on WhatsApp</span>
                   </a>
-
-                  <span className="text-sm font-600 text-[#64748B]">
-                    {WHATSAPP_NAME} · {WHATSAPP_DISPLAY}
-                  </span>
                 </div>
 
                 <div className="mt-8 pt-6 border-t border-[#1E2D45]">
