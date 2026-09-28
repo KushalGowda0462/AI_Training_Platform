@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Modal from "@/components/Modal";
 import DemoRequestModal from "@/components/DemoRequestModal";
+import PlatformSection from "@/components/PlatformSection";
 import { whatsappLink } from "@/lib/contact";
 
 /**
@@ -147,31 +148,28 @@ export default function HomePage() {
             <div className="md:col-span-6 lg:col-span-6 max-w-xl relative z-10">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--gold-light)] text-[var(--gold-hover)] text-sm font-700 mb-4">
                 <span className="w-2 h-2 rounded-full bg-[var(--gold)] inline-block animate-pulse" />
-                AI delivered IT training – 1:1 mentorship
+                Aurilearn – Your AI delivered IT training engine – 1:1 mentorship
               </div>
 
               <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-900 text-[#0F172A] leading-[1.05] tracking-tight mb-4">
-                With Aurilearn, you will <span className="text-gradient-gold">exceed your own expectations.</span>
+                The World&apos;s first <span className="text-gradient-gold">Vertical Narrow Language Model</span>
               </h1>
 
               <p className="text-lg text-[#475569] leading-relaxed mb-5 font-medium">
-                The Aurilearn AI instructor can be
-                used any time, any where on any device and transforms your legacy training in to a
-                1:1 mentorship experience leading you to technology mastery. Further, it is secure,
-                scalable, and easily integrated in to your current training management platform with
-                robust and granular data analytics.
+                Specifically architected, orchestrated, trained on and fine tuned to deliver IT
+                training.
               </p>
 
               <ul className="space-y-2 mb-6 text-[#64748B]">
                 {[
-                  "AI agent instructing 1:1 just for you",
-                  "Ask as many questions as you want",
-                  "Receive context-aware expert answers",
-                  "Go entirely at your own speed",
-                  "Any device, any time, any where",
+                  "Students are taught using interactive slides, through live context based white boarding and case studies",
+                  "Knowledge and skill sets are ensured through frequent quizzes and instructor check ins",
+                  "Instructor agent is highly personalizable in terms of voice, accent, explanation style, supportive level, etc.",
+                  "System is easy to use and highly customizable",
+                  "Real time progress readily tracked",
                 ].map((item, idx) => (
-                  <li key={idx} className="flex items-center gap-3">
-                    <svg className="w-5 h-5 text-[var(--gold)] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <li key={idx} className="flex items-start gap-3">
+                    <svg className="w-5 h-5 text-[var(--gold)] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                     </svg>
                     <span className="font-medium">{item}</span>
@@ -232,6 +230,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ─── PLATFORM (James input 26/09) ─── */}
+      <PlatformSection />
 
       {/* ─── SECTION 2: ABOUT + TRUST LOGOS (full-screen snap) ─── */}
       <section id="about" className="snap-section bg-[#FAFAF8] border-t border-[#E7E2D8] flex flex-col">

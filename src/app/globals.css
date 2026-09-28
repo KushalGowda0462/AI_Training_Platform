@@ -106,6 +106,17 @@ body {
   position: relative;
 }
 
+/* Tall content panel — like .snap-section but free to grow.
+   Used by the Platform section, whose content is taller than one screen. */
+.section-tall {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  scroll-snap-align: start;
+  position: relative;
+}
+
 /* Max width container */
 .container-content {
   max-width: 1200px;
