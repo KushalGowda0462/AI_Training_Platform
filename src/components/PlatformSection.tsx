@@ -575,8 +575,8 @@ export default function PlatformSection() {
     return (
         <section id="platform" className="section-tall bg-white border-t border-[#E7E2D8]">
             <div className="container-content w-full py-20 md:py-24">
-                <div className="max-w-2xl mb-12">
-                    <div className="gold-divider" />
+                <div className="max-w-3xl mx-auto text-center mb-14">
+                    <div className="gold-divider mx-auto" />
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-900 text-[#0F172A] leading-[1.1] tracking-tight mb-4">
                         Platform
                     </h2>
@@ -586,31 +586,51 @@ export default function PlatformSection() {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
 
                     {/* ── Left half: the four points ── */}
-                    <div className="space-y-4">
-                        {LEFT_POINTS.map((p) => (
-                            <div
-                                key={p.title}
-                                className="rounded-2xl border border-[#E7E2D8] bg-[#FAFAF8] p-6 transition-all hover:border-[var(--gold)] hover:shadow-[0_8px_30px_rgba(15,23,42,0.06)]"
-                            >
-                                <h3 className="text-xl font-900 text-[#0F172A] mb-1">{p.title}</h3>
-                                <p className="text-[#475569] font-medium">{p.blurb}</p>
-                            </div>
-                        ))}
+                    <div className="flex flex-col">
+                        <h3 className="text-sm font-700 uppercase tracking-widest text-[#94A3B8] mb-2">
+                            What It Covers
+                        </h3>
+                        <p className="text-sm text-[#64748B] font-medium mb-4">
+                            The whole journey, end to end.
+                        </p>
+
+                        <div className="flex flex-col gap-3 flex-1">
+                            {LEFT_POINTS.map((p, i) => (
+                                <div
+                                    key={p.title}
+                                    className="flex-1 flex items-center gap-4 rounded-xl border border-[#E7E2D8] bg-[#FAFAF8] px-5 py-4 min-h-[86px] transition-all hover:border-[var(--gold)] hover:bg-white hover:shadow-[0_8px_30px_rgba(15,23,42,0.06)]"
+                                >
+                                    <span className="w-8 h-8 rounded-full bg-[var(--gold-light)] text-[var(--gold-hover)] text-xs font-800 flex items-center justify-center shrink-0">
+                                        {String(i + 1).padStart(2, "0")}
+                                    </span>
+                                    <span className="min-w-0">
+                                        <span className="block text-lg font-900 text-[#0F172A] leading-snug">{p.title}</span>
+                                        <span className="block text-[#475569] font-medium text-sm leading-snug">{p.blurb}</span>
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
                     </div>
 
                     {/* ── Right half: What Do You Get + Experience ── */}
-                    <div className="space-y-10">
+                    <div className="flex flex-col gap-8">
 
                         <div>
-                            <h3 className="text-sm font-700 uppercase tracking-widest text-[#94A3B8] mb-4">
+                            <h3 className="text-sm font-700 uppercase tracking-widest text-[#94A3B8] mb-2">
                                 What Do You Get
                             </h3>
-                            <ul className="space-y-3">
+                            <p className="text-sm text-[#64748B] font-medium mb-4">
+                                Included with every seat.
+                            </p>
+                            <ul className="flex flex-col gap-3">
                                 {WHAT_YOU_GET.map((item) => (
-                                    <li key={item} className="flex gap-3 items-start">
+                                    <li
+                                        key={item}
+                                        className="flex gap-3 items-start rounded-xl border border-[#E7E2D8] bg-[#FAFAF8] px-5 py-4"
+                                    >
                                         <svg className="w-5 h-5 text-[var(--gold)] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                                         </svg>
@@ -628,14 +648,16 @@ export default function PlatformSection() {
                                 Click any of these to try it right here.
                             </p>
 
-                            <div className="space-y-2.5">
-                                {EXPERIENCES.map((e) => (
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 items-stretch">
+                                {EXPERIENCES.map((e, i) => (
                                     <button
                                         key={e.key}
                                         onClick={() => setOpenDemo(e.key)}
-                                        className="group w-full text-left rounded-xl border border-[#E7E2D8] bg-white px-5 py-4 flex items-center gap-4 transition-all hover:border-[var(--gold)] hover:bg-[#FAFAF8] hover:translate-x-0.5 cursor-pointer"
+                                        className={`group text-left rounded-xl border border-[#E7E2D8] bg-white px-4 py-3.5 flex items-center gap-3 transition-all hover:border-[var(--gold)] hover:bg-[#FAFAF8] cursor-pointer ${
+                                            i === EXPERIENCES.length - 1 ? "sm:col-span-2" : ""
+                                        }`}
                                     >
-                                        <span className="w-9 h-9 rounded-full bg-[var(--gold-light)] text-[var(--gold-hover)] flex items-center justify-center shrink-0 group-hover:bg-[var(--gold)] group-hover:text-white transition-colors">
+                                        <span className="w-8 h-8 rounded-full bg-[var(--gold-light)] text-[var(--gold-hover)] flex items-center justify-center shrink-0 group-hover:bg-[var(--gold)] group-hover:text-white transition-colors">
                                             {e.kind === "video" ? (
                                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                                                     <path d="M8 6l10 6-10 6V6z" />
@@ -647,8 +669,8 @@ export default function PlatformSection() {
                                             )}
                                         </span>
                                         <span className="flex-1 min-w-0">
-                                            <span className="block font-800 text-[#0F172A] leading-snug">{e.title}</span>
-                                            <span className="block text-sm text-[#64748B] font-medium">{e.blurb}</span>
+                                            <span className="block font-800 text-[#0F172A] leading-snug text-[15px]">{e.title}</span>
+                                            <span className="block text-[13px] text-[#64748B] font-medium leading-snug">{e.blurb}</span>
                                         </span>
                                     </button>
                                 ))}
