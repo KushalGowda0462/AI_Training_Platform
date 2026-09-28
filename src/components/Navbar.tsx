@@ -37,15 +37,14 @@ export default function Navbar() {
      * Top menu. "anchor" items scroll to a section on the home page;
      * "demo" opens the Request an Enterprise Demo form.
      *
-     * NOTE: a "Products" item is requested but has no section to link to yet.
-     * Add { kind: "anchor", href: "/#products", label: "Products" } here once
-     * that section exists.
+     * The products page is titled "Platform" per James's 26/09 input.
      */
     const navLinks: ({ label: string } & (
         | { kind: "anchor"; href: string }
         | { kind: "demo" }
     ))[] = [
         { kind: "anchor", href: "/#about", label: "About" },
+        { kind: "anchor", href: "/#platform", label: "Platform" },
         { kind: "demo", label: "Demo" },
         { kind: "anchor", href: "/#security", label: "Security" },
         { kind: "anchor", href: "/#contact", label: "Contact" },
