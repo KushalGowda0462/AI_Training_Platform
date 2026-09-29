@@ -369,15 +369,20 @@ export const CASE_STAGES = [
 
 /** ── 5. The three 1 minute clips ────────────────────────────────────────
  *
- * INTERIM: all three point at the existing demo video so the players work
- * today. Drop the real clips into /public and change the three paths below —
- * nothing else needs to change. Spaces in filenames must be written as %20.
+ * The player is built and ready. Each entry is empty until the real clip
+ * exists; an empty string makes the tile show the waiting state instead of
+ * playing anything. Deliberately NOT pointed at the hero demo video — these
+ * tiles must not show a clip that is not theirs.
+ *
+ * To go live: drop the file into /public and put its path here, e.g.
+ *   labmentorship: "/lab-mentorship.mp4",
+ * Spaces in a filename must be written as %20. Nothing else changes.
  */
-export const VIDEO_SOURCES = {
-    labmentorship: "/Demo%20Video.mp4",
-    interactive: "/Demo%20Video.mp4",
-    contentgen: "/Demo%20Video.mp4",
-} as const;
+export const VIDEO_SOURCES: Record<"labmentorship" | "interactive" | "contentgen", string> = {
+    labmentorship: "",
+    interactive: "",
+    contentgen: "",
+};
 
 export const VIDEO_CAPTIONS = {
     labmentorship:

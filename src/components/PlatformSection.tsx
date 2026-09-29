@@ -405,23 +405,45 @@ function CaseStudyDemo() {
 
 /* ──────────────────────── Video player ──────────────────────── */
 
+/**
+ * The player is wired and ready. While its source in content.ts is still
+ * empty it shows the waiting state rather than playing an unrelated clip;
+ * the moment a real path is set there, it plays that clip instead.
+ */
 function VideoDemo({ src, caption }: { src: string; caption: string }) {
+    const ready = src.trim().length > 0;
+
     return (
         <div>
             <div className="rounded-xl overflow-hidden border border-[#1E2D45] bg-black aspect-video mb-4">
-                <video
-                    key={src}
-                    src={src}
-                    className="h-full w-full object-contain"
-                    controls
-                    autoPlay
-                    playsInline
-                    preload="metadata"
-                >
-                    Your browser does not support the video tag.
-                </video>
+                {ready ? (
+                    <video
+                        key={src}
+                        src={src}
+                        className="h-full w-full object-contain"
+                        controls
+                        autoPlay
+                        playsInline
+                        preload="metadata"
+                    >
+                        Your browser does not support the video tag.
+                    </video>
+                ) : (
+                    <div className="h-full w-full flex flex-col items-center justify-center gap-3 bg-[#060D1A]">
+                        <span className="w-14 h-14 rounded-full bg-[var(--gold)]/15 border border-[var(--gold)]/50 flex items-center justify-center">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-[var(--gold-light)] ml-0.5">
+                                <path d="M8 6l10 6-10 6V6z" />
+                            </svg>
+                        </span>
+                        <p className="text-sm font-800 text-white">1 minute clip to be added</p>
+                        <p className="text-xs font-bold text-[#94A3B8]">The player is ready and will play it here</p>
+                    </div>
+                )}
             </div>
-            <p className="text-sm text-[#CBD5E1] font-semibold leading-relaxed">{caption}</p>
+            <p className="text-sm text-[#CBD5E1] font-semibold leading-relaxed">
+                <span className="text-[var(--gold-light)] font-800">Will show: </span>
+                {caption}
+            </p>
         </div>
     );
 }
