@@ -156,7 +156,7 @@ export default function HomePage() {
               </h1>
 
               <p className="text-lg text-[#475569] leading-relaxed mb-5 font-medium">
-                Specifically architected, orchestrated, trained on and fine tuned to deliver IT
+                specifically architected, orchestrated, trained on and fine tuned to deliver IT
                 training.
               </p>
 
@@ -197,6 +197,9 @@ export default function HomePage() {
 
             {/* Right: Product Visual */}
             <div className="md:col-span-6 lg:col-span-6 relative z-10 lg:ml-auto w-full max-w-lg">
+              <h2 className="text-xl md:text-2xl font-900 text-[#0F172A] tracking-tight mb-3">
+                Aurilearn at work
+              </h2>
               <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-[#0B1220] to-[#162035] aspect-[4/3] shadow-2xl border-4 border-white">
                 <video
                   src="/Demo%20Video.mp4#t=0.1"
