@@ -197,9 +197,19 @@ export default function HomePage() {
 
             {/* Right: Product Visual */}
             <div className="md:col-span-6 lg:col-span-6 relative z-10 lg:ml-auto w-full max-w-lg">
-              <h2 className="text-xl md:text-2xl font-900 text-[#0F172A] tracking-tight mb-3">
-                Aurilearn at work
-              </h2>
+              {/* Title over the video — spans the full width of the frame */}
+              <div className="mb-4">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="h-px w-10 bg-[var(--gold)] shrink-0" />
+                  <span className="text-[11px] font-800 uppercase tracking-[0.2em] text-[var(--gold-hover)] whitespace-nowrap">
+                    See it live
+                  </span>
+                  <span className="h-px flex-1 bg-gradient-to-r from-[#E7E2D8] to-transparent" />
+                </div>
+                <h2 className="text-3xl md:text-4xl font-900 text-[#0F172A] tracking-tight leading-[1.1]">
+                  Aurilearn <span className="text-gradient-gold">at work</span>
+                </h2>
+              </div>
               <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-[#0B1220] to-[#162035] aspect-[4/3] shadow-2xl border-4 border-white">
                 <video
                   src="/Demo%20Video.mp4#t=0.1"
