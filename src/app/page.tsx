@@ -244,9 +244,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── PLATFORM (James input 26/09) ─── */}
-      <PlatformSection />
-
       {/* ─── SECTION 2: ABOUT + TRUST LOGOS (full-screen snap) ─── */}
       <section id="about" className="snap-section bg-[#FAFAF8] border-t border-[#E7E2D8] flex flex-col">
         {/* Main content — grows to push logos down */}
@@ -312,6 +309,9 @@ export default function HomePage() {
           </div>
         </div> */}
       </section>
+
+      {/* ─── PLATFORM (James input 26/09) ─── */}
+      <PlatformSection />
 
       {/* ─── SECTION 3: HOW IT WORKS (full-screen snap) ─── */}
       <section className="snap-section bg-white border-t border-[#E7E2D8]">
