@@ -45,18 +45,18 @@ const WHAT_YOU_GET = [
 ];
 
 const EXPERIENCES: { key: DemoKey; title: string; blurb: string; kind: "interactive" | "video" }[] = [
-    { key: "quiz", title: "Quiz directed learning", blurb: "Five quizzes, a new one each time", kind: "interactive" },
-    { key: "slides", title: "Interactive slides", blurb: "Click through a slide you can interact with", kind: "interactive" },
-    { key: "whiteboard", title: "Live real time white boarding", blurb: "Watch a diagram generated live", kind: "interactive" },
-    { key: "casestudy", title: "Case studies", blurb: "Work through a case study example", kind: "interactive" },
-    { key: "labmentorship", title: "Lab work mentorship", blurb: "Lab exercise with agent assistance", kind: "video" },
-    { key: "interactive", title: "Highly interactive", blurb: "Ask any question any time, including follow ups", kind: "video" },
-    { key: "contentgen", title: "Content generation", blurb: "How it works, the output, how long it takes", kind: "video" },
+    { key: "quiz", title: "Quiz directed learning", blurb: "A new quiz every time", kind: "interactive" },
+    { key: "slides", title: "Interactive slides", blurb: "Interact as you go", kind: "interactive" },
+    { key: "whiteboard", title: "Live real time white boarding", blurb: "A diagram drawn live", kind: "interactive" },
+    { key: "casestudy", title: "Case studies", blurb: "Work a real scenario", kind: "interactive" },
+    { key: "labmentorship", title: "Lab work mentorship", blurb: "Agent assisted lab", kind: "video" },
+    { key: "interactive", title: "Highly interactive", blurb: "Ask anything, any time", kind: "video" },
+    { key: "contentgen", title: "Content generation", blurb: "How it works, and the output", kind: "video" },
 ];
 
 /* ── shared dark-surface classes ── */
-const CARD = "rounded-xl border border-[#1E2D45] bg-[#162035]";
-const PANEL = "rounded-xl border border-[#1E2D45] bg-[#0F1A2E]";
+const CARD = "rounded-xl border border-[#E7E2D8] bg-white";
+const PANEL = "rounded-xl border border-[#E7E2D8] bg-[#FAFAF8]";
 
 /* ─────────────────────────── Quiz ─────────────────────────── */
 
@@ -91,14 +91,14 @@ function QuizDemo({ quiz, indexLabel }: { quiz: Quiz; indexLabel: string }) {
     if (done) {
         return (
             <div className="text-center py-6">
-                <p className="text-sm font-800 uppercase tracking-widest text-[var(--gold-light)] mb-2">
+                <p className="text-sm font-800 uppercase tracking-widest text-[var(--gold-hover)] mb-2">
                     {indexLabel} complete
                 </p>
-                <p className="text-5xl font-900 text-white mb-2">
+                <p className="text-5xl font-900 text-[#0F172A] mb-2">
                     {score}
-                    <span className="text-2xl text-[#94A3B8] font-800">/{questions.length}</span>
+                    <span className="text-2xl text-[#64748B] font-800">/{questions.length}</span>
                 </p>
-                <p className="text-[#CBD5E1] font-semibold mb-6 max-w-md mx-auto leading-relaxed">
+                <p className="text-[#475569] font-semibold mb-6 max-w-md mx-auto leading-relaxed">
                     In the real platform your instructor agent picks the next topic based on what you got wrong.
                 </p>
                 <button onClick={restart} className="btn-gold px-6 py-2.5 text-sm font-800 cursor-pointer">
@@ -111,53 +111,53 @@ function QuizDemo({ quiz, indexLabel }: { quiz: Quiz; indexLabel: string }) {
     return (
         <div>
             <div className="flex items-center justify-between mb-4">
-                <span className="text-xs font-800 uppercase tracking-widest text-[var(--gold-light)]">
+                <span className="text-xs font-800 uppercase tracking-widest text-[var(--gold-hover)]">
                     {indexLabel} · {quiz.title}
                 </span>
-                <span className="text-xs font-800 text-[#94A3B8]">Score {score}</span>
+                <span className="text-xs font-800 text-[#64748B]">Score {score}</span>
             </div>
 
             <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-800 uppercase tracking-widest text-[#94A3B8]">
+                <span className="text-xs font-800 uppercase tracking-widest text-[#64748B]">
                     Question {current + 1} of {questions.length}
                 </span>
             </div>
 
-            <div className="h-1.5 w-full bg-[#1E2D45] rounded-full mb-6 overflow-hidden">
+            <div className="h-1.5 w-full bg-[#E7E2D8] rounded-full mb-6 overflow-hidden">
                 <div
                     className="h-full bg-[var(--gold)] rounded-full transition-all duration-300"
                     style={{ width: `${((current + (picked !== null ? 1 : 0)) / questions.length) * 100}%` }}
                 />
             </div>
 
-            <p className="text-lg font-800 text-white mb-5 leading-snug">{item.q}</p>
+            <p className="text-lg font-800 text-[#0F172A] mb-5 leading-snug">{item.q}</p>
 
             <div className="space-y-2.5 mb-5">
                 {item.options.map((opt, i) => {
                     const isAnswer = i === item.answer;
                     const isPicked = picked === i;
-                    let cls = "border-[#1E2D45] bg-[#162035] hover:border-[var(--gold)] hover:bg-[#1B2942]";
+                    let cls = "border-[#E7E2D8] bg-white hover:border-[var(--gold)] hover:bg-[#FAFAF8]";
                     if (picked !== null) {
-                        if (isAnswer) cls = "border-[#22C55E] bg-[#22C55E]/10";
-                        else if (isPicked) cls = "border-[#EF4444] bg-[#EF4444]/10";
-                        else cls = "border-[#1E2D45] bg-[#162035] opacity-50";
+                        if (isAnswer) cls = "border-[#16A34A] bg-[#16A34A]/5";
+                        else if (isPicked) cls = "border-[#DC2626] bg-[#DC2626]/5";
+                        else cls = "border-[#E7E2D8] bg-white opacity-60";
                     }
                     return (
                         <button
                             key={i}
                             onClick={() => choose(i)}
                             disabled={picked !== null}
-                            className={`w-full text-left px-4 py-3 rounded-xl border-2 transition-all font-semibold text-white text-sm flex items-center gap-3 ${cls} ${picked === null ? "cursor-pointer" : "cursor-default"}`}
+                            className={`w-full text-left px-4 py-3 rounded-xl border-2 transition-all font-semibold text-[#0F172A] text-sm flex items-center gap-3 ${cls} ${picked === null ? "cursor-pointer" : "cursor-default"}`}
                         >
-                            <span className="w-6 h-6 rounded-full bg-[#0B1220] border border-[#1E2D45] text-[#94A3B8] text-xs font-800 flex items-center justify-center shrink-0">
+                            <span className="w-6 h-6 rounded-full bg-[#F3F0E8] border border-[#E7E2D8] text-[#64748B] text-xs font-800 flex items-center justify-center shrink-0">
                                 {String.fromCharCode(65 + i)}
                             </span>
                             <span className="flex-1">{opt}</span>
                             {picked !== null && isAnswer && (
-                                <span className="text-[#22C55E] font-800 text-xs shrink-0">Correct</span>
+                                <span className="text-[#16A34A] font-800 text-xs shrink-0">Correct</span>
                             )}
                             {picked !== null && isPicked && !isAnswer && (
-                                <span className="text-[#EF4444] font-800 text-xs shrink-0">Your answer</span>
+                                <span className="text-[#DC2626] font-800 text-xs shrink-0">Your answer</span>
                             )}
                         </button>
                     );
@@ -166,10 +166,10 @@ function QuizDemo({ quiz, indexLabel }: { quiz: Quiz; indexLabel: string }) {
 
             {picked !== null && (
                 <div className={`${PANEL} p-4 mb-5`}>
-                    <p className="text-xs font-800 uppercase tracking-widest text-[var(--gold-light)] mb-1.5">
+                    <p className="text-xs font-800 uppercase tracking-widest text-[var(--gold-hover)] mb-1.5">
                         Instructor agent
                     </p>
-                    <p className="text-sm text-[#CBD5E1] leading-relaxed font-semibold">{item.why}</p>
+                    <p className="text-sm text-[#475569] leading-relaxed font-semibold">{item.why}</p>
                 </div>
             )}
 
@@ -202,17 +202,17 @@ function SlidesDemo() {
                 {SLIDE_DECK.map((_, i) => (
                     <div
                         key={i}
-                        className={`h-1.5 rounded-full transition-all ${i === index ? "w-8 bg-[var(--gold)]" : "w-4 bg-[#1E2D45]"}`}
+                        className={`h-1.5 rounded-full transition-all ${i === index ? "w-8 bg-[var(--gold)]" : "w-4 bg-[#E7E2D8]"}`}
                     />
                 ))}
-                <span className="ml-auto text-xs font-800 text-[#94A3B8]">
+                <span className="ml-auto text-xs font-800 text-[#64748B]">
                     Slide {index + 1} of {SLIDE_DECK.length}
                 </span>
             </div>
 
             <div className={`${PANEL} p-6 mb-4 min-h-[280px]`}>
-                <h4 className="text-xl font-900 text-white mb-2 leading-snug">{slide.title}</h4>
-                <p className="text-sm text-[#CBD5E1] font-semibold mb-5 leading-relaxed">{slide.body}</p>
+                <h4 className="text-xl font-900 text-[#0F172A] mb-2 leading-snug">{slide.title}</h4>
+                <p className="text-sm text-[#475569] font-semibold mb-5 leading-relaxed">{slide.body}</p>
 
                 <div className="flex flex-wrap gap-2 mb-4">
                     {slide.hotspots.map((h, i) => (
@@ -221,8 +221,8 @@ function SlidesDemo() {
                             onClick={() => setOpenSpot(openSpot === i ? null : i)}
                             className={`px-4 py-2 rounded-lg text-sm font-800 border-2 transition-all cursor-pointer ${
                                 openSpot === i
-                                    ? "border-[var(--gold)] bg-[var(--gold)]/15 text-[var(--gold-light)]"
-                                    : "border-[#1E2D45] bg-[#162035] text-[#CBD5E1] hover:border-[var(--gold)]"
+                                    ? "border-[var(--gold)] bg-[var(--gold)]/15 text-[var(--gold-hover)]"
+                                    : "border-[#E7E2D8] bg-white text-[#475569] hover:border-[var(--gold)]"
                             }`}
                         >
                             {h.label}
@@ -232,12 +232,12 @@ function SlidesDemo() {
 
                 {openSpot !== null ? (
                     <div className={`${CARD} p-4`}>
-                        <p className="text-sm text-[#CBD5E1] leading-relaxed font-semibold">
+                        <p className="text-sm text-[#475569] leading-relaxed font-semibold">
                             {slide.hotspots[openSpot].detail}
                         </p>
                     </div>
                 ) : (
-                    <p className="text-xs text-[#94A3B8] font-bold">
+                    <p className="text-xs text-[#64748B] font-bold">
                         Click any label above — the agent expands on whichever part you ask about.
                     </p>
                 )}
@@ -247,7 +247,7 @@ function SlidesDemo() {
                 <button
                     onClick={() => go(-1)}
                     disabled={index === 0}
-                    className="px-5 py-2.5 rounded-xl border-2 border-[#1E2D45] text-sm font-800 text-[#CBD5E1] bg-[#162035] hover:border-[var(--gold)] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-colors"
+                    className="px-5 py-2.5 rounded-xl border-2 border-[#E7E2D8] text-sm font-800 text-[#475569] bg-white hover:border-[var(--gold)] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-colors"
                 >
                     Back
                 </button>
@@ -291,59 +291,59 @@ function WhiteboardDemo() {
 
     return (
         <div>
-            <div className="rounded-xl bg-[#060D1A] border border-[#1E2D45] p-5 mb-4">
+            <div className="rounded-xl bg-white border border-[#E7E2D8] p-5 mb-4">
                 <svg viewBox="0 0 520 210" className="w-full h-auto">
                     <g className={`transition-opacity duration-700 ${show(0)}`}>
-                        <circle cx="45" cy="105" r="22" fill="none" stroke="#D4A017" strokeWidth="3" />
-                        <text x="45" y="148" textAnchor="middle" fill="#CBD5E1" fontSize="12" fontWeight="800">User</text>
+                        <circle cx="45" cy="105" r="22" fill="none" stroke="var(--gold)" strokeWidth="3" />
+                        <text x="45" y="148" textAnchor="middle" fill="#475569" fontSize="12" fontWeight="800">User</text>
                     </g>
                     <g className={`transition-opacity duration-700 ${show(1)}`}>
-                        <line x1="72" y1="105" x2="122" y2="105" stroke="#64748B" strokeWidth="2.5" strokeDasharray="4 3" />
-                        <path d="M122 105l-7-4v8z" fill="#64748B" />
+                        <line x1="72" y1="105" x2="122" y2="105" stroke="#94A3B8" strokeWidth="2.5" strokeDasharray="4 3" />
+                        <path d="M122 105l-7-4v8z" fill="#94A3B8" />
                     </g>
                     <g className={`transition-opacity duration-700 ${show(1)}`}>
-                        <rect x="128" y="82" width="92" height="46" rx="8" fill="none" stroke="#D4A017" strokeWidth="3" />
-                        <text x="174" y="110" textAnchor="middle" fill="#FFFFFF" fontSize="13" fontWeight="800">Ingress</text>
-                        <text x="174" y="148" textAnchor="middle" fill="#94A3B8" fontSize="11" fontWeight="700">TLS ends here</text>
+                        <rect x="128" y="82" width="92" height="46" rx="8" fill="none" stroke="var(--gold)" strokeWidth="3" />
+                        <text x="174" y="110" textAnchor="middle" fill="#0F172A" fontSize="13" fontWeight="800">Ingress</text>
+                        <text x="174" y="148" textAnchor="middle" fill="#64748B" fontSize="11" fontWeight="700">TLS ends here</text>
                     </g>
                     <g className={`transition-opacity duration-700 ${show(2)}`}>
-                        <line x1="224" y1="105" x2="274" y2="105" stroke="#64748B" strokeWidth="2.5" strokeDasharray="4 3" />
-                        <path d="M274 105l-7-4v8z" fill="#64748B" />
+                        <line x1="224" y1="105" x2="274" y2="105" stroke="#94A3B8" strokeWidth="2.5" strokeDasharray="4 3" />
+                        <path d="M274 105l-7-4v8z" fill="#94A3B8" />
                     </g>
                     <g className={`transition-opacity duration-700 ${show(2)}`}>
-                        <rect x="280" y="82" width="92" height="46" rx="8" fill="none" stroke="#D4A017" strokeWidth="3" />
-                        <text x="326" y="110" textAnchor="middle" fill="#FFFFFF" fontSize="13" fontWeight="800">Service</text>
-                        <text x="326" y="148" textAnchor="middle" fill="#94A3B8" fontSize="11" fontWeight="700">virtual IP</text>
+                        <rect x="280" y="82" width="92" height="46" rx="8" fill="none" stroke="var(--gold)" strokeWidth="3" />
+                        <text x="326" y="110" textAnchor="middle" fill="#0F172A" fontSize="13" fontWeight="800">Service</text>
+                        <text x="326" y="148" textAnchor="middle" fill="#64748B" fontSize="11" fontWeight="700">virtual IP</text>
                     </g>
                     <g className={`transition-opacity duration-700 ${show(3)}`}>
-                        <line x1="376" y1="105" x2="418" y2="55" stroke="#64748B" strokeWidth="2.5" strokeDasharray="4 3" />
-                        <line x1="376" y1="105" x2="418" y2="105" stroke="#64748B" strokeWidth="2.5" strokeDasharray="4 3" />
-                        <line x1="376" y1="105" x2="418" y2="155" stroke="#64748B" strokeWidth="2.5" strokeDasharray="4 3" />
-                        <rect x="424" y="36" width="68" height="38" rx="8" fill="none" stroke="#22C55E" strokeWidth="3" />
-                        <text x="458" y="60" textAnchor="middle" fill="#FFFFFF" fontSize="12" fontWeight="800">Pod</text>
-                        <rect x="424" y="86" width="68" height="38" rx="8" fill="none" stroke="#22C55E" strokeWidth="3" />
-                        <text x="458" y="110" textAnchor="middle" fill="#FFFFFF" fontSize="12" fontWeight="800">Pod</text>
+                        <line x1="376" y1="105" x2="418" y2="55" stroke="#94A3B8" strokeWidth="2.5" strokeDasharray="4 3" />
+                        <line x1="376" y1="105" x2="418" y2="105" stroke="#94A3B8" strokeWidth="2.5" strokeDasharray="4 3" />
+                        <line x1="376" y1="105" x2="418" y2="155" stroke="#94A3B8" strokeWidth="2.5" strokeDasharray="4 3" />
+                        <rect x="424" y="36" width="68" height="38" rx="8" fill="none" stroke="#16A34A" strokeWidth="3" />
+                        <text x="458" y="60" textAnchor="middle" fill="#0F172A" fontSize="12" fontWeight="800">Pod</text>
+                        <rect x="424" y="86" width="68" height="38" rx="8" fill="none" stroke="#16A34A" strokeWidth="3" />
+                        <text x="458" y="110" textAnchor="middle" fill="#0F172A" fontSize="12" fontWeight="800">Pod</text>
                     </g>
                     <g className={`transition-opacity duration-700 ${show(4)}`}>
-                        <rect x="424" y="136" width="68" height="38" rx="8" fill="none" stroke="#EF4444" strokeWidth="3" strokeDasharray="5 4" />
-                        <text x="458" y="160" textAnchor="middle" fill="#94A3B8" fontSize="12" fontWeight="800">Pod</text>
-                        <line x1="376" y1="105" x2="418" y2="155" stroke="#EF4444" strokeWidth="2.5" strokeDasharray="3 4" />
-                        <text x="458" y="192" textAnchor="middle" fill="#EF4444" fontSize="11" fontWeight="800">not ready</text>
+                        <rect x="424" y="136" width="68" height="38" rx="8" fill="none" stroke="#DC2626" strokeWidth="3" strokeDasharray="5 4" />
+                        <text x="458" y="160" textAnchor="middle" fill="#64748B" fontSize="12" fontWeight="800">Pod</text>
+                        <line x1="376" y1="105" x2="418" y2="155" stroke="#DC2626" strokeWidth="2.5" strokeDasharray="3 4" />
+                        <text x="458" y="192" textAnchor="middle" fill="#DC2626" fontSize="11" fontWeight="800">not ready</text>
                     </g>
                 </svg>
             </div>
 
             <div className={`${PANEL} p-4 mb-4 min-h-[68px]`}>
-                <p className="text-xs font-800 uppercase tracking-widest text-[var(--gold-light)] mb-1.5">
+                <p className="text-xs font-800 uppercase tracking-widest text-[var(--gold-hover)] mb-1.5">
                     Instructor agent {playing ? "is drawing" : ""}
                 </p>
-                <p className="text-sm text-[#CBD5E1] font-semibold leading-relaxed">{BOARD_STEPS[step].caption}</p>
+                <p className="text-sm text-[#475569] font-semibold leading-relaxed">{BOARD_STEPS[step].caption}</p>
             </div>
 
             <div className="flex items-center gap-3">
                 <button
                     onClick={replay}
-                    className="px-5 py-2.5 rounded-xl border-2 border-[#1E2D45] text-sm font-800 text-[#CBD5E1] bg-[#162035] hover:border-[var(--gold)] cursor-pointer transition-colors"
+                    className="px-5 py-2.5 rounded-xl border-2 border-[#E7E2D8] text-sm font-800 text-[#475569] bg-white hover:border-[var(--gold)] cursor-pointer transition-colors"
                 >
                     Replay
                 </button>
@@ -370,24 +370,24 @@ function CaseStudyDemo() {
                 {CASE_STAGES.map((_, i) => (
                     <div
                         key={i}
-                        className={`h-1.5 flex-1 rounded-full transition-all ${i <= stage ? "bg-[var(--gold)]" : "bg-[#1E2D45]"}`}
+                        className={`h-1.5 flex-1 rounded-full transition-all ${i <= stage ? "bg-[var(--gold)]" : "bg-[#E7E2D8]"}`}
                     />
                 ))}
             </div>
 
             <div className={`${PANEL} p-6 mb-4 min-h-[210px]`}>
-                <p className="text-xs font-800 uppercase tracking-widest text-[#94A3B8] mb-2">
+                <p className="text-xs font-800 uppercase tracking-widest text-[#64748B] mb-2">
                     Step {stage + 1} of {CASE_STAGES.length}
                 </p>
-                <h4 className="text-xl font-900 text-white mb-3 leading-snug">{CASE_STAGES[stage].heading}</h4>
-                <p className="text-sm text-[#CBD5E1] leading-relaxed font-semibold">{CASE_STAGES[stage].body}</p>
+                <h4 className="text-xl font-900 text-[#0F172A] mb-3 leading-snug">{CASE_STAGES[stage].heading}</h4>
+                <p className="text-sm text-[#475569] leading-relaxed font-semibold">{CASE_STAGES[stage].body}</p>
             </div>
 
             <div className="flex items-center gap-3">
                 <button
                     onClick={() => setStage((s) => Math.max(0, s - 1))}
                     disabled={stage === 0}
-                    className="px-5 py-2.5 rounded-xl border-2 border-[#1E2D45] text-sm font-800 text-[#CBD5E1] bg-[#162035] hover:border-[var(--gold)] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-colors"
+                    className="px-5 py-2.5 rounded-xl border-2 border-[#E7E2D8] text-sm font-800 text-[#475569] bg-white hover:border-[var(--gold)] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-colors"
                 >
                     Back
                 </button>
@@ -415,7 +415,7 @@ function VideoDemo({ src, caption }: { src: string; caption: string }) {
 
     return (
         <div>
-            <div className="rounded-xl overflow-hidden border border-[#1E2D45] bg-black aspect-video mb-4">
+            <div className={`rounded-xl overflow-hidden border border-[#E7E2D8] aspect-video mb-4 ${ready ? "bg-[#0B1220]" : "bg-[#FAFAF8]"}`}>
                 {ready ? (
                     <video
                         key={src}
@@ -429,19 +429,19 @@ function VideoDemo({ src, caption }: { src: string; caption: string }) {
                         Your browser does not support the video tag.
                     </video>
                 ) : (
-                    <div className="h-full w-full flex flex-col items-center justify-center gap-3 bg-[#060D1A]">
-                        <span className="w-14 h-14 rounded-full bg-[var(--gold)]/15 border border-[var(--gold)]/50 flex items-center justify-center">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-[var(--gold-light)] ml-0.5">
+                    <div className="h-full w-full flex flex-col items-center justify-center gap-3">
+                        <span className="w-14 h-14 rounded-full bg-[var(--gold)]/10 border border-[var(--gold)]/40 flex items-center justify-center">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-[var(--gold-hover)] ml-0.5">
                                 <path d="M8 6l10 6-10 6V6z" />
                             </svg>
                         </span>
-                        <p className="text-sm font-800 text-white">1 minute clip to be added</p>
-                        <p className="text-xs font-bold text-[#94A3B8]">The player is ready and will play it here</p>
+                        <p className="text-sm font-800 text-[#0F172A]">1 minute clip to be added</p>
+                        <p className="text-xs font-bold text-[#64748B]">The player is ready and will play it here</p>
                     </div>
                 )}
             </div>
-            <p className="text-sm text-[#CBD5E1] font-semibold leading-relaxed">
-                <span className="text-[var(--gold-light)] font-800">Will show: </span>
+            <p className="text-sm text-[#475569] font-semibold leading-relaxed">
+                <span className="text-[var(--gold-hover)] font-800">Will show: </span>
                 {caption}
             </p>
         </div>
@@ -481,14 +481,14 @@ export default function PlatformSection() {
     };
 
     return (
-        <section id="platform" className="section-tall bg-[#0B1220] border-t border-[#1E2D45]">
+        <section id="platform" className="section-tall bg-[#FAFAF8] border-t border-[#E7E2D8]">
             <div className="container-content w-full py-20 md:py-24">
                 <div className="max-w-3xl mx-auto text-center mb-14">
                     <div className="gold-divider mx-auto" />
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-900 text-white leading-[1.1] tracking-tight mb-4">
+                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-900 text-[#0F172A] leading-[1.1] tracking-tight mb-4">
                         Platform
                     </h2>
-                    <p className="text-lg text-[#CBD5E1] font-semibold leading-relaxed">
+                    <p className="text-lg text-[#475569] font-semibold leading-relaxed">
                         One engine covering the whole journey — from first concept to a certification pass, with the
                         evidence to prove it happened.
                     </p>
@@ -498,10 +498,10 @@ export default function PlatformSection() {
 
                     {/* ── Left half: the four points ── */}
                     <div className="flex flex-col">
-                        <h3 className="text-sm font-800 uppercase tracking-widest text-[var(--gold-light)] mb-2">
+                        <h3 className="text-sm font-800 uppercase tracking-widest text-[var(--gold-hover)] mb-2">
                             What It Covers
                         </h3>
-                        <p className="text-sm text-[#94A3B8] font-bold mb-4">
+                        <p className="text-sm text-[#64748B] font-bold mb-4">
                             The whole journey, end to end.
                         </p>
 
@@ -509,14 +509,14 @@ export default function PlatformSection() {
                             {LEFT_POINTS.map((p, i) => (
                                 <div
                                     key={p.title}
-                                    className={`${CARD} flex-1 flex items-center gap-4 px-5 py-4 min-h-[86px] transition-all hover:border-[var(--gold)] hover:-translate-y-0.5`}
+                                    className={`${CARD} flex-1 flex items-center gap-4 px-5 py-4 min-h-[86px] transition-all hover:border-[var(--gold)] hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(15,23,42,0.06)]`}
                                 >
-                                    <span className="w-9 h-9 rounded-full bg-[var(--gold)]/15 border border-[var(--gold)]/50 text-[var(--gold-light)] text-xs font-900 flex items-center justify-center shrink-0">
+                                    <span className="w-9 h-9 rounded-full bg-[var(--gold)]/10 border border-[var(--gold)]/40 text-[var(--gold-hover)] text-xs font-900 flex items-center justify-center shrink-0">
                                         {String(i + 1).padStart(2, "0")}
                                     </span>
                                     <span className="min-w-0">
-                                        <span className="block text-lg font-900 text-white leading-snug">{p.title}</span>
-                                        <span className="block text-[#94A3B8] font-bold text-sm leading-snug">{p.blurb}</span>
+                                        <span className="block text-lg font-900 text-[#0F172A] leading-snug">{p.title}</span>
+                                        <span className="block text-[#64748B] font-bold text-sm leading-snug">{p.blurb}</span>
                                     </span>
                                 </div>
                             ))}
@@ -527,10 +527,10 @@ export default function PlatformSection() {
                     <div className="flex flex-col gap-8">
 
                         <div>
-                            <h3 className="text-sm font-800 uppercase tracking-widest text-[var(--gold-light)] mb-2">
+                            <h3 className="text-sm font-800 uppercase tracking-widest text-[var(--gold-hover)] mb-2">
                                 What Do You Get
                             </h3>
-                            <p className="text-sm text-[#94A3B8] font-bold mb-4">
+                            <p className="text-sm text-[#64748B] font-bold mb-4">
                                 Included with every seat.
                             </p>
                             <ul className="flex flex-col gap-3">
@@ -539,17 +539,17 @@ export default function PlatformSection() {
                                         <svg className="w-5 h-5 text-[var(--gold)] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                                         </svg>
-                                        <span className="text-white font-bold leading-snug">{item}</span>
+                                        <span className="text-[#0F172A] font-bold leading-snug">{item}</span>
                                     </li>
                                 ))}
                             </ul>
                         </div>
 
                         <div>
-                            <h3 className="text-sm font-800 uppercase tracking-widest text-[var(--gold-light)] mb-2">
+                            <h3 className="text-sm font-800 uppercase tracking-widest text-[var(--gold-hover)] mb-2">
                                 Experience
                             </h3>
-                            <p className="text-sm text-[#94A3B8] font-bold mb-4">
+                            <p className="text-sm text-[#64748B] font-bold mb-4">
                                 Click any of these to try it right here.
                             </p>
 
@@ -558,11 +558,11 @@ export default function PlatformSection() {
                                     <button
                                         key={e.key}
                                         onClick={() => open(e.key)}
-                                        className={`${CARD} group text-left px-4 py-3.5 flex items-center gap-3 transition-all hover:border-[var(--gold)] hover:bg-[#1B2942] cursor-pointer ${
+                                        className={`${CARD} group text-left px-4 py-3.5 flex items-center gap-3 transition-all hover:border-[var(--gold)] hover:bg-[#F3F0E8] cursor-pointer ${
                                             i === EXPERIENCES.length - 1 ? "sm:col-span-2" : ""
                                         }`}
                                     >
-                                        <span className="w-8 h-8 rounded-full bg-[var(--gold)]/15 border border-[var(--gold)]/50 text-[var(--gold-light)] flex items-center justify-center shrink-0 group-hover:bg-[var(--gold)] group-hover:text-[#0B1220] transition-colors">
+                                        <span className="w-8 h-8 rounded-full bg-[var(--gold)]/10 border border-[var(--gold)]/40 text-[var(--gold-hover)] flex items-center justify-center shrink-0 group-hover:bg-[var(--gold)] group-hover:text-white transition-colors">
                                             {e.kind === "video" ? (
                                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                                                     <path d="M8 6l10 6-10 6V6z" />
@@ -574,8 +574,8 @@ export default function PlatformSection() {
                                             )}
                                         </span>
                                         <span className="flex-1 min-w-0">
-                                            <span className="block font-900 text-white leading-snug text-[15px]">{e.title}</span>
-                                            <span className="block text-[13px] text-[#94A3B8] font-bold leading-snug">{e.blurb}</span>
+                                            <span className="block font-900 text-[#0F172A] leading-snug text-[15px]">{e.title}</span>
+                                            <span className="block text-[13px] text-[#64748B] font-bold leading-snug">{e.blurb}</span>
                                         </span>
                                     </button>
                                 ))}
@@ -589,7 +589,6 @@ export default function PlatformSection() {
             <Modal
                 isOpen={openDemo !== null}
                 onClose={close}
-                tone="dark"
                 title={openDemo ? modalTitle[openDemo] : ""}
                 size={openDemo === "whiteboard" ? "xl" : "lg"}
             >
