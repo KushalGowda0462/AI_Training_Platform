@@ -307,20 +307,22 @@ function WhiteboardDemo() {
             </div>
 
             <div className="flex items-center gap-3">
+                <div className="grid grid-cols-2 gap-3 flex-1">
                 <button
                     onClick={goPrev}
                     disabled={step === 0}
-                    className="px-5 py-2.5 rounded-xl border-2 border-[#E7E2D8] text-sm font-800 text-[#475569] bg-white hover:border-[var(--gold)] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-colors"
+                    className="w-full text-center px-5 py-2.5 rounded-xl border-2 border-[#E7E2D8] text-sm font-800 text-[#475569] bg-white hover:border-[var(--gold)] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-colors"
                 >
                     Previous
                 </button>
                 <button
                     onClick={goNext}
                     disabled={step === BOARD_STEPS.length - 1}
-                    className="btn-gold flex-1 justify-center py-2.5 text-sm font-800 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                    className="btn-gold w-full justify-center border-2 border-transparent py-2.5 text-sm font-800 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
                 >
                     Next
                 </button>
+                </div>
                 <button
                     onClick={() => setMuted((m) => !m)}
                     aria-pressed={!muted}
