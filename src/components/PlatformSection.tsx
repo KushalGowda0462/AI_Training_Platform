@@ -2,9 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import Modal from "@/components/Modal";
+import InteractiveSlides from "@/components/platform/InteractiveSlides";
 import {
     QUIZZES,
-    SLIDE_DECK,
     BOARD_STEPS,
     CASE_STAGES,
     VIDEO_SOURCES,
@@ -40,7 +40,7 @@ const LEFT_POINTS = [
 ];
 
 const WHAT_YOU_GET = [
-    "Individualized Instructor agent teaching that is highly personalized",
+    "Highly individualized instructor agent teaching that is personalized to match each learning style and behavior",
     "One on one lab work guidance and mentorship",
 ];
 
@@ -104,6 +104,10 @@ function QuizDemo({ quiz, indexLabel }: { quiz: Quiz; indexLabel: string }) {
                 <button onClick={restart} className="btn-gold px-6 py-2.5 text-sm font-800 cursor-pointer">
                     Take it again
                 </button>
+
+                <p className="mt-6 text-[11px] text-[#94A3B8] font-semibold leading-snug">
+                    *This is an actual Aurilearn {quiz.title} quiz pack
+                </p>
             </div>
         );
     }
@@ -180,85 +184,10 @@ function QuizDemo({ quiz, indexLabel }: { quiz: Quiz; indexLabel: string }) {
             >
                 {current === questions.length - 1 ? "See result" : "Next question"}
             </button>
-        </div>
-    );
-}
 
-/* ───────────────────── Interactive slides ───────────────────── */
-
-function SlidesDemo() {
-    const [index, setIndex] = useState(0);
-    const [openSpot, setOpenSpot] = useState<number | null>(null);
-    const slide = SLIDE_DECK[index];
-
-    const go = (dir: number) => {
-        setIndex((i) => Math.min(SLIDE_DECK.length - 1, Math.max(0, i + dir)));
-        setOpenSpot(null);
-    };
-
-    return (
-        <div>
-            <div className="flex items-center gap-1.5 mb-4">
-                {SLIDE_DECK.map((_, i) => (
-                    <div
-                        key={i}
-                        className={`h-1.5 rounded-full transition-all ${i === index ? "w-8 bg-[var(--gold)]" : "w-4 bg-[#E7E2D8]"}`}
-                    />
-                ))}
-                <span className="ml-auto text-xs font-800 text-[#64748B]">
-                    Slide {index + 1} of {SLIDE_DECK.length}
-                </span>
-            </div>
-
-            <div className={`${PANEL} p-6 mb-4 min-h-[280px]`}>
-                <h4 className="text-xl font-900 text-[#0F172A] mb-2 leading-snug">{slide.title}</h4>
-                <p className="text-sm text-[#475569] font-semibold mb-5 leading-relaxed">{slide.body}</p>
-
-                <div className="flex flex-wrap gap-2 mb-4">
-                    {slide.hotspots.map((h, i) => (
-                        <button
-                            key={i}
-                            onClick={() => setOpenSpot(openSpot === i ? null : i)}
-                            className={`px-4 py-2 rounded-lg text-sm font-800 border-2 transition-all cursor-pointer ${
-                                openSpot === i
-                                    ? "border-[var(--gold)] bg-[var(--gold)]/15 text-[var(--gold-hover)]"
-                                    : "border-[#E7E2D8] bg-white text-[#475569] hover:border-[var(--gold)]"
-                            }`}
-                        >
-                            {h.label}
-                        </button>
-                    ))}
-                </div>
-
-                {openSpot !== null ? (
-                    <div className={`${CARD} p-4`}>
-                        <p className="text-sm text-[#475569] leading-relaxed font-semibold">
-                            {slide.hotspots[openSpot].detail}
-                        </p>
-                    </div>
-                ) : (
-                    <p className="text-xs text-[#64748B] font-bold">
-                        Click any label above — the agent expands on whichever part you ask about.
-                    </p>
-                )}
-            </div>
-
-            <div className="flex items-center gap-3">
-                <button
-                    onClick={() => go(-1)}
-                    disabled={index === 0}
-                    className="px-5 py-2.5 rounded-xl border-2 border-[#E7E2D8] text-sm font-800 text-[#475569] bg-white hover:border-[var(--gold)] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-colors"
-                >
-                    Back
-                </button>
-                <button
-                    onClick={() => go(1)}
-                    disabled={index === SLIDE_DECK.length - 1}
-                    className="btn-gold flex-1 justify-center py-2.5 text-sm font-800 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
-                >
-                    Next slide
-                </button>
-            </div>
+            <p className="mt-4 text-[11px] text-[#94A3B8] font-semibold leading-snug">
+                *This is an actual Aurilearn {quiz.title} quiz pack
+            </p>
         </div>
     );
 }
@@ -267,25 +196,62 @@ function SlidesDemo() {
 
 function WhiteboardDemo() {
     const [step, setStep] = useState(0);
-    const [playing, setPlaying] = useState(true);
-    const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const [muted, setMuted] = useState(false);
+    const [speaking, setSpeaking] = useState(false);
 
-    useEffect(() => {
-        if (!playing) return;
-        if (step >= BOARD_STEPS.length - 1) {
-            setPlaying(false);
-            return;
+    /**
+     * Voice over. Until a recorded narration track is supplied this uses the
+     * browser's own speech synthesis. Each step is narrated in full — nothing
+     * advances on its own, so the learner moves with Previous and Next exactly
+     * as they would through a taught module.
+     */
+    const speak = (text: string) => {
+        if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+        try {
+            window.speechSynthesis.cancel();
+            if (muted) return;
+            const u = new SpeechSynthesisUtterance(text);
+            u.rate = 0.98;
+            u.pitch = 1;
+            u.onstart = () => setSpeaking(true);
+            u.onend = () => setSpeaking(false);
+            u.onerror = () => setSpeaking(false);
+            window.speechSynthesis.speak(u);
+        } catch {
+            /* narration is an enhancement — never break the diagram */
+            setSpeaking(false);
         }
-        timer.current = setTimeout(() => setStep((s) => s + 1), 1400);
-        return () => {
-            if (timer.current) clearTimeout(timer.current);
-        };
-    }, [step, playing]);
-
-    const replay = () => {
-        setStep(0);
-        setPlaying(true);
     };
+
+    // narrate whichever step is on screen, in full
+    useEffect(() => {
+        speak(BOARD_STEPS[step].caption);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [step]);
+
+    // toggling sound stops or starts the current step's narration
+    useEffect(() => {
+        if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+        if (muted) {
+            window.speechSynthesis.cancel();
+            setSpeaking(false);
+        } else {
+            speak(BOARD_STEPS[step].caption);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [muted]);
+
+    // stop talking when the modal closes
+    useEffect(() => {
+        return () => {
+            if (typeof window !== "undefined" && "speechSynthesis" in window) {
+                window.speechSynthesis.cancel();
+            }
+        };
+    }, []);
+
+    const goPrev = () => setStep((n) => Math.max(0, n - 1));
+    const goNext = () => setStep((n) => Math.min(BOARD_STEPS.length - 1, n + 1));
 
     const show = (n: number) => (step >= n ? "opacity-100" : "opacity-0");
 
@@ -335,24 +301,45 @@ function WhiteboardDemo() {
 
             <div className={`${PANEL} p-4 mb-4 min-h-[68px]`}>
                 <p className="text-xs font-800 uppercase tracking-widest text-[var(--gold-hover)] mb-1.5">
-                    Instructor agent {playing ? "is drawing" : ""}
+                    Instructor agent {speaking ? "is speaking" : ""} · Step {step + 1} of {BOARD_STEPS.length}
                 </p>
                 <p className="text-sm text-[#475569] font-semibold leading-relaxed">{BOARD_STEPS[step].caption}</p>
             </div>
 
             <div className="flex items-center gap-3">
+                <div className="grid grid-cols-2 gap-3 flex-1">
                 <button
-                    onClick={replay}
-                    className="px-5 py-2.5 rounded-xl border-2 border-[#E7E2D8] text-sm font-800 text-[#475569] bg-white hover:border-[var(--gold)] cursor-pointer transition-colors"
+                    onClick={goPrev}
+                    disabled={step === 0}
+                    className="w-full text-center px-5 py-2.5 rounded-xl border-2 border-[#E7E2D8] text-sm font-800 text-[#475569] bg-white hover:border-[var(--gold)] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-colors"
                 >
-                    Replay
+                    Previous
                 </button>
                 <button
-                    onClick={() => setStep((s) => Math.min(BOARD_STEPS.length - 1, s + 1))}
-                    disabled={step >= BOARD_STEPS.length - 1}
-                    className="btn-gold flex-1 justify-center py-2.5 text-sm font-800 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                    onClick={goNext}
+                    disabled={step === BOARD_STEPS.length - 1}
+                    className="btn-gold w-full justify-center border-2 border-transparent py-2.5 text-sm font-800 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
                 >
-                    {step >= BOARD_STEPS.length - 1 ? "Diagram complete" : "Draw next step"}
+                    Next
+                </button>
+                </div>
+                <button
+                    onClick={() => setMuted((m) => !m)}
+                    aria-pressed={!muted}
+                    aria-label={muted ? "Turn voice on" : "Turn voice off"}
+                    className="px-4 py-2.5 rounded-xl border-2 border-[#E7E2D8] text-sm font-800 text-[#475569] bg-white hover:border-[var(--gold)] cursor-pointer transition-colors inline-flex items-center gap-2 shrink-0"
+                >
+                    {muted ? (
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                            <path d="M11 5L6 9H2v6h4l5 4V5z" />
+                            <path d="M23 9l-6 6M17 9l6 6" />
+                        </svg>
+                    ) : (
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                            <path d="M11 5L6 9H2v6h4l5 4V5z" />
+                            <path d="M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13" />
+                        </svg>
+                    )}
                 </button>
             </div>
         </div>
@@ -488,9 +475,9 @@ export default function PlatformSection() {
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-900 text-[#0F172A] leading-[1.1] tracking-tight mb-4">
                         Platform
                     </h2>
-                    <p className="text-lg text-[#475569] font-semibold leading-relaxed">
-                        One engine covering the whole journey — from first concept to a certification pass, with the
-                        evidence to prove it happened.
+                    <p className="text-lg md:text-xl text-[#475569] font-medium leading-relaxed">
+                        One engine taking you on the whole journey from first concept to a certification pass,
+                        with the evidence to prove it happened.
                     </p>
                 </div>
 
@@ -498,25 +485,25 @@ export default function PlatformSection() {
 
                     {/* ── Left half: the four points ── */}
                     <div className="flex flex-col">
-                        <h3 className="text-sm font-800 uppercase tracking-widest text-[var(--gold-hover)] mb-2">
+                        <h3 className="text-sm md:text-base font-800 uppercase tracking-widest text-[var(--gold-hover)] mb-2">
                             What It Covers
                         </h3>
-                        <p className="text-sm text-[#64748B] font-bold mb-4">
+                        <p className="text-base text-[var(--gold-hover)] font-bold mb-4">
                             The whole journey, end to end.
                         </p>
 
-                        <div className="flex flex-col gap-3 flex-1">
+                        <div className="flex flex-col gap-3">
                             {LEFT_POINTS.map((p, i) => (
                                 <div
                                     key={p.title}
-                                    className={`${CARD} flex-1 flex items-center gap-4 px-5 py-4 min-h-[86px] transition-all hover:border-[var(--gold)] hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(15,23,42,0.06)]`}
+                                    className={`${CARD} flex items-center gap-4 px-6 py-5 transition-all hover:border-[var(--gold)] hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(15,23,42,0.06)]`}
                                 >
-                                    <span className="w-9 h-9 rounded-full bg-[var(--gold)]/10 border border-[var(--gold)]/40 text-[var(--gold-hover)] text-xs font-900 flex items-center justify-center shrink-0">
+                                    <span className="w-11 h-11 rounded-full bg-[var(--gold)]/10 border border-[var(--gold)]/40 text-[var(--gold-hover)] text-sm font-900 flex items-center justify-center shrink-0">
                                         {String(i + 1).padStart(2, "0")}
                                     </span>
                                     <span className="min-w-0">
-                                        <span className="block text-lg font-900 text-[#0F172A] leading-snug">{p.title}</span>
-                                        <span className="block text-[#64748B] font-bold text-sm leading-snug">{p.blurb}</span>
+                                        <span className="block text-xl md:text-2xl font-900 text-[#0F172A] leading-snug">{p.title}</span>
+                                        <span className="block text-[#475569] font-semibold text-base leading-snug">{p.blurb}</span>
                                     </span>
                                 </div>
                             ))}
@@ -527,10 +514,10 @@ export default function PlatformSection() {
                     <div className="flex flex-col gap-8">
 
                         <div>
-                            <h3 className="text-sm font-800 uppercase tracking-widest text-[var(--gold-hover)] mb-2">
+                            <h3 className="text-sm md:text-base font-800 uppercase tracking-widest text-[var(--gold-hover)] mb-2">
                                 What Do You Get
                             </h3>
-                            <p className="text-sm text-[#64748B] font-bold mb-4">
+                            <p className="text-base text-[var(--gold-hover)] font-bold mb-4">
                                 Included with every seat.
                             </p>
                             <ul className="flex flex-col gap-3">
@@ -539,17 +526,17 @@ export default function PlatformSection() {
                                         <svg className="w-5 h-5 text-[var(--gold)] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                                         </svg>
-                                        <span className="text-[#0F172A] font-bold leading-snug">{item}</span>
+                                        <span className="text-[#0F172A] font-bold leading-snug text-base md:text-lg">{item}</span>
                                     </li>
                                 ))}
                             </ul>
                         </div>
 
                         <div>
-                            <h3 className="text-sm font-800 uppercase tracking-widest text-[var(--gold-hover)] mb-2">
+                            <h3 className="text-sm md:text-base font-800 uppercase tracking-widest text-[var(--gold-hover)] mb-2">
                                 Experience
                             </h3>
-                            <p className="text-sm text-[#64748B] font-bold mb-4">
+                            <p className="text-base text-[var(--gold-hover)] font-bold mb-4">
                                 Click any of these to try it right here.
                             </p>
 
@@ -574,8 +561,8 @@ export default function PlatformSection() {
                                             )}
                                         </span>
                                         <span className="flex-1 min-w-0">
-                                            <span className="block font-900 text-[#0F172A] leading-snug text-[15px]">{e.title}</span>
-                                            <span className="block text-[13px] text-[#64748B] font-bold leading-snug">{e.blurb}</span>
+                                            <span className="block font-900 text-[#0F172A] leading-snug text-base">{e.title}</span>
+                                            <span className="block text-sm text-[#475569] font-semibold leading-snug">{e.blurb}</span>
                                         </span>
                                     </button>
                                 ))}
@@ -599,7 +586,7 @@ export default function PlatformSection() {
                         indexLabel={`Quiz ${activeQuiz + 1} of ${QUIZZES.length}`}
                     />
                 )}
-                {openDemo === "slides" && <SlidesDemo />}
+                {openDemo === "slides" && <InteractiveSlides />}
                 {openDemo === "whiteboard" && <WhiteboardDemo />}
                 {openDemo === "casestudy" && <CaseStudyDemo />}
                 {openDemo === "labmentorship" && (
