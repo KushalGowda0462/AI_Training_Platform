@@ -21,6 +21,23 @@ const PIECES: { id: PieceId; label: string; note: string }[] = [
 
 const CORRECT: PieceId[] = ["ingress", "service", "pod"];
 
+/** Lets the learner wipe their attempt and try the arrangement again. */
+function RedoButton({ onClick, disabled }: { onClick: () => void; disabled: boolean }) {
+    return (
+        <button
+            onClick={onClick}
+            disabled={disabled}
+            className="ml-auto inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border-2 border-[#E7E2D8] bg-white text-xs font-800 text-[#475569] hover:border-[var(--gold)] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-colors shrink-0"
+        >
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 2v6h6" />
+                <path d="M3.51 15a9 9 0 102.13-9.36L3 8" />
+            </svg>
+            Redo
+        </button>
+    );
+}
+
 /* ── Slide 1: order the request path ── */
 
 function PathBuilder() {
@@ -37,6 +54,11 @@ function PathBuilder() {
             next[index] = id;
             return next;
         });
+        setHeld(null);
+    };
+
+    const redo = () => {
+        setSlots([null, null, null]);
         setHeld(null);
     };
 
@@ -99,9 +121,12 @@ function PathBuilder() {
 
     return (
         <div>
-            <p className="text-sm text-[#475569] font-semibold mb-4">
-                Drag each part into the path — or tap one, then tap a slot. The result below changes with what you build.
-            </p>
+            <div className="flex items-start gap-3 mb-4">
+                <p className="text-sm text-[#475569] font-semibold">
+                    Drag each part into the path — or tap one, then tap a slot. The result below changes with what you build.
+                </p>
+                <RedoButton onClick={redo} disabled={placed.length === 0} />
+            </div>
 
             {/* palette */}
             <div className="flex flex-wrap gap-2 mb-5">
@@ -193,10 +218,13 @@ function ReplicaBuilder() {
 
     return (
         <div>
-            <p className="text-sm text-[#475569] font-semibold mb-4">
-                Drag pods into the Service — or tap to add. Peak traffic is {PEAK.toLocaleString()} requests a minute and one pod
-                serves {CAPACITY}.
-            </p>
+            <div className="flex items-start gap-3 mb-4">
+                <p className="text-sm text-[#475569] font-semibold">
+                    Drag pods into the Service — or tap to add. Peak traffic is {PEAK.toLocaleString()} requests a minute and one
+                    pod serves {CAPACITY}.
+                </p>
+                <RedoButton onClick={() => setPods(0)} disabled={pods === 0} />
+            </div>
 
             <div className="flex flex-wrap gap-2 mb-4">
                 <button

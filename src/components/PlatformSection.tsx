@@ -196,42 +196,52 @@ function QuizDemo({ quiz, indexLabel }: { quiz: Quiz; indexLabel: string }) {
 
 function WhiteboardDemo() {
     const [step, setStep] = useState(0);
-    const [playing, setPlaying] = useState(true);
     const [muted, setMuted] = useState(false);
-    const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const [speaking, setSpeaking] = useState(false);
 
     /**
      * Voice over. Until a recorded narration track is supplied this uses the
-     * browser's own speech synthesis so the agent talks through the diagram as
-     * it draws. Swap in an <audio> track per step when the recording exists.
+     * browser's own speech synthesis. Each step is narrated in full — nothing
+     * advances on its own, so the learner moves with Previous and Next exactly
+     * as they would through a taught module.
      */
     const speak = (text: string) => {
-        if (muted) return;
         if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
         try {
             window.speechSynthesis.cancel();
+            if (muted) return;
             const u = new SpeechSynthesisUtterance(text);
             u.rate = 0.98;
             u.pitch = 1;
+            u.onstart = () => setSpeaking(true);
+            u.onend = () => setSpeaking(false);
+            u.onerror = () => setSpeaking(false);
             window.speechSynthesis.speak(u);
         } catch {
             /* narration is an enhancement — never break the diagram */
+            setSpeaking(false);
         }
     };
 
-    // narrate whichever step is on screen
+    // narrate whichever step is on screen, in full
     useEffect(() => {
         speak(BOARD_STEPS[step].caption);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [step]);
 
-    // stop talking when muted or when the modal closes
+    // toggling sound stops or starts the current step's narration
     useEffect(() => {
-        if (muted && typeof window !== "undefined" && "speechSynthesis" in window) {
+        if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+        if (muted) {
             window.speechSynthesis.cancel();
+            setSpeaking(false);
+        } else {
+            speak(BOARD_STEPS[step].caption);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [muted]);
 
+    // stop talking when the modal closes
     useEffect(() => {
         return () => {
             if (typeof window !== "undefined" && "speechSynthesis" in window) {
@@ -240,22 +250,8 @@ function WhiteboardDemo() {
         };
     }, []);
 
-    useEffect(() => {
-        if (!playing) return;
-        if (step >= BOARD_STEPS.length - 1) {
-            setPlaying(false);
-            return;
-        }
-        timer.current = setTimeout(() => setStep((s) => s + 1), 2600);
-        return () => {
-            if (timer.current) clearTimeout(timer.current);
-        };
-    }, [step, playing]);
-
-    const replay = () => {
-        setStep(0);
-        setPlaying(true);
-    };
+    const goPrev = () => setStep((n) => Math.max(0, n - 1));
+    const goNext = () => setStep((n) => Math.min(BOARD_STEPS.length - 1, n + 1));
 
     const show = (n: number) => (step >= n ? "opacity-100" : "opacity-0");
 
@@ -305,22 +301,31 @@ function WhiteboardDemo() {
 
             <div className={`${PANEL} p-4 mb-4 min-h-[68px]`}>
                 <p className="text-xs font-800 uppercase tracking-widest text-[var(--gold-hover)] mb-1.5">
-                    Instructor agent {playing ? "is drawing" : ""}
+                    Instructor agent {speaking ? "is speaking" : ""} · Step {step + 1} of {BOARD_STEPS.length}
                 </p>
                 <p className="text-sm text-[#475569] font-semibold leading-relaxed">{BOARD_STEPS[step].caption}</p>
             </div>
 
             <div className="flex items-center gap-3">
                 <button
-                    onClick={replay}
-                    className="px-5 py-2.5 rounded-xl border-2 border-[#E7E2D8] text-sm font-800 text-[#475569] bg-white hover:border-[var(--gold)] cursor-pointer transition-colors"
+                    onClick={goPrev}
+                    disabled={step === 0}
+                    className="px-5 py-2.5 rounded-xl border-2 border-[#E7E2D8] text-sm font-800 text-[#475569] bg-white hover:border-[var(--gold)] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-colors"
                 >
-                    Replay
+                    Previous
+                </button>
+                <button
+                    onClick={goNext}
+                    disabled={step === BOARD_STEPS.length - 1}
+                    className="btn-gold flex-1 justify-center py-2.5 text-sm font-800 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                >
+                    Next
                 </button>
                 <button
                     onClick={() => setMuted((m) => !m)}
                     aria-pressed={!muted}
-                    className="px-5 py-2.5 rounded-xl border-2 border-[#E7E2D8] text-sm font-800 text-[#475569] bg-white hover:border-[var(--gold)] cursor-pointer transition-colors inline-flex items-center gap-2"
+                    aria-label={muted ? "Turn voice on" : "Turn voice off"}
+                    className="px-4 py-2.5 rounded-xl border-2 border-[#E7E2D8] text-sm font-800 text-[#475569] bg-white hover:border-[var(--gold)] cursor-pointer transition-colors inline-flex items-center gap-2 shrink-0"
                 >
                     {muted ? (
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
@@ -333,7 +338,6 @@ function WhiteboardDemo() {
                             <path d="M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13" />
                         </svg>
                     )}
-                    {muted ? "Voice off" : "Voice on"}
                 </button>
             </div>
         </div>
