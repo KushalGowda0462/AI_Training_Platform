@@ -486,7 +486,7 @@ export default function PlatformSection() {
                             The whole journey, end to end.
                         </p>
 
-                        <div className="flex flex-col gap-4 flex-1 justify-between">
+                        <div className="flex flex-col gap-3">
                             {LEFT_POINTS.map((p, i) => (
                                 <div
                                     key={p.title}
