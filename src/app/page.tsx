@@ -123,7 +123,7 @@ export default function HomePage() {
     },
     {
       step: "04",
-      image: null, // awaiting artwork for this step
+      image: "/how-it-works/labs.png",
       title: "Practice in Real Labs",
       desc: "Learners work inside realistic infrastructure labs while the AI mentor provides step-by-step guidance and debugging support.",
     },
@@ -339,18 +339,14 @@ export default function HomePage() {
                       circle so the artwork reads as an icon set, not as
                       pasted-in pictures of different sizes. */}
                   <div className="mb-4">
-                    <div className="w-14 h-14 rounded-full overflow-hidden bg-[var(--gold)]/5 border border-[var(--gold)]/30 flex items-center justify-center shadow-[0_0_14px_rgba(169,128,42,0.10)] group-hover:border-[var(--gold)] transition-colors">
-                      {step.image ? (
-                        /* eslint-disable-next-line @next/next/no-img-element */
-                        <img
-                          src={step.image}
-                          alt=""
-                          className="w-full h-full object-contain p-1.5"
-                          draggable={false}
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-[var(--gold)]/10" />
-                      )}
+                    <div className="w-14 h-14 rounded-full bg-[var(--gold)]/5 border border-[var(--gold)]/30 flex items-center justify-center shadow-[0_0_14px_rgba(169,128,42,0.10)] group-hover:border-[var(--gold)] group-hover:bg-[var(--gold)]/10 transition-colors">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={step.image}
+                        alt=""
+                        className="w-9 h-9 object-contain"
+                        draggable={false}
+                      />
                     </div>
                   </div>
                   <h3 className="text-base font-800 text-[#0F172A] mb-2">{step.title}</h3>
