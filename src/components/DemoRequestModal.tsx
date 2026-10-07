@@ -2,6 +2,12 @@
 
 import { useState, FormEvent } from "react";
 import Modal from "@/components/Modal";
+import {
+  submitDemoRequest,
+  demoMailtoHref,
+  isDemoFormConfigured,
+  DEMO_RECIPIENTS,
+} from "@/lib/demoRequest";
 
 type FormData = {
   firstName: string;
@@ -57,7 +63,11 @@ export default function DemoRequestModal({ isOpen, onClose }: Props) {
     telephone: "",
     country: "",
   });
-  const [submitted, setSubmitted] = useState(false);
+  /** idle → sending → sent, or error if delivery failed. */
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [sendError, setSendError] = useState<string>("");
+  /** Spam trap — real people never fill this in. */
+  const [company, setCompany] = useState("");
   const [errors, setErrors] = useState<Partial<FormData>>({});
 
   const validate = (): boolean => {
@@ -92,10 +102,25 @@ export default function DemoRequestModal({ isOpen, onClose }: Props) {
     }
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (validate()) {
-      setSubmitted(true);
+    if (!validate()) return;
+    if (company) return; // honeypot tripped — drop it silently
+
+    setStatus("sending");
+    setSendError("");
+    try {
+      await submitDemoRequest(form);
+      setStatus("sent");
+    } catch (err) {
+      // Never show a thank-you we cannot stand behind.
+      setStatus("error");
+      setSendError(
+        isDemoFormConfigured()
+          ? "We could not send your request just now."
+          : "Demo requests are not connected yet."
+      );
+      console.error("Demo request failed:", err);
     }
   };
 
@@ -103,7 +128,9 @@ export default function DemoRequestModal({ isOpen, onClose }: Props) {
     onClose();
     // Reset after close animation
     setTimeout(() => {
-      setSubmitted(false);
+      setStatus("idle");
+      setSendError("");
+      setCompany("");
       setForm({ firstName: "", lastName: "", workEmail: "", jobRole: "", jobRoleOther: "", telephone: "", country: "" });
       setErrors({});
     }, 300);
@@ -111,7 +138,7 @@ export default function DemoRequestModal({ isOpen, onClose }: Props) {
 
   return (
     <Modal isOpen={isOpen} onClose={handleClose} title="Request an Enterprise Demo" size="lg">
-      {submitted ? (
+      {status === "sent" ? (
         /* ── Success state ── */
         <div className="flex flex-col items-center text-center py-8 gap-5">
           <div className="w-16 h-16 rounded-full bg-[var(--gold)]/10 border border-[var(--gold)]/30 flex items-center justify-center">
@@ -134,7 +161,7 @@ export default function DemoRequestModal({ isOpen, onClose }: Props) {
         </div>
       ) : (
         /* ── Form ── */
-        <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
+        <form onSubmit={handleSubmit} noValidate className="relative flex flex-col gap-5">
           <p className="text-[#64748B] text-sm leading-relaxed -mt-1">
             Fill in your details below and an Aurilearn specialist will be in touch to schedule your personalised demo.
           </p>
@@ -244,6 +271,35 @@ export default function DemoRequestModal({ isOpen, onClose }: Props) {
             </div>
           </div>
 
+          {/* Spam trap — hidden from people, tempting to bots */}
+          <input
+            type="text"
+            name="company"
+            value={company}
+            onChange={(e) => setCompany(e.target.value)}
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="absolute -left-[9999px] w-px h-px opacity-0"
+          />
+
+          {/* Delivery failed — say so, and give them a way through */}
+          {status === "error" && (
+            <div className="rounded-xl border-2 border-red-300 bg-red-50 p-4">
+              <p className="text-sm font-800 text-[#0F172A] mb-1">{sendError}</p>
+              <p className="text-sm text-[#475569] leading-relaxed">
+                Please email us directly at{" "}
+                <a
+                  href={demoMailtoHref(form)}
+                  className="font-bold text-[var(--gold-hover)] underline underline-offset-2"
+                >
+                  {DEMO_RECIPIENTS[0]}
+                </a>{" "}
+                and we will get straight back to you.
+              </p>
+            </div>
+          )}
+
           {/* Submit */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2 border-t border-[#E7E2D8] mt-1">
             <p className="text-xs text-[#94A3B8] leading-relaxed">
@@ -251,9 +307,22 @@ export default function DemoRequestModal({ isOpen, onClose }: Props) {
             </p>
             <button
               type="submit"
-              className="btn-gold px-8 py-2.5 text-sm font-bold shrink-0 w-full sm:w-auto justify-center"
+              disabled={status === "sending"}
+              className="btn-gold px-8 py-2.5 text-sm font-bold shrink-0 w-full sm:w-auto justify-center disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              Submit Request
+              {status === "sending" ? (
+                <>
+                  <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="3" opacity=".25" />
+                    <path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+                  </svg>
+                  Sending…
+                </>
+              ) : status === "error" ? (
+                "Try again"
+              ) : (
+                "Submit Request"
+              )}
             </button>
           </div>
         </form>
