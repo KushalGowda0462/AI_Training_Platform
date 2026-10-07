@@ -8,6 +8,8 @@ type FormData = {
   lastName: string;
   workEmail: string;
   jobRole: string;
+  /** Only used when jobRole is "Other" — we need a real role for every request. */
+  jobRoleOther: string;
   telephone: string;
   country: string;
 };
@@ -51,6 +53,7 @@ export default function DemoRequestModal({ isOpen, onClose }: Props) {
     lastName: "",
     workEmail: "",
     jobRole: "",
+    jobRoleOther: "",
     telephone: "",
     country: "",
   });
@@ -67,6 +70,8 @@ export default function DemoRequestModal({ isOpen, onClose }: Props) {
       newErrors.workEmail = "Please enter a valid email address.";
     }
     if (!form.jobRole) newErrors.jobRole = "Job role is required.";
+    if (form.jobRole === "Other" && !form.jobRoleOther.trim())
+      newErrors.jobRoleOther = "Please tell us your job role.";
     if (!form.telephone.trim()) {
       newErrors.telephone = "Telephone number is required.";
     } else if (!/^\+?[\d\s\-().]{7,20}$/.test(form.telephone)) {
@@ -99,7 +104,7 @@ export default function DemoRequestModal({ isOpen, onClose }: Props) {
     // Reset after close animation
     setTimeout(() => {
       setSubmitted(false);
-      setForm({ firstName: "", lastName: "", workEmail: "", jobRole: "", telephone: "", country: "" });
+      setForm({ firstName: "", lastName: "", workEmail: "", jobRole: "", jobRoleOther: "", telephone: "", country: "" });
       setErrors({});
     }, 300);
   };
@@ -185,6 +190,27 @@ export default function DemoRequestModal({ isOpen, onClose }: Props) {
               {JOB_ROLES.map((r) => <option key={r} value={r}>{r}</option>)}
             </select>
             {errors.jobRole && <p className="text-xs text-red-500 mt-0.5">{errors.jobRole}</p>}
+
+            {form.jobRole === "Other" && (
+              <div className="flex flex-col gap-1.5 mt-2">
+                <label className="text-xs font-bold text-[#475569] uppercase tracking-wide">
+                  Please specify your job role <span className="text-[var(--gold)]">*</span>
+                </label>
+                <input
+                  name="jobRoleOther"
+                  value={form.jobRoleOther}
+                  onChange={handleChange}
+                  autoFocus
+                  placeholder="e.g. Head of Technical Enablement"
+                  className={`w-full h-11 px-3.5 rounded-xl border text-sm text-[#0F172A] bg-white outline-none transition-all
+                    focus:ring-2 focus:ring-[var(--gold)]/30 focus:border-[var(--gold)]
+                    ${errors.jobRoleOther ? "border-red-400 ring-2 ring-red-100" : "border-[#E7E2D8] hover:border-[#C8BFA8]"}`}
+                />
+                {errors.jobRoleOther && (
+                  <p className="text-xs text-red-500 mt-0.5">{errors.jobRoleOther}</p>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Row 4 – Telephone & Country */}

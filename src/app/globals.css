@@ -117,12 +117,15 @@ body {
   position: relative;
 }
 
-/* Max width container */
+/* Max width container.
+   Sized to use the page the way Cisco and Palo Alto do — a wide content
+   band with slim gutters — rather than leaving deep empty margins. The
+   gutter grows with the viewport so it still breathes on large screens. */
 .container-content {
-  max-width: 1200px;
+  max-width: 1680px;
   margin: 0 auto;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  padding-left: clamp(1.25rem, 4vw, 3.5rem);
+  padding-right: clamp(1.25rem, 4vw, 3.5rem);
 }
 
 /* Gold divider */
