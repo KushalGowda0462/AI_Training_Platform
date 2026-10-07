@@ -335,20 +335,23 @@ export default function HomePage() {
                     <div className="hidden lg:block absolute top-[44px] -right-3 w-6 h-[2px] bg-[#E7E2D8] z-10" />
                   )}
                   <div className="text-xs font-bold text-[var(--gold)] tracking-widest mb-3 uppercase">{step.step}</div>
-                  <div className="h-20 mb-4 flex items-center">
-                    {step.image ? (
-                      /* eslint-disable-next-line @next/next/no-img-element */
-                      <img
-                        src={step.image}
-                        alt=""
-                        className="h-20 w-auto object-contain"
-                        draggable={false}
-                      />
-                    ) : (
-                      /* No artwork supplied for this step yet — a neutral gold
-                         frame keeps the row uniform until one arrives. */
-                      <div className="h-16 w-16 rounded-xl border-2 border-dashed border-[var(--gold)]/40 bg-[var(--gold)]/5" />
-                    )}
+                  {/* Icon badge — every step gets the same 56px gold-ringed
+                      circle so the artwork reads as an icon set, not as
+                      pasted-in pictures of different sizes. */}
+                  <div className="mb-4">
+                    <div className="w-14 h-14 rounded-full overflow-hidden bg-[var(--gold)]/5 border border-[var(--gold)]/30 flex items-center justify-center shadow-[0_0_14px_rgba(169,128,42,0.10)] group-hover:border-[var(--gold)] transition-colors">
+                      {step.image ? (
+                        /* eslint-disable-next-line @next/next/no-img-element */
+                        <img
+                          src={step.image}
+                          alt=""
+                          className="w-full h-full object-contain p-1.5"
+                          draggable={false}
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-[var(--gold)]/10" />
+                      )}
+                    </div>
                   </div>
                   <h3 className="text-base font-800 text-[#0F172A] mb-2">{step.title}</h3>
                   <p className="text-sm text-[#64748B] leading-relaxed">{step.desc}</p>
