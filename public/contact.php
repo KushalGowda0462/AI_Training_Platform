@@ -18,11 +18,6 @@ $RECIPIENTS = [
     'Arjun@aurilearn.ai',
     'Rashmi@aurilearn.ai',
     'vijay@aurilearn.ai',
-
-    /* TEMPORARY — added so delivery can be verified without access to the
-       four inboxes above. Remove once a test email has been confirmed as
-       received. */
-    'jathin@dctech.cloud',
 ];
 
 /* The address mail is sent FROM. Must be on this domain or the host's
