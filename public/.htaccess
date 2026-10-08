@@ -1,0 +1,2 @@
+# Apache (e.g. GoDaddy) — make sure the whiteboard voiceover clips are served as audio.
+AddType audio/mp4 .m4a
