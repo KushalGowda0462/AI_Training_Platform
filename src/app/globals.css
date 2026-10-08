@@ -95,9 +95,30 @@ body {
   padding-bottom: 5rem;
 }
 
-/* Full-screen panel — for scroll-snap sections */
+/* ── 12 column grid ────────────────────────────────────────────────
+   The page is laid out on one 12 column grid. Children take spans with
+   Tailwind's col-span-* so every section lines up on the same columns. */
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(1rem, 2vw, 2rem);
+  row-gap: clamp(1rem, 2vw, 2rem);
+  width: 100%;
+}
+
+/* The navbar is fixed and 5rem tall, so a section scrolled to by an
+   anchor must stop 5rem early or its top hides underneath it. */
+section[id] {
+  /* navbar is 5rem plus its 1px bottom border */
+  scroll-margin-top: calc(5rem + 1px);
+}
+
+/* Full-screen panel — for scroll-snap sections.
+   Height excludes the fixed navbar so a whole section fits on screen
+   when you jump to it from the menu. svh keeps mobile browser chrome
+   from pushing content out of view. */
 .snap-section {
-  min-height: 100vh;
+  min-height: calc(100svh - 5rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -109,12 +130,37 @@ body {
 /* Tall content panel — like .snap-section but free to grow.
    Used by the Platform section, whose content is taller than one screen. */
 .section-tall {
-  min-height: 100vh;
+  min-height: calc(100svh - 5rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
   scroll-snap-align: start;
   position: relative;
+}
+
+/* Short laptops (1366x768 and similar) have roughly 690px of usable height
+   once the navbar is accounted for. Tighten the Platform section there so
+   the last Experience tile still lands on screen when you jump to it from
+   the menu, rather than being cut off. */
+@media (max-height: 820px) {
+  #platform > .container-content {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+  #platform > .container-content > div:first-child {
+    margin-bottom: 1rem;
+  }
+  #platform h2 {
+    font-size: 1.75rem;
+  }
+  #platform .grid-12 {
+    row-gap: 1rem;
+  }
+  #platform button,
+  #platform li {
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+  }
 }
 
 /* Max width container.

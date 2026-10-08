@@ -20,6 +20,7 @@ export const DEMO_RECIPIENTS = [
     "James@aurilearn.ai",
     "Arjun@aurilearn.ai",
     "Rashmi@aurilearn.ai",
+    "vijay@aurilearn.ai",
 ] as const;
 
 const ENDPOINT = process.env.NEXT_PUBLIC_DEMO_FORM_ENDPOINT ?? "";
