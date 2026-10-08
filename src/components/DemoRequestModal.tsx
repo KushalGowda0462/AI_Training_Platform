@@ -5,7 +5,6 @@ import Modal from "@/components/Modal";
 import {
   submitDemoRequest,
   demoMailtoHref,
-  isDemoFormConfigured,
   FALLBACK_CONTACT,
 } from "@/lib/demoRequest";
 
@@ -110,15 +109,15 @@ export default function DemoRequestModal({ isOpen, onClose }: Props) {
     setStatus("sending");
     setSendError("");
     try {
-      await submitDemoRequest(form);
+      await submitDemoRequest(form, company);
       setStatus("sent");
     } catch (err) {
       // Never show a thank-you we cannot stand behind.
       setStatus("error");
       setSendError(
-        isDemoFormConfigured()
-          ? "We could not send your request just now."
-          : "Demo requests are not connected yet."
+        err instanceof Error && err.message
+          ? err.message
+          : "We could not send your request just now."
       );
       console.error("Demo request failed:", err);
     }
