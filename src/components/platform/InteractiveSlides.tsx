@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
+import DemoNav from "@/components/platform/DemoNav";
 import { SLIDE_DECK, SLIDE_LOOP, SLIDE_COURSE, type SlideKey } from "@/components/platform/content";
 
 /**
@@ -248,7 +249,7 @@ function LineChart({
 /** The live verdict, written by the instructor agent from the current state. */
 function AgentNote({ tone, headline, children }: { tone: Tone; headline: string; children: ReactNode }) {
     return (
-        <div className={`rounded-xl border-2 p-3.5 ${TONE_PANEL[tone]}`}>
+        <div className={`mt-auto rounded-xl border-2 p-3.5 md:min-h-[150px] ${TONE_PANEL[tone]}`}>
             <p className="text-[11px] font-800 uppercase tracking-widest text-[var(--gold-hover)] mb-1">Instructor agent</p>
             <p className="text-[15px] font-900 text-[#0F172A] mb-1 leading-snug">{headline}</p>
             <p className="text-[13px] text-[#475569] font-semibold leading-relaxed">{children}</p>
@@ -259,7 +260,7 @@ function AgentNote({ tone, headline, children }: { tone: Tone; headline: string;
 /** Controls on the left, outcome on the right; stacks on small screens. */
 function SimLayout({ controls, outcome }: { controls: ReactNode; outcome: ReactNode }) {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-4">
+        <div className="flex-1 grid grid-cols-1 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-4">
             <div className="rounded-xl border border-[#E7E2D8] bg-[#FAFAF8] p-4 flex flex-col gap-4">
                 <p className="text-[11px] font-800 uppercase tracking-widest text-[var(--gold-hover)] -mb-1">Change parameters</p>
                 {controls}
@@ -830,8 +831,10 @@ const SIMULATORS: Record<SlideKey, () => ReactNode> = {
 
 export default function InteractiveSlides() {
     const [index, setIndex] = useState(0);
-    const [resets, setResets] = useState(0);
-    const slide = SLIDE_DECK[index];
+    // one reset counter per slide, so resetting one slide leaves the others as they are
+    const [resets, setResets] = useState<number[]>(() => SLIDE_DECK.map(() => 0));
+
+    const reset = () => setResets((r) => r.map((n, i) => (i === index ? n + 1 : n)));
 
     return (
         <div>
@@ -857,18 +860,9 @@ export default function InteractiveSlides() {
                 <span className="ml-auto text-xs font-800 text-[#64748B]">
                     Slide {index + 1} of {SLIDE_DECK.length}
                 </span>
-            </div>
-
-            <div className="flex items-start gap-3 mb-3">
-                <div className="min-w-0">
-                    <p className="text-[11px] font-800 uppercase tracking-widest text-[var(--gold-hover)] mb-0.5">
-                        NVIDIA INFRA · {slide.where}
-                    </p>
-                    <h4 className="text-xl font-900 text-[#0F172A] leading-snug">{slide.title}</h4>
-                </div>
                 <button
-                    onClick={() => setResets((n) => n + 1)}
-                    className="ml-auto inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border-2 border-[#E7E2D8] bg-white text-xs font-800 text-[#475569] hover:border-[var(--gold)] cursor-pointer transition-colors shrink-0"
+                    onClick={reset}
+                    className="ml-2 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border-2 border-[#E7E2D8] bg-white text-xs font-800 text-[#475569] hover:border-[var(--gold)] cursor-pointer transition-colors shrink-0"
                 >
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M3 2v6h6" />
@@ -878,30 +872,39 @@ export default function InteractiveSlides() {
                 </button>
             </div>
 
-            <div className="mb-3" key={`${slide.key}-${resets}`}>
-                {SIMULATORS[slide.key]()}
+            {/*
+             * Every slide sits in the same grid cell, with only the current one
+             * visible. The box therefore always takes the height of the tallest
+             * slide, so it is the same size on every slide and the Previous /
+             * Next buttons never move.
+             */}
+            <div className="grid mb-4">
+                {SLIDE_DECK.map((s, i) => (
+                    <div
+                        key={`${s.key}-${resets[i]}`}
+                        className={`[grid-area:1/1] min-w-0 flex flex-col ${i === index ? "" : "invisible"}`}
+                        aria-hidden={i !== index}
+                        inert={i !== index}
+                    >
+                        <p className="text-[11px] font-800 uppercase tracking-widest text-[var(--gold-hover)] mb-0.5">
+                            NVIDIA INFRA · {s.where}
+                        </p>
+                        <h4 className="text-xl font-900 text-[#0F172A] leading-snug mb-3">{s.title}</h4>
+                        <div className="mb-3 flex-1 flex flex-col">{SIMULATORS[s.key]()}</div>
+                        <p className="text-[13px] text-[#64748B] font-semibold">
+                            <span className="font-900 text-[#0F172A]">The trade-off it teaches: </span>
+                            {s.why}
+                        </p>
+                    </div>
+                ))}
             </div>
 
-            <p className="text-[13px] text-[#64748B] font-semibold mb-4">
-                <span className="font-900 text-[#0F172A]">The trade-off it teaches: </span>
-                {slide.why}
-            </p>
-
-            <div className="flex items-center gap-3">
-                <button
-                    onClick={() => setIndex((i) => Math.max(0, i - 1))}
-                    disabled={index === 0}
-                    className="px-5 py-2.5 rounded-xl border-2 border-[#E7E2D8] text-sm font-800 text-[#475569] bg-white hover:border-[var(--gold)] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-colors"
-                >
-                    Back
-                </button>
-                <button
-                    onClick={() => setIndex((i) => (i + 1) % SLIDE_DECK.length)}
-                    className="btn-gold flex-1 justify-center py-2.5 text-sm font-800 cursor-pointer"
-                >
-                    {index === SLIDE_DECK.length - 1 ? "Start again" : "Next slide"}
-                </button>
-            </div>
+            <DemoNav
+                onPrev={() => setIndex((i) => Math.max(0, i - 1))}
+                onNext={() => setIndex((i) => (i + 1) % SLIDE_DECK.length)}
+                prevDisabled={index === 0}
+                nextLabel={index === SLIDE_DECK.length - 1 ? "Start again" : "Next"}
+            />
 
             <p className="text-[11px] font-bold text-[#94A3B8] text-center mt-3">
                 {SLIDE_DECK.length} of {SLIDE_COURSE.experiences} interactive experiences across the {SLIDE_COURSE.modules} modules of the

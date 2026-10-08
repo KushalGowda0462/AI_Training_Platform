@@ -10,7 +10,7 @@
  *                       → back to 1 on each click. Any number of questions
  *                       per quiz works; 5 each is what is here now.
  *   2. SLIDE_DECK     — the five NVIDIA INFRA simulators shown as slides.
- *   3. BOARD_STEPS    — the live whiteboarding sequence, one caption per step.
+ *   3. BOARD / BOARD_STEPS — the live whiteboarding sequence, one caption per step.
  *   4. CASE_STUDIES   — the NVIDIA INFRA case studies and scenarios.
  *   5. VIDEO_SOURCES  — the three 1 minute clips. Drop the files in /public
  *                       and point each entry at them.
@@ -360,13 +360,39 @@ export const SLIDE_LOOP = ["Change parameters", "Experiment", "Observe the outco
 /** The full course, for the line under the deck. */
 export const SLIDE_COURSE = { experiences: 29, modules: 8 };
 
-/** ── 3. Live whiteboarding sequence ─────────────────────────────────── */
+/** ── 3. Live whiteboarding ─────────────────────────────────────────────
+ *
+ * The learner asks the agent to explain something on the whiteboard and it
+ * draws the diagram one piece at a time, narrating each step. The diagram
+ * itself is drawn in WhiteboardDemo; each step here reveals one more part.
+ */
+export const BOARD = {
+    title: "Logical Storage Hierarchy",
+    question: "Can you explain that using the whiteboard?",
+    reply: "Let me draw that out so you can see it.",
+};
+
 export const BOARD_STEPS = [
-    { caption: "Let us draw the request path. Start with the user." },
-    { caption: "Traffic hits the Ingress first — TLS ends here." },
-    { caption: "The Ingress forwards to a Service on its virtual IP." },
-    { caption: "The Service load balances across the ready pods." },
-    { caption: "If a pod fails its readiness probe it drops out of the set." },
+    {
+        caption:
+            "We start at the top, with the application servers. These are the hosts that need storage, but they never touch a disk directly.",
+    },
+    {
+        caption:
+            "The servers access a Storage Virtual Machine. The SVM is what serves their data over NFS, SMB or iSCSI, and it keeps each tenant's data separate.",
+    },
+    {
+        caption:
+            "Down at the hardware level are the physical disks. They are grouped into an aggregate, which is simply a pool of raw capacity.",
+    },
+    {
+        caption:
+            "On top of the aggregate we create FlexVol volumes. These are the logical containers the SVM manages, and they can grow or shrink without touching the disks.",
+    },
+    {
+        caption:
+            "Inside each volume your data is stored as data blocks. So servers access the SVM, the SVM manages volumes, and volumes live on aggregates built from disks.",
+    },
 ];
 
 /** ── 4. Case studies ────────────────────────────────────────────────────
