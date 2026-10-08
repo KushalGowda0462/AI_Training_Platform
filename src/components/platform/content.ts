@@ -9,9 +9,9 @@
  *   1. QUIZZES        — 5 quizzes. The tile rotates Quiz 1 → 2 → 3 → 4 → 5
  *                       → back to 1 on each click. Any number of questions
  *                       per quiz works; 5 each is what is here now.
- *   2. SLIDE_DECK     — the interactive slide content.
+ *   2. SLIDE_DECK     — the five NVIDIA INFRA simulators shown as slides.
  *   3. BOARD_STEPS    — the live whiteboarding sequence, one caption per step.
- *   4. CASE_STAGES    — the case study walkthrough.
+ *   4. CASE_STUDIES   — the NVIDIA INFRA case studies and scenarios.
  *   5. VIDEO_SOURCES  — the three 1 minute clips. Drop the files in /public
  *                       and point each entry at them.
  *
@@ -303,36 +303,62 @@ export const QUIZZES: Quiz[] = [
     },
 ];
 
-/** ── 2. Interactive slides ──────────────────────────────────────────── */
-export const SLIDE_DECK = [
+/** ── 2. Interactive slides ──────────────────────────────────────────────
+ *
+ * From the NVIDIA INFRA course: the five experiences recommended for the
+ * website, out of 29 across 8 modules. Each one is a working simulator in
+ * InteractiveSlides.tsx; the text around it lives here. The order is the
+ * order of the deck, so "Why 64 GPUs Don't Give 64x" opens it.
+ */
+export type SlideKey = "scaling" | "timeslicing" | "bottleneck" | "egress" | "storage";
+
+export type SlideInfo = {
+    key: SlideKey;
+    title: string;
+    /** where it sits in the course */
+    where: string;
+    /** why it was shortlisted — shown under the simulator */
+    why: string;
+};
+
+export const SLIDE_DECK: SlideInfo[] = [
     {
-        title: "How a request reaches your pod",
-        body: "Traffic does not go straight to a container. It passes through three hops, each of which can be the thing that is broken.",
-        hotspots: [
-            { label: "Ingress", detail: "Terminates TLS and matches the host and path, then forwards to a Service." },
-            { label: "Service", detail: "Holds a stable virtual IP and load balances across whichever pods are currently ready." },
-            { label: "Pod", detail: "Your container. If its readiness probe fails it is quietly removed from the Service." },
-        ],
+        key: "scaling",
+        title: "Why 64 GPUs don't give 64x",
+        where: "Module 2 · Lesson 5",
+        why: "Adding more GPUs does not always mean the same increase in performance.",
     },
     {
-        title: "Where deployments usually go wrong",
-        body: "Click each item to see what the symptom looks like in practice.",
-        hotspots: [
-            { label: "Image pull", detail: "ErrImagePull or ImagePullBackOff — wrong tag, private registry, or a missing pull secret." },
-            { label: "Resources", detail: "The pod stays Pending because no node has enough CPU or memory left to fit the request." },
-            { label: "Probes", detail: "The pod runs but never goes Ready, so the Service has no endpoints and traffic 503s." },
-        ],
+        key: "timeslicing",
+        title: "GPU time-slicing latency simulator",
+        where: "Module 5 · Lesson 2",
+        why: "Sharing a GPU can affect application performance.",
     },
     {
-        title: "Rolling updates in one picture",
-        body: "A rolling update replaces pods gradually. maxUnavailable and maxSurge decide how gradually.",
-        hotspots: [
-            { label: "maxSurge", detail: "How many extra pods may exist above the desired count during the rollout." },
-            { label: "maxUnavailable", detail: "How many pods may be missing at once. Set it to 0 for a zero-downtime rollout." },
-            { label: "Rollback", detail: "kubectl rollout undo returns to the previous ReplicaSet if the new pods never become ready." },
-        ],
+        key: "bottleneck",
+        title: "Diagnosing GPU bottlenecks",
+        where: "Module 2 · Lesson 6",
+        why: "Change the key inputs and see where the performance bottleneck moves.",
+    },
+    {
+        key: "egress",
+        title: "Data gravity and egress cost",
+        where: "Module 8 · Lesson 3",
+        why: "Data placement and architecture choices directly raise or cut cost.",
+    },
+    {
+        key: "storage",
+        title: "Storage architecture bottlenecks",
+        where: "Module 6 · Lesson 1",
+        why: "Storage performance can become the bottleneck for GPU workloads.",
     },
 ];
+
+/** Shown on every slide: what an interactive slide is for. */
+export const SLIDE_LOOP = ["Change parameters", "Experiment", "Observe the outcome", "Understand the trade-off"];
+
+/** The full course, for the line under the deck. */
+export const SLIDE_COURSE = { experiences: 29, modules: 8 };
 
 /** ── 3. Live whiteboarding sequence ─────────────────────────────────── */
 export const BOARD_STEPS = [
@@ -343,27 +369,334 @@ export const BOARD_STEPS = [
     { caption: "If a pod fails its readiness probe it drops out of the set." },
 ];
 
-/** ── 4. Case study walkthrough ──────────────────────────────────────── */
-export const CASE_STAGES = [
+/** ── 4. Case studies ────────────────────────────────────────────────────
+ *
+ * From the NVIDIA INFRA course: five real-world case studies, each walked
+ * through in stages, and four shorter scenarios from the review exercises
+ * that set a problem for the learner rather than report an outcome.
+ */
+export type CasePoint = { lead?: string; text: string };
+
+export type CaseStage = {
+    heading: string;
+    body?: string;
+    points?: CasePoint[];
+};
+
+export type CaseStudy = {
+    id: string;
+    kind: "case" | "scenario";
+    /** short label for the picker */
+    short: string;
+    title: string;
+    domain: string;
+    stages: CaseStage[];
+    tech: string[];
+};
+
+export const CASE_STUDIES: CaseStudy[] = [
     {
-        heading: "The situation",
-        body: "A retailer rolls out a new version of its checkout service at 09:40 on a Friday. The rollout reports success. Within four minutes the support queue fills with customers seeing errors at payment.",
+        id: "1",
+        kind: "case",
+        short: "HIPAA platform",
+        title: "Building a HIPAA-compliant AI training platform",
+        domain: "Healthcare AI (HIPAA-regulated)",
+        stages: [
+            {
+                heading: "The challenge",
+                body: "A healthcare AI company needs to train models on around 500 TB of CT scans. All of it is protected health information (PHI) and must be processed in the United States only. Under HIPAA any provider handling PHI must sign a Business Associate Agreement (BAA), and the environment needs encryption at rest and in transit, plus audit controls. The public cloud is the quick route to GPUs, but moving the dataset for each training cycle would cost more than $45K in egress.",
+            },
+            {
+                heading: "The infrastructure decision",
+                points: [
+                    { lead: "Keep PHI on dedicated hardware.", text: "Training runs on an on-premises H100 cluster in a HIPAA-compliant colocation facility." },
+                    { lead: "Use the cloud only where it is safe to.", text: "A BAA is signed with one provider, used for de-identified data only." },
+                    { lead: "Draw a clear compliance boundary.", text: "Identified patient data stays inside it; only de-identified data leaves." },
+                    { lead: "Model cost after the constraints.", text: "The cost comparison is made once compliance has narrowed the options, egress included." },
+                ],
+            },
+            {
+                heading: "What engineers learn",
+                points: [
+                    { text: "Translating HIPAA requirements (BAA, encryption, audit controls) into infrastructure requirements" },
+                    { text: "Separating PHI from de-identified data and placing each in the right environment" },
+                    { text: "Including data egress in GPU workload placement decisions" },
+                    { text: "Comparing on-premises colocation with cloud using a TCO model" },
+                    { text: "Designing a hybrid architecture around a compliance boundary" },
+                ],
+            },
+            {
+                heading: "Outcome",
+                points: [
+                    { lead: "75%", text: "lower training cost than the cloud alternative" },
+                    { lead: "100%", text: "of the data kept inside the HIPAA boundary" },
+                    { lead: "Passed", text: "the annual HIPAA audit" },
+                ],
+            },
+            {
+                heading: "Key takeaway",
+                body: "For regulated AI workloads, compliance can determine the infrastructure architecture.",
+            },
+        ],
+        tech: ["H100", "HIPAA", "PHI", "BAA", "HIPAA-compliant colocation", "Hybrid cloud", "Data egress", "TCO"],
     },
     {
-        heading: "What you can see",
-        body: "All pods show Running. CPU and memory look normal. The Service has endpoints. The only odd signal is that the error rate climbed the moment the new ReplicaSet scaled up.",
+        id: "2",
+        kind: "case",
+        short: "Global media demand",
+        title: "Scaling AI infrastructure for global media demand",
+        domain: "Global media platform, content recommendation",
+        stages: [
+            {
+                heading: "The challenge",
+                body: "A global media platform retrains its recommendation models every six hours. Most of the time the load is steady. During major events, such as sports fixtures and release days, demand climbs to around 10 times the average. Sizing on-premises for those peaks would leave most of the cluster idle for the rest of the year; running everything in the cloud on-demand means paying premium rates for the steady baseline too.",
+            },
+            {
+                heading: "The infrastructure decision",
+                points: [
+                    { lead: "Own the baseline.", text: "An on-premises cluster is sized for the predictable six-hour retraining cycle, so it stays busy." },
+                    { lead: "Rent the peaks.", text: "A cloud Spot fleet absorbs the burst capacity needed for major events." },
+                    { lead: "Scale on real demand.", text: "Auto-scaling is triggered by queue depth, so cloud capacity is added only when work is waiting." },
+                    { lead: "Treat it as one hybrid system.", text: "On-premises and cloud work together in a hybrid burst pattern, not as two platforms." },
+                ],
+            },
+            {
+                heading: "What engineers learn",
+                points: [
+                    { text: "Separating predictable baseline demand from peak demand" },
+                    { text: "Capacity planning for an on-premises GPU baseline" },
+                    { text: "Using cloud Spot capacity for burst workloads" },
+                    { text: "Configuring Kubernetes auto-scaling to burst to Spot instances" },
+                    { text: "Comparing a hybrid model against all-cloud on-demand" },
+                ],
+            },
+            {
+                heading: "Outcome",
+                points: [
+                    { lead: "95%", text: "utilisation on the on-premises baseline cluster" },
+                    { lead: "Peaks", text: "handled without permanently owned hardware" },
+                    { lead: "60%", text: "lower cost than all-cloud on-demand" },
+                ],
+            },
+            {
+                heading: "Key takeaway",
+                body: "Don't build permanent infrastructure for temporary demand.",
+            },
+        ],
+        tech: ["Hybrid cloud", "On-prem baseline", "Spot instances", "Queue-depth autoscaling", "Kubernetes", "Capacity planning", "Cost optimisation"],
     },
     {
-        heading: "The question put to you",
-        body: "Everything reports healthy and yet customers are failing at payment. Where do you look next, and why would a passing health check still let broken traffic through?",
+        id: "3",
+        kind: "case",
+        short: "1,024-GPU foundation model",
+        title: "Training a foundation model with 1,024 GPUs",
+        domain: "Autonomous vehicle startup",
+        stages: [
+            {
+                heading: "The challenge",
+                body: "An autonomous vehicle startup needs to train a foundation model on 1,024 H100 GPUs for six weeks. Buying a cluster that size would mean more than $50M in capital expenditure, for a one-time run with no workload to keep the hardware busy afterwards. The run still needs high-performance networking and protection against interruptions.",
+            },
+            {
+                heading: "The infrastructure decision",
+                points: [
+                    { lead: "Go cloud-native.", text: "A fleet of AWS p5.48xlarge instances bought on Spot." },
+                    { lead: "Use EFA networking.", text: "To support distributed training across the full cluster." },
+                    { lead: "Reserve nothing.", text: "The cluster is transient and exists for the six-week run only." },
+                    { lead: "Tear it down afterwards.", text: "Checkpointing is built in because Spot capacity can be interrupted." },
+                ],
+            },
+            {
+                heading: "What engineers learn",
+                points: [
+                    { text: "Comparing CapEx and OpEx for a transient workload" },
+                    { text: "Evaluating purchase, on-demand, 3-year reserved and Spot for one large run" },
+                    { text: "Using Spot with checkpointing every 500 steps for fault tolerance" },
+                    { text: "Using EFA networking for large-scale distributed training" },
+                    { text: "Using workload duration as a deciding factor in infrastructure choice" },
+                ],
+            },
+            {
+                heading: "Outcome",
+                points: [
+                    { lead: "60%", text: "discount against on-demand pricing by using Spot" },
+                    { lead: "Dissolved", text: "the cluster once the run completed" },
+                    { lead: "$0", text: "ongoing hardware maintenance or staffing cost" },
+                ],
+            },
+            {
+                heading: "Key takeaway",
+                body: "The right infrastructure model depends on workload characteristics and duration. For one-time or infrequent large-scale runs, cloud is almost always correct: CapEx for transient capacity is not justified.",
+            },
+        ],
+        tech: ["H100", "AWS p5.48xlarge", "Spot instances", "EFA", "Checkpointing", "CapEx vs OpEx", "Distributed training", "Transient clusters"],
     },
     {
-        heading: "How the agent works it through with you",
-        body: "A liveness probe only proves the process is alive. This deployment had no readiness probe, so pods joined the Service before the payment provider connection pool had warmed. Traffic arrived a few seconds too early and failed. The fix is a readiness probe on a real dependency check plus maxUnavailable set to 0.",
+        id: "4",
+        kind: "case",
+        short: "GDPR residency",
+        title: "Designing GDPR-compliant AI infrastructure",
+        domain: "EU financial services, AI fraud detection",
+        stages: [
+            {
+                heading: "The challenge",
+                body: "An EU financial services firm trains fraud detection models on personal data that GDPR requires to stay within the EU. The firm is headquartered in the US and runs on AWS. Choosing an EU region is only a start: the team must make sure the data cannot be read, decrypted or processed outside the EU, and prove it to an auditor. Fines can reach 4% of global annual turnover.",
+            },
+            {
+                heading: "The infrastructure decision",
+                points: [
+                    { lead: "EU region for all training.", text: "Workloads run in AWS eu-west-1." },
+                    { lead: "Isolation and keys.", text: "AWS-native regional and access controls with dedicated KMS keys." },
+                    { lead: "Contractual guarantee.", text: "The Data Processing Agreement includes an EU data residency clause." },
+                    { lead: "Enforced across four layers.", text: "Classification at ingest, region-locked storage, OPA Gatekeeper admission control that rejects EU-data pods without an EU node selector, and immutable audit logs." },
+                ],
+            },
+            {
+                heading: "What engineers learn",
+                points: [
+                    { text: "Mapping GDPR requirements to specific technical controls" },
+                    { text: "Locking data to a region with bucket policies and KMS key locality" },
+                    { text: "Enforcing GPU workload placement with node affinity and OPA Gatekeeper" },
+                    { text: "Restricting data paths with Kubernetes network policy" },
+                    { text: "Where contractual controls (the DPA) fit alongside technical ones" },
+                ],
+            },
+            {
+                heading: "Outcome",
+                points: [
+                    { lead: "Maintained", text: "GDPR compliance" },
+                    { lead: "0", text: "data transfers outside the EU in the annual audit" },
+                    { lead: "EU only", text: "every training run" },
+                ],
+            },
+            {
+                heading: "Key takeaway",
+                body: "Data residency must be enforced throughout the AI infrastructure stack, not simply by selecting an EU cloud region.",
+            },
+        ],
+        tech: ["GDPR", "EU data residency", "AWS eu-west-1", "KMS", "VPC Service Controls", "Node affinity", "Network policy", "OPA Gatekeeper", "Audit logging", "DPA"],
     },
     {
-        heading: "What you take away",
-        body: "Healthy is not the same as ready. You will be asked to apply the same reasoning to a different service in the next lab, and the agent will not give you the answer until you have tried.",
+        id: "5",
+        kind: "case",
+        short: "70B run recovery",
+        title: "Recovering a 70B LLM training run after failure",
+        domain: "Large language model training",
+        stages: [
+            {
+                heading: "The challenge",
+                body: "A team is training a 70B parameter LLM with FSDP (ZeRO-3) across 64 GPUs. At step 8,000 MLflow shows the loss diverging. They need to return to the last good checkpoint at step 7,500 and carry on without restarting. A full checkpoint is about 700 GB (140 GB of BF16 weights plus 560 GB of optimizer state), sharded across 64 ranks. A traditional torch.save gathers it to one rank and stalls every GPU for about 28 seconds.",
+            },
+            {
+                heading: "The infrastructure decision",
+                points: [
+                    { lead: "Checkpoint in parallel.", text: "torch.distributed.checkpoint has each rank save its own ~10.9 GB shard: 2.2 seconds instead of 28, 12.7x faster." },
+                    { lead: "Tier the storage.", text: "Write to NVMe-oF synchronously, upload to S3 (MinIO or StorageGRID) asynchronously, keep the last three locally." },
+                    { lead: "Track lineage in MLflow.", text: "Parameters, metrics, git commit and checkpoint URI, referenced rather than uploaded." },
+                    { lead: "Recover by lookup, not by search.", text: "Query MLflow for the URI; DCP restores state across all 64 ranks." },
+                    { lead: "Choose frequency deliberately.", text: "Every 500 to 2,000 steps. At 500 steps and 2 s a step, a failure costs about 17 minutes." },
+                ],
+            },
+            {
+                heading: "What engineers learn",
+                points: [
+                    { text: "Sizing checkpoints for large models (weights plus optimizer state)" },
+                    { text: "Shard-per-rank saving and loading with torch.distributed.checkpoint" },
+                    { text: "Balancing checkpoint frequency against recovery cost" },
+                    { text: "Tiered checkpoint storage with NVMe-oF and S3" },
+                    { text: "Making runs reproducible by logging parameters and git commits" },
+                ],
+            },
+            {
+                heading: "Outcome",
+                points: [
+                    { lead: "~2.2 s", text: "to restore all 64 ranks once MLflow gives the checkpoint URI" },
+                    { lead: "Seconds", text: "to resume from the last good checkpoint, not a multi-hour restart" },
+                    { lead: "~22 min", text: "of GPU time saved per checkpoint cycle at a 500-step frequency" },
+                ],
+            },
+            {
+                heading: "Key takeaway",
+                body: "Production AI infrastructure must be designed not only to run workloads, but also to recover them quickly when things go wrong.",
+            },
+        ],
+        tech: ["70B LLM", "FSDP / ZeRO-3", "torch.distributed.checkpoint", "MLflow", "Artifact lineage", "S3 / MinIO / StorageGRID", "NVMe-oF", "Checkpointing"],
+    },
+    {
+        id: "A",
+        kind: "scenario",
+        short: "GPU bottleneck",
+        title: "GPU performance bottleneck",
+        domain: "Review exercise",
+        stages: [
+            {
+                heading: "Engineering challenge",
+                body: "A 64-GPU training cluster is I/O-bound. GPU utilisation sits at 45% because the DataLoader keeps stalling. The team is choosing between VAST Data (all-NVMe, higher CAPEX), Weka.io (NVMe-oF native, mid CAPEX) and a NAS/NFS system with SSD cache (lower CAPEX).",
+            },
+            {
+                heading: "You must determine",
+                body: "How much the idle GPU hours cost each month, and whether that waste justifies the extra CAPEX of faster storage.",
+            },
+        ],
+        tech: ["GPU utilisation", "DataLoader stalls", "I/O-bound training", "NVMe-oF", "Storage TCO"],
+    },
+    {
+        id: "B",
+        kind: "scenario",
+        short: "256-GPU storage",
+        title: "Storage architecture for a 256-GPU AI cluster",
+        domain: "Review exercise",
+        stages: [
+            {
+                heading: "Engineering challenge",
+                body: "A team is designing storage for a 256-GPU H100 training cluster. Each GPU processes batches at an effective 20 GB/s, so the cluster needs about 5.1 TB/s of aggregate storage bandwidth. A traditional NAS filer delivers 25 GB/s.",
+            },
+            {
+                heading: "You must determine",
+                body: "The minimum aggregate bandwidth required, why the NAS filer is inadequate, and the three bottlenecks beyond raw bandwidth that make NAS unsuitable.",
+            },
+        ],
+        tech: ["Aggregate bandwidth", "NAS limitations", "High-performance storage", "H100 clusters"],
+    },
+    {
+        id: "C",
+        kind: "scenario",
+        short: "$180K/month bill",
+        title: "Reducing a $180K/month GPU bill",
+        domain: "Review exercise",
+        stages: [
+            {
+                heading: "Engineering challenge",
+                body: "An NLP team spends $180K a month on cloud GPU instances, against a quota of 64 H100s, while average GPU utilisation is only 35%.",
+            },
+            {
+                heading: "You must determine",
+                points: [
+                    { lead: "1.", text: "Diagnose the waste pattern with PromQL queries" },
+                    { lead: "2.", text: "Recommend right-sizing" },
+                    { lead: "3.", text: "Set the right reservation commitment" },
+                    { lead: "4.", text: "Identify which jobs can move to Spot, and at what checkpoint frequency" },
+                ],
+            },
+        ],
+        tech: ["FinOps", "PromQL", "GPU utilisation", "Right-sizing", "Reserved instances", "Spot", "Checkpointing"],
+    },
+    {
+        id: "D",
+        kind: "scenario",
+        short: "800 TB medical AI",
+        title: "800 TB medical AI training infrastructure",
+        domain: "Review exercise",
+        stages: [
+            {
+                heading: "Engineering challenge",
+                body: "A healthcare AI company wants to train a diagnostic imaging model on 800 TB of de-identified X-ray images (no PHI) in AWS S3 us-east-1. Training needs 64 H100 GPUs running continuously for four months, then idle for eight months each year.",
+            },
+            {
+                heading: "You must determine",
+                body: "The best deployment model, justified with a TCO comparison of cloud on-demand, a 3-year cloud reservation and buying on-premises hardware.",
+            },
+        ],
+        tech: ["TCO modelling", "CapEx vs OpEx", "Utilisation", "Data gravity", "H100"],
     },
 ];
 

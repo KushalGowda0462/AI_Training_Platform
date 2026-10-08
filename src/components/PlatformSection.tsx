@@ -6,10 +6,11 @@ import InteractiveSlides from "@/components/platform/InteractiveSlides";
 import {
     QUIZZES,
     BOARD_STEPS,
-    CASE_STAGES,
+    CASE_STUDIES,
     VIDEO_SOURCES,
     VIDEO_CAPTIONS,
     type Quiz,
+    type CaseStudy,
 } from "@/components/platform/content";
 
 /**
@@ -46,9 +47,9 @@ const WHAT_YOU_GET = [
 
 const EXPERIENCES: { key: DemoKey; title: string; blurb: string; kind: "interactive" | "video" }[] = [
     { key: "quiz", title: "Quiz directed learning", blurb: "A new quiz every time", kind: "interactive" },
-    { key: "slides", title: "Interactive slides", blurb: "Interact as you go", kind: "interactive" },
+    { key: "slides", title: "Interactive slides", blurb: "Change it, see the result", kind: "interactive" },
     { key: "whiteboard", title: "Live real time white boarding", blurb: "A diagram drawn live", kind: "interactive" },
-    { key: "casestudy", title: "Case studies", blurb: "Work a real scenario", kind: "interactive" },
+    { key: "casestudy", title: "Case studies", blurb: "Real infrastructure decisions", kind: "interactive" },
     { key: "labmentorship", title: "Lab work mentorship", blurb: "Agent assisted lab", kind: "video" },
     { key: "interactive", title: "Highly interactive", blurb: "Ask anything, any time", kind: "video" },
     { key: "contentgen", title: "Content generation", blurb: "How it works, and the output", kind: "video" },
@@ -348,26 +349,123 @@ function WhiteboardDemo() {
 
 /* ───────────────────────── Case study ───────────────────────── */
 
+const CASE_GROUPS: { kind: CaseStudy["kind"]; label: string }[] = [
+    { kind: "case", label: "Case studies" },
+    { kind: "scenario", label: "Engineering scenarios" },
+];
+
 function CaseStudyDemo() {
+    const [caseId, setCaseId] = useState(CASE_STUDIES[0].id);
     const [stage, setStage] = useState(0);
+
+    const cs = CASE_STUDIES.find((c) => c.id === caseId)!;
+    const current = cs.stages[stage];
+    const last = stage === cs.stages.length - 1;
+    const isOutcome = current.heading === "Outcome";
+    const next = CASE_STUDIES[CASE_STUDIES.findIndex((c) => c.id === caseId) + 1];
+
+    const pick = (id: string) => {
+        setCaseId(id);
+        setStage(0);
+    };
 
     return (
         <div>
-            <div className="flex items-center gap-1.5 mb-5">
-                {CASE_STAGES.map((_, i) => (
-                    <div
-                        key={i}
-                        className={`h-1.5 flex-1 rounded-full transition-all ${i <= stage ? "bg-[var(--gold)]" : "bg-[#E7E2D8]"}`}
+            {/* picker */}
+            <div className="flex flex-col gap-2.5 mb-5">
+                {CASE_GROUPS.map((g) => (
+                    <div key={g.kind}>
+                        <p className="text-[11px] font-800 uppercase tracking-widest text-[#64748B] mb-1.5">{g.label}</p>
+                        <div className="flex flex-wrap gap-1.5">
+                            {CASE_STUDIES.filter((c) => c.kind === g.kind).map((c) => (
+                                <button
+                                    key={c.id}
+                                    onClick={() => pick(c.id)}
+                                    aria-pressed={c.id === caseId}
+                                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border-2 text-xs font-800 transition-colors cursor-pointer ${
+                                        c.id === caseId
+                                            ? "border-[var(--gold)] bg-[var(--gold)]/10 text-[var(--gold-hover)]"
+                                            : "border-[#E7E2D8] bg-white text-[#475569] hover:border-[var(--gold)]"
+                                    }`}
+                                >
+                                    <span className="font-900">{c.id}</span>
+                                    {c.short}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            <p className="text-[11px] font-800 uppercase tracking-widest text-[var(--gold-hover)] mb-0.5">
+                {cs.kind === "case" ? `Case study ${cs.id}` : `Scenario ${cs.id}`} · {cs.domain}
+            </p>
+            <h4 className="text-xl font-900 text-[#0F172A] mb-3 leading-snug">{cs.title}</h4>
+
+            <div className="flex items-center gap-1.5 mb-3">
+                {cs.stages.map((s, i) => (
+                    <button
+                        key={s.heading}
+                        onClick={() => setStage(i)}
+                        aria-label={s.heading}
+                        className={`h-1.5 flex-1 rounded-full transition-all cursor-pointer ${i <= stage ? "bg-[var(--gold)]" : "bg-[#E7E2D8] hover:bg-[var(--gold)]/50"}`}
                     />
                 ))}
             </div>
 
-            <div className={`${PANEL} p-6 mb-4 min-h-[210px]`}>
+            <div className={`${PANEL} p-5 mb-3 min-h-[230px]`}>
                 <p className="text-xs font-800 uppercase tracking-widest text-[#64748B] mb-2">
-                    Step {stage + 1} of {CASE_STAGES.length}
+                    Step {stage + 1} of {cs.stages.length}
                 </p>
-                <h4 className="text-xl font-900 text-[#0F172A] mb-3 leading-snug">{CASE_STAGES[stage].heading}</h4>
-                <p className="text-sm text-[#475569] leading-relaxed font-semibold">{CASE_STAGES[stage].body}</p>
+                <h5 className="text-lg font-900 text-[#0F172A] mb-2.5 leading-snug">{current.heading}</h5>
+
+                {current.body && (
+                    <p
+                        className={
+                            current.heading === "Key takeaway"
+                                ? "text-lg font-900 text-[var(--gold-hover)] leading-snug"
+                                : "text-sm text-[#475569] leading-relaxed font-semibold"
+                        }
+                    >
+                        {current.body}
+                    </p>
+                )}
+
+                {current.points && isOutcome && (
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                        {current.points.map((p) => (
+                            <div key={p.text} className={`${CARD} px-4 py-3`}>
+                                <p className="text-2xl font-900 text-[var(--gold-hover)] leading-tight">{p.lead}</p>
+                                <p className="text-[13px] text-[#475569] font-semibold leading-snug">{p.text}</p>
+                            </div>
+                        ))}
+                    </div>
+                )}
+
+                {current.points && !isOutcome && (
+                    <ul className="flex flex-col gap-2">
+                        {current.points.map((p) => (
+                            <li key={p.text} className="flex gap-2.5 items-start text-sm leading-relaxed">
+                                <svg className="w-4 h-4 text-[var(--gold)] shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span className="text-[#475569] font-semibold">
+                                    {p.lead && <span className="font-900 text-[#0F172A]">{p.lead} </span>}
+                                    {p.text}
+                                </span>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
+
+            {/* technologies & concepts */}
+            <div className="flex flex-wrap gap-1.5 mb-4">
+                {cs.tech.map((t) => (
+                    <span key={t} className="px-2 py-0.5 rounded-md bg-[#F3F0E8] text-[11px] font-800 text-[#475569]">
+                        {t}
+                    </span>
+                ))}
             </div>
 
             <div className="flex items-center gap-3">
@@ -379,11 +477,15 @@ function CaseStudyDemo() {
                     Back
                 </button>
                 <button
-                    onClick={() => setStage((s) => Math.min(CASE_STAGES.length - 1, s + 1))}
-                    disabled={stage === CASE_STAGES.length - 1}
+                    onClick={() => (last ? next && pick(next.id) : setStage((s) => s + 1))}
+                    disabled={last && !next}
                     className="btn-gold flex-1 justify-center py-2.5 text-sm font-800 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
                 >
-                    {stage === CASE_STAGES.length - 1 ? "End of case study" : "Continue"}
+                    {!last
+                        ? `Continue: ${cs.stages[stage + 1].heading}`
+                        : next
+                        ? `Next: ${next.kind === "case" ? "case study" : "scenario"} ${next.id}`
+                        : "End of case studies"}
                 </button>
             </div>
         </div>
@@ -461,7 +563,7 @@ export default function PlatformSection() {
         quiz: "Quiz directed learning",
         slides: "Interactive slides",
         whiteboard: "Live real time white boarding",
-        casestudy: "Case study example",
+        casestudy: "Case studies",
         labmentorship: "Lab work mentorship",
         interactive: "Highly interactive",
         contentgen: "Content generation",
@@ -577,7 +679,7 @@ export default function PlatformSection() {
                 isOpen={openDemo !== null}
                 onClose={close}
                 title={openDemo ? modalTitle[openDemo] : ""}
-                size={openDemo === "whiteboard" ? "xl" : "lg"}
+                size={openDemo === "whiteboard" || openDemo === "slides" || openDemo === "casestudy" ? "xl" : "lg"}
             >
                 {openDemo === "quiz" && (
                     <QuizDemo
