@@ -18,9 +18,12 @@
 /**
  * Who receives a demo request.
  *
- * The FIRST address is the primary — it is the one the form endpoint is
- * registered to and the one that must confirm the endpoint on first use.
- * The rest are copied in via `_cc` on every submission.
+ * Everyone here is an equal recipient. Each address is sent its own
+ * message addressed directly to it — nobody is CC'd, so no one appears
+ * as an afterthought and nobody sees the others' addresses.
+ *
+ * Each address confirms itself once, the first time a request is sent to
+ * it. Adding or removing someone is a change to this list alone.
  */
 export const DEMO_RECIPIENTS = [
     "James@aurilearn.ai",
@@ -73,26 +76,25 @@ export async function submitDemoRequest(r: DemoRequest): Promise<void> {
         throw new Error("Demo form endpoint is not configured.");
     }
 
-    const [primary, ...copied] = DEMO_RECIPIENTS;
+    const base = ENDPOINT.trim();
 
-    const payload: Record<string, string> = {
+    /** One endpoint per recipient, so each gets their own direct email. */
+    const endpointFor = (email: string) =>
+        base.includes("{email}")
+            ? base.replace("{email}", encodeURIComponent(email))
+            : `${base.replace(/\/+$/, "")}/${encodeURIComponent(email)}`;
+
+    const body = (email: string) => ({
         ...(ACCESS_KEY ? { access_key: ACCESS_KEY } : {}),
-
-        /* FormSubmit fields. `_cc` is what gets the request to everyone
-           rather than just the address the endpoint is registered to —
-           the primary is in the endpoint url, the rest are copied here.
-           Ignored harmlessly by providers that do not use them. */
-        _cc: copied.join(","),
         _subject: `Enterprise demo request — ${r.firstName} ${r.lastName}`,
         _template: "table",
         _captcha: "false",
         _replyto: r.workEmail,
-
         subject: `Enterprise demo request — ${r.firstName} ${r.lastName}`,
         from_name: `${r.firstName} ${r.lastName}`,
-        // most providers key the reply-to off one of these
         email: r.workEmail,
         replyto: r.workEmail,
+        recipient: email,
         first_name: r.firstName,
         last_name: r.lastName,
         work_email: r.workEmail,
@@ -100,19 +102,32 @@ export async function submitDemoRequest(r: DemoRequest): Promise<void> {
         telephone: r.telephone,
         country: r.country,
         message: formatDemoRequest(r),
-    };
-
-    const res = await fetch(ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(payload),
     });
 
-    // Web3Forms (and similar providers) also report the outcome in the body,
-    // so a 200 with { success: false } still counts as a failure.
-    const body: { success?: boolean; message?: string } = await res.json().catch(() => ({}));
+    const results = await Promise.allSettled(
+        DEMO_RECIPIENTS.map(async (email) => {
+            const res = await fetch(endpointFor(email), {
+                method: "POST",
+                headers: { "Content-Type": "application/json", Accept: "application/json" },
+                body: JSON.stringify(body(email)),
+            });
+            if (!res.ok) throw new Error(`${email}: endpoint returned ${res.status}`);
+            return email;
+        })
+    );
 
-    if (!res.ok || body.success === false) {
-        throw new Error(`Form endpoint returned ${res.status}${body.message ? `: ${body.message}` : ""}`);
+    const failed = results
+        .map((res, i) => (res.status === "rejected" ? DEMO_RECIPIENTS[i] : null))
+        .filter(Boolean);
+
+    if (failed.length) {
+        // Partial delivery still means the lead reached someone, so the
+        // visitor is not shown an error — but this must not pass silently.
+        console.error("Demo request not delivered to:", failed.join(", "));
+    }
+
+    // Only a total failure is an error the visitor should see.
+    if (failed.length === DEMO_RECIPIENTS.length) {
+        throw new Error("Demo request could not be delivered to any recipient.");
     }
 }
