@@ -43,3 +43,7 @@ out/
 .env
 .env.local
 .DS_Store
+
+# SMTP credentials — never commit (repo is public)
+smtp-config.php
+**/smtp-config.php

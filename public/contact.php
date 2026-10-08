@@ -25,6 +25,104 @@ $RECIPIENTS = [
 $MAIL_FROM      = 'noreply@aurilearn.ai';
 $MAIL_FROM_NAME = 'Aurilearn Website';
 
+
+/* ─── SMTP (recommended) ───────────────────────────────────────────────
+   aurilearn.ai mail runs on Microsoft 365 and the domain publishes
+   "v=spf1 include:spf.protection.outlook.com -all" with DMARC p=quarantine.
+   That means only Microsoft's servers may send as @aurilearn.ai; mail sent
+   straight from this web server fails SPF and gets quarantined, so PHP's
+   mail() will appear to work while the message never reaches anyone.
+
+   Sending through Microsoft 365 with a real mailbox login fixes that: the
+   message leaves Microsoft's own servers, so SPF and DMARC both pass.
+
+   Credentials are read from a file OUTSIDE the web root so they are never
+   downloadable and never committed to git. Create it one level above
+   public_html as smtp-config.php:
+
+       <?php return [
+           'host' => 'smtp.office365.com',
+           'port' => 587,
+           'user' => 'noreply@aurilearn.ai',
+           'pass' => 'THE-MAILBOX-PASSWORD',
+       ];
+
+   With no such file this falls back to mail(), which still works on hosts
+   where the domain's SPF permits it. */
+$SMTP = null;
+foreach ([__DIR__ . '/../smtp-config.php', __DIR__ . '/smtp-config.php'] as $cfgPath) {
+    if (is_readable($cfgPath)) {
+        $maybe = include $cfgPath;
+        if (is_array($maybe) && !empty($maybe['user']) && !empty($maybe['pass'])) {
+            $SMTP = $maybe;
+        }
+        break;
+    }
+}
+
+/**
+ * Minimal SMTP client with STARTTLS and AUTH LOGIN.
+ * Returns true on success; on failure sets $error and returns false.
+ */
+function smtp_send(array $cfg, string $from, string $fromName, string $to, string $subject, string $body, string $replyTo, &$error = null) {
+    $host = $cfg['host'] ?? 'smtp.office365.com';
+    $port = (int) ($cfg['port'] ?? 587);
+
+    $fp = @stream_socket_client("tcp://{$host}:{$port}", $errno, $errstr, 20);
+    if (!$fp) { $error = "connect failed: {$errstr}"; return false; }
+    stream_set_timeout($fp, 20);
+
+    $read = function () use ($fp) {
+        $data = '';
+        while (($line = fgets($fp, 515)) !== false) {
+            $data .= $line;
+            if (strlen($line) < 4 || $line[3] === ' ') break;
+        }
+        return $data;
+    };
+    $cmd = function ($line, $expect) use ($fp, $read, &$error) {
+        if ($line !== null) fwrite($fp, $line . "\r\n");
+        $res = $read();
+        if (strpos($res, (string) $expect) !== 0) {
+            $error = trim($line === null ? $res : "{$line} -> {$res}");
+            return false;
+        }
+        return true;
+    };
+
+    $ehlo = 'EHLO ' . (isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : 'localhost');
+
+    if (!$cmd(null, '220')) { fclose($fp); return false; }
+    if (!$cmd($ehlo, '250')) { fclose($fp); return false; }
+    if (!$cmd('STARTTLS', '220')) { fclose($fp); return false; }
+    if (!@stream_socket_enable_crypto($fp, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
+        $error = 'TLS negotiation failed'; fclose($fp); return false;
+    }
+    if (!$cmd($ehlo, '250')) { fclose($fp); return false; }
+    if (!$cmd('AUTH LOGIN', '334')) { fclose($fp); return false; }
+    if (!$cmd(base64_encode($cfg['user']), '334')) { fclose($fp); return false; }
+    if (!$cmd(base64_encode($cfg['pass']), '235')) { fclose($fp); return false; }
+    if (!$cmd('MAIL FROM:<' . $from . '>', '250')) { fclose($fp); return false; }
+    if (!$cmd('RCPT TO:<' . $to . '>', '250')) { fclose($fp); return false; }
+    if (!$cmd('DATA', '354')) { fclose($fp); return false; }
+
+    $headers = "From: {$fromName} <{$from}>\r\n"
+             . "To: <{$to}>\r\n"
+             . "Reply-To: <{$replyTo}>\r\n"
+             . "Subject: {$subject}\r\n"
+             . "MIME-Version: 1.0\r\n"
+             . "Content-Type: text/plain; charset=UTF-8\r\n"
+             . "X-Mailer: Aurilearn-Website\r\n";
+    // dot-stuffing: a lone "." would end the message early
+    $safeBody = preg_replace('/^\./m', '..', $body);
+    fwrite($fp, $headers . "\r\n" . $safeBody . "\r\n.\r\n");
+
+    if (!$cmd(null, '250')) { fclose($fp); return false; }
+    $cmd('QUIT', '221');
+    fclose($fp);
+    return true;
+}
+
 /* Simple abuse limit: submissions allowed per IP per hour. */
 $RATE_LIMIT        = 5;
 $RATE_WINDOW_SECS  = 3600;
@@ -142,12 +240,35 @@ $headers = implode("\r\n", [
        the others' addresses ─── */
 $delivered = 0;
 $failed    = [];
+$lastError = '';
+
 foreach ($RECIPIENTS as $to) {
-    if (@mail($to, $subject, $body, $headers, '-f' . $MAIL_FROM)) {
+    $ok = false;
+
+    if ($SMTP) {
+        // Preferred: authenticated send through the domain's own mail
+        // provider, so SPF and DMARC pass.
+        $err = '';
+        $ok = smtp_send($SMTP, $MAIL_FROM, $MAIL_FROM_NAME, $to, $subject, $body, $email, $err);
+        if (!$ok && $err !== '') {
+            $lastError = $err;
+        }
+    } else {
+        // Fallback. Note this will be quarantined on any domain whose SPF
+        // does not permit this server — mail() returning true is not proof
+        // the message was accepted by the recipient's provider.
+        $ok = @mail($to, $subject, $body, $headers, '-f' . $MAIL_FROM);
+    }
+
+    if ($ok) {
         $delivered++;
     } else {
         $failed[] = $to;
     }
+}
+
+if ($lastError !== '') {
+    error_log('Aurilearn demo request SMTP error: ' . $lastError);
 }
 
 if ($delivered === 0) {
