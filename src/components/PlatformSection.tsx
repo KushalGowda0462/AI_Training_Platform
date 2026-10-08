@@ -469,84 +469,84 @@ export default function PlatformSection() {
 
     return (
         <section id="platform" className="section-tall bg-[#FAFAF8] border-t border-[#E7E2D8]">
-            <div className="container-content w-full py-20 md:py-24">
-                <div className="max-w-3xl mx-auto text-center mb-14">
+            <div className="container-content w-full py-10 md:py-12">
+                <div className="max-w-3xl mx-auto text-center mb-8">
                     <div className="gold-divider mx-auto" />
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-900 text-[#0F172A] leading-[1.1] tracking-tight mb-4">
+                    <h2 className="text-3xl md:text-4xl font-900 text-[#0F172A] leading-[1.1] tracking-tight mb-3">
                         Platform
                     </h2>
-                    <p className="text-lg md:text-xl text-[#475569] font-medium leading-relaxed">
+                    <p className="text-base md:text-lg text-[#475569] font-medium leading-relaxed">
                         One engine taking you on the whole journey from first concept to a certification pass,
                         with the evidence to prove it happened.
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+                <div className="grid-12 items-start">
 
-                    {/* ── Left half: the four points ── */}
-                    <div className="flex flex-col">
-                        <h3 className="text-sm md:text-base font-800 uppercase tracking-widest text-[var(--gold-hover)] mb-2">
+                    {/* ── Columns 1-5: the four points ── */}
+                    <div className="col-span-12 lg:col-span-4 flex flex-col">
+                        <h3 className="text-sm font-800 uppercase tracking-widest text-[var(--gold-hover)] mb-1">
                             What It Covers
                         </h3>
-                        <p className="text-base text-[var(--gold-hover)] font-bold mb-4">
+                        <p className="text-sm text-[var(--gold-hover)] font-bold mb-3">
                             The whole journey, end to end.
                         </p>
 
-                        <div className="flex flex-col gap-3">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
                             {LEFT_POINTS.map((p, i) => (
                                 <div
                                     key={p.title}
-                                    className={`${CARD} flex items-center gap-4 px-6 py-5 transition-all hover:border-[var(--gold)] hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(15,23,42,0.06)]`}
+                                    className={`${CARD} flex items-center gap-3 px-4 py-4 transition-all hover:border-[var(--gold)] hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(15,23,42,0.06)]`}
                                 >
-                                    <span className="w-11 h-11 rounded-full bg-[var(--gold)]/10 border border-[var(--gold)]/40 text-[var(--gold-hover)] text-sm font-900 flex items-center justify-center shrink-0">
+                                    <span className="w-9 h-9 rounded-full bg-[var(--gold)]/10 border border-[var(--gold)]/40 text-[var(--gold-hover)] text-xs font-900 flex items-center justify-center shrink-0">
                                         {String(i + 1).padStart(2, "0")}
                                     </span>
                                     <span className="min-w-0">
-                                        <span className="block text-xl md:text-2xl font-900 text-[#0F172A] leading-snug">{p.title}</span>
-                                        <span className="block text-[#475569] font-semibold text-base leading-snug">{p.blurb}</span>
+                                        <span className="block text-lg font-900 text-[#0F172A] leading-snug">{p.title}</span>
+                                        <span className="block text-[#475569] font-semibold text-sm leading-snug">{p.blurb}</span>
                                     </span>
                                 </div>
                             ))}
                         </div>
                     </div>
 
-                    {/* ── Right half: What Do You Get + Experience ── */}
-                    <div className="flex flex-col gap-8">
+                    {/* ── Columns 6-12: What Do You Get + Experience ── */}
+                    <div className="col-span-12 lg:col-span-8 flex flex-col gap-6">
 
                         <div>
-                            <h3 className="text-sm md:text-base font-800 uppercase tracking-widest text-[var(--gold-hover)] mb-2">
+                            <h3 className="text-sm font-800 uppercase tracking-widest text-[var(--gold-hover)] mb-1">
                                 What Do You Get
                             </h3>
-                            <p className="text-base text-[var(--gold-hover)] font-bold mb-4">
+                            <p className="text-sm text-[var(--gold-hover)] font-bold mb-3">
                                 Included with every seat.
                             </p>
-                            <ul className="flex flex-col gap-3">
+                            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 items-stretch">
                                 {WHAT_YOU_GET.map((item) => (
-                                    <li key={item} className={`${CARD} flex gap-3 items-start px-5 py-4`}>
+                                    <li key={item} className={`${CARD} flex gap-2.5 items-start px-4 py-3.5`}>
                                         <svg className="w-5 h-5 text-[var(--gold)] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                                         </svg>
-                                        <span className="text-[#0F172A] font-bold leading-snug text-base md:text-lg">{item}</span>
+                                        <span className="text-[#0F172A] font-bold leading-snug text-sm">{item}</span>
                                     </li>
                                 ))}
                             </ul>
                         </div>
 
                         <div>
-                            <h3 className="text-sm md:text-base font-800 uppercase tracking-widest text-[var(--gold-hover)] mb-2">
+                            <h3 className="text-sm font-800 uppercase tracking-widest text-[var(--gold-hover)] mb-1">
                                 Experience
                             </h3>
-                            <p className="text-base text-[var(--gold-hover)] font-bold mb-4">
+                            <p className="text-sm text-[var(--gold-hover)] font-bold mb-3">
                                 Click any of these to try it right here.
                             </p>
 
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 items-stretch">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 items-stretch">
                                 {EXPERIENCES.map((e, i) => (
                                     <button
                                         key={e.key}
                                         onClick={() => open(e.key)}
                                         className={`${CARD} group text-left px-4 py-3.5 flex items-center gap-3 transition-all hover:border-[var(--gold)] hover:bg-[#F3F0E8] cursor-pointer ${
-                                            i === EXPERIENCES.length - 1 ? "sm:col-span-2" : ""
+                                            i === EXPERIENCES.length - 1 ? "sm:col-span-2 lg:col-span-1" : ""
                                         }`}
                                     >
                                         <span className="w-8 h-8 rounded-full bg-[var(--gold)]/10 border border-[var(--gold)]/40 text-[var(--gold-hover)] flex items-center justify-center shrink-0 group-hover:bg-[var(--gold)] group-hover:text-white transition-colors">
@@ -561,8 +561,8 @@ export default function PlatformSection() {
                                             )}
                                         </span>
                                         <span className="flex-1 min-w-0">
-                                            <span className="block font-900 text-[#0F172A] leading-snug text-base">{e.title}</span>
-                                            <span className="block text-sm text-[#475569] font-semibold leading-snug">{e.blurb}</span>
+                                            <span className="block font-900 text-[#0F172A] leading-snug text-[15px]">{e.title}</span>
+                                            <span className="block text-[13px] text-[#475569] font-semibold leading-snug">{e.blurb}</span>
                                         </span>
                                     </button>
                                 ))}
