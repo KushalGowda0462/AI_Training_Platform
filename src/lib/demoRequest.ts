@@ -25,12 +25,24 @@
  * Each address confirms itself once, the first time a request is sent to
  * it. Adding or removing someone is a change to this list alone.
  */
-export const DEMO_RECIPIENTS = [
-    "James@aurilearn.ai",
-    "Arjun@aurilearn.ai",
-    "Rashmi@aurilearn.ai",
-    "vijay@aurilearn.ai",
-] as const;
+export type Recipient = {
+    /** Shown nowhere public — used for the mailto subject and logs only. */
+    name: string;
+    /**
+     * Either the address or, once FormSubmit has issued one, that
+     * address's random alias. The alias works identically and keeps the
+     * real inbox out of the shipped JavaScript, so replace the address
+     * with the alias as soon as each person has activated.
+     */
+    target: string;
+};
+
+export const DEMO_RECIPIENTS: Recipient[] = [
+    { name: "James", target: "James@aurilearn.ai" },
+    { name: "Arjun", target: "Arjun@aurilearn.ai" },
+    { name: "Rashmi", target: "Rashmi@aurilearn.ai" },
+    { name: "Vijay", target: "vijay@aurilearn.ai" },
+];
 
 /**
  * Default delivery endpoint.
@@ -46,6 +58,8 @@ export const DEMO_RECIPIENTS = [
  * build at a test endpoint.
  */
 const DEFAULT_ENDPOINT = "https://formsubmit.co/ajax";
+
+
 
 const ENDPOINT = process.env.NEXT_PUBLIC_DEMO_FORM_ENDPOINT?.trim() || DEFAULT_ENDPOINT;
 const ACCESS_KEY = process.env.NEXT_PUBLIC_DEMO_FORM_ACCESS_KEY ?? "";
@@ -76,9 +90,18 @@ export const formatDemoRequest = (r: DemoRequest) =>
         `Country:   ${r.country}`,
     ].join("\n");
 
-/** Fallback used when the endpoint is unset or unreachable. */
+/**
+ * Fallback used when delivery fails.
+ *
+ * Deliberately the address already published on the contact section
+ * rather than the four individual inboxes — a mailto in the markup is
+ * readable by anyone, and there is no reason to put four personal
+ * addresses in front of scrapers for a fallback that rarely fires.
+ */
+export const FALLBACK_CONTACT = "sales@aurilearn.ai";
+
 export const demoMailtoHref = (r: DemoRequest) =>
-    `mailto:${DEMO_RECIPIENTS.join(",")}` +
+    `mailto:${FALLBACK_CONTACT}` +
     `?subject=${encodeURIComponent(`Enterprise demo request — ${r.firstName} ${r.lastName}`)}` +
     `&body=${encodeURIComponent(formatDemoRequest(r))}`;
 
@@ -94,12 +117,12 @@ export async function submitDemoRequest(r: DemoRequest): Promise<void> {
     const base = ENDPOINT.trim();
 
     /** One endpoint per recipient, so each gets their own direct email. */
-    const endpointFor = (email: string) =>
+    const endpointFor = (target: string) =>
         base.includes("{email}")
-            ? base.replace("{email}", encodeURIComponent(email))
-            : `${base.replace(/\/+$/, "")}/${encodeURIComponent(email)}`;
+            ? base.replace("{email}", encodeURIComponent(target))
+            : `${base.replace(/\/+$/, "")}/${encodeURIComponent(target)}`;
 
-    const body = (email: string) => ({
+    const body = () => ({
         ...(ACCESS_KEY ? { access_key: ACCESS_KEY } : {}),
         _subject: `Enterprise demo request — ${r.firstName} ${r.lastName}`,
         _template: "table",
@@ -109,7 +132,6 @@ export async function submitDemoRequest(r: DemoRequest): Promise<void> {
         from_name: `${r.firstName} ${r.lastName}`,
         email: r.workEmail,
         replyto: r.workEmail,
-        recipient: email,
         first_name: r.firstName,
         last_name: r.lastName,
         work_email: r.workEmail,
@@ -120,13 +142,13 @@ export async function submitDemoRequest(r: DemoRequest): Promise<void> {
     });
 
     const results = await Promise.allSettled(
-        DEMO_RECIPIENTS.map(async (email) => {
-            const response: Response = await fetch(endpointFor(email), {
+        DEMO_RECIPIENTS.map(async ({ name, target }) => {
+            const response: Response = await fetch(endpointFor(target), {
                 method: "POST",
                 headers: { "Content-Type": "application/json", Accept: "application/json" },
-                body: JSON.stringify(body(email)),
+                body: JSON.stringify(body()),
             });
-            if (!response.ok) throw new Error(`${email}: endpoint returned ${response.status}`);
+            if (!response.ok) throw new Error(`${name}: endpoint returned ${response.status}`);
 
             /* FormSubmit answers 200 even when it refuses the submission and
                reports the real outcome in the body as {"success":"false"}.
@@ -138,16 +160,16 @@ export async function submitDemoRequest(r: DemoRequest): Promise<void> {
                 const ok = result.success === true || result.success === "true";
                 if (!ok) {
                     throw new Error(
-                        `${email}: ${result.message ?? "endpoint reported failure"}`
+                        `${name}: ${result.message ?? "endpoint reported failure"}`
                     );
                 }
             }
-            return email;
+            return name;
         })
     );
 
     const failed = results
-        .map((res, i) => (res.status === "rejected" ? DEMO_RECIPIENTS[i] : null))
+        .map((res, i) => (res.status === "rejected" ? DEMO_RECIPIENTS[i].name : null))
         .filter(Boolean);
 
     if (failed.length) {

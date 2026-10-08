@@ -6,7 +6,7 @@ import {
   submitDemoRequest,
   demoMailtoHref,
   isDemoFormConfigured,
-  DEMO_RECIPIENTS,
+  FALLBACK_CONTACT,
 } from "@/lib/demoRequest";
 
 type FormData = {
@@ -293,7 +293,7 @@ export default function DemoRequestModal({ isOpen, onClose }: Props) {
                   href={demoMailtoHref(form)}
                   className="font-bold text-[var(--gold-hover)] underline underline-offset-2"
                 >
-                  {DEMO_RECIPIENTS[0]}
+                  {FALLBACK_CONTACT}
                 </a>{" "}
                 and we will get straight back to you.
               </p>
@@ -303,7 +303,7 @@ export default function DemoRequestModal({ isOpen, onClose }: Props) {
           {/* Submit */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2 border-t border-[#E7E2D8] mt-1">
             <p className="text-xs text-[#94A3B8] leading-relaxed">
-              By submitting, you agree to Aurilearn&apos;s privacy policy. We will never share your data.
+              By submitting, you agree to Aurilearn&apos;s privacy policy. Your details are used only to arrange your demo.
             </p>
             <button
               type="submit"
