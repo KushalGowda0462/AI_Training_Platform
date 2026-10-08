@@ -15,11 +15,18 @@
  * lost the way it was before.
  */
 
-/** Who receives a demo request. */
+/**
+ * Who receives a demo request.
+ *
+ * The FIRST address is the primary — it is the one the form endpoint is
+ * registered to and the one that must confirm the endpoint on first use.
+ * The rest are copied in via `_cc` on every submission.
+ */
 export const DEMO_RECIPIENTS = [
     "James@aurilearn.ai",
     "Arjun@aurilearn.ai",
     "Rashmi@aurilearn.ai",
+    "vijay@aurilearn.ai",
 ] as const;
 
 const ENDPOINT = process.env.NEXT_PUBLIC_DEMO_FORM_ENDPOINT ?? "";
@@ -66,8 +73,21 @@ export async function submitDemoRequest(r: DemoRequest): Promise<void> {
         throw new Error("Demo form endpoint is not configured.");
     }
 
+    const [primary, ...copied] = DEMO_RECIPIENTS;
+
     const payload: Record<string, string> = {
         ...(ACCESS_KEY ? { access_key: ACCESS_KEY } : {}),
+
+        /* FormSubmit fields. `_cc` is what gets the request to everyone
+           rather than just the address the endpoint is registered to —
+           the primary is in the endpoint url, the rest are copied here.
+           Ignored harmlessly by providers that do not use them. */
+        _cc: copied.join(","),
+        _subject: `Enterprise demo request — ${r.firstName} ${r.lastName}`,
+        _template: "table",
+        _captcha: "false",
+        _replyto: r.workEmail,
+
         subject: `Enterprise demo request — ${r.firstName} ${r.lastName}`,
         from_name: `${r.firstName} ${r.lastName}`,
         // most providers key the reply-to off one of these
@@ -88,7 +108,11 @@ export async function submitDemoRequest(r: DemoRequest): Promise<void> {
         body: JSON.stringify(payload),
     });
 
-    if (!res.ok) {
-        throw new Error(`Form endpoint returned ${res.status}`);
+    // Web3Forms (and similar providers) also report the outcome in the body,
+    // so a 200 with { success: false } still counts as a failure.
+    const body: { success?: boolean; message?: string } = await res.json().catch(() => ({}));
+
+    if (!res.ok || body.success === false) {
+        throw new Error(`Form endpoint returned ${res.status}${body.message ? `: ${body.message}` : ""}`);
     }
 }
