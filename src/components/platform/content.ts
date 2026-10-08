@@ -6,7 +6,7 @@
  * can drop real content in without touching any layout code.
  *
  * What engineering needs to supply:
- *   1. QUIZZES        — 5 quizzes. The tile rotates Quiz 1 → 2 → 3 → 4 → 5
+ *   1. QUIZZES        — 5 NVIDIA INFRA quizzes. The tile rotates Quiz 1 → 2 → 3 → 4 → 5
  *                       → back to 1 on each click. Any number of questions
  *                       per quiz works; 5 each is what is here now.
  *   2. SLIDE_DECK     — the five NVIDIA INFRA simulators shown as slides.
@@ -15,8 +15,9 @@
  *   5. VIDEO_SOURCES  — the three 1 minute clips. Drop the files in /public
  *                       and point each entry at them.
  *
- * The content below is interim material written to keep every tile working.
- * Replace it in place; the components read whatever is exported here.
+ * The quizzes, slides and case studies come from the NVIDIA INFRA course
+ * material. Replace any of it in place; the components read whatever is
+ * exported here.
  * ─────────────────────────────────────────────────────────────────────────
  */
 
@@ -34,270 +35,288 @@ export type Quiz = {
     questions: QuizQuestion[];
 };
 
-/** ── 1. The five rotating quizzes ───────────────────────────────────── */
+/** ── 1. The five rotating quizzes ──────────────────────────────────────
+ *
+ * From the NVIDIA INFRA course (GPU-Accelerated AI Infrastructure). Each
+ * quiz follows one part of the course, and every answer comes from the
+ * course material: the case studies, the review scenarios and the lessons
+ * behind the interactive experiences.
+ */
+export const QUIZ_COURSE = "NVIDIA INFRA";
+
 export const QUIZZES: Quiz[] = [
     {
-        title: "Kubernetes Administration",
+        title: "GPU Architecture and Accelerated Compute",
         questions: [
             {
-                q: "Which control plane component stores all Kubernetes cluster state?",
-                options: ["kubelet", "etcd", "kube-proxy", "containerd"],
-                answer: 1,
-                why: "etcd is the consistent key-value store holding the entire cluster state. The API server is the only component that talks to it directly.",
-            },
-            {
-                q: "What does a Service of type ClusterIP give you?",
+                q: "Why does training on 64 GPUs not give a 64x speedup?",
                 options: [
-                    "A public IP reachable from the internet",
-                    "A stable internal IP reachable only inside the cluster",
-                    "A port opened on every node",
-                    "A DNS record with no load balancing",
+                    "Each GPU runs at a lower clock when more are installed",
+                    "Every step also has to exchange gradients between GPUs, and that communication grows with the cluster",
+                    "The framework only uses half of the GPUs at a time",
+                    "Larger clusters always use a smaller batch size",
                 ],
                 answer: 1,
-                why: "ClusterIP is the default type. NodePort and LoadBalancer are the types that expose traffic outside the cluster.",
+                why: "Compute per GPU stays the same, but every step ends with a gradient exchange across all of them. The slower the interconnect, the bigger that share of the step, and the further the real speedup falls below the ideal line.",
             },
             {
-                q: "A pod is stuck in CrashLoopBackOff. What is happening?",
+                q: "Which interconnect lets a multi-GPU training job scale closest to linear?",
+                options: ["PCIe Gen5 / Ethernet", "InfiniBand NDR 400", "They all scale the same way", "NVLink / NVSwitch"],
+                answer: 3,
+                why: "NVLink / NVSwitch has by far the most bandwidth between GPUs, so the gradient exchange takes the smallest share of each step. On PCIe or Ethernet, communication can take longer than the compute itself.",
+            },
+            {
+                q: "A 70B-parameter model's BF16 weights alone take about how much memory?",
+                options: ["140 GB", "35 GB", "70 GB", "560 GB"],
+                answer: 0,
+                why: "BF16 uses 2 bytes per parameter, so 70B parameters is about 140 GB. That alone is more than one 80 GB GPU holds, before any optimizer state, which is another 560 GB in the course's 70B case.",
+            },
+            {
+                q: "A 64-GPU cluster sits at 45% GPU utilisation because the DataLoader keeps stalling. Where is the bottleneck?",
                 options: [
-                    "The image cannot be pulled from the registry",
-                    "The scheduler cannot find a node with enough resources",
-                    "The container starts, exits with an error, and is restarted with growing delays",
-                    "The pod is waiting on a PersistentVolume to bind",
+                    "In GPU compute, so a faster precision such as FP8 will fix it",
+                    "In the GPU interconnect",
+                    "In the data path feeding the GPUs: the job is I/O-bound",
+                    "In the scheduler",
                 ],
                 answer: 2,
-                why: "The container is starting and exiting repeatedly, and the kubelet waits a little longer before each restart. Check the previous run's logs with --previous.",
+                why: "The GPUs are waiting for data. Making them compute faster only makes them wait longer. The fix is on the input side: loader throughput or faster storage.",
             },
             {
-                q: "Which command shows recent events and the current state of one pod?",
+                q: "What does MIG (Multi-Instance GPU) do?",
                 options: [
-                    "kubectl get pods -o wide",
-                    "kubectl describe pod <name>",
-                    "kubectl top pod <name>",
-                    "kubectl config view",
+                    "Splits one GPU into isolated instances, each with its own memory and compute",
+                    "Joins several GPUs into one larger logical GPU",
+                    "Lets pods take turns on the whole GPU",
+                    "Moves GPU memory pages to host memory when full",
                 ],
-                answer: 1,
-                why: "describe prints the spec, the conditions and the recent events attached to the pod — the fastest first look when something will not start.",
-            },
-            {
-                q: "What is a readiness probe for?",
-                options: [
-                    "Restarting a container that has hung",
-                    "Telling the kubelet when a container may start receiving traffic",
-                    "Delaying the first start of a container",
-                    "Checking that the node itself is healthy",
-                ],
-                answer: 1,
-                why: "Readiness controls whether the pod is in the Service endpoints. Liveness is the probe that restarts a hung container.",
+                answer: 0,
+                why: "MIG partitions the GPU in hardware, so each instance gets dedicated memory and compute and one tenant cannot slow down or crash another. Taking turns on the whole GPU is time-slicing.",
             },
         ],
     },
     {
-        title: "Enterprise Networking",
+        title: "GPU Resource Sharing and Multi-Tenant Clusters",
         questions: [
             {
-                q: "At which OSI layer does a traditional switch forward traffic?",
-                options: ["Layer 1", "Layer 2", "Layer 3", "Layer 4"],
-                answer: 1,
-                why: "A switch forwards on MAC addresses, which is Layer 2. A router works on IP addresses at Layer 3.",
-            },
-            {
-                q: "What does putting ports into separate VLANs achieve?",
+                q: "How does GPU time-slicing share one GPU between several pods?",
                 options: [
-                    "It encrypts traffic between those ports",
-                    "It splits one physical switch into separate broadcast domains",
-                    "It increases the link speed of those ports",
-                    "It assigns static IP addresses automatically",
+                    "Each pod gets a fixed slice of GPU memory and SMs",
+                    "Each pod is moved to a different GPU when it is idle",
+                    "Pods take turns on the whole GPU, with no memory or fault isolation between them",
+                    "Only one pod may be scheduled; the others wait in a queue",
                 ],
-                answer: 1,
-                why: "A VLAN logically separates broadcast domains on shared hardware. Traffic between VLANs has to be routed.",
-            },
-            {
-                q: "Which protocol maps an IP address to a MAC address on a local network?",
-                options: ["DNS", "ARP", "DHCP", "ICMP"],
-                answer: 1,
-                why: "ARP resolves a known IP to the MAC address needed to frame the packet on the local segment.",
-            },
-            {
-                q: "What problem does Spanning Tree Protocol solve?",
-                options: [
-                    "Slow DNS resolution",
-                    "Loops in a switched Layer 2 topology",
-                    "IP address exhaustion",
-                    "Unencrypted management traffic",
-                ],
-                answer: 1,
-                why: "Redundant links create loops that would broadcast-storm the network. STP blocks ports to leave one active path.",
-            },
-            {
-                q: "What is the default administrative distance of OSPF on Cisco devices?",
-                options: ["90", "110", "120", "170"],
-                answer: 1,
-                why: "OSPF defaults to 110. Internal EIGRP is 90 and RIP is 120, so EIGRP wins over OSPF when both offer the same route.",
-            },
-        ],
-    },
-    {
-        title: "Storage and Data Management",
-        questions: [
-            {
-                q: "Which RAID level mirrors data across drives with no striping?",
-                options: ["RAID 0", "RAID 1", "RAID 5", "RAID 6"],
-                answer: 1,
-                why: "RAID 1 writes the same data to both drives. RAID 0 stripes with no redundancy, and 5 and 6 use parity.",
-            },
-            {
-                q: "What does thin provisioning do?",
-                options: [
-                    "Reserves the full volume capacity up front",
-                    "Allocates physical capacity only as data is actually written",
-                    "Compresses every block before writing it",
-                    "Splits a volume across two arrays",
-                ],
-                answer: 1,
-                why: "Thin provisioning presents the full logical size but consumes physical capacity on demand, which is why monitoring real usage matters.",
-            },
-            {
-                q: "What does a storage snapshot normally capture?",
-                options: [
-                    "A full byte-for-byte copy of the volume",
-                    "A point-in-time view, typically using pointers rather than copying data",
-                    "Only the files changed in the last hour",
-                    "The volume configuration but not its data",
-                ],
-                answer: 1,
-                why: "Most snapshots are pointer based, so they are near instant and cheap until the original blocks start changing.",
-            },
-            {
-                q: "Which of these presents file-level rather than block-level storage?",
-                options: ["iSCSI", "NFS", "Fibre Channel", "NVMe over Fabrics"],
-                answer: 1,
-                why: "NFS serves files and handles the filesystem itself. The others present raw blocks that the host formats.",
-            },
-            {
-                q: "What is deduplication designed to reduce?",
-                options: [
-                    "Network latency between sites",
-                    "Stored capacity consumed by repeated identical blocks",
-                    "The number of drives in an aggregate",
-                    "CPU load on the storage controller",
-                ],
-                answer: 1,
-                why: "Deduplication stores one copy of a repeated block and references it, which reclaims capacity but does cost controller CPU.",
-            },
-        ],
-    },
-    {
-        title: "Cloud Foundations",
-        questions: [
-            {
-                q: "Under the shared responsibility model, who secures the physical data centre?",
-                options: [
-                    "The customer",
-                    "The cloud provider",
-                    "It is split evenly",
-                    "Whichever party holds the compliance certificate",
-                ],
-                answer: 1,
-                why: "The provider owns security of the cloud — facilities and hardware. The customer owns security in the cloud: data, access and configuration.",
-            },
-            {
-                q: "What is an availability zone?",
-                options: [
-                    "A billing boundary within an account",
-                    "An isolated location within a region, with its own power and cooling",
-                    "A globally distributed cache",
-                    "A network access control list",
-                ],
-                answer: 1,
-                why: "Spreading workloads across zones is what protects you from a single facility failing, while staying close enough for low latency.",
-            },
-            {
-                q: "Which model leaves you responsible for patching the guest operating system?",
-                options: ["SaaS", "PaaS", "IaaS", "None of them"],
                 answer: 2,
-                why: "With IaaS you get the virtual machine, and everything above the hypervisor is yours — including OS patching.",
+                why: "Time-slicing interleaves the pods on the full GPU. It is cheap and flexible, but every active neighbour adds latency and there is no isolation, which is the trade-off against MIG.",
             },
             {
-                q: "What is object storage best suited to?",
+                q: "As more replicas share one GPU through time-slicing, what happens to per-pod latency?",
                 options: [
-                    "Low latency transactional databases",
-                    "Large volumes of unstructured data accessed over HTTP",
-                    "Shared home directories needing file locking",
-                    "Boot volumes for virtual machines",
+                    "It stays flat until the GPU memory is full",
+                    "It rises with every active neighbour, plus context-switching overhead",
+                    "It falls, because the GPU is busier",
+                    "It only changes for bursty workloads",
                 ],
                 answer: 1,
-                why: "Object storage scales enormously and is accessed by API, which suits media, backups and logs rather than transactional workloads.",
+                why: "Each pod waits for the others' turns and pays for the switch between them. Steady batch work suffers most, because every replica is busy at once; bursty notebooks share better because they are mostly idle.",
             },
             {
-                q: "What is auto scaling primarily for?",
+                q: "What does enabling MPS change when several processes share a GPU?",
                 options: [
-                    "Reducing the blast radius of a security incident",
-                    "Matching running capacity to actual demand",
-                    "Encrypting data in transit",
-                    "Replicating data between regions",
+                    "It gives each process isolated memory, like MIG",
+                    "It turns off the GPU between requests to save power",
+                    "It moves the workload to the CPU when the GPU is busy",
+                    "It lets kernels from different processes run on the GPU at the same time, cutting context-switch overhead",
                 ],
-                answer: 1,
-                why: "Auto scaling adds and removes instances as load changes, so you neither pay for idle capacity nor fall over at peak.",
+                answer: 3,
+                why: "MPS lets work from several clients run concurrently instead of taking turns. Latency drops, but the clients share one memory space, so a fault in one can affect the others.",
+            },
+            {
+                q: "Why does distributed training need gang scheduling?",
+                options: [
+                    "So all pods of a job start together; partial placement leaves GPUs held idle and can deadlock the cluster",
+                    "To run every pod of a job on the same node",
+                    "To give training jobs priority over inference",
+                    "To restart failed pods automatically",
+                ],
+                answer: 0,
+                why: "A distributed job cannot make progress until every worker is running. If two jobs each grab part of what they need, both hold GPUs and wait forever. Gang scheduling places all or nothing.",
+            },
+            {
+                q: "What does backfill scheduling do on a busy GPU cluster?",
+                options: [
+                    "Pre-empts running jobs to start larger ones sooner",
+                    "Duplicates jobs on spare GPUs in case one fails",
+                    "Runs smaller jobs in the idle gaps while a large job waits for its resources, without delaying it",
+                    "Moves finished jobs' data back to storage",
+                ],
+                answer: 2,
+                why: "While a large job waits for enough GPUs to free up, those GPUs would otherwise sit idle. Backfill uses the gap for work that will finish in time, raising utilisation.",
             },
         ],
     },
     {
-        title: "Security Operations",
+        title: "Storage for AI Workloads",
         questions: [
             {
-                q: "What does the principle of least privilege require?",
-                options: [
-                    "Every user gets administrator rights for speed",
-                    "Each identity gets only the access its task requires",
-                    "All access is granted for a fixed 30 days",
-                    "Access is decided by job title alone",
-                ],
-                answer: 1,
-                why: "Least privilege limits what a compromised account can reach, which is what contains an incident rather than preventing it.",
+                q: "A 256-GPU H100 cluster processes batches at an effective 20 GB/s per GPU. Roughly what aggregate storage bandwidth does it need?",
+                options: ["25 GB/s", "256 GB/s", "About 20 TB/s", "About 5.1 TB/s"],
+                answer: 3,
+                why: "256 GPUs × 20 GB/s is about 5,120 GB/s, or 5.1 TB/s. A traditional NAS filer delivering 25 GB/s supplies around half a percent of that.",
             },
             {
-                q: "What makes authentication multi-factor?",
+                q: "As you add concurrent workers to a legacy NAS, what happens to aggregate throughput?",
                 options: [
-                    "Two passwords of different lengths",
-                    "Two or more independent factor types, such as something you know and something you have",
-                    "A password changed every 30 days",
-                    "A password plus a security question",
+                    "It flattens at the filer's limit, so each extra GPU spends more time idle",
+                    "It keeps scaling linearly with the workers",
+                    "It drops to zero once a threshold is passed",
+                    "It only changes for sequential reads",
                 ],
-                answer: 1,
-                why: "The factors must be independent kinds. A password plus a security question is still just two things you know.",
+                answer: 0,
+                why: "A single filer has a fixed ceiling, and random small reads hit it sooner. Distributed storage spreads the load across many nodes, so throughput keeps following the ideal line much further.",
             },
             {
-                q: "What is a SIEM chiefly used for?",
+                q: "A cluster is I/O-bound at 45% GPU utilisation. How do you decide whether faster storage is worth its extra CAPEX?",
                 options: [
-                    "Encrypting data at rest",
-                    "Aggregating and correlating logs so activity can be detected and investigated",
-                    "Blocking traffic at the network perimeter",
-                    "Managing software licences",
+                    "Buy the fastest option; storage is always the bottleneck",
+                    "Work out what the idle GPU hours cost each month and compare that waste with the extra CAPEX",
+                    "Compare only the raw capacity of each option",
+                    "Choose the option with the lowest CAPEX",
                 ],
                 answer: 1,
-                why: "A SIEM pulls together events from many systems so patterns become visible that no single log would reveal.",
+                why: "Idle GPUs are expensive. Putting a monthly figure on the wasted hours turns a storage choice into a TCO comparison you can defend.",
             },
             {
-                q: "Encryption at rest protects data primarily against what?",
+                q: "In the 70B training case, where are checkpoints written first?",
                 options: [
-                    "An attacker intercepting traffic between two services",
-                    "Someone obtaining the stored media or underlying storage",
-                    "A user choosing a weak password",
-                    "A denial of service attack",
+                    "Straight to S3, synchronously",
+                    "Into MLflow as uploaded artifacts",
+                    "To a fast NVMe-oF tier synchronously, then uploaded to S3 asynchronously",
+                    "Only to the local disk of rank 0",
                 ],
-                answer: 1,
-                why: "At rest covers the stored copy. Traffic between services is protected by encryption in transit instead.",
+                answer: 2,
+                why: "The fast tier keeps the training stall short; the S3 upload happens in the background without blocking training. The last three checkpoints stay local, and MLflow only records the checkpoint's URI.",
             },
             {
-                q: "Phishing attacks primarily target which weakness?",
+                q: "With torch.distributed.checkpoint, how long does a 70B checkpoint write take compared with a traditional torch.save?",
                 options: [
-                    "Unpatched operating systems",
-                    "People and their trust decisions",
-                    "Weak cipher suites",
-                    "Misconfigured firewalls",
+                    "About the same, 28 seconds",
+                    "About 2.2 seconds instead of 28, because each rank writes only its own shard",
+                    "About 14 seconds, because the work is split in two",
+                    "Longer, because 64 files are written",
                 ],
                 answer: 1,
-                why: "Phishing bypasses technical controls by persuading a person to act, which is why awareness training sits alongside the tooling.",
+                why: "torch.save first gathers everything to one rank. DCP has each of the 64 ranks save its own ~10.9 GB shard with no AllGather, so the write is 12.7 times faster.",
+            },
+        ],
+    },
+    {
+        title: "Compliance and Data Residency",
+        questions: [
+            {
+                q: "Under HIPAA, what must a provider that handles protected health information (PHI) sign?",
+                options: [
+                    "A Business Associate Agreement (BAA)",
+                    "A Data Processing Agreement (DPA)",
+                    "A Service Level Agreement (SLA)",
+                    "A Non-Disclosure Agreement (NDA)",
+                ],
+                answer: 0,
+                why: "The BAA is the HIPAA requirement. The environment also needs encryption at rest and in transit, plus audit controls. A DPA is the GDPR-side contract.",
+            },
+            {
+                q: "In the HIPAA case study, where does training on identified patient data run?",
+                options: [
+                    "In any US cloud region",
+                    "On cloud Spot instances with encryption turned on",
+                    "On an on-premises H100 cluster in a HIPAA-compliant colocation facility",
+                    "Anywhere, once the data is encrypted",
+                ],
+                answer: 2,
+                why: "PHI never leaves a controlled environment. The cloud provider, under a BAA, is used for de-identified data only. Training cost came out 75% lower than the cloud alternative.",
+            },
+            {
+                q: "GDPR fines can reach what share of a company's global annual turnover?",
+                options: ["1%", "2%", "10%", "4%"],
+                answer: 3,
+                why: "Up to 4% of global annual turnover, which is why the firm in the case has to prove residency to an auditor rather than assume it.",
+            },
+            {
+                q: "In the GDPR case, what does OPA Gatekeeper do?",
+                options: [
+                    "Encrypts training data with KMS keys",
+                    "Rejects any pod that requests EU-resident data without an EU node selector",
+                    "Writes the immutable audit log",
+                    "Tags data with its classification at ingest",
+                ],
+                answer: 1,
+                why: "It is the Kubernetes admission-control layer of the four-layer design. The others are classification at ingest, region-locked storage with KMS key locality, and audit logging.",
+            },
+            {
+                q: "What is the key lesson of the GDPR case study?",
+                options: [
+                    "Residency must be enforced throughout the stack: storage, keys, scheduling and audit, not just the region",
+                    "Choosing an EU cloud region is enough to comply",
+                    "Personal data should never be used for training",
+                    "Compliance is handled by the cloud provider's contract alone",
+                ],
+                answer: 0,
+                why: "The region is only a start. Data must not be readable, decryptable or processable outside the EU, and the firm must be able to show that. The annual audit found zero transfers outside the EU.",
+            },
+        ],
+    },
+    {
+        title: "Hybrid Scaling and Cost Optimisation",
+        questions: [
+            {
+                q: "A platform retrains every six hours but sees 10x demand during major events. What architecture does the case study choose?",
+                options: [
+                    "An on-premises cluster sized for the peaks",
+                    "Everything in the cloud on-demand",
+                    "Own the baseline on-premises and burst the peaks to a cloud Spot fleet",
+                    "Reserved cloud instances for three years",
+                ],
+                answer: 2,
+                why: "Sizing on-premises for peaks leaves it idle most of the year; all-cloud on-demand pays premium rates for the baseline too. The hybrid burst ran the baseline at 95% utilisation and cut cost by 60%.",
+            },
+            {
+                q: "In that hybrid design, what triggers scaling out to the cloud?",
+                options: ["CPU utilisation", "Queue depth", "Time of day", "Manual approval"],
+                answer: 1,
+                why: "Scaling on queue depth means cloud capacity is added only when work is actually waiting, so you pay for the burst and nothing more.",
+            },
+            {
+                q: "Why does a one-time, six-week run on 1,024 H100s go to cloud Spot instead of bought hardware?",
+                options: [
+                    "Cloud GPUs are always faster",
+                    "H100s cannot be bought outright",
+                    "Spot capacity is never interrupted",
+                    "The run is transient, so more than $50M of CapEx is not justified once it ends",
+                ],
+                answer: 3,
+                why: "There is no workload to keep the hardware busy afterwards. Spot with checkpointing gave a 60% discount against on-demand, and the cluster was dissolved after the run.",
+            },
+            {
+                q: "Moving a 500 TB dataset out of the cloud for every training cycle costs more than $45K each time. What is the architectural answer?",
+                options: [
+                    "Anchor the data and move the compute to it",
+                    "Compress the dataset before every transfer",
+                    "Split each run across two clouds",
+                    "Move the data again whenever a cheaper region appears",
+                ],
+                answer: 0,
+                why: "Data has gravity. Naive cross-cloud mobility pays egress on every run, so the cost grows with each one. Keeping the data in place means only results and checkpoints move.",
+            },
+            {
+                q: "An NLP team spends $180K a month on 64 H100s at 35% average utilisation. What is the first step?",
+                options: [
+                    "Buy the GPUs outright",
+                    "Move every job to Spot",
+                    "Diagnose the waste pattern with PromQL queries",
+                    "Cut the GPU quota in half",
+                ],
+                answer: 2,
+                why: "You size the fix from the data. The exercise then works through right-sizing, the right reservation commitment, and which jobs can move to Spot at what checkpoint frequency.",
             },
         ],
     },
@@ -365,6 +384,11 @@ export const SLIDE_COURSE = { experiences: 29, modules: 8 };
  * The learner asks the agent to explain something on the whiteboard and it
  * draws the diagram one piece at a time, narrating each step. The diagram
  * itself is drawn in WhiteboardDemo; each step here reveals one more part.
+ *
+ * Each step's voiceover is a recorded clip in /public/whiteboard. The clips
+ * were generated with the Kokoro text-to-speech model (voice am_michael) from
+ * the captions below. If a caption changes, regenerate its clip so the two
+ * still match. Step 1's clip also speaks BOARD.reply first.
  */
 export const BOARD = {
     title: "Logical Storage Hierarchy",
@@ -376,22 +400,27 @@ export const BOARD_STEPS = [
     {
         caption:
             "We start at the top, with the application servers. These are the hosts that need storage, but they never touch a disk directly.",
+        audio: "/whiteboard/step-1.m4a",
     },
     {
         caption:
             "The servers access a Storage Virtual Machine. The SVM is what serves their data over NFS, SMB or iSCSI, and it keeps each tenant's data separate.",
+        audio: "/whiteboard/step-2.m4a",
     },
     {
         caption:
             "Down at the hardware level are the physical disks. They are grouped into an aggregate, which is simply a pool of raw capacity.",
+        audio: "/whiteboard/step-3.m4a",
     },
     {
         caption:
             "On top of the aggregate we create FlexVol volumes. These are the logical containers the SVM manages, and they can grow or shrink without touching the disks.",
+        audio: "/whiteboard/step-4.m4a",
     },
     {
         caption:
             "Inside each volume your data is stored as data blocks. So servers access the SVM, the SVM manages volumes, and volumes live on aggregates built from disks.",
+        audio: "/whiteboard/step-5.m4a",
     },
 ];
 

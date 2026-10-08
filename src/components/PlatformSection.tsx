@@ -6,6 +6,7 @@ import InteractiveSlides from "@/components/platform/InteractiveSlides";
 import DemoNav from "@/components/platform/DemoNav";
 import {
     QUIZZES,
+    QUIZ_COURSE,
     BOARD,
     BOARD_STEPS,
     CASE_STUDIES,
@@ -109,7 +110,7 @@ function QuizDemo({ quiz, indexLabel }: { quiz: Quiz; indexLabel: string }) {
                 </button>
 
                 <p className="mt-6 text-[11px] text-[#94A3B8] font-semibold leading-snug">
-                    *This is an actual Aurilearn {quiz.title} quiz pack
+                    *Questions from the Aurilearn {QUIZ_COURSE} course: {quiz.title}
                 </p>
             </div>
         );
@@ -189,7 +190,7 @@ function QuizDemo({ quiz, indexLabel }: { quiz: Quiz; indexLabel: string }) {
             </button>
 
             <p className="mt-4 text-[11px] text-[#94A3B8] font-semibold leading-snug">
-                *This is an actual Aurilearn {quiz.title} quiz pack
+                *Questions from the Aurilearn {QUIZ_COURSE} course: {quiz.title}
             </p>
         </div>
     );
@@ -212,58 +213,59 @@ function WhiteboardDemo() {
     const [speaking, setSpeaking] = useState(false);
     const chatRef = useRef<HTMLDivElement>(null);
 
+    const audioRef = useRef<HTMLAudioElement | null>(null);
+
     /**
-     * Voice over. Until a recorded narration track is supplied this uses the
-     * browser's own speech synthesis. Each step is narrated in full — nothing
-     * advances on its own, so the learner moves with Previous and Next exactly
-     * as they would through a taught module.
+     * Voice over: one recorded clip per step. Each step is narrated in full —
+     * nothing advances on its own, so the learner moves with Previous and
+     * Next exactly as they would through a taught module.
      */
-    const speak = (text: string) => {
-        if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
-        try {
-            window.speechSynthesis.cancel();
-            if (muted) return;
-            const u = new SpeechSynthesisUtterance(text);
-            u.rate = 0.98;
-            u.pitch = 1;
-            u.onstart = () => setSpeaking(true);
-            u.onend = () => setSpeaking(false);
-            u.onerror = () => setSpeaking(false);
-            window.speechSynthesis.speak(u);
-        } catch {
-            /* narration is an enhancement — never break the diagram */
-            setSpeaking(false);
-        }
+    useEffect(() => {
+        const audio = new Audio();
+        audio.preload = "auto";
+        audio.onplaying = () => setSpeaking(true);
+        audio.onpause = () => setSpeaking(false);
+        audio.onended = () => setSpeaking(false);
+        audioRef.current = audio;
+        // stop talking when the modal closes
+        return () => {
+            audio.pause();
+            audio.removeAttribute("src");
+            audioRef.current = null;
+        };
+    }, []);
+
+    const play = (n: number) => {
+        const audio = audioRef.current;
+        if (!audio) return;
+        audio.pause();
+        audio.src = BOARD_STEPS[n].audio;
+        audio.currentTime = 0;
+        audio.play().catch((e: DOMException) => {
+            // only a real autoplay block turns the voice off, so one tap turns it back on;
+            // an AbortError just means the clip was replaced by the next step's
+            if (e.name === "NotAllowedError") setMuted(true);
+        });
     };
 
-    // narrate whichever step is on screen, in full, and keep the chat scrolled to it
+    // narrate whichever step is on screen, and keep the chat scrolled to it
     useEffect(() => {
-        speak(BOARD_STEPS[step].caption);
+        if (!muted) play(step);
         const chat = chatRef.current;
         if (chat) chat.scrollTo({ top: chat.scrollHeight, behavior: "smooth" });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [step]);
 
-    // toggling sound stops or starts the current step's narration
-    useEffect(() => {
-        if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+    // toggling sound stops the narration, or replays the current step
+    const toggleVoice = () => {
         if (muted) {
-            window.speechSynthesis.cancel();
-            setSpeaking(false);
+            setMuted(false);
+            play(step);
         } else {
-            speak(BOARD_STEPS[step].caption);
+            setMuted(true);
+            audioRef.current?.pause();
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [muted]);
-
-    // stop talking when the modal closes
-    useEffect(() => {
-        return () => {
-            if (typeof window !== "undefined" && "speechSynthesis" in window) {
-                window.speechSynthesis.cancel();
-            }
-        };
-    }, []);
+    };
 
     const goPrev = () => setStep((n) => Math.max(0, n - 1));
     const goNext = () => setStep((n) => Math.min(BOARD_STEPS.length - 1, n + 1));
@@ -376,7 +378,7 @@ function WhiteboardDemo() {
 
             <DemoNav onPrev={goPrev} onNext={goNext} prevDisabled={step === 0} nextDisabled={step === BOARD_STEPS.length - 1}>
                 <button
-                    onClick={() => setMuted((m) => !m)}
+                    onClick={toggleVoice}
                     aria-pressed={!muted}
                     aria-label={muted ? "Turn voice on" : "Turn voice off"}
                     className="h-11 px-4 rounded-xl border-2 border-[#E7E2D8] text-sm font-800 text-[#475569] bg-white hover:border-[var(--gold)] cursor-pointer transition-colors inline-flex items-center gap-2 shrink-0"
