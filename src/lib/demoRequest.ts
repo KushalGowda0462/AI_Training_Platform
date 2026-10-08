@@ -32,7 +32,22 @@ export const DEMO_RECIPIENTS = [
     "vijay@aurilearn.ai",
 ] as const;
 
-const ENDPOINT = process.env.NEXT_PUBLIC_DEMO_FORM_ENDPOINT ?? "";
+/**
+ * Default delivery endpoint.
+ *
+ * Deliberately a constant rather than env-only. NEXT_PUBLIC_ values are
+ * compiled into the bundle at build time, so an env var that someone
+ * forgets to set when producing the cPanel zip would ship a form that
+ * silently fails on the live site. Nothing here is secret — the base url
+ * is public and the recipient addresses are already in the bundle for the
+ * mailto fallback — so defaulting costs nothing and removes that risk.
+ *
+ * Set NEXT_PUBLIC_DEMO_FORM_ENDPOINT to override, e.g. to point a local
+ * build at a test endpoint.
+ */
+const DEFAULT_ENDPOINT = "https://formsubmit.co/ajax";
+
+const ENDPOINT = process.env.NEXT_PUBLIC_DEMO_FORM_ENDPOINT?.trim() || DEFAULT_ENDPOINT;
 const ACCESS_KEY = process.env.NEXT_PUBLIC_DEMO_FORM_ACCESS_KEY ?? "";
 
 export const isDemoFormConfigured = () => ENDPOINT.trim().length > 0;
@@ -106,12 +121,27 @@ export async function submitDemoRequest(r: DemoRequest): Promise<void> {
 
     const results = await Promise.allSettled(
         DEMO_RECIPIENTS.map(async (email) => {
-            const res = await fetch(endpointFor(email), {
+            const response: Response = await fetch(endpointFor(email), {
                 method: "POST",
                 headers: { "Content-Type": "application/json", Accept: "application/json" },
                 body: JSON.stringify(body(email)),
             });
-            if (!res.ok) throw new Error(`${email}: endpoint returned ${res.status}`);
+            if (!response.ok) throw new Error(`${email}: endpoint returned ${response.status}`);
+
+            /* FormSubmit answers 200 even when it refuses the submission and
+               reports the real outcome in the body as {"success":"false"}.
+               Trusting the status code alone would show a thank-you for a
+               message that was never sent, which is the exact failure this
+               whole change exists to prevent. */
+            const result = await response.json().catch(() => null);
+            if (result && typeof result === "object" && "success" in result) {
+                const ok = result.success === true || result.success === "true";
+                if (!ok) {
+                    throw new Error(
+                        `${email}: ${result.message ?? "endpoint reported failure"}`
+                    );
+                }
+            }
             return email;
         })
     );
