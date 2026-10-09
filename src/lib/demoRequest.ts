@@ -93,9 +93,20 @@ export async function submitDemoRequest(
             (result && result.message) || `Endpoint returned ${response.status}`
         );
     }
-    if (result && typeof result === "object" && "success" in result) {
-        if (result.success !== true && result.success !== "true") {
-            throw new Error(result.message || "Endpoint reported failure.");
-        }
+
+    /* A 200 is not proof of anything on its own. If PHP is not running the
+       handler — the Next dev server serves contact.php as a text file, and a
+       misconfigured host would too — the reply is a 200 carrying the file's
+       source, not JSON. Treating that as success showed a thank-you for a
+       message that was never sent. Delivery is only believed when the
+       handler explicitly says so. */
+    if (!result || typeof result !== "object" || !("success" in result)) {
+        throw new Error(
+            "The server did not confirm delivery. If this is a local build, " +
+            "the form needs the PHP host to run."
+        );
+    }
+    if (result.success !== true && result.success !== "true") {
+        throw new Error(result.message || "Endpoint reported failure.");
     }
 }
