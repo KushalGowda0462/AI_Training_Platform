@@ -123,7 +123,8 @@ export default function HomePage() {
     },
     {
       step: "04",
-      image: "/how-it-works/labs.png",
+      image: "/how-it-works/labs-rack.jpg",
+      photo: true,
       title: "Practice in Real Labs",
       desc: "Learners work inside realistic infrastructure labs while the AI mentor provides step-by-step guidance and debugging support.",
     },
@@ -341,7 +342,11 @@ export default function HomePage() {
                       <img
                         src={step.image}
                         alt=""
-                        className="w-9 h-9 object-contain"
+                        className={
+                          "photo" in step
+                            ? "w-full h-full p-[3px] rounded-full object-cover"
+                            : "w-9 h-9 object-contain"
+                        }
                         draggable={false}
                       />
                     </div>
