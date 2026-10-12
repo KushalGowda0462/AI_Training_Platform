@@ -11,13 +11,14 @@
  */
 
 /* ─── Who receives a demo request ──────────────────────────────────────
-   Server side only. Never sent to the browser. Edit this list to add or
-   remove people; nothing else needs changing. */
+   Server side only. Never sent to the browser.
+
+   One shared address. It is a Microsoft 365 distribution list, so who
+   receives demo requests is managed there by adding or removing members,
+   not by editing this file. The list must allow mail from outside the
+   organisation, or Microsoft rejects the website's messages. */
 $RECIPIENTS = [
-    'James@aurilearn.ai',
-    'Arjun@aurilearn.ai',
-    'Rashmi@aurilearn.ai',
-    'vijay@aurilearn.ai',
+    'demorequest@aurilearn.ai',
 ];
 
 /* The address mail is sent FROM. Must be on this domain or the host's
