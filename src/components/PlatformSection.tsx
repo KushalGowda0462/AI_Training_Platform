@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Modal from "@/components/Modal";
+import DemoRequestModal from "@/components/DemoRequestModal";
 import InteractiveSlides from "@/components/platform/InteractiveSlides";
 import DemoNav from "@/components/platform/DemoNav";
 import {
@@ -19,8 +20,8 @@ import {
 /**
  * "Platform" section — James's 26/09 input, with the 29/09 client revisions.
  *
- * Layout: the four capability points sit on the left half, "What Do You Get"
- * and "Experience" on the right half.
+ * Layout: the four journey stages run across the top, with "Included with
+ * every seat" on the left and the live demos on the right below them.
  *
  * Every Experience tile opens a working demo — there are no placeholders.
  * All the content they show comes from ./platform/content.ts so the
@@ -36,26 +37,34 @@ type DemoKey =
     | "interactive"
     | "contentgen";
 
-const LEFT_POINTS = [
-    { title: "Learning", blurb: "acquire knowledge" },
-    { title: "Skilling", blurb: "attain new capabilities" },
-    { title: "Certification preparation", blurb: "pass on first go" },
-    { title: "Analytics", blurb: "see who is doing what, where and how well" },
+const JOURNEY = [
+    { title: "Learning", blurb: "Build core knowledge with an AI instructor that adapts to each learner." },
+    { title: "Skilling", blurb: "Apply it in hands-on labs, with guidance at every step." },
+    { title: "Certification", blurb: "Targeted exam preparation built to pass on the first attempt." },
+    { title: "Analytics", blurb: "See who is progressing, where, and how well across your teams." },
 ];
 
-const WHAT_YOU_GET = [
-    "Highly individualized instructor agent teaching that is personalized to match each learning style and behavior",
-    "One on one lab work guidance and mentorship",
+const INCLUDED = [
+    {
+        title: "A personal AI instructor",
+        blurb: "Pace, examples and explanations adapt to how each person learns.",
+        icon: "M12 3l1.9 4.6L18.5 9.5l-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9L12 3zM19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15z",
+    },
+    {
+        title: "One-to-one lab mentorship",
+        blurb: "Hands-on guidance through every lab, from setup to sign-off.",
+        icon: "M4 5h16v10H4zM8 19h8M12 15v4",
+    },
 ];
 
 const EXPERIENCES: { key: DemoKey; title: string; blurb: string; kind: "interactive" | "video" }[] = [
-    { key: "quiz", title: "Quiz directed learning", blurb: "A new quiz every time", kind: "interactive" },
-    { key: "slides", title: "Interactive slides", blurb: "Change it, see the result", kind: "interactive" },
-    { key: "whiteboard", title: "Live real time white boarding", blurb: "A diagram drawn live", kind: "interactive" },
+    { key: "quiz", title: "Quiz-led learning", blurb: "A fresh quiz on every attempt", kind: "interactive" },
+    { key: "slides", title: "Interactive slides", blurb: "Change the inputs, see the result", kind: "interactive" },
+    { key: "whiteboard", title: "Live whiteboarding", blurb: "A diagram drawn in real time", kind: "interactive" },
     { key: "casestudy", title: "Case studies", blurb: "Real infrastructure decisions", kind: "interactive" },
-    { key: "labmentorship", title: "Lab work mentorship", blurb: "Agent assisted lab", kind: "video" },
-    { key: "interactive", title: "Highly interactive", blurb: "Ask anything, any time", kind: "video" },
-    { key: "contentgen", title: "Content generation", blurb: "How it works, and the output", kind: "video" },
+    { key: "labmentorship", title: "Lab mentorship", blurb: "An AI agent guiding a live lab", kind: "video" },
+    { key: "interactive", title: "Ask anything", blurb: "Questions answered at any point", kind: "video" },
+    { key: "contentgen", title: "Content generation", blurb: "How course material is produced", kind: "video" },
 ];
 
 /* ── shared dark-surface classes ── */
@@ -612,6 +621,7 @@ function VideoDemo({ src, caption }: { src: string; caption: string }) {
 
 export default function PlatformSection() {
     const [openDemo, setOpenDemo] = useState<DemoKey | null>(null);
+    const [requestOpen, setRequestOpen] = useState(false);
 
     /**
      * Quiz rotation: 1st click shows Quiz 1, 2nd Quiz 2, and so on to Quiz 5,
@@ -630,120 +640,107 @@ export default function PlatformSection() {
 
     const close = () => setOpenDemo(null);
 
-    const modalTitle: Record<DemoKey, string> = {
-        quiz: "Quiz directed learning",
-        slides: "Interactive slides",
-        whiteboard: "Live real time white boarding",
-        casestudy: "Case studies",
-        labmentorship: "Lab work mentorship",
-        interactive: "Highly interactive",
-        contentgen: "Content generation",
-    };
+    const modalTitle = Object.fromEntries(EXPERIENCES.map((e) => [e.key, e.title])) as Record<DemoKey, string>;
+
+    const LABEL = "text-xs font-semibold uppercase tracking-[0.14em] text-[var(--gold-hover)]";
 
     return (
         <section id="platform" className="section-tall bg-[#FAFAF8] border-t border-[#E7E2D8]">
-            <div className="container-content w-full py-10 md:py-12">
-                <div className="max-w-3xl mx-auto text-center mb-8">
+            <div className="container-content w-full py-10 md:py-14">
+                <div className="max-w-4xl mx-auto text-center mb-10">
                     <div className="gold-divider mx-auto" />
-                    <h2 className="text-3xl md:text-4xl font-900 text-[#0F172A] leading-[1.1] tracking-tight mb-3">
+                    <h2 className="section-title text-[#0F172A] mb-3">
                         Platform
                     </h2>
-                    <p className="text-base md:text-lg text-[#475569] font-medium leading-relaxed">
-                        One engine taking you on the whole journey from first concept to a certification pass,
-                        with the evidence to prove it happened.
+                    <p className="max-w-2xl mx-auto text-base md:text-lg text-[#475569] leading-relaxed text-pretty">
+                        A personal AI instructor, hands-on labs and exam preparation for every learner,
+                        with the data to show it worked.
                     </p>
                 </div>
 
-                <div className="grid-12 items-start">
+                {/* ── The journey ── */}
+                <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-10">
+                    {JOURNEY.map((step, i) => (
+                        <li key={step.title} className={`${CARD} relative overflow-hidden px-5 pt-5 pb-5 before:absolute before:inset-x-0 before:top-0 before:h-[3px] before:bg-[var(--gold)]/70`}>
+                            <span className="block text-sm font-semibold tabular-nums text-[var(--gold-hover)] mb-1.5">
+                                {String(i + 1).padStart(2, "0")}
+                            </span>
+                            <span className="block text-lg font-semibold text-[#0F172A] mb-1">{step.title}</span>
+                            <span className="block text-sm text-[#475569] leading-relaxed max-w-xs">{step.blurb}</span>
+                        </li>
+                    ))}
+                </ol>
 
-                    {/* ── Columns 1-5: the four points ── */}
+                <div className="grid-12 items-stretch">
+
+                    {/* ── Included with every seat ── */}
                     <div className="col-span-12 lg:col-span-4 flex flex-col">
-                        <h3 className="text-sm font-800 uppercase tracking-widest text-[var(--gold-hover)] mb-1">
-                            What It Covers
-                        </h3>
-                        <p className="text-sm text-[var(--gold-hover)] font-bold mb-3">
-                            The whole journey, end to end.
-                        </p>
-
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
-                            {LEFT_POINTS.map((p, i) => (
-                                <div
-                                    key={p.title}
-                                    className={`${CARD} flex items-center gap-3 px-4 py-4 transition-all hover:border-[var(--gold)] hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(15,23,42,0.06)]`}
-                                >
-                                    <span className="w-9 h-9 rounded-full bg-[var(--gold)]/10 border border-[var(--gold)]/40 text-[var(--gold-hover)] text-xs font-900 flex items-center justify-center shrink-0">
-                                        {String(i + 1).padStart(2, "0")}
+                        <h3 className={`${LABEL} mb-3`}>Included with every seat</h3>
+                        <ul className={`${CARD} flex-1 flex flex-col divide-y divide-[#E7E2D8]`}>
+                            {INCLUDED.map((item) => (
+                                <li key={item.title} className="flex-1 flex gap-4 items-start px-5 py-5">
+                                    <span className="w-10 h-10 rounded-lg bg-[#F3EEE2] text-[var(--gold-hover)] flex items-center justify-center shrink-0">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d={item.icon} />
+                                        </svg>
                                     </span>
                                     <span className="min-w-0">
-                                        <span className="block text-lg font-900 text-[#0F172A] leading-snug">{p.title}</span>
-                                        <span className="block text-[#475569] font-semibold text-sm leading-snug">{p.blurb}</span>
+                                        <span className="block font-semibold text-[#0F172A] leading-snug mb-1">{item.title}</span>
+                                        <span className="block text-sm text-[#475569] leading-relaxed">{item.blurb}</span>
                                     </span>
-                                </div>
+                                </li>
                             ))}
-                        </div>
+                        </ul>
                     </div>
 
-                    {/* ── Columns 6-12: What Do You Get + Experience ── */}
-                    <div className="col-span-12 lg:col-span-8 flex flex-col gap-6">
-
-                        <div>
-                            <h3 className="text-sm font-800 uppercase tracking-widest text-[var(--gold-hover)] mb-1">
-                                What Do You Get
-                            </h3>
-                            <p className="text-sm text-[var(--gold-hover)] font-bold mb-3">
-                                Included with every seat.
-                            </p>
-                            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 items-stretch">
-                                {WHAT_YOU_GET.map((item) => (
-                                    <li key={item} className={`${CARD} flex gap-2.5 items-start px-4 py-3.5`}>
-                                        <svg className="w-5 h-5 text-[var(--gold)] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                                        </svg>
-                                        <span className="text-[#0F172A] font-bold leading-snug text-sm">{item}</span>
-                                    </li>
-                                ))}
-                            </ul>
+                    {/* ── Live demos ── */}
+                    <div className="col-span-12 lg:col-span-8 flex flex-col">
+                        <div className="flex items-baseline justify-between gap-4 mb-3">
+                            <h3 className={LABEL}>See it in action</h3>
+                            <p className="hidden sm:block text-xs text-[#64748B]">Each demo opens right here on the page</p>
                         </div>
 
-                        <div>
-                            <h3 className="text-sm font-800 uppercase tracking-widest text-[var(--gold-hover)] mb-1">
-                                Experience
-                            </h3>
-                            <p className="text-sm text-[var(--gold-hover)] font-bold mb-3">
-                                Click any of these to try it right here.
-                            </p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 flex-1">
+                            {EXPERIENCES.map((e) => (
+                                <button
+                                    key={e.key}
+                                    onClick={() => open(e.key)}
+                                    className={`${CARD} demo-tile group text-left p-4 flex flex-col transition-all hover:border-[var(--gold)] hover:shadow-[0_6px_24px_rgba(15,23,42,0.06)] cursor-pointer`}
+                                >
+                                    <span className="flex items-center justify-between mb-3">
+                                        <span className="text-[11px] font-medium uppercase tracking-wider text-[#64748B]">
+                                            {e.kind === "video" ? "Video" : "Interactive"}
+                                        </span>
+                                        <svg className="text-[#94A3B8] group-hover:text-[var(--gold-hover)] group-hover:translate-x-0.5 transition-all" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M5 12h14M13 6l6 6-6 6" />
+                                        </svg>
+                                    </span>
+                                    <span className="block font-semibold text-[#0F172A] leading-snug">{e.title}</span>
+                                    <span className="block text-[13px] text-[#475569] leading-snug mt-0.5">{e.blurb}</span>
+                                </button>
+                            ))}
 
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 items-stretch">
-                                {EXPERIENCES.map((e, i) => (
-                                    <button
-                                        key={e.key}
-                                        onClick={() => open(e.key)}
-                                        className={`${CARD} group text-left px-4 py-3.5 flex items-center gap-3 transition-all hover:border-[var(--gold)] hover:bg-[#F3F0E8] cursor-pointer ${
-                                            i === EXPERIENCES.length - 1 ? "sm:col-span-2 lg:col-span-1" : ""
-                                        }`}
-                                    >
-                                        <span className="w-8 h-8 rounded-full bg-[var(--gold)]/10 border border-[var(--gold)]/40 text-[var(--gold-hover)] flex items-center justify-center shrink-0 group-hover:bg-[var(--gold)] group-hover:text-white transition-colors">
-                                            {e.kind === "video" ? (
-                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                                                    <path d="M8 6l10 6-10 6V6z" />
-                                                </svg>
-                                            ) : (
-                                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                                                    <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
-                                                </svg>
-                                            )}
-                                        </span>
-                                        <span className="flex-1 min-w-0">
-                                            <span className="block font-900 text-[#0F172A] leading-snug text-[15px]">{e.title}</span>
-                                            <span className="block text-[13px] text-[#475569] font-semibold leading-snug">{e.blurb}</span>
-                                        </span>
-                                    </button>
-                                ))}
-                            </div>
+                            <button
+                                onClick={() => setRequestOpen(true)}
+                                className="demo-tile group text-left p-4 rounded-xl bg-[#0F172A] text-white flex flex-col transition-colors hover:bg-[#1E293B] cursor-pointer"
+                            >
+                                <span className="flex items-center justify-between mb-3">
+                                    <span className="text-[11px] font-medium uppercase tracking-wider text-[var(--gold-light)]">
+                                        Live session
+                                    </span>
+                                    <svg className="text-[var(--gold-light)] group-hover:translate-x-0.5 transition-transform" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M5 12h14M13 6l6 6-6 6" />
+                                    </svg>
+                                </span>
+                                <span className="block font-semibold leading-snug">Book a walkthrough</span>
+                                <span className="block text-[13px] text-[#CBD5E1] leading-snug mt-0.5">The full platform, with our team</span>
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <DemoRequestModal isOpen={requestOpen} onClose={() => setRequestOpen(false)} />
 
             {/* ── Demo modals ── */}
             <Modal

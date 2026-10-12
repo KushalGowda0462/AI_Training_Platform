@@ -123,7 +123,8 @@ export default function HomePage() {
     },
     {
       step: "04",
-      image: "/how-it-works/labs.png",
+      image: "/how-it-works/labs-rack.jpg",
+      photo: true,
       title: "Practice in Real Labs",
       desc: "Learners work inside realistic infrastructure labs while the AI mentor provides step-by-step guidance and debugging support.",
     },
@@ -206,7 +207,7 @@ export default function HomePage() {
                   </span>
                   <span className="h-px flex-1 bg-gradient-to-r from-[#E7E2D8] to-transparent" />
                 </div>
-                <h2 className="text-3xl md:text-4xl font-900 text-[#0F172A] tracking-tight leading-[1.1]">
+                <h2 className="section-title text-[#0F172A]">
                   Aurilearn <span className="text-gradient-gold">at work</span>
                 </h2>
               </div>
@@ -250,11 +251,8 @@ export default function HomePage() {
         <div className="container-content flex-1 flex flex-col justify-center py-16">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
             <div className="md:col-span-12 lg:col-span-8 lg:col-start-3 text-center">
-              <div className="w-14 h-14 rounded-2xl bg-[var(--gold)] shadow-lg mx-auto mb-6 flex items-center justify-center">
-                <span className="text-white text-2xl font-bold">A</span>
-              </div>
               <div className="gold-divider mx-auto" />
-              <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A] mb-6">About Aurilearn</h2>
+              <h2 className="section-title text-[#0F172A] mb-6">About</h2>
               <p className="text-lg md:text-xl font-serif text-[#0F172A] leading-snug mb-6 italic">
                 &quot;Built on decades of deep real-world IT training experience and applying LLMs to
                 narrow, high value training use cases.&quot;
@@ -319,7 +317,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-12 mb-12">
             <div className="md:col-span-12 lg:col-span-8 lg:col-start-3 text-center">
               <div className="gold-divider mx-auto" />
-              <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A] mb-3">How Aurilearn works</h2>
+              <h2 className="section-title text-[#0F172A] mb-3">How Aurilearn works</h2>
               <p className="text-lg text-[#64748B] max-w-xl mx-auto">
                 Five steps from deployment to certified expertise — Your
                 Comprehensive Solution
@@ -344,7 +342,11 @@ export default function HomePage() {
                       <img
                         src={step.image}
                         alt=""
-                        className="w-9 h-9 object-contain"
+                        className={
+                          "photo" in step
+                            ? "w-full h-full p-[3px] rounded-full object-cover"
+                            : "w-9 h-9 object-contain"
+                        }
                         draggable={false}
                       />
                     </div>
@@ -370,7 +372,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-12 mb-12">
             <div className="md:col-span-12 lg:col-span-8 lg:col-start-3 max-w-2xl mx-auto">
               <div className="gold-divider mx-auto" />
-              <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A] mb-3">Natural Learning Experience</h2>
+              <h2 className="section-title text-[#0F172A] mb-3">Natural Learning Experience</h2>
               <p className="text-lg text-[#64748B]">
                 Interact with your Aurilearn AI instructor like working with a senior engineer.
               </p>
@@ -405,7 +407,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <div className="lg:col-span-6">
               <div className="gold-divider" />
-              <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A] mb-5">Mentorship That Feels Real</h2>
+              <h2 className="section-title text-[#0F172A] mb-5">Mentorship That Feels Real</h2>
               <p className="text-base text-[#64748B] leading-relaxed mb-7">
                 Aurilearn&apos;s AI instructor behaves like a senior engineer guiding your learning journey — patient, precise, and always available.
               </p>
@@ -470,13 +472,13 @@ export default function HomePage() {
       </section>
 
       {/* ─── SECTION 6: ENTERPRISE DEPLOYMENT CONTROL ─── */}
-      <section id="security" className="snap-section bg-[#0B1220]">
+      <section id="security" className="snap-section bg-[#FAFAF8] border-t border-[#E7E2D8]">
         <div className="container-content w-full py-16">
           <div className="grid grid-cols-1 md:grid-cols-12 mb-12">
             <div className="md:col-span-12 lg:col-span-8 lg:col-start-3 text-center">
               <div className="gold-divider mx-auto" />
-              <h2 className="text-3xl md:text-4xl font-800 text-white mb-4">Enterprise Deployment Control</h2>
-              <p className="text-[#94A3B8] text-base max-w-xl mx-auto">
+              <h2 className="section-title text-[#0F172A] mb-4">Security</h2>
+              <p className="text-[#64748B] text-base max-w-xl mx-auto">
                 Aurilearn runs within your controlled environment ensuring that you have full enterprise
                 governance, security and access management.
               </p>
@@ -486,12 +488,12 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
             <div className="md:col-span-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
               {securityCards.map((card) => (
-                <div key={card.title} className="bg-[#162035] border border-[#1E2D45] rounded-2xl p-6 flex flex-col gap-4 hover:-translate-y-1 transition-transform duration-300">
-                  <div className="w-14 h-14 rounded-full bg-[#0B1220] border border-[var(--gold)]/20 flex items-center justify-center text-2xl shadow-[0_0_16px_rgba(169,128,42,0.12)]">
+                <div key={card.title} className="bg-white border border-[#E7E2D8] rounded-2xl p-6 flex flex-col gap-4 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--gold)] hover:shadow-[0_8px_30px_rgba(15,23,42,0.06)]">
+                  <div className="w-14 h-14 rounded-full bg-[#F3EEE2] border border-[var(--gold)]/30 flex items-center justify-center text-2xl">
                     {card.icon}
                   </div>
-                  <h3 className="text-base font-bold text-white">{card.title}</h3>
-                  <p className="text-sm text-[#94A3B8] leading-relaxed">{card.desc}</p>
+                  <h3 className="text-base font-bold text-[#0F172A]">{card.title}</h3>
+                  <p className="text-sm text-[#475569] leading-relaxed">{card.desc}</p>
                 </div>
               ))}
             </div>
@@ -508,7 +510,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
             <div className="lg:col-span-5">
               <div className="gold-divider" />
-              <h2 className="text-3xl md:text-4xl font-800 text-[#0F172A] mb-5">Analytics when, where and as you want them</h2>
+              <h2 className="section-title text-[#0F172A] mb-5">Analytics when, where and as you want them</h2>
               <p className="text-base text-[#64748B] leading-relaxed mb-7">
                 Move beyond generic course completion rates. All data is captured and presented on demand, giving engineering leaders granular visibility in to team capabilities and potential road blocks.
               </p>
@@ -724,9 +726,7 @@ export default function HomePage() {
             <div className="md:col-span-12 lg:col-span-8 lg:col-start-3 max-w-xl mx-auto w-full">
               <div className="text-center mb-8">
                 <div className="gold-divider mx-auto" />
-                <h2 className="text-3xl md:text-4xl font-800 text-white mb-3">
-                  Let Aurliearn take you beyond your own expectations
-                </h2>
+                <h2 className="section-title text-white mb-3">Contact</h2>
                 <p className="text-[#94A3B8] text-base">
                   Book a 30-minute discovery call with an AURILEARN.AI Customer Service Representative
                 </p>
