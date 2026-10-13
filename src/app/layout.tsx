@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import ChatWidget from "@/components/ChatWidget";
+import Footer from "@/components/Footer";
 
 const META_PIXEL_ID = "327793394379737";
 const GA_MEASUREMENT_ID = "G-WXT567CCDN";
@@ -76,6 +77,7 @@ fbq('track', 'PageView');
         {/* End Meta Pixel Code */}
         <Navbar />
         <main className="pt-16">{children}</main>
+        <Footer />
         <ChatWidget />
       </body>
     </html>

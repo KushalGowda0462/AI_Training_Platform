@@ -781,7 +781,7 @@ export const VIDEO_CAPTIONS = {
         "How content generation works, what it produces, and how long it takes end to end.",
 } as const;
 
-/** The video shown under "Advertisement" at the foot of the Platform section. */
+/** The video shown under "Watch a Student Use AuriLearn" at the foot of the Platform section. */
 export const ADVERTISEMENT = {
     title: "Customer Experience",
     src: "/customer-experience.mp4",

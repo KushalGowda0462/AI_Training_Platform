@@ -138,9 +138,9 @@ section[id] {
   position: relative;
 }
 
-/* The Advertisement panel at the foot of the Platform section. The Platform
-   content above it fills one screen, so this panel stays out of view when
-   you jump to Platform from the menu, and fills its own screen when you
+/* The "Watch a Student Use AuriLearn" panel at the foot of the Platform page.
+   The Platform content above it fills one screen, so this panel stays out
+   of view when the page opens, and fills its own screen when you
    scroll down to it. */
 .platform-ad {
   min-height: calc(100svh - 5rem);
@@ -196,11 +196,11 @@ section[id] {
     padding-top: 0.875rem;
     padding-bottom: 0.875rem;
   }
-  /* Contact panel plus its footer band, likewise */
+  /* Contact panel and the site footer, likewise */
   #contact > .container-content {
     padding-bottom: 0.5rem;
   }
-  #contact > div:last-child > .container-content {
+  footer > .container-content {
     padding-top: 1rem;
     padding-bottom: 1rem;
   }

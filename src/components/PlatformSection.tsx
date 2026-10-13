@@ -742,15 +742,15 @@ export default function PlatformSection() {
                 </div>
             </div>
 
-            {/* ── Advertisement: its own screen, so it stays out of view until you scroll to it ── */}
-            <div id="advertisement" className="platform-ad border-t border-[#E7E2D8]">
+            {/* ── Watch a Student Use AuriLearn: its own screen, so it stays out of view until you scroll to it ── */}
+            <div id="watch-a-student" className="platform-ad border-t border-[#E7E2D8]">
                 <div className="container-content w-full py-10">
                     <div className="max-w-4xl mx-auto w-full">
                         {/* sub-title: gold hairlines either side, a step below the "Platform" title */}
                         <div className="flex items-center justify-center gap-4 mb-6">
                             <span className="h-px w-12 sm:w-24 bg-gradient-to-r from-transparent to-[var(--gold)]" />
                             <h3 className="text-[1.375rem] md:text-[1.625rem] leading-tight font-normal tracking-tight text-[#0F172A] text-center">
-                                Advertisement
+                                Watch a Student Use AuriLearn
                             </h3>
                             <span className="h-px w-12 sm:w-24 bg-gradient-to-l from-transparent to-[var(--gold)]" />
                         </div>
