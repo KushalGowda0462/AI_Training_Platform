@@ -719,21 +719,20 @@ export default function HomePage() {
       </section>
 
       {/* ─── SECTION 8: FINAL CTA / CONTACT (full-screen snap, flex-col) ─── */}
-      <section id="contact" className="snap-section bg-[#0B1220] flex flex-col pt-20 md:pt-28">
+      <section id="contact" className="snap-section bg-[#0B1220] flex flex-col pt-20 md:pt-24">
         {/* Form area — grows to fill space */}
-        <div className="container-content w-full flex-1 flex flex-col justify-center pb-12">
+        <div className="container-content w-full flex-1 flex flex-col justify-center pb-8">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
             <div className="md:col-span-12 lg:col-span-8 lg:col-start-3 max-w-xl mx-auto w-full">
               <div className="text-center mb-8">
                 <div className="gold-divider mx-auto" />
-                <h2 className="section-title text-white mb-3">Contact</h2>
-                <p className="text-[#94A3B8] text-base">
+                <p className="text-[#CBD5E1] text-lg leading-relaxed">
                   Book a 30-minute discovery call with an AURILEARN.AI Customer Service Representative
                 </p>
               </div>
 
-              <div className="bg-[#162035] rounded-2xl p-8 sm:p-10 text-center border border-[#1E2D45] shadow-2xl mt-8">
-                <h3 className="text-sm font-bold text-[#94A3B8] uppercase tracking-widest mb-6">
+              <div className="bg-[#162035] rounded-2xl p-8 text-center border border-[#1E2D45] shadow-2xl">
+                <h3 className="text-sm font-bold text-[#94A3B8] uppercase tracking-widest mb-5">
                   Contact us at
                 </h3>
 
@@ -773,7 +772,7 @@ export default function HomePage() {
                   )}
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-[#1E2D45]">
+                <div className="mt-6 pt-5 border-t border-[#1E2D45]">
                   <p className="text-[#64748B] text-xs font-600">
                     We&apos;ll get back to you within 24 hours
                   </p>
@@ -785,8 +784,8 @@ export default function HomePage() {
 
         {/* Rich company footer band — pinned at bottom of the contact panel */}
         <div className="w-full mt-auto border-t border-[#162035] bg-[#060D1A]">
-          <div className="container-content py-8">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-6">
+          <div className="container-content py-6">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-5">
               {/* Brand + tagline */}
               <div className="md:col-span-12 lg:col-span-4 lg:col-start-2">
                 <div className="flex items-center gap-2 mb-3">

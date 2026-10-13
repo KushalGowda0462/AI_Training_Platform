@@ -138,10 +138,31 @@ section[id] {
   position: relative;
 }
 
+/* The Advertisement panel at the foot of the Platform section. The Platform
+   content above it fills one screen, so this panel stays out of view when
+   you jump to Platform from the menu, and fills its own screen when you
+   scroll down to it. */
+.platform-ad {
+  min-height: calc(100svh - 5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  scroll-snap-align: start;
+  scroll-margin-top: calc(5rem + 1px);
+}
+
 /* Short laptops (1366x768 and similar) have roughly 690px of usable height
    once the navbar is accounted for. Tighten the Platform section there so
    the last demo tile still lands on screen when you jump to it from
    the menu, rather than being cut off. */
+/* The Platform grid reads better in a narrower band than the full-width
+   container the other sections use. */
+#platform > .container-content {
+  max-width: 1440px;
+  padding-left: clamp(1.25rem, 6vw, 5.5rem);
+  padding-right: clamp(1.25rem, 6vw, 5.5rem);
+}
+
 @media (max-height: 820px) {
   #platform > .container-content {
     padding-top: 1.5rem;
@@ -159,6 +180,29 @@ section[id] {
   #platform .demo-tile {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
+  }
+}
+
+/* Very short windows (1280x720 and similar): trim a little more so the
+   Platform and Contact sections still fit without scrolling. */
+@media (max-height: 740px) {
+  #platform > .container-content {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: clamp(1.25rem, 4vw, 3.5rem);
+    padding-right: clamp(1.25rem, 4vw, 3.5rem);
+  }
+  #platform ol > li {
+    padding-top: 0.875rem;
+    padding-bottom: 0.875rem;
+  }
+  /* Contact panel plus its footer band, likewise */
+  #contact > .container-content {
+    padding-bottom: 0.5rem;
+  }
+  #contact > div:last-child > .container-content {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
 }
 
