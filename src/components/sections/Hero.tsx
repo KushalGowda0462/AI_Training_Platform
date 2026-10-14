@@ -5,8 +5,8 @@ import Link from "next/link";
 import Modal from "@/components/Modal";
 import DemoRequestModal from "@/components/DemoRequestModal";
 
-// "Aurilearn Demonstrative Videos" on the DC Tech Consulting YouTube channel
-const YOUTUBE_ID = "y6PM-YowgsA";
+// "Aurilearn Demonstrative Video" on the Aurilearn ai YouTube channel
+const YOUTUBE_ID = "_BNz0LMvnMk";
 
 export default function Hero() {
   const [videoModalOpen, setVideoModalOpen] = useState(false);
@@ -119,11 +119,11 @@ export default function Hero() {
     </section>
 
     {/* Video Modal */}
-    <Modal isOpen={videoModalOpen} onClose={() => setVideoModalOpen(false)} title="Aurilearn Demonstrative Videos" size="xl">
+    <Modal isOpen={videoModalOpen} onClose={() => setVideoModalOpen(false)} title="Aurilearn Demonstrative Video" size="xl">
       <div className="aspect-video bg-[#0B1220] rounded-xl overflow-hidden border border-[#1E2D45]">
         <iframe
           src={`https://www.youtube-nocookie.com/embed/${YOUTUBE_ID}?autoplay=1&rel=0`}
-          title="Aurilearn Demonstrative Videos"
+          title="Aurilearn Demonstrative Video"
           className="h-full w-full"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerPolicy="strict-origin-when-cross-origin"

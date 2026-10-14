@@ -6,8 +6,8 @@ import Modal from "@/components/Modal";
 import DemoRequestModal from "@/components/DemoRequestModal";
 import { Wrap } from "./ui";
 
-// "Aurilearn Demonstrative Videos" on the DC Tech Consulting YouTube channel
-const YOUTUBE_ID = "y6PM-YowgsA";
+// "Aurilearn Demonstrative Video" on the Aurilearn ai YouTube channel
+const YOUTUBE_ID = "_BNz0LMvnMk";
 
 const jumpLinks = [
   { href: "#training-gap", label: "why aurilearn" },
@@ -121,7 +121,7 @@ export default function Hero() {
         <div className="aspect-video bg-[#0B1220] rounded-xl overflow-hidden">
           <iframe
             src={`https://www.youtube-nocookie.com/embed/${YOUTUBE_ID}?autoplay=1&rel=0`}
-            title="Aurilearn Demonstrative Videos"
+            title="Aurilearn Demonstrative Video"
             className="h-full w-full"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
