@@ -4,20 +4,10 @@ import { useState } from "react";
 import Link from "next/link";
 import Modal from "@/components/Modal";
 import DemoRequestModal from "@/components/DemoRequestModal";
-import { Wrap, Chip } from "./ui";
-
-const agentSpecs = [
-  { label: "Voice", value: "Personalizable" },
-  { label: "Accent", value: "Personalizable" },
-  { label: "Explanation style", value: "Personalizable" },
-  { label: "Support level", value: "Adjustable" },
-  { label: "Progress tracking", value: "Real time" },
-];
+import { Wrap } from "./ui";
 
 // "Aurilearn Demonstrative Videos" on the DC Tech Consulting YouTube channel
 const YOUTUBE_ID = "y6PM-YowgsA";
-
-const teachingModes =["Interactive slides", "Live whiteboarding", "Case studies", "Quizzes", "Instructor check-ins"];
 
 const jumpLinks = [
   { href: "#training-gap", label: "why aurilearn" },
@@ -50,7 +40,7 @@ export default function Hero() {
         <Wrap className="relative">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
             {/* Left: pitch */}
-            <div className="lg:col-span-7 min-w-0">
+            <div className="lg:col-span-6 min-w-0">
               <div className="inline-flex items-center gap-2 rounded-full border border-[#E7E2D8] bg-white px-3 py-1.5 mb-6 font-mono text-xs font-semibold text-[#0F172A]">
                 <span className="w-2 h-2 rounded-full bg-[var(--gold)] animate-pulse" />
                 AuriLearn · AI-delivered IT training · 1:1 mentorship
@@ -84,14 +74,6 @@ export default function Hero() {
                 Included: 10 free minutes of AI instruction with &quot;Try for Free&quot;
               </p>
 
-              <div className="mt-7 inline-flex max-w-full items-center gap-2 rounded-lg border border-[#E7E2D8] bg-white px-4 py-2.5 font-mono text-[13px] text-[#0F172A]">
-                <span className="text-[var(--gold)]">$</span>
-                <span className="truncate">aurilearn instructor --mode 1:1</span>
-                <span className="rounded border border-emerald-200 bg-emerald-50 px-1.5 py-0.5 text-[10px] font-bold text-emerald-700">
-                  LIVE
-                </span>
-              </div>
-
               <nav aria-label="On this page" className="mt-8 flex flex-wrap gap-x-3 gap-y-1 font-mono text-[11px] uppercase tracking-widest text-[#94A3B8]">
                 {jumpLinks.map((l, i) => (
                   <span key={l.href} className="flex items-center gap-3">
@@ -104,8 +86,8 @@ export default function Hero() {
               </nav>
             </div>
 
-            {/* Right: video + instructor spec card */}
-            <div className="lg:col-span-5 min-w-0 flex flex-col gap-5">
+            {/* Right: video */}
+            <div className="lg:col-span-6 min-w-0 flex flex-col gap-5">
               <h2 className="text-xl font-extrabold text-[#0F172A]">
                 The <span className="text-[var(--gold)]">AuriLearn</span> way of learning
               </h2>
@@ -130,32 +112,6 @@ export default function Hero() {
                   </span>
                 </span>
               </button>
-
-              <div className="rounded-2xl border border-[#E7E2D8] bg-white p-6 shadow-[0_12px_40px_rgba(15,23,42,0.06)]">
-                <div className="flex items-center justify-between pb-4 border-b border-[#E7E2D8]">
-                  <span className="font-mono text-[13px] font-bold text-[#0F172A]">AuriLearn Instructor Agent</span>
-                  <span className="flex items-center gap-1.5 font-mono text-[11px] text-emerald-600">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                    Active
-                  </span>
-                </div>
-                <dl className="mt-4 rounded-xl border border-[#E7E2D8] divide-y divide-[#E7E2D8]">
-                  {agentSpecs.map((s) => (
-                    <div key={s.label} className="flex items-center justify-between gap-4 px-4 py-2.5 font-mono text-[12px]">
-                      <dt className="text-[#64748B]">{s.label}</dt>
-                      <dd className="font-bold text-[#0F172A]">{s.value}</dd>
-                    </div>
-                  ))}
-                </dl>
-                <p className="mt-5 mb-2 font-mono text-[10px] uppercase tracking-[0.15em] text-[#94A3B8]">
-                  How it teaches:
-                </p>
-                <div className="flex flex-wrap gap-1.5">
-                  {teachingModes.map((m) => (
-                    <Chip key={m}>{m}</Chip>
-                  ))}
-                </div>
-              </div>
             </div>
           </div>
         </Wrap>
