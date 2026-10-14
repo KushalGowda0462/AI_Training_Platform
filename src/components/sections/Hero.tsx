@@ -5,6 +5,9 @@ import Link from "next/link";
 import Modal from "@/components/Modal";
 import DemoRequestModal from "@/components/DemoRequestModal";
 
+// "Aurilearn Demonstrative Videos" on the DC Tech Consulting YouTube channel
+const YOUTUBE_ID = "y6PM-YowgsA";
+
 export default function Hero() {
   const [videoModalOpen, setVideoModalOpen] = useState(false);
   const [demoModalOpen, setDemoModalOpen] = useState(false);
@@ -85,14 +88,11 @@ export default function Hero() {
               </h2>
             </div>
             <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-[#0B1220] to-[#162035] aspect-[4/3] shadow-2xl border-4 border-white">
-              <video
-                src="/Demo%20Video.mp4#t=0.1"
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`https://i.ytimg.com/vi/${YOUTUBE_ID}/maxresdefault.jpg`}
+                alt=""
                 className="absolute inset-0 h-full w-full object-cover"
-                muted
-                playsInline
-                preload="metadata"
-                aria-hidden="true"
-                tabIndex={-1}
               />
               <div className="absolute inset-0 bg-[#0B1220]/25" />
 
@@ -119,18 +119,16 @@ export default function Hero() {
     </section>
 
     {/* Video Modal */}
-    <Modal isOpen={videoModalOpen} onClose={() => setVideoModalOpen(false)} title="Aurilearn Demo: Overcoming Obstacles" size="xl">
+    <Modal isOpen={videoModalOpen} onClose={() => setVideoModalOpen(false)} title="Aurilearn Demonstrative Videos" size="xl">
       <div className="aspect-video bg-[#0B1220] rounded-xl overflow-hidden border border-[#1E2D45]">
-        <video
-          src="/Demo%20Video.mp4"
-          className="h-full w-full object-contain"
-          controls
-          autoPlay
-          playsInline
-          preload="metadata"
-        >
-          Your browser does not support the video tag.
-        </video>
+        <iframe
+          src={`https://www.youtube-nocookie.com/embed/${YOUTUBE_ID}?autoplay=1&rel=0`}
+          title="Aurilearn Demonstrative Videos"
+          className="h-full w-full"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          allowFullScreen
+        />
       </div>
     </Modal>
     </>
