@@ -218,23 +218,23 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     fail('That work email does not look valid.');
 }
 
-/* Free trials are for companies only. Same lists as src/lib/freeTrial.ts;
-   keep the two in step. */
-$PERSONAL_EMAIL_DOMAINS = [
-    'gmail.com', 'googlemail.com', 'ymail.com', 'rocketmail.com',
-    'msn.com', 'icloud.com', 'me.com', 'mac.com', 'aol.com',
-    'proton.me', 'protonmail.com', 'pm.me', 'mail.com', 'email.com',
-    'zoho.com', 'zohomail.com', 'rediffmail.com', 'qq.com', '163.com',
-    '126.com', 'sina.com', 'inbox.com', 'fastmail.com', 'tutanota.com',
-    'tuta.io', 'hey.com', 'gmx.com', 'gmx.net', 'yandex.com', 'yandex.ru',
-    'mail.ru', 'web.de', 'hushmail.com',
-];
-$PERSONAL_EMAIL_PROVIDERS = ['yahoo', 'hotmail', 'outlook', 'live', 'gmx', 'yandex'];
+/* Free trials are for companies only. The refused domains are in
+   personal-email-domains.json beside this file — the same file the
+   browser checks against. If it is missing, fall back to the big
+   providers rather than letting every personal address through. */
+$blocked = json_decode((string) @file_get_contents(__DIR__ . '/personal-email-domains.json'), true);
+if (!is_array($blocked) || empty($blocked['providers'])) {
+    error_log('Aurilearn: personal-email-domains.json missing or unreadable; using built-in list.');
+    $blocked = [
+        'providers' => ['gmail', 'googlemail', 'yahoo', 'hotmail', 'outlook', 'live', 'msn', 'aol', 'icloud', 'rediffmail', 'zoho', 'protonmail'],
+        'domains'   => ['me.com', 'mac.com', 'proton.me'],
+    ];
+}
 
 if ($isTrial) {
-    $domain = strtolower((string) substr((string) strrchr($email, '@'), 1));
-    $label  = explode('.', $domain)[0];
-    if (in_array($domain, $PERSONAL_EMAIL_DOMAINS, true) || in_array($label, $PERSONAL_EMAIL_PROVIDERS, true)) {
+    $domain   = strtolower((string) substr((string) strrchr($email, '@'), 1));
+    $provider = explode('.', $domain)[0];
+    if (in_array($domain, $blocked['domains'] ?? [], true) || in_array($provider, $blocked['providers'], true)) {
         fail('Please use your company email address. Personal email addresses (Gmail, Outlook, Yahoo, etc.) are not accepted.');
     }
 }
