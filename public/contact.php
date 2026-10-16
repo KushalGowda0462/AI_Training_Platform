@@ -133,6 +133,29 @@ $RATE_WINDOW_SECS  = 3600;
 header('Content-Type: application/json; charset=utf-8');
 header('X-Content-Type-Options: nosniff');
 
+/* ─── Cross-site posts ───
+   The Vercel copy of the site cannot run PHP, so its forms post here.
+   Only our own origins are allowed; anything else gets no CORS headers
+   and the browser refuses to send it. */
+$origin = (string) ($_SERVER['HTTP_ORIGIN'] ?? '');
+$allowedOrigins = [
+    'https://aurilearn.ai',
+    'https://www.aurilearn.ai',
+    'https://aurilearn-site.vercel.app',
+];
+if (in_array($origin, $allowedOrigins, true)
+    || preg_match('#^https://aurilearn-site-[a-z0-9-]+\.vercel\.app$#', $origin)) {
+    header('Access-Control-Allow-Origin: ' . $origin);
+    header('Vary: Origin');
+    if (($_SERVER['REQUEST_METHOD'] ?? '') === 'OPTIONS') {
+        header('Access-Control-Allow-Methods: POST, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type, Accept');
+        header('Access-Control-Max-Age: 86400');
+        http_response_code(204);
+        exit;
+    }
+}
+
 function fail($message, $code = 400) {
     http_response_code($code);
     echo json_encode(['success' => false, 'message' => $message]);
@@ -218,7 +241,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     fail('That work email does not look valid.');
 }
 
-/* Free trials are for companies only. The refused domains are in
+/* Both forms are for companies only. The refused domains are in
    personal-email-domains.json beside this file — the same file the
    browser checks against. If it is missing, fall back to the big
    providers rather than letting every personal address through. */
@@ -231,12 +254,10 @@ if (!is_array($blocked) || empty($blocked['providers'])) {
     ];
 }
 
-if ($isTrial) {
-    $domain   = strtolower((string) substr((string) strrchr($email, '@'), 1));
-    $provider = explode('.', $domain)[0];
-    if (in_array($domain, $blocked['domains'] ?? [], true) || in_array($provider, $blocked['providers'], true)) {
-        fail('Please use your company email address. Personal email addresses (Gmail, Outlook, Yahoo, etc.) are not accepted.');
-    }
+$domain   = strtolower((string) substr((string) strrchr($email, '@'), 1));
+$provider = explode('.', $domain)[0];
+if (in_array($domain, $blocked['domains'] ?? [], true) || in_array($provider, $blocked['providers'], true)) {
+    fail('Please use your company email address. Personal email addresses (Gmail, Outlook, Yahoo, etc.) are not accepted.');
 }
 
 /* Header injection guard: a newline in a value that reaches a mail header

@@ -7,6 +7,7 @@ import {
   demoMailtoHref,
   FALLBACK_CONTACT,
 } from "@/lib/demoRequest";
+import { isPersonalEmail, PERSONAL_EMAIL_MESSAGE } from "@/lib/personalEmail";
 
 type FormData = {
   firstName: string;
@@ -74,9 +75,11 @@ export default function DemoRequestModal({ isOpen, onClose }: Props) {
     if (!form.firstName.trim()) newErrors.firstName = "First name is required.";
     if (!form.lastName.trim()) newErrors.lastName = "Last name is required.";
     if (!form.workEmail.trim()) {
-      newErrors.workEmail = "Work email is required.";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.workEmail)) {
+      newErrors.workEmail = "Company email is required.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.workEmail.trim())) {
       newErrors.workEmail = "Please enter a valid email address.";
+    } else if (isPersonalEmail(form.workEmail)) {
+      newErrors.workEmail = PERSONAL_EMAIL_MESSAGE;
     }
     if (!form.jobRole) newErrors.jobRole = "Job role is required.";
     if (form.jobRole === "Other" && !form.jobRoleOther.trim())
@@ -189,7 +192,7 @@ export default function DemoRequestModal({ isOpen, onClose }: Props) {
 
           {/* Row 2 – Work Email */}
           <Field
-            label="Work Email"
+            label="Company Email"
             name="workEmail"
             type="email"
             placeholder="jane.smith@company.com"

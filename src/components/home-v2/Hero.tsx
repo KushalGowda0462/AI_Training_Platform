@@ -42,19 +42,19 @@ export default function Hero() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
             {/* Left: pitch */}
             <div className="lg:col-span-6 min-w-0">
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#E7E2D8] bg-white px-3 py-1.5 mb-6 font-mono text-xs font-semibold text-[#0F172A]">
-                <span className="w-2 h-2 rounded-full bg-[var(--gold)] animate-pulse" />
+              <div className="inline-flex items-center gap-2.5 rounded-full border border-[#E7E2D8] bg-white px-4 py-2 mb-6 font-mono text-sm sm:text-[15px] tracking-tight font-semibold text-[#0F172A]">
+                <span className="w-2.5 h-2.5 rounded-full bg-[var(--gold)] animate-pulse shrink-0" />
                 AuriLearn · AI-delivered IT training · 1:1 mentorship
               </div>
 
-              <h1 className="text-[clamp(2.3rem,1.4rem+4.4vw,4rem)] font-extrabold tracking-tight leading-[1.04] text-[#0F172A]">
-                The World&apos;s first{" "}
+              <h1 className="text-[clamp(2.1rem,1.3rem+3.6vw,3.4rem)] font-extrabold tracking-tight leading-[1.06] text-[#0F172A]">
+                The World&apos;s first AI Delivered IT training{" "}
                 <span className="text-gradient-gold">Vertical Narrow Language Model.</span>
               </h1>
 
-              <p className="mt-6 max-w-[560px] text-[clamp(1.0625rem,1rem+0.35vw,1.1875rem)] text-[#475569] leading-relaxed">
-                <strong className="text-[#0F172A]">Specifically architected</strong>, orchestrated, trained on and fine
-                tuned to deliver <strong className="text-[#0F172A]">IT training</strong> through a 1:1 AI instructor.
+              <p className="mt-6 max-w-[600px] text-[clamp(1.25rem,1.1rem+0.6vw,1.5rem)] text-[#475569] leading-relaxed">
+                Specifically architected, orchestrated, trained on and fine tuned to deliver IT training through a 1:1
+                AI instructor.
               </p>
 
               <div className="mt-8 flex flex-col sm:flex-row sm:items-start gap-3">
@@ -75,9 +75,9 @@ export default function Hero() {
                 Included: 10 free minutes of AI instruction with &quot;Try for Free&quot;
               </p>
 
-              <nav aria-label="On this page" className="mt-8 flex flex-wrap gap-x-3 gap-y-1 font-mono text-[11px] uppercase tracking-widest text-[#94A3B8]">
+              <nav aria-label="On this page" className="mt-8 flex flex-wrap gap-x-4 gap-y-2 font-mono text-sm md:text-[15px] uppercase tracking-widest text-[#94A3B8]">
                 {jumpLinks.map((l, i) => (
-                  <span key={l.href} className="flex items-center gap-3">
+                  <span key={l.href} className="flex items-center gap-4">
                     {i > 0 && <span aria-hidden="true">·</span>}
                     <a href={l.href} className="hover:text-[var(--gold)] transition-colors">
                       {l.label}
@@ -89,7 +89,7 @@ export default function Hero() {
 
             {/* Right: video */}
             <div className="lg:col-span-6 min-w-0 flex flex-col gap-5">
-              <h2 className="text-xl font-extrabold text-[#0F172A]">
+              <h2 className="text-center text-2xl md:text-[2rem] font-extrabold tracking-tight text-[#0F172A]">
                 The <span className="text-[var(--gold)]">AuriLearn</span> way of learning
               </h2>
 

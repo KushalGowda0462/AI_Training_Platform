@@ -4,13 +4,8 @@ import { useState, FormEvent } from "react";
 import Modal from "@/components/Modal";
 import { Field } from "@/components/DemoRequestModal";
 import { FALLBACK_CONTACT } from "@/lib/demoRequest";
-import {
-  submitFreeTrialRequest,
-  freeTrialMailtoHref,
-  isPersonalEmail,
-  PERSONAL_EMAIL_MESSAGE,
-  FreeTrialRequest,
-} from "@/lib/freeTrial";
+import { submitFreeTrialRequest, freeTrialMailtoHref, FreeTrialRequest } from "@/lib/freeTrial";
+import { isPersonalEmail, PERSONAL_EMAIL_MESSAGE } from "@/lib/personalEmail";
 
 const EMPTY: FreeTrialRequest = { firstName: "", lastName: "", jobTitle: "", workEmail: "" };
 
