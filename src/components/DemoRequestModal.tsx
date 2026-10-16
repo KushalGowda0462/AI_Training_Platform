@@ -342,7 +342,7 @@ type FieldProps = {
   required?: boolean;
 };
 
-function Field({ label, name, value, onChange, placeholder, type = "text", error, required }: FieldProps) {
+export function Field({ label, name, value, onChange, placeholder, type = "text", error, required }: FieldProps) {
   return (
     <div className="flex flex-col gap-1.5">
       <label htmlFor={name} className="text-xs font-bold text-[#475569] uppercase tracking-wide">

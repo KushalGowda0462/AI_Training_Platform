@@ -1,17 +1,17 @@
 import { Band, SectionHead } from "./ui";
 
 const mentorPoints = [
-  { title: "Human-like mentorship", desc: "Learners interact with the AI instructor as if they are working with an experienced mentor." },
-  { title: "Context-aware teaching", desc: "The AI understands what the learner is currently doing and adapts its guidance accordingly." },
-  { title: "Continuous feedback", desc: "Immediate feedback on commands, configurations, and decisions in real time." },
-  { title: "Confidence building", desc: "Engineers learn by doing while the AI mentor supports and validates their reasoning process." },
+  { title: "Human-like mentorship", desc: "You interact with the AI instructor as if they are working with an experienced mentor." },
+  { title: "Context-aware teaching", desc: "The AI understands what you are currently doing and adapts its guidance and input accordingly." },
+  { title: "Continuous feedback", desc: "Immediate feedback on commands, configurations and decisions in real time." },
+  { title: "Confidence building", desc: "You learn by doing while the AI mentor supports and validates your reasoning process." },
 ];
 
 const chat = [
-  { role: "learner", text: "I applied the NetworkPolicy but traffic is still being blocked between namespaces." },
-  { role: "ai", text: "Good catch. Let's check two things: first, ensure the podSelector labels match exactly. A common mistake is a label casing mismatch. Can you paste your policy spec?" },
+  { role: "learner", text: "I applied the NetworkPolicy but traffic is still being blocked between name spaces." },
+  { role: "ai", text: "Good catch. Let's look at two things: first, ensure the pod selector labels match exactly. A common mistake is label casing mis-match. Can you paste your policy spec?" },
   { role: "learner", text: "Here it is — podSelector: matchLabels: app: frontend" },
-  { role: "ai", text: "I see it — your destination namespace selector is missing. Add a namespaceSelector block alongside the podSelector. Here's the corrected structure..." },
+  { role: "ai", text: "I see it — your destination name space selector is missing. Add a name space selector block alongside the pod selector. Here's the corrected structure..." },
 ];
 
 const features = [
@@ -22,24 +22,24 @@ const features = [
   },
   {
     title: "Debug Errors Instantly",
-    desc: "Paste logs, errors, or configurations and receive guided troubleshooting explanations in real time.",
+    desc: "Paste logs, errors and configurations and receive guided troubleshooting explanations in real time.",
     icon: <path d="M4 17l6-6-6-6M12 19h8" />,
   },
   {
     title: "Guided Lab Execution",
-    desc: "The AI mentor walks engineers through complex infrastructure tasks step by step.",
+    desc: "The AI mentor walks you through complex infrastructure tasks step by step.",
     icon: <path d="M9 18l-6 3V6l6-3 6 3 6-3v15l-6 3-6-3zM9 3v15M15 6v15" />,
   },
 ];
 
 export default function Instructor() {
   return (
-    <Band id="instructor">
+    <Band id="instructor" alt>
       <SectionHead
         center
         eyebrow="powered by AuriLearn"
-        title="Mentorship that feels real."
-        lede="AuriLearn's AI instructor behaves like a senior engineer guiding your learning journey — patient, precise, and always available."
+        title="One on One Mentorship."
+        lede="AuriLearn's AI instructor guides you through your learning journey with patience, precision, understanding and is always available."
       />
 
       <div className="rounded-3xl border border-[var(--gold)]/40 bg-white p-6 sm:p-10 shadow-[0_20px_60px_rgba(169,128,42,0.10)]">
@@ -50,7 +50,7 @@ export default function Instructor() {
               AuriLearn AI Instructor
             </span>
             <h3 className="mt-5 text-2xl sm:text-[1.75rem] font-extrabold tracking-tight leading-tight text-[#0F172A]">
-              Interact with your AuriLearn AI instructor like working with a senior engineer.
+              Interact with your AuriLearn AI instructor like working with the most senior engineer.
             </h3>
             <ul className="mt-6 space-y-4">
               {mentorPoints.map((p) => (
@@ -69,17 +69,15 @@ export default function Instructor() {
           <div className="lg:col-span-6 min-w-0 rounded-2xl bg-[#0B1220] border border-[#1E2D45] overflow-hidden">
             <div className="flex items-center gap-3 px-5 py-4 border-b border-white/10">
               <span className="w-2 h-2 rounded-full bg-emerald-400" />
-              <span className="font-mono text-[13px] font-bold text-white">AuriLearn Instructor</span>
-              <span className="ml-auto rounded-full border border-[var(--gold)]/50 px-2.5 py-0.5 font-mono text-[10px] text-[#E8C96B]">
-                Kubernetes CKA
-              </span>
+              <span className="font-mono text-[13px] font-bold text-white">AuriLearn Instructor - Kubernetes CKA</span>
             </div>
             <div className="flex flex-col gap-3 p-5">
               {chat.map((m, i) =>
                 m.role === "learner" ? (
-                  <p key={i} className="self-end max-w-[85%] rounded-xl rounded-br-sm bg-[#D4A017]/15 border border-[#D4A017]/30 px-4 py-2.5 text-[13px] leading-relaxed text-white">
-                    {m.text}
-                  </p>
+                  <div key={i} className="self-end max-w-[85%] rounded-xl rounded-br-sm bg-[#D4A017]/15 border border-[#D4A017]/30 px-4 py-2.5">
+                    <p className="font-mono text-[11px] font-bold text-[#E8C96B] mb-1">Student</p>
+                    <p className="text-[13px] leading-relaxed text-white">{m.text}</p>
+                  </div>
                 ) : (
                   <div key={i} className="self-start max-w-[90%] rounded-xl rounded-bl-sm bg-white/[0.04] border border-white/10 px-4 py-3">
                     <p className="font-mono text-[11px] font-bold text-[#E8C96B] mb-1">AuriLearn</p>

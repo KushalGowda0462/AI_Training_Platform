@@ -8,12 +8,12 @@ const steps = [
   {
     image: "/how-it-works/learning.png",
     title: "Deploy Aurilearn Instructor",
-    desc: "Aurilearn deploys securely in to your companies environment and integrates with your existing engineering tools and lab systems.",
+    desc: "Aurilearn deploys securely in to your company's environment and integrates with your existing learning platform, lab system and engineering tools.",
   },
   {
     image: "/how-it-works/enroll.png",
     title: "Enroll Teams in Training Programs",
-    desc: "Teams join curated Aurilearn learning tracks such as Kubernetes, DevOps, platform engineering, or internal product training.",
+    desc: "Teams join curated Aurilearn learning tracks such as Kubernetes, DevOps, platform engineering and internal product and technical training.",
   },
   {
     image: "/how-it-works/mentorship.png",
@@ -24,11 +24,11 @@ const steps = [
     image: "/how-it-works/labs-rack.jpg",
     photo: true,
     title: "Practice in Real Labs",
-    desc: "Learners work inside realistic infrastructure labs while the AI mentor provides step-by-step guidance and debugging support.",
+    desc: "Learners work inside real infrastructure labs while the AI mentor provides step-by-step guidance and debugging support.",
   },
   {
     image: "/how-it-works/progress.png",
-    title: "Track Skill Progress",
+    title: "Track Skills Progress",
     desc: "Managers monitor class and module progress, lab completion, and certification readiness across their teams.",
   },
 ];
@@ -39,7 +39,7 @@ export default function Steps() {
   const [open, setOpen] = useState(0);
 
   return (
-    <Band id="how-it-works">
+    <Band id="how-it-works" alt>
       <SectionHead
         eyebrow="how it works"
         title="Five steps from deployment to certified expertise."

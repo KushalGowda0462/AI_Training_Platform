@@ -8,7 +8,7 @@ export function Wrap({ children, className = "" }: { children: React.ReactNode; 
 
 export function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
-    <p className="font-mono text-[13px] font-semibold text-[var(--gold)] mb-3">
+    <p className="font-mono text-[17px] md:text-lg font-semibold text-[var(--gold)] mb-3">
       {"// "}
       {children}
     </p>

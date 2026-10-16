@@ -69,18 +69,28 @@ export async function submitDemoRequest(
     r: DemoRequest,
     honeypot = ""
 ): Promise<void> {
+    await postToFormEndpoint({
+        first_name: r.firstName,
+        last_name: r.lastName,
+        work_email: r.workEmail,
+        job_role: resolvedJobRole(r),
+        telephone: r.telephone,
+        country: r.country,
+        company: honeypot,
+    });
+}
+
+/**
+ * Posts a form payload to the PHP handler. Resolves only when the handler
+ * explicitly confirms delivery; throws otherwise.
+ */
+export async function postToFormEndpoint(
+    payload: Record<string, string>
+): Promise<void> {
     const response = await fetch(ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-            first_name: r.firstName,
-            last_name: r.lastName,
-            work_email: r.workEmail,
-            job_role: resolvedJobRole(r),
-            telephone: r.telephone,
-            country: r.country,
-            company: honeypot,
-        }),
+        body: JSON.stringify(payload),
     });
 
     /* The endpoint reports the real outcome in the body. A 2xx alone is

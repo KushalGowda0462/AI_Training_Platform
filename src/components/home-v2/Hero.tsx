@@ -1,16 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import Modal from "@/components/Modal";
 import DemoRequestModal from "@/components/DemoRequestModal";
+import FreeTrialModal from "@/components/FreeTrialModal";
 import { Wrap } from "./ui";
 
 // "Aurilearn Demonstrative Video" on the Aurilearn ai YouTube channel
 const YOUTUBE_ID = "_BNz0LMvnMk";
 
 const jumpLinks = [
-  { href: "#training-gap", label: "why aurilearn" },
   { href: "#instructor", label: "ai instructor" },
   { href: "#analytics", label: "analytics" },
   { href: "#how-it-works", label: "how it works" },
@@ -20,10 +19,12 @@ const jumpLinks = [
 export default function Hero() {
   const [videoOpen, setVideoOpen] = useState(false);
   const [demoOpen, setDemoOpen] = useState(false);
+  const [trialOpen, setTrialOpen] = useState(false);
 
   return (
     <>
       <DemoRequestModal isOpen={demoOpen} onClose={() => setDemoOpen(false)} />
+      <FreeTrialModal isOpen={trialOpen} onClose={() => setTrialOpen(false)} />
 
       {/* id="hero" lets the navbar hide its own demo button while this is on screen */}
       <section id="hero" className="relative overflow-hidden bg-[#FAFAF8] pt-16 pb-20 md:pt-24 md:pb-28">
@@ -63,12 +64,12 @@ export default function Hero() {
                 >
                   Request an Enterprise Demo
                 </button>
-                <Link
-                  href="/contact/"
-                  className="rounded-full border-2 border-[#0F172A] bg-white text-[#0F172A] px-8 py-3 font-bold text-base text-center transition-all hover:bg-[#0F172A] hover:text-white hover:-translate-y-0.5"
+                <button
+                  onClick={() => setTrialOpen(true)}
+                  className="rounded-full border-2 border-[#0F172A] bg-white text-[#0F172A] px-8 py-3 font-bold text-base text-center transition-all hover:bg-[#0F172A] hover:text-white hover:-translate-y-0.5 cursor-pointer"
                 >
                   Try it for Free
-                </Link>
+                </button>
               </div>
               <p className="mt-3 text-xs font-semibold text-[#64748B]">
                 Included: 10 free minutes of AI instruction with &quot;Try for Free&quot;
