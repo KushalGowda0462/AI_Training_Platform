@@ -85,7 +85,7 @@ export default function CertificationCard({ cert }: Props) {
                     )}
 
                     <div className="pt-4 border-t border-[#E7E2D8]">
-                        <Link href="/#contact" className="btn-gold w-full justify-center" onClick={() => setOpen(false)}>
+                        <Link href="/contact" className="btn-gold w-full justify-center" onClick={() => setOpen(false)}>
                             Request Demo for this Certification
                         </Link>
                     </div>

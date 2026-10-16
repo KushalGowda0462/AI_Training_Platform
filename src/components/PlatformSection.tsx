@@ -13,6 +13,7 @@ import {
     CASE_STUDIES,
     VIDEO_SOURCES,
     VIDEO_CAPTIONS,
+    ADVERTISEMENT,
     type Quiz,
     type CaseStudy,
 } from "@/components/platform/content";
@@ -622,6 +623,7 @@ function VideoDemo({ src, caption }: { src: string; caption: string }) {
 export default function PlatformSection() {
     const [openDemo, setOpenDemo] = useState<DemoKey | null>(null);
     const [requestOpen, setRequestOpen] = useState(false);
+    const [adOpen, setAdOpen] = useState(false);
 
     /**
      * Quiz rotation: 1st click shows Quiz 1, 2nd Quiz 2, and so on to Quiz 5,
@@ -646,7 +648,7 @@ export default function PlatformSection() {
 
     return (
         <section id="platform" className="section-tall bg-[#FAFAF8] border-t border-[#E7E2D8]">
-            <div className="container-content w-full py-10 md:py-14">
+            <div className="container-content w-full py-10 md:py-14 min-h-[calc(100svh-5rem)] flex flex-col justify-center">
                 <div className="max-w-4xl mx-auto text-center mb-10">
                     <div className="gold-divider mx-auto" />
                     <h2 className="section-title text-[#0F172A] mb-3">
@@ -738,9 +740,90 @@ export default function PlatformSection() {
                         </div>
                     </div>
                 </div>
+
+                <div className="watch-link mt-6 text-center">
+                    <a
+                        href="#watch-a-student"
+                        className="group inline-flex items-center gap-3 text-[15px] font-semibold text-[#0F172A] hover:text-[var(--gold-hover)] transition-colors"
+                    >
+                        <span className="w-8 h-8 rounded-full bg-[var(--gold)] text-white flex items-center justify-center shadow-[0_4px_14px_rgba(169,128,42,0.3)]">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M8 5l11 7-11 7V5z" />
+                            </svg>
+                        </span>
+                        Watch a Student Use AuriLearn
+                        <svg className="text-[var(--gold-hover)] group-hover:translate-y-0.5 transition-transform" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                            <path d="M12 5v14M6 13l6 6 6-6" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            {/* ── Watch a Student Use AuriLearn: its own screen, so it stays out of view until you scroll to it ── */}
+            <div id="watch-a-student" className="platform-ad border-t border-[#E7E2D8]">
+                <div className="container-content w-full py-10">
+                    <div className="max-w-4xl mx-auto w-full">
+                        {/* sub-title: gold hairlines either side, a step below the "Platform" title */}
+                        <div className="flex items-center justify-center gap-4 mb-6">
+                            <span className="h-px w-12 sm:w-24 bg-gradient-to-r from-transparent to-[var(--gold)]" />
+                            <h3 className="text-[1.375rem] md:text-[1.625rem] leading-tight font-normal tracking-tight text-[#0F172A] text-center">
+                                Watch a Student Use AuriLearn
+                            </h3>
+                            <span className="h-px w-12 sm:w-24 bg-gradient-to-l from-transparent to-[var(--gold)]" />
+                        </div>
+
+                        <div className={`${CARD} p-4 md:p-5 shadow-[0_10px_40px_rgba(15,23,42,0.06)]`}>
+                            <p className="text-center text-xs font-semibold uppercase tracking-[0.14em] text-[var(--gold-hover)] mb-3">
+                                {ADVERTISEMENT.title}
+                            </p>
+                            {/* thumbnail and play button, as on the hero's demo video; it plays in a modal */}
+                            <div className="relative rounded-xl overflow-hidden bg-gradient-to-br from-[#0B1220] to-[#162035] aspect-video">
+                                <video
+                                    src={`${ADVERTISEMENT.src}#t=0.1`}
+                                    className="absolute inset-0 h-full w-full object-cover"
+                                    muted
+                                    playsInline
+                                    preload="metadata"
+                                    aria-hidden="true"
+                                    tabIndex={-1}
+                                />
+                                <div className="absolute inset-0 bg-[#0B1220]/25" />
+
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                    <button
+                                        onClick={() => setAdOpen(true)}
+                                        className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-2xl hover:bg-white/20 hover:scale-105 transition-all cursor-pointer"
+                                        aria-label={`Play ${ADVERTISEMENT.title} video`}
+                                    >
+                                        <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center">
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                                                <path d="M8 6l10 6-10 6V6z" fill="var(--ink)" />
+                                            </svg>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <DemoRequestModal isOpen={requestOpen} onClose={() => setRequestOpen(false)} />
+
+            <Modal isOpen={adOpen} onClose={() => setAdOpen(false)} title={ADVERTISEMENT.title} size="xl">
+                <div className="aspect-video bg-[#0B1220] rounded-xl overflow-hidden border border-[#1E2D45]">
+                    <video
+                        src={ADVERTISEMENT.src}
+                        className="h-full w-full object-contain"
+                        controls
+                        autoPlay
+                        playsInline
+                        preload="metadata"
+                    >
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </Modal>
 
             {/* ── Demo modals ── */}
             <Modal

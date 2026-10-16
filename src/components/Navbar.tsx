@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import DemoRequestModal from "@/components/DemoRequestModal";
 
@@ -9,6 +10,7 @@ export default function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
     const [heroVisible, setHeroVisible] = useState(true);
     const [demoOpen, setDemoOpen] = useState(false);
+    const pathname = usePathname();
 
     useEffect(() => {
         const onScroll = () => {
@@ -34,41 +36,24 @@ export default function Navbar() {
     }, []);
 
     /**
-     * Top menu. "anchor" items scroll to a section on the home page;
-     * "demo" opens the Request an Enterprise Demo form.
+     * Top menu. "page" items go to their own page; "demo" opens the
+     * Request an Enterprise Demo form.
      *
      * The products page is titled "Platform" per James's 26/09 input.
      */
     const navLinks: ({ label: string } & (
-        | { kind: "anchor"; href: string }
+        | { kind: "page"; href: string }
         | { kind: "demo" }
     ))[] = [
-        { kind: "anchor", href: "/#about", label: "About" },
-        { kind: "anchor", href: "/#platform", label: "Platform" },
+        { kind: "page", href: "/about", label: "About" },
+        { kind: "page", href: "/platform", label: "Platform" },
         { kind: "demo", label: "Demo" },
-        { kind: "anchor", href: "/#security", label: "Security" },
-        { kind: "anchor", href: "/#contact", label: "Contact" },
+        { kind: "page", href: "/security", label: "Security" },
+        { kind: "page", href: "/contact", label: "Contact" },
     ];
 
-    const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-        if (href.startsWith("/#") && window.location.pathname === "/") {
-            e.preventDefault();
-            const id = href.replace("/#", "");
-            const element = document.getElementById(id);
-            if (element) {
-                element.scrollIntoView({ behavior: "smooth", block: "start" });
-                setMenuOpen(false);
-            }
-        }
-    };
-
-    const scrollToContact = () => {
-        const el = document.getElementById("contact");
-        if (el) {
-            el.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-        setMenuOpen(false);
-    };
+    // trailingSlash is on, so the current path may end in "/"
+    const isActive = (href: string) => pathname.replace(/\/$/, "") === href;
 
     return (
         <>
@@ -109,8 +94,8 @@ export default function Navbar() {
                                 <Link
                                     key={l.href}
                                     href={l.href}
-                                    onClick={(e) => handleAnchorClick(e, l.href)}
-                                    className="text-sm font-semibold text-[#475569] hover:text-[#0F172A] transition-colors"
+                                    aria-current={isActive(l.href) ? "page" : undefined}
+                                    className={`text-sm font-semibold transition-colors ${isActive(l.href) ? "text-[var(--gold-hover)]" : "text-[#475569] hover:text-[#0F172A]"}`}
                                 >
                                     {l.label}
                                 </Link>
@@ -120,9 +105,9 @@ export default function Navbar() {
 
                     {/* CTAs */}
                     <div className={`hidden md:flex items-center gap-3 transition-all duration-300 ${heroVisible ? "opacity-0 translate-y-2 pointer-events-none" : "opacity-100 translate-y-0"}`}>
-                        <button onClick={scrollToContact} className="text-sm font-600 px-4 py-2 rounded-lg text-[#0F172A] hover:bg-[#F3F0E8] transition-colors cursor-pointer">
+                        <Link href="/contact" className="text-sm font-600 px-4 py-2 rounded-lg text-[#0F172A] hover:bg-[#F3F0E8] transition-colors cursor-pointer">
                             Try for Free
-                        </button>
+                        </Link>
                         <button onClick={() => setDemoOpen(true)} className="btn-gold text-sm px-5 py-2 cursor-pointer">
                             Request Enterprise Demo
                         </button>
@@ -162,17 +147,18 @@ export default function Navbar() {
                                 <Link
                                     key={l.href}
                                     href={l.href}
-                                    onClick={(e) => handleAnchorClick(e, l.href)}
-                                    className="block px-3 py-3 text-base font-semibold text-[#475569] hover:text-[#0F172A] rounded-xl hover:bg-[#FAFAF8] transition-colors"
+                                    onClick={() => setMenuOpen(false)}
+                                    aria-current={isActive(l.href) ? "page" : undefined}
+                                    className={`block px-3 py-3 text-base font-semibold rounded-xl hover:bg-[#FAFAF8] transition-colors ${isActive(l.href) ? "text-[var(--gold-hover)]" : "text-[#475569] hover:text-[#0F172A]"}`}
                                 >
                                     {l.label}
                                 </Link>
                             )
                         )}
                         <div className="px-3 pt-4 flex flex-col gap-3">
-                            <button onClick={scrollToContact} className="w-full text-center py-3 text-sm font-600 rounded-xl bg-[#F3F0E8] text-[#0F172A] cursor-pointer">
+                            <Link href="/contact" onClick={() => setMenuOpen(false)} className="w-full text-center py-3 text-sm font-600 rounded-xl bg-[#F3F0E8] text-[#0F172A] cursor-pointer">
                                 Try for Free
-                            </button>
+                            </Link>
                             <button onClick={() => { setDemoOpen(true); setMenuOpen(false); }} className="btn-gold text-sm w-full justify-center py-3 cursor-pointer">
                                 Request Enterprise Demo
                             </button>

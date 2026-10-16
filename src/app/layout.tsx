@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import ChatWidget from "@/components/ChatWidget";
+import Footer from "@/components/Footer";
 
 const META_PIXEL_ID = "327793394379737";
 const GA_MEASUREMENT_ID = "G-WXT567CCDN";
@@ -33,7 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
       </head>
-      <body className="bg-[#FAFAF8]">
+      <body className="bg-[#FAFAF8] min-h-svh flex flex-col">
         {/* Google tag (gtag.js) */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
@@ -75,7 +76,8 @@ fbq('track', 'PageView');
         </noscript>
         {/* End Meta Pixel Code */}
         <Navbar />
-        <main className="pt-16">{children}</main>
+        <main className="pt-20 flex-1 flex flex-col">{children}</main>
+        <Footer />
         <ChatWidget />
       </body>
     </html>
