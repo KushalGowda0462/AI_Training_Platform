@@ -9,20 +9,19 @@ const SHOW_WHATSAPP_BUTTON = false;
 /* ─── SECTION 8: FINAL CTA / CONTACT (full-screen snap, flex-col) ─── */
 export default function Contact() {
   return (
-    <section id="contact" className="snap-section bg-[#0B1220] flex flex-col pt-20 md:pt-24">
-      {/* Form area — grows to fill space */}
-      <div className="container-content w-full flex-1 flex flex-col justify-center pb-8">
+    <section id="contact" className="flex-1 flex flex-col bg-[#FAFAF8]">
+      <div className="container-content w-full flex-1 flex flex-col justify-center py-12">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           <div className="md:col-span-12 lg:col-span-8 lg:col-start-3 max-w-xl mx-auto w-full">
             <div className="text-center mb-8">
               <div className="gold-divider mx-auto" />
-              <p className="text-[#CBD5E1] text-lg leading-relaxed">
+              <p className="text-[#475569] text-lg leading-relaxed">
                 Book a 30-minute discovery call with an AURILEARN.AI Customer Service Representative
               </p>
             </div>
 
-            <div className="bg-[#162035] rounded-2xl p-8 text-center border border-[#1E2D45] shadow-2xl">
-              <h3 className="text-sm font-bold text-[#94A3B8] uppercase tracking-widest mb-5">
+            <div className="contact-card bg-white rounded-2xl p-8 text-center border border-[#E7E2D8] shadow-[0_10px_40px_rgba(15,23,42,0.06)]">
+              <h3 className="text-sm font-bold text-[#64748B] uppercase tracking-widest mb-5">
                 Contact us at
               </h3>
 
@@ -37,14 +36,14 @@ export default function Contact() {
                       <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
                     </svg>
                   </div>
-                  <span className="text-xl sm:text-2xl font-800 text-white group-hover:text-[var(--gold)] transition-colors">
+                  <span className="text-xl sm:text-2xl font-800 text-[#0F172A] group-hover:text-[var(--gold-hover)] transition-colors">
                     sales@aurilearn.ai
                   </span>
                 </a>
 
                 {SHOW_WHATSAPP_BUTTON && (
                 <>
-                <div className="w-12 h-px bg-[#1E2D45]" />
+                <div className="w-12 h-px bg-[#E7E2D8]" />
 
                 <a
                   href={whatsappLink()}
@@ -62,7 +61,7 @@ export default function Contact() {
                 )}
               </div>
 
-              <div className="mt-6 pt-5 border-t border-[#1E2D45]">
+              <div className="mt-6 pt-5 border-t border-[#E7E2D8]">
                 <p className="text-[#64748B] text-xs font-600">
                   We&apos;ll get back to you within 24 hours
                 </p>

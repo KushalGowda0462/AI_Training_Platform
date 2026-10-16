@@ -155,9 +155,10 @@ section[id] {
    once the navbar is accounted for. Tighten the Platform section there so
    the last demo tile still lands on screen when you jump to it from
    the menu, rather than being cut off. */
-/* The Platform grid reads better in a narrower band than the full-width
-   container the other sections use. */
-#platform > .container-content {
+/* The Platform grid and the hero read better in a narrower band than the
+   full-width container the other sections use. */
+#platform > .container-content,
+#hero > .container-content {
   max-width: 1440px;
   padding-left: clamp(1.25rem, 6vw, 5.5rem);
   padding-right: clamp(1.25rem, 6vw, 5.5rem);
@@ -181,10 +182,18 @@ section[id] {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
   }
+  #contact > .container-content {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  #hero > .container-content {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
 }
 
 /* Very short windows (1280x720 and similar): trim a little more so the
-   Platform and Contact sections still fit without scrolling. */
+   Platform section and the Contact page still fit without scrolling. */
 @media (max-height: 740px) {
   #platform > .container-content {
     padding-top: 1rem;
@@ -196,10 +205,32 @@ section[id] {
     padding-top: 0.875rem;
     padding-bottom: 0.875rem;
   }
-  /* Contact panel and the site footer, likewise */
-  #contact > .container-content {
+  #platform .demo-tile {
+    padding-top: 0.5rem;
     padding-bottom: 0.5rem;
   }
+  #platform .watch-link {
+    margin-top: 0.5rem;
+  }
+  #platform ol {
+    margin-bottom: 0.75rem;
+  }
+  #platform > .container-content > div:first-child {
+    margin-bottom: 0.5rem;
+  }
+  #contact > .container-content {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+  #hero > .container-content {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  #contact .contact-card {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+  /* The site footer, likewise */
   footer > .container-content {
     padding-top: 1rem;
     padding-bottom: 1rem;

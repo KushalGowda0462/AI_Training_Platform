@@ -17,12 +17,12 @@ export default function Hero() {
     <DemoRequestModal isOpen={demoModalOpen} onClose={() => setDemoModalOpen(false)} />
 
     {/* ─── SECTION 1: HERO (full-screen snap) ─── */}
-    <section id="hero" className="snap-section hero-bg pt-20">
-      <div className="container-content w-full py-16 lg:py-0">
+    <section id="hero" className="snap-section hero-bg">
+      <div className="container-content w-full py-12 lg:py-16">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-14 items-center">
 
           {/* Left: Text */}
-          <div className="md:col-span-6 lg:col-span-6 max-w-2xl relative z-10">
+          <div className="md:col-span-6 lg:col-span-7 relative z-10">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--gold-light)] text-[var(--gold-hover)] text-sm font-700 mb-4">
               <span className="w-2 h-2 rounded-full bg-[var(--gold)] inline-block animate-pulse" />
               Aurilearn – Your AI delivered IT training engine – 1:1 mentorship
@@ -73,7 +73,7 @@ export default function Hero() {
           </div>
 
           {/* Right: Product Visual */}
-          <div className="md:col-span-6 lg:col-span-6 relative z-10 lg:ml-auto w-full max-w-xl">
+          <div className="md:col-span-6 lg:col-span-5 relative z-10 w-full">
             {/* Title over the video — spans the full width of the frame */}
             <div className="mb-4">
               <div className="flex items-center gap-3 mb-2">

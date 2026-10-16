@@ -740,6 +740,23 @@ export default function PlatformSection() {
                         </div>
                     </div>
                 </div>
+
+                <div className="watch-link mt-6 text-center">
+                    <a
+                        href="#watch-a-student"
+                        className="group inline-flex items-center gap-3 text-[15px] font-semibold text-[#0F172A] hover:text-[var(--gold-hover)] transition-colors"
+                    >
+                        <span className="w-8 h-8 rounded-full bg-[var(--gold)] text-white flex items-center justify-center shadow-[0_4px_14px_rgba(169,128,42,0.3)]">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M8 5l11 7-11 7V5z" />
+                            </svg>
+                        </span>
+                        Watch a Student Use AuriLearn
+                        <svg className="text-[var(--gold-hover)] group-hover:translate-y-0.5 transition-transform" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                            <path d="M12 5v14M6 13l6 6 6-6" />
+                        </svg>
+                    </a>
+                </div>
             </div>
 
             {/* ── Watch a Student Use AuriLearn: its own screen, so it stays out of view until you scroll to it ── */}
