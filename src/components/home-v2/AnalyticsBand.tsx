@@ -3,6 +3,7 @@ import { Band, SectionHead } from "./ui";
 const metrics = [
   "Number of students enrolled and in progress",
   "Track exact module position of each learner",
+  "See quiz score results",
   "Pass/fail rates on automated lab validations",
   "Certification exam registration tracking",
   "Final certification pass statistics",
@@ -17,7 +18,7 @@ const stages = [
 
 export default function AnalyticsBand() {
   return (
-    <Band id="analytics" alt>
+    <Band id="analytics">
       <SectionHead
         eyebrow="analytics"
         title="Analytics when, where and as you want them."

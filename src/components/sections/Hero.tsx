@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import Modal from "@/components/Modal";
 import DemoRequestModal from "@/components/DemoRequestModal";
+import FreeTrialModal from "@/components/FreeTrialModal";
 
 // "Aurilearn Demonstrative Video" on the Aurilearn ai YouTube channel
 const YOUTUBE_ID = "_BNz0LMvnMk";
@@ -11,10 +11,12 @@ const YOUTUBE_ID = "_BNz0LMvnMk";
 export default function Hero() {
   const [videoModalOpen, setVideoModalOpen] = useState(false);
   const [demoModalOpen, setDemoModalOpen] = useState(false);
+  const [trialModalOpen, setTrialModalOpen] = useState(false);
 
   return (
     <>
     <DemoRequestModal isOpen={demoModalOpen} onClose={() => setDemoModalOpen(false)} />
+    <FreeTrialModal isOpen={trialModalOpen} onClose={() => setTrialModalOpen(false)} />
 
     {/* ─── SECTION 1: HERO (full-screen snap) ─── */}
     <section id="hero" className="snap-section hero-bg">
@@ -62,12 +64,12 @@ export default function Hero() {
               >
                 Request an Enterprise Demo
               </button>
-              <Link
-                href="/contact"
+              <button
+                onClick={() => setTrialModalOpen(true)}
                 className="btnx-outline flex items-center justify-center text-base font-bold px-7 h-12 rounded-xl bg-white border-2 w-full sm:w-auto transition-all hover:bg-[#FAFAF8] hover:-translate-y-0.5 cursor-pointer"
               >
                 Try it for Free
-              </Link>
+              </button>
             </div>
             <p className="text-xs text-[#64748B] font-semibold mb-3">Included: 10 free minutes of AI instruction with &quot;Try for Free&quot;</p>
           </div>
