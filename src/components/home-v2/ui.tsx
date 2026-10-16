@@ -56,7 +56,7 @@ export function Band({
 
 export function Chip({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-block font-mono text-[11px] text-[#475569] bg-white border border-[#E7E2D8] rounded-md px-2 py-1">
+    <span className="inline-block font-mono text-sm md:text-[15px] text-[#475569] bg-white border border-[#E7E2D8] rounded-md px-3 py-1.5">
       {children}
     </span>
   );

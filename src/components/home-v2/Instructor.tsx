@@ -8,7 +8,7 @@ const mentorPoints = [
 ];
 
 const chat = [
-  { role: "learner", text: "I applied the NetworkPolicy but traffic is still being blocked between name spaces." },
+  { role: "learner", text: "I applied the Network Policy but traffic is still being blocked between name spaces." },
   { role: "ai", text: "Good catch. Let's look at two things: first, ensure the pod selector labels match exactly. A common mistake is label casing mis-match. Can you paste your policy spec?" },
   { role: "learner", text: "Here it is — podSelector: matchLabels: app: frontend" },
   { role: "ai", text: "I see it — your destination name space selector is missing. Add a name space selector block alongside the pod selector. Here's the corrected structure..." },
@@ -50,7 +50,7 @@ export default function Instructor() {
               AuriLearn AI Instructor
             </span>
             <h3 className="mt-5 text-2xl sm:text-[1.75rem] font-extrabold tracking-tight leading-tight text-[#0F172A]">
-              Interact with your AuriLearn AI instructor like working with the most senior engineer.
+              You interact with the AI instructor as if you are working with an experienced mentor.
             </h3>
             <ul className="mt-6 space-y-4">
               {mentorPoints.map((p) => (

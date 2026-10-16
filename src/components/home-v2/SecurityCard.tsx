@@ -6,9 +6,9 @@ import DemoRequestModal from "@/components/DemoRequestModal";
 import { Band, SectionHead, Check } from "./ui";
 
 const points = [
-  { title: "Private on premise Deployment", desc: "Deploy within your infrastructure or dedicated cloud environment." },
+  { title: "Private On Premise Deployment", desc: "Deploy within your infrastructure or dedicated cloud environment." },
   { title: "Controlled Access", desc: "Administrators manage which teams and users can access the AI instructor." },
-  { title: "Organization-Isolated Environments", desc: "No cross-tenant data sharing at any layer." },
+  { title: "Organization Isolated Environments", desc: "No cross tenant data sharing at any layer." },
   { title: "Secure Training Data", desc: "Runbooks, labs, and infrastructure interactions never leave your controlled environment." },
   { title: "Enterprise Identity Integration", desc: "Corporate SSO, authentication systems, and access policies." },
 ];

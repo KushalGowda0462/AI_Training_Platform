@@ -24,7 +24,7 @@ const steps = [
     image: "/how-it-works/labs-rack.jpg",
     photo: true,
     title: "Practice in Real Labs",
-    desc: "Learners work inside real infrastructure labs while the AI mentor provides step-by-step guidance and debugging support.",
+    desc: "Learners work inside real labs while the AI mentor provides step-by-step guidance and debugging support.",
   },
   {
     image: "/how-it-works/progress.png",
@@ -93,7 +93,7 @@ export default function Steps() {
         })}
       </ol>
 
-      <p className="mt-8 mb-3 font-mono text-[11px] uppercase tracking-[0.15em] text-[#94A3B8]">Learning tracks</p>
+      <p className="mt-8 mb-3 font-mono text-sm md:text-[15px] uppercase tracking-[0.15em] text-[#94A3B8]">Learning tracks</p>
       <div className="flex flex-wrap gap-2">
         {tracks.map((t) => (
           <Chip key={t}>{t}</Chip>
