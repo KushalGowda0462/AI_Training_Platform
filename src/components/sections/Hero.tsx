@@ -81,7 +81,7 @@ export default function Hero() {
             <div className="mb-4">
               <div className="flex items-center gap-3 mb-2">
                 <span className="h-px w-10 bg-[var(--gold)] shrink-0" />
-                <span className="text-2xl md:text-[2rem] leading-none font-extrabold uppercase tracking-[0.12em] text-[var(--gold-hover)] whitespace-nowrap">
+                <span className="text-2xl md:text-[2rem] leading-none font-normal uppercase tracking-[0.12em] text-[var(--gold-hover)] whitespace-nowrap">
                   See it live
                 </span>
                 <span className="h-px flex-1 bg-gradient-to-r from-[#E7E2D8] to-transparent" />
