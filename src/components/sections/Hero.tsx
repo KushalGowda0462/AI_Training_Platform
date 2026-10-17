@@ -81,12 +81,12 @@ export default function Hero() {
             <div className="mb-4">
               <div className="flex items-center gap-3 mb-2">
                 <span className="h-px w-10 bg-[var(--gold)] shrink-0" />
-                <span className="text-base md:text-lg font-800 uppercase tracking-[0.18em] text-[var(--gold-hover)] whitespace-nowrap">
+                <span className="text-2xl md:text-[2rem] leading-none font-extrabold uppercase tracking-[0.12em] text-[var(--gold-hover)] whitespace-nowrap">
                   See it live
                 </span>
                 <span className="h-px flex-1 bg-gradient-to-r from-[#E7E2D8] to-transparent" />
               </div>
-              <h2 className="text-lg md:text-xl font-800 text-[#0F172A]">
+              <h2 className="text-base font-semibold text-[#0F172A]">
                 Aurilearn <span className="text-gradient-gold">at work</span>
               </h2>
             </div>
