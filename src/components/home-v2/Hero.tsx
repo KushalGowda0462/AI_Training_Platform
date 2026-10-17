@@ -48,12 +48,12 @@ export default function Hero() {
               </div>
 
               <h1 className="text-[clamp(2.1rem,1.3rem+3.6vw,3.4rem)] font-extrabold tracking-tight leading-[1.06] text-[#0F172A]">
-                The World&apos;s first AI Delivered IT training{" "}
+                The World&apos;s first AI delivered IT Training{" "}
                 <span className="text-gradient-gold">Vertical Narrow Language Model.</span>
               </h1>
 
               <p className="mt-6 max-w-[600px] text-[clamp(1.25rem,1.1rem+0.6vw,1.5rem)] text-[#475569] leading-relaxed">
-                Specifically architected, orchestrated, trained on and fine tuned to deliver IT training through a 1:1
+                Specifically architected, orchestrated, trained on and fine tuned to specifically and only deliver IT training through a 1:1
                 AI instructor.
               </p>
 

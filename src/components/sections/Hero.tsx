@@ -31,12 +31,13 @@ export default function Hero() {
             </div>
 
             <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-900 text-[#0F172A] leading-[1.05] tracking-tight mb-4">
-              The World&apos;s first <span className="text-gradient-gold">Vertical Narrow Language Model</span>
+              The World&apos;s first AI delivered IT Training{" "}
+              <span className="text-gradient-gold">Vertical Narrow Language Model</span>
             </h1>
 
             <p className="text-lg text-[#475569] leading-relaxed mb-5 font-medium">
-              specifically architected, orchestrated, trained on and fine tuned to deliver IT
-              training.
+              specifically architected, orchestrated, trained on and fine tuned to specifically and
+              only deliver IT training.
             </p>
 
             <ul className="space-y-2 mb-6 text-[#64748B]">
@@ -80,12 +81,12 @@ export default function Hero() {
             <div className="mb-4">
               <div className="flex items-center gap-3 mb-2">
                 <span className="h-px w-10 bg-[var(--gold)] shrink-0" />
-                <span className="text-[11px] font-800 uppercase tracking-[0.2em] text-[var(--gold-hover)] whitespace-nowrap">
+                <span className="text-base md:text-lg font-800 uppercase tracking-[0.18em] text-[var(--gold-hover)] whitespace-nowrap">
                   See it live
                 </span>
                 <span className="h-px flex-1 bg-gradient-to-r from-[#E7E2D8] to-transparent" />
               </div>
-              <h2 className="section-title text-[#0F172A]">
+              <h2 className="text-lg md:text-xl font-800 text-[#0F172A]">
                 Aurilearn <span className="text-gradient-gold">at work</span>
               </h2>
             </div>
