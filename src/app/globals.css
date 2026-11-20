@@ -165,7 +165,8 @@ footer {
 /* The Platform grid and the hero read better in a narrower band than the
    full-width container the other sections use. */
 #platform > .container-content,
-#hero > .container-content {
+#hero > .container-content,
+#videos > .container-content {
   max-width: 1440px;
   padding-left: clamp(1.25rem, 6vw, 5.5rem);
   padding-right: clamp(1.25rem, 6vw, 5.5rem);
@@ -196,6 +197,13 @@ footer {
   #hero > .container-content {
     padding-top: 2rem;
     padding-bottom: 2rem;
+  }
+  #videos > .container-content {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+  #videos > .container-content > div:first-child {
+    margin-bottom: 1.5rem;
   }
 }
 

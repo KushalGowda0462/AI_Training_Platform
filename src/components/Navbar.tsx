@@ -49,6 +49,7 @@ export default function Navbar() {
         { kind: "page", href: "/platform", label: "Platform" },
         { kind: "demo", label: "Demo" },
         { kind: "page", href: "/security", label: "Security" },
+        { kind: "page", href: "/videos", label: "Videos" },
         { kind: "page", href: "/contact", label: "Contact" },
     ];
 
