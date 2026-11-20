@@ -1,5 +1,5 @@
 {
-  "_comment": "Email domains the free-trial form refuses. Read by src/lib/freeTrial.ts (browser) and public/contact.php (server), so this is the one place to edit. 'providers' match the first part of the domain, which catches country variants (yahoo.co.in, hotmail.fr, zoho.in...).",
+  "_comment": "Email domains the demo request form refuses. Read by src/lib/personalEmail.ts (browser) and public/contact.php (server), so this is the one place to edit. 'providers' match the first part of the domain, which catches country variants (yahoo.co.in, hotmail.fr, zoho.in...).",
   "providers": [
     "gmail", "googlemail", "yahoo", "ymail", "rocketmail", "hotmail", "outlook", "live", "windowslive", "msn",
     "aol", "aim", "icloud", "zoho", "zohomail", "gmx", "yandex", "rediffmail", "rediff", "protonmail", "proton",

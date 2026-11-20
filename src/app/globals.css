@@ -127,6 +127,13 @@ section[id] {
   position: relative;
 }
 
+/* The footer is a snap point too, aligned to its bottom edge. Without it
+   the only snap points are section tops, so scrolling down to the footer
+   was pulled straight back up to the last section. */
+footer {
+  scroll-snap-align: end;
+}
+
 /* Tall content panel — like .snap-section but free to grow.
    Used by the Platform section, whose content is taller than one screen. */
 .section-tall {

@@ -1,5 +1,5 @@
 /**
- * Both website forms accept company email addresses only.
+ * The demo request form accepts company email addresses only.
  *
  * The refused domains live in public/personal-email-domains.json, which
  * public/contact.php reads too, so the check cannot be skipped by

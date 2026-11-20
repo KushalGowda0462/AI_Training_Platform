@@ -204,33 +204,22 @@ if (count($hits) >= $RATE_LIMIT) {
 $hits[] = time();
 @file_put_contents($file, implode(',', $hits));
 
-/* ─── Validate ───
-   Two kinds of request share this handler: an enterprise demo request
-   (the default) and a "Try it for Free" sign-up (request_type free_trial). */
-$isTrial   = $get('request_type') === 'free_trial';
+/* ─── Validate ─── */
 $firstName = $get('first_name');
 $lastName  = $get('last_name');
 $email     = $get('work_email');
 $jobRole   = $get('job_role');
-$jobTitle  = $get('job_title');
 $telephone = $get('telephone');
 $country   = $get('country');
 
-$required = $isTrial
-    ? [
-        'first name'    => $firstName,
-        'last name'     => $lastName,
-        'job title'     => $jobTitle,
-        'company email' => $email,
-    ]
-    : [
-        'first name' => $firstName,
-        'last name'  => $lastName,
-        'work email' => $email,
-        'job role'   => $jobRole,
-        'telephone'  => $telephone,
-        'country'    => $country,
-    ];
+$required = [
+    'first name' => $firstName,
+    'last name'  => $lastName,
+    'work email' => $email,
+    'job role'   => $jobRole,
+    'telephone'  => $telephone,
+    'country'    => $country,
+];
 foreach ($required as $label => $value) {
     if ($value === '') {
         fail("Please provide your {$label}.");
@@ -241,7 +230,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     fail('That work email does not look valid.');
 }
 
-/* Both forms are for companies only. The refused domains are in
+/* Demo requests are for companies only. The refused domains are in
    personal-email-domains.json beside this file — the same file the
    browser checks against. If it is missing, fall back to the big
    providers rather than letting every personal address through. */
@@ -269,29 +258,19 @@ $clean = static function ($v) {
 $firstName = $clean($firstName);
 $lastName  = $clean($lastName);
 $jobRole   = $clean($jobRole);
-$jobTitle  = $clean($jobTitle);
 $telephone = $clean($telephone);
 $country   = $clean($country);
 $email     = $clean($email);
 
 /* ─── Compose ─── */
-if ($isTrial) {
-    $subject = "Free trial request — {$firstName} {$lastName}";
-    $body = "A new free trial sign-up came in from the Aurilearn website.\n\n"
-          . "Name:      {$firstName} {$lastName}\n"
-          . "Job title: {$jobTitle}\n"
-          . "Email:     {$email}\n\n"
-          . "Reply to this email to reach them directly.\n";
-} else {
-    $subject = "Enterprise demo request — {$firstName} {$lastName}";
-    $body = "A new demo request came in from the Aurilearn website.\n\n"
-          . "Name:      {$firstName} {$lastName}\n"
-          . "Email:     {$email}\n"
-          . "Job role:  {$jobRole}\n"
-          . "Telephone: {$telephone}\n"
-          . "Country:   {$country}\n\n"
-          . "Reply to this email to reach them directly.\n";
-}
+$subject = "Enterprise demo request — {$firstName} {$lastName}";
+$body = "A new demo request came in from the Aurilearn website.\n\n"
+      . "Name:      {$firstName} {$lastName}\n"
+      . "Email:     {$email}\n"
+      . "Job role:  {$jobRole}\n"
+      . "Telephone: {$telephone}\n"
+      . "Country:   {$country}\n\n"
+      . "Reply to this email to reach them directly.\n";
 
 $headers = implode("\r\n", [
     'From: ' . $MAIL_FROM_NAME . ' <' . $MAIL_FROM . '>',
