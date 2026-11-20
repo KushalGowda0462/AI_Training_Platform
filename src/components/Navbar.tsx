@@ -49,6 +49,7 @@ export default function Navbar() {
         { kind: "page", href: "/platform", label: "Platform" },
         { kind: "demo", label: "Demo" },
         { kind: "page", href: "/security", label: "Security" },
+        { kind: "page", href: "/videos", label: "Videos" },
         { kind: "page", href: "/contact", label: "Contact" },
     ];
 
@@ -105,9 +106,6 @@ export default function Navbar() {
 
                     {/* CTAs */}
                     <div className={`hidden md:flex items-center gap-3 transition-all duration-300 ${heroVisible ? "opacity-0 translate-y-2 pointer-events-none" : "opacity-100 translate-y-0"}`}>
-                        <Link href="/contact" className="text-sm font-600 px-4 py-2 rounded-lg text-[#0F172A] hover:bg-[#F3F0E8] transition-colors cursor-pointer">
-                            Try for Free
-                        </Link>
                         <button onClick={() => setDemoOpen(true)} className="btn-gold text-sm px-5 py-2 cursor-pointer">
                             Request Enterprise Demo
                         </button>
@@ -156,9 +154,6 @@ export default function Navbar() {
                             )
                         )}
                         <div className="px-3 pt-4 flex flex-col gap-3">
-                            <Link href="/contact" onClick={() => setMenuOpen(false)} className="w-full text-center py-3 text-sm font-600 rounded-xl bg-[#F3F0E8] text-[#0F172A] cursor-pointer">
-                                Try for Free
-                            </Link>
                             <button onClick={() => { setDemoOpen(true); setMenuOpen(false); }} className="btn-gold text-sm w-full justify-center py-3 cursor-pointer">
                                 Request Enterprise Demo
                             </button>

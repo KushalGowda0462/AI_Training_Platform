@@ -127,6 +127,13 @@ section[id] {
   position: relative;
 }
 
+/* The footer is a snap point too, aligned to its bottom edge. Without it
+   the only snap points are section tops, so scrolling down to the footer
+   was pulled straight back up to the last section. */
+footer {
+  scroll-snap-align: end;
+}
+
 /* Tall content panel — like .snap-section but free to grow.
    Used by the Platform section, whose content is taller than one screen. */
 .section-tall {
@@ -158,7 +165,8 @@ section[id] {
 /* The Platform grid and the hero read better in a narrower band than the
    full-width container the other sections use. */
 #platform > .container-content,
-#hero > .container-content {
+#hero > .container-content,
+#videos > .container-content {
   max-width: 1440px;
   padding-left: clamp(1.25rem, 6vw, 5.5rem);
   padding-right: clamp(1.25rem, 6vw, 5.5rem);
@@ -189,6 +197,13 @@ section[id] {
   #hero > .container-content {
     padding-top: 2rem;
     padding-bottom: 2rem;
+  }
+  #videos > .container-content {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+  #videos > .container-content > div:first-child {
+    margin-bottom: 1.5rem;
   }
 }
 

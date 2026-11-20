@@ -28,6 +28,7 @@ export default function Footer() {
                 { label: "Security", href: "/security" },
                 { label: "Analytics", href: "/security#analytics" },
                 { label: "Scalability", href: "/platform#scalability" },
+                { label: "Videos", href: "/videos" },
               ].map((l) => (
                 <li key={l.label}>
                   <Link href={l.href} className="text-xs text-[#475569] hover:text-[var(--gold)] transition-colors">{l.label}</Link>
